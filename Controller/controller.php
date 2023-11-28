@@ -9,7 +9,7 @@
     }
 
     function CtlAjouterClient(){
-
+        //ya
     }
 
     function CtlSupprimerClient( $idClient ){
