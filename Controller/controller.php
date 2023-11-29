@@ -1,11 +1,15 @@
 <?php
 
+    require_once("View/view.php");
+    require_once("Modele/modele.php");
+
+
     function CtlError( $exception ){
 
     }
 
     function CtlAccueil(){
-
+        accueil();
     }
 
     function CtlAjouterClient(){
