@@ -9,7 +9,7 @@
     <link rel="preload" href="View/style/fonts/SFProDisplay-Bold.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="View/style/fonts/SFProDisplay-Bold.woff" as="font" type="font/woff" crossorigin>
 
-    <script type="text/javascript" scr="app.js"></script>
+    <script src="app.js"></script> 
 
     <title>MGN</title>
 </head>
