@@ -5,7 +5,7 @@
 
 
     function CtlError( $exception ){
-        accueil();
+        accueil(false);
     }
 
     function CtlAccueil(){
@@ -16,10 +16,10 @@
         if ( !empty($login) && !empty($password) ) {
             $resultat = formConnexion( $login, $password );
             if ( $resultat != false ){
-                
+                accueil(false);
             }
         }
-        accueil();
+        accueil(false);
     }
 
     function CtlAjouterClient(){

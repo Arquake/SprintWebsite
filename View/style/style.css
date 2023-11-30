@@ -126,3 +126,15 @@ li {
 li:hover{
     background-color: rgb(57, 150, 99);
 }
+
+.invalidForm{
+    margin: 1%;
+    color: #931717;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'SF Pro Display';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 20px;
+    text-align: center;
+}

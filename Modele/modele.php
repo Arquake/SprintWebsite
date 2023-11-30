@@ -11,7 +11,7 @@
 
     function formConnexion( $login, $password ){
         $connexion = getConnect();
-        $resultat = $connexion -> query('');
+        $resultat = $connexion -> query('SELECT * FROM Client');
         if ( $resultat == false || empty($resultat) ){
             return false;
         }
