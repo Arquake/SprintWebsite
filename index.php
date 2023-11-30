@@ -24,11 +24,23 @@
         // 
 
         if ( isset($_SESSION['poste']) ) {
-
+            CtlAccueil();
         } else {
             if ( isset($_POST['connexion']) ){
 
+                //
+                // if connexion button is pressed
+                // 
+
+                CtlConnexion($_POST['login'],$_POST['password']);
+
             } else {
+
+                //
+                // if nothing is pressed or just loaded the page
+                // for the first time in the current navigation tab
+                //
+
                 CtlAccueil();
             }
         }

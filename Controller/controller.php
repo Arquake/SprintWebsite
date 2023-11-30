@@ -5,10 +5,20 @@
 
 
     function CtlError( $exception ){
-
+        accueil();
     }
 
     function CtlAccueil(){
+        accueil();
+    }
+
+    function CtlConnexion( $login, $password ){
+        if ( !empty($login) && !empty($password) ) {
+            $resultat = formConnexion( $login, $password );
+            if ( $resultat != false ){
+                
+            }
+        }
         accueil();
     }
 

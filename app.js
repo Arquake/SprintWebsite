@@ -13,8 +13,9 @@ function invalidField(field){
 // Check if field's data have the right length
 //
 function validFormField( field, minLength, maxLength ){
-    console.log(field.value)
-    if ( field.value.maxLength > maxLength || field.value.minLength < minLength ) {
-        field.bgColor = 'red'
+    if ( field.value.length < minLength || field.value.length > maxLength ) {
+        field.style.backgroundColor = '#d64848'
+    } else {
+        field.style.backgroundColor = '#FFF'
     }
 }
