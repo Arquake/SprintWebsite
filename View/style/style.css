@@ -7,7 +7,7 @@ body,html {
 
 header {
     width: 100%;
-    height: 10%;
+    height: 7%;
     background-color: rgb(81, 214, 141);
     margin: 0;
     padding: 0;
@@ -15,7 +15,7 @@ header {
 
 #logo {
     height: 100%;
-    width: 5%;
+    width: 4%;
     padding-left: 1%;
     margin: 0%;
 }
@@ -93,3 +93,36 @@ legend {
     font-display: swap;
 }
 
+
+aside {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    float: left;
+    height: 100%;
+    width: 10%;
+    max-width: 324px;
+    background-color: rgb(66, 175, 115);
+}
+
+ul {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+li {
+    padding: 0;
+    margin: 0;
+    padding-left: 0;
+    height: 5%;
+    list-style-type: none 
+}
+
+li:hover{
+    background-color: rgb(57, 150, 99);
+}
