@@ -17,14 +17,7 @@
     <header><img src="View/style/assets/logo.png" alt="" id="logo"></header>
 
 
-    <aside>
-        <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-    </aside>
+
 
     <?php
         echo $contenu;
