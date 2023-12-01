@@ -1,6 +1,5 @@
 body,html {
     width: 100%;
-    height: 100%;
     margin: 0;
     padding: 0;
 }
@@ -46,6 +45,10 @@ label {
     width: 40%;
     margin-right: 1%;
     margin-bottom: 1%;
+}
+
+p:hover {
+    text-shadow: 1px 1px 8px rgba(255, 255, 255, 0.712);
 }
 
 input[type=text], input[type=password] {
@@ -123,18 +126,39 @@ li {
     list-style-type: none 
 }
 
-li:hover{
+li:hover {
     background-color: rgb(57, 150, 99);
 }
 
-.invalidForm{
-    margin: 1%;
+.invalidForm {
     color: #931717;
+    
+    margin: 1%;
     margin-left: auto;
     margin-right: auto;
+
     font-family: 'SF Pro Display';
     font-weight: bold;
     font-style: normal;
     font-size: 20px;
     text-align: center;
 }
+
+.error {
+    margin: 1%;
+    margin-left: auto;
+    margin-right: auto;
+
+    font-family: 'SF Pro Display';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 20px;
+    text-align: center;
+}
+
+.errorATag {
+    color: #33FF;
+    text-decoration: underline;
+}
+
+

@@ -11,9 +11,15 @@
 
     function formConnexion( $login, $password ){
         $connexion = getConnect();
-        $resultat = $connexion -> query('SELECT * FROM Client');
+        $resultat = $connexion -> query("SELECT password FROM Employe WHERE login='" . $login . "'");
         if ( $resultat == false || empty($resultat) ){
             return false;
         }
+        return $resultat;
+    }
+
+    function employeInformations( $login ){
+        $connexion = getConnect();
+        $resultat = $connexion -> query("SELECT nom, prenom FROM Employe WHERE login='" . $login . "'");
         return $resultat;
     }
