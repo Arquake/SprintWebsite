@@ -19,7 +19,7 @@ header {
     margin: 0%;
 }
 
-.connexionForm {
+.topPageForm {
     width: 30%;
     padding-top: 1% ;
     margin-left: auto;
@@ -73,6 +73,33 @@ input[type=submit] {
     float: right;
     margin-right: 3%;
     width: 53%;
+}
+
+select {
+    width: 53%;
+    height: 100%;
+    float: right;
+    margin-right: 3%;
+    padding-top: 1.5%;
+    padding-bottom: 1%;
+    margin-bottom: 1%;
+    padding-left: 2%;
+
+    font-family: 'SF Pro Display';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 20px;
+
+    letter-spacing: 1px;
+}
+
+option {
+    font-family: 'SF Pro Display';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 20px;
+
+    letter-spacing: 1px;
 }
 
 legend {

@@ -1,8 +1,7 @@
-function connexionSubmitCheck( form ){
-    var login = form.elements['login']
-    var password = form.elements['password']
-
+function createEmployeCheck(this){
+    
 }
+
 
 function invalidField(field){
 
@@ -15,7 +14,9 @@ function invalidField(field){
 function validFormField( field, minLength, maxLength ){
     if ( field.value.length < minLength || field.value.length > maxLength ) {
         field.style.backgroundColor = '#d64848'
+        return false
     } else {
         field.style.backgroundColor = '#FFF'
     }
+    return true
 }

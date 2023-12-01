@@ -6,7 +6,7 @@
             $contenu .= '<div class="invalidForm">Formulaire non valide<br>mot de passe ou login incorrect</div>';
         };
         $contenu .= '
-        <form action="index.php" method="post" class="connexionForm" onSubmit="connexionSubmitCheck(this)" id="connexionForm">
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
             <fieldset>
                 <legend>Connexion</legend>
                 <p><label for="login">Login</label><input type="text" name="login" onBlur="validFormField( this, 8, 32 )" required="required"></p>
