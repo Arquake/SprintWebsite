@@ -1,5 +1,5 @@
 <?php
-    include_once("connect.php");
+    require_once("connect.php");
 
     function getConnect() {
         try {
@@ -22,12 +22,12 @@
 
         $connexion = getConnect();
 
-        echo "<script>console.log('this')</script>";
+        echo "<script>console.log('oui')</script>";
 
         $resultat = $connexion -> query("SELECT * FROM Employe WHERE login='" . $login . "'");
-        echo "<script>console.log('".$resultat."')</script>";
+        echo "<script>console.log('".!empty($resultat)."')</script>";
 
-        if ( $resultat != false || !empty($resultat) ){
+        if ( $resultat != false && !empty($resultat) != 1 ){
 
             //
             // password will be checked according to the hash given from the database
