@@ -1,3 +1,20 @@
+DROP TABLE Client;
+DROP TABLE Employe;
+DROP TABLE HoraireAgence;
+DROP TABLE CreerClient;
+DROP TABLE RattacherA;
+DROP TABLE ModifierType;
+DROP TABLE Type;
+DROP TABLE TypeContrat;
+DROP TABLE TypeCompte;
+DROP TABLE PieceType;
+DROP TABLE Compte;
+DROP TABLE PossedeCompte;
+DROP TABLE Contrat;
+DROP TABLE Contracte;
+DROP TABLE RendezVous;
+
+
 CREATE TABLE Client (
     idClient int NOT NULL AUTO_INCREMENT PRIMARY KEY
     ,nomClient VARCHAR(45) NOT NULL
@@ -60,7 +77,7 @@ CREATE TABLE TypeCompte (
      REFERENCES Type(type)
     ,decouvert int
     ,plafond int 
-    ,interet decimal(2,3) NOT NULL
+    ,interet decimal(3,3) NOT NULL
     ,propose boolean NOT NULL
 );
 

@@ -18,14 +18,9 @@
 
     function formConnexion( $login, $password ){
 
-        echo "<script>console.log('there')</script>";
-
         $connexion = getConnect();
 
-        echo "<script>console.log('oui')</script>";
-
         $resultat = $connexion -> query("SELECT * FROM Employe WHERE login='" . $login . "'");
-        echo "<script>console.log('".!empty($resultat)."')</script>";
 
         if ( $resultat != false && !empty($resultat) != 1 ){
 

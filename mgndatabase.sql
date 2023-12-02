@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 02 déc. 2023 à 10:30
+-- Généré le : sam. 02 déc. 2023 à 11:38
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -223,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `typecompte` (
   `typeCompte` varchar(45) NOT NULL,
   `decouvert` int DEFAULT NULL,
   `plafond` int DEFAULT NULL,
-  `interet` decimal(2,3) NOT NULL,
+  `interet` decimal(3,3) NOT NULL,
   `propose` tinyint(1) NOT NULL,
   PRIMARY KEY (`typeCompte`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
