@@ -36,7 +36,7 @@
 
             } else if ( isset($_POST['createEmploye']) ) {
 
-                CtlAjouterEmploye( $_POST['loginCreation'], $_POST['passwordCreation'], $_POST['posteCreation'] );
+                CtlAjouterEmploye( $_POST['loginCreation'], $_POST['passwordCreation'], $_POST['posteCreation'], $_POST['nomCreation'], $_POST['prenomCreation'] );
 
             } else {
 

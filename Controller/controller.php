@@ -64,13 +64,13 @@
 
     }
 
-    function CtlAjouterEmploye ( $login, $password, $poste ){
+    function CtlAjouterEmploye ( $login, $password, $poste ,$nom, $prenom ){
 
-        $created = createEmploye( $login, $password, $poste );
+        $created = createEmploye( $login, $password, $poste ,$nom, $prenom);
 
         echo "<script>console.log('".$created."')</script>";
 
-        accueil($created);
+        gestionEmployeDirecteur($created);
 
     }
 
