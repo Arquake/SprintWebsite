@@ -6,10 +6,10 @@
             $contenu .= '<div class="invalidForm">Formulaire non valide<br>mot de passe ou login incorrect</div>';
         };
         $contenu .= '
-        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm" onSubmit="connexionAttempt(this)">
             <fieldset>
                 <legend>Connexion</legend>
-                <p><label for="login">Login</label><input type="text" name="login" onBlur="validFormField( this, 8, 32 )" required="required"></p>
+                <p><label for="login">Login</label><input type="text" name="login" onBlur="validFormField( this, 2, 32 )" required="required"></p>
                 <p><label for="password">Mot De Passe</label><input type="password" name="password" onBlur="validFormField( this, 8, 32 )" required="required"></p>
                 <p><input type="submit" value="Connexion" name="connexion"></p>
             </fieldset>
@@ -36,4 +36,8 @@
 
     function accueilDirecteur(){
         require_once("View/gabarit.php");
+    }
+
+    function gestionEmployeDirecteur(){
+
     }

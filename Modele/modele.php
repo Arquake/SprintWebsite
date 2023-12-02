@@ -53,8 +53,10 @@
 
         $connexion = getConnect();
         $resultat = $connexion -> query("SELECT login FROM Employe WHERE login='" . $login . "'");
+
+        echo "<script>console.log('".var_dump($resultat)."')</script>";
         
-        if ( $resultat != false || !empty($resultat) ){
+        if ( $resultat != false && empty($resultat) == 0 ){
 
             $connexion -> query("INSERT INTO EMPLOYE(login,password,poste) VALUES(login='" . $login . "', password='" . password_hash($password, PASSWORD_DEFAULT, ['cost' => 12] ) . "', poste='" . $poste . "')");
 

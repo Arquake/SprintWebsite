@@ -1,6 +1,11 @@
-//function createEmployeCheck(this){
-//    
-//}
+function createEmployeCheck(field){
+    return validFormField(field.elements['loginCreation'],2,32 ) && validFormField(field.elements['passwordCreation'],8,32 )
+}
+
+
+function connexionAttempt(field){
+    return validFormField(field.elements['login'],2,32 ) && validFormField(field.elements['password'],8,32 )
+}
 
 
 function invalidField(field){

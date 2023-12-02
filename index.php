@@ -34,6 +34,10 @@
 
                 CtlConnexion($_POST['login'],$_POST['password']);
 
+            } else if ( isset($_POST['createEmploye']) ) {
+
+                CtlAjouterEmploye( $_POST['loginCreation'], $_POST['passwordCreation'], $_POST['posteCreation'] );
+
             } else {
 
                 //

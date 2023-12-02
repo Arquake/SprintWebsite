@@ -27,7 +27,7 @@
     <form action="index.php" method="post" class="topPageForm" onSubmit="createEmployeCheck(this)" id="topPageForm">
         <fieldset>
             <legend>Création d'employé</legend>
-            <p><label for="login">Login de l'employé</label><input type="text" name="loginCreation" onBlur="validFormField( this, 8, 32 )" required="required"></p>
+            <p><label for="login">Login de l'employé</label><input type="text" name="loginCreation" onBlur="validFormField( this, 2, 32 )" required="required"></p>
             <p><label for="password">Mot De Passe de l'employé</label><input type="password" name="passwordCreation" onBlur="validFormField( this, 8, 32 )" required="required"></p>
             <p>
                 <label for="posteCreation">Poste de l'empolyé</label>

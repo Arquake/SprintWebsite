@@ -47,14 +47,16 @@
                 //
 
                 if ( $_SESSION['poste'] == "Agent" ){
-                    accueilAgent();
+                    echo "<script>console.log('Agent')</script>";
                 } else if ( $_SESSION['poste'] == "Conseiller" ){
-                    accueilConseiller();
+                    echo "<script>console.log('Conseiller')</script>";
                 } else {
-                    accueilDirecteur();
+                    echo "<script>console.log('Directeur')</script>";
                 }
 
             }
+
+            accueil();
 
         }
 
@@ -62,7 +64,13 @@
 
     }
 
-    function CtlAjouterEmploye ( $login, $password, $poste){
+    function CtlAjouterEmploye ( $login, $password, $poste ){
+
+        $created = createEmploye( $login, $password, $poste );
+
+        echo "<script>console.log('".$created."')</script>";
+
+        accueil($created);
 
     }
 
