@@ -2,17 +2,30 @@
     include_once("connect.php");
 
     function getConnect() {
-        $connexion=new PDO('mysql:host='.SERVEUR.';dbname='.BDD,USER,PASSWORD);
-        $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $connexion->query('SET NAMES UTF8');
+        try {
+            $connexion=new PDO('mysql:host='.SERVEUR.';dbname='.BDD,USER,PASSWORD);
+            $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $connexion->query('SET NAMES UTF8');
 
-        return $connexion;
+            return $connexion;
+        } catch ( Exception $e ){
+            echo "<script>console.log('".$e."')</script>";
+        }
+        
+
+        
     }
 
     function formConnexion( $login, $password ){
 
+        echo "<script>console.log('there')</script>";
+
         $connexion = getConnect();
+
+        echo "<script>console.log('this')</script>";
+
         $resultat = $connexion -> query("SELECT * FROM Employe WHERE login='" . $login . "'");
+        echo "<script>console.log('".$resultat."')</script>";
 
         if ( $resultat != false || !empty($resultat) ){
 
@@ -48,7 +61,7 @@
         
         if ( $resultat != false || !empty($resultat) ){
 
-            $connexion -> query("INSERT INTO EMPLOYE(login,password,poste) VALUES(login='" . $login . "', password='" . $password . "', poste='" . $poste . "')");
+            $connexion -> query("INSERT INTO EMPLOYE(login,password,poste) VALUES(login='" . $login . "', password='" . password_hash($password, PASSWORD_DEFAULT, ['cost' => 12] ) . "', poste='" . $poste . "')");
 
             return true;
 

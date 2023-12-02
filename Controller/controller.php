@@ -18,7 +18,7 @@
         // If $login && $password aren't empty entre the loop
         //
 
-        if ( !empty($login) && !empty($password) ) {
+        if ( ( !empty($login) && !empty($password) ) ) {
 
             //
             // $resultat gets the login, password, poste from the database
