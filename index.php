@@ -26,19 +26,49 @@
         if ( isset($_SESSION['poste']) ) {
             CtlAccueil();
         } else {
-            if ( isset($_POST['connexion']) ){
+
+            if ( isset($_POST['connexion']) && !isset($_SESSION['poste']) ){
 
                 //
-                // if connexion button is pressed
-                // 
+                // if connexion submit is clicked and if there's no ongoing session
+                //
 
                 CtlConnexion($_POST['login'],$_POST['password']);
 
-            } else if ( isset($_POST['createEmploye']) ) {
+            } else if ( isset($_POST['createEmploye']) && $_SESSION['poste'] == 'Directeur') {
+
+                //
+                // if createEmploye submit is clicked and if there's an ongoing session which has the $poste Directeur
+                //
 
                 CtlAjouterEmploye( $_POST['loginCreation'], $_POST['passwordCreation'], $_POST['posteCreation'], $_POST['nomCreation'], $_POST['prenomCreation'] );
 
-            } else {
+            } 
+            
+            
+            
+            
+            
+            
+            //
+            // DEFAULT CASES
+            // Main pages of : AGENTS | CONSEILLERS | DIRECTEUR | CONNEXION PAGE
+            //
+            if ( isset($_SESSION['poste'])) {
+                if ( $_SESSION['poste'] == "Agents" ) {
+                    CtlAgentHomePage();
+                }
+    
+                else if ( $_SESSION['poste'] == "Conseiller" ) {
+                    CtlConseillerHomePage();
+                }
+    
+                else if ( $_SESSION['poste'] == "Directeur" ) {
+                    CtlDirecteurHomePage();
+                }
+            }
+            
+            else {
 
                 //
                 // if nothing is pressed or just loaded the page

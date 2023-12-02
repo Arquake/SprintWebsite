@@ -27,7 +27,9 @@
 
             $resultat = formConnexion( $login, $password );
 
-            if ( $resultat != false ){
+            echo "<script>console.log('".($resultat != false && !empty($resultat))."')</script>";
+
+            if ( $resultat != false && !empty($resultat)){
 
                 //
                 // poste && login will be stored in the $_SESSION for future uses and database access
@@ -56,13 +58,28 @@
 
             }
 
-            accueil();
-
         }
 
         accueil(false);
 
     }
+
+
+    function CtlAgentHomePage(){
+        accueilAgent();
+    }
+
+
+    function CtlConseillerHomePage() {
+        accueilConseiller();
+    }
+
+
+    function CtlDirecteurHomePage() {
+        accueilDirecteur();
+    }
+
+
 
     function CtlAjouterEmploye ( $login, $password, $poste ,$nom, $prenom ){
 

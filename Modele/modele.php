@@ -20,13 +20,16 @@
 
         $connexion = getConnect();
 
-        $resultat = $connexion -> query("SELECT * FROM Employe WHERE login='" . $login . "'");
+        /*WHERE login='" . $login . "'*/
+        $resultat = $connexion -> query("SELECT * FROM Employe");
 
-        if ( $resultat != false && !empty($resultat) != 1 ){
+        if ( $resultat != false ){
 
             //
             // password will be checked according to the hash given from the database
             //
+
+            echo "<script>console.log('".var_dump($resultat)."')</script>";
 
             if ( password_verify($password, $resultat['password']) ) {
 
@@ -56,19 +59,7 @@
         
         if ( $resultat != false && empty($resultat) == 0 ){
 
-            echo "<script>console.log('". $login . "  " . password_hash($password, PASSWORD_DEFAULT, ['cost' => 12] ) . "   " . $poste . "   " . $nomEmploye . "   " . $prenomEmploye . "   ". date('Ymd') ."')</script>";
-            try {
-                $connexion -> query("INSERT INTO Employe(login,password,poste,nomEmploye,prenomEmploye,dateEmbauche) VALUES('" . $login . "', '" . password_hash($password, PASSWORD_DEFAULT, ['cost' => 12] ) . "', '" . $poste . "', '" . $nomEmploye . "', '" . $prenomEmploye . "', '" . date('Ymd') . "')");
-
-
-
-
-
-            } catch (Exception $e) {
-                echo "<script>console.log('".$e->getMessage()."')</script>";
-                return false;
-            }
-         
+            $connexion -> query("INSERT INTO Employe(login,password,poste,nomEmploye,prenomEmploye,dateEmbauche) VALUES('" . $login . "', '" . password_hash($password, PASSWORD_DEFAULT, ['cost' => 12] ) . "', '" . $poste . "', '" . $nomEmploye . "', '" . $prenomEmploye . "', '" . date('Ymd') . "')");
 
             return true;
 
