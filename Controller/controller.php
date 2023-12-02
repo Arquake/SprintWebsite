@@ -30,34 +30,28 @@
             if ( $resultat != false ){
 
                 //
-                // password will be checked according to the hash given from the database
+                // poste && login will be stored in the $_SESSION for future uses and database access
+                // name && surname are also stored to display on top of the screen
                 //
 
-                if ( password_verify($password, $resultat['password']) ) {
+                $_SESSION['poste'] = $resultat['poste'];
+                $_SESSION['login'] = $login;
 
-                    //
-                    // poste && login will be stored in the $_SESSION for future uses and database access
-                    // name && surname are also stored to display on top of the screen
-                    //
+                $resultat = employeInformations( $login );
 
-                    $_SESSION['poste'] = $resultat['poste'];
-                    $_SESSION['login'] = $login;
-                    $resultat = employeInformations( $login );
-                    $_SESSION['nom'] = $resultat['nom'];
-                    $_SESSION['prenom'] = $resultat['prenom'];
+                $_SESSION['nom'] = $resultat['nom'];
+                $_SESSION['prenom'] = $resultat['prenom'];
 
-                    //
-                    // try to match $poste with the correct page to show
-                    //
+                //
+                // try to match $poste with the correct page to show
+                //
 
-                    if ( $_SESSION['poste'] == "Agent" ){
-                        accueilAgent();
-                    } else if ( $_SESSION['poste'] == "Conseiller" ){
-                        accueilConseiller();
-                    } else {
-                        accueilDirecteur();
-                    }
-
+                if ( $_SESSION['poste'] == "Agent" ){
+                    accueilAgent();
+                } else if ( $_SESSION['poste'] == "Conseiller" ){
+                    accueilConseiller();
+                } else {
+                    accueilDirecteur();
                 }
 
             }
@@ -65,6 +59,10 @@
         }
 
         accueil(false);
+
+    }
+
+    function CtlAjouterEmploye ( $login, $password, $poste){
 
     }
 

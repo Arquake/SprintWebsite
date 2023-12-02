@@ -1,6 +1,6 @@
-function createEmployeCheck(this){
-    
-}
+//function createEmployeCheck(this){
+//    
+//}
 
 
 function invalidField(field){
