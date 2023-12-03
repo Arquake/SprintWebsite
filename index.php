@@ -4,10 +4,14 @@
     //
     session_start();
 
+    session_unset();
+
     include_once("Controller/controller.php");
 
-    echo "<script>console.log('".var_dump($_SESSION)."')</script>";
-    echo "<script>console.log('".var_dump($_POST)."')</script>";
+
+    //echo "<script>console.log('".var_dump($_SESSION)."')</script>";
+    //echo "<script>console.log('".var_dump($_POST)."')</script>";
+
 
     //
     // Check if user try to sign out
@@ -15,10 +19,19 @@
     //
 
 
+    //
+    // deconnexion input is set as an image
+    // because of it is returned by it x and y coordinates
+    // if x is set y is set and then just take one to match if button is clicked
+    //
+
     try {
-        if ( isset($_POST['deconnexion'])) {
+        if ( isset($_POST['deconnexion_x'])) {
             session_unset();
         }
+
+        // echo "<script>console.log('".var_dump($_SESSION)."')</script>";
+        // echo "<script>console.log('".var_dump($_POST)."')</script>";
 
         //
         // if the user is connected a $poste is assigned to him
@@ -26,64 +39,58 @@
         // { 'Agent', 'Conseiller', 'Directeur'}
         // 
 
-        if ( isset($_SESSION['poste']) ) {
-            CtlAccueil();
-        } else {
+        if ( isset($_POST['connexion']) && !isset($_SESSION['poste']) ){
 
-            if ( isset($_POST['connexion']) && !isset($_SESSION['poste']) ){
-
-                //
-                // if connexion submit is clicked and if there's no ongoing session
-                //
-
-                CtlConnexion($_POST['login'],$_POST['password']);
-
-            } else if ( isset($_POST['createEmploye']) && $_SESSION['poste'] == 'Directeur') {
-
-                //
-                // if createEmploye submit is clicked and if there's an ongoing session which has the $poste Directeur
-                //
-
-                CtlAjouterEmploye( $_POST['loginCreation'], $_POST['passwordCreation'], $_POST['posteCreation'], $_POST['nomCreation'], $_POST['prenomCreation'] );
-
-            } 
-            
-            
-            
-            
-            
-            
             //
-            // DEFAULT CASES
-            // Main pages of : AGENTS | CONSEILLERS | DIRECTEUR | CONNEXION PAGE
+            // if connexion submit is clicked and if there's no ongoing session
             //
-            if ( isset($_SESSION['poste'])) {
-                if ( $_SESSION['poste'] == "Agents" ) {
-                    CtlAgentHomePage();
-                }
-    
-                else if ( $_SESSION['poste'] == "Conseiller" ) {
-                    CtlConseillerHomePage();
-                }
-    
-                else if ( $_SESSION['poste'] == "Directeur" ) {
-                    CtlDirecteurHomePage();
-                }
+
+            CtlConnexion($_POST['login'],$_POST['password']);
+
+        } else if ( isset($_POST['createEmploye']) && $_SESSION['poste'] == 'Directeur') {
+
+            //
+            // if createEmploye submit is clicked and if there's an ongoing session which has the $poste Directeur
+            //
+
+            CtlAjouterEmploye( $_POST['loginCreation'], $_POST['passwordCreation'], $_POST['posteCreation'], $_POST['nomCreation'], $_POST['prenomCreation'] );
+
+        } 
+        
+        
+        
+        
+        
+        
+        //
+        // DEFAULT CASES
+        // Main pages of : AGENTS | CONSEILLERS | DIRECTEUR | CONNEXION PAGE
+        //
+        if ( isset($_SESSION['poste'])) {
+            if ( $_SESSION['poste'] == "Agents" ) {
+                CtlAgentHomePage();
             }
-            
-            else {
 
-                //
-                // if nothing is pressed or just loaded the page
-                // for the first time in the current navigation tab
-                //
+            else if ( $_SESSION['poste'] == "Conseiller" ) {
+                CtlConseillerHomePage();
+            }
 
-                CtlAccueil();
+            else if ( $_SESSION['poste'] == "Directeur" ) {
+                CtlDirecteurHomePage();
             }
         }
+        
+        else {
 
+            //
+            // if nothing is pressed or just loaded the page
+            // for the first time in the current navigation tab
+            //
+
+            CtlAccueil();
+        }
     } catch ( Exception $e ) {
-        CtlError( $e );
+    CtlError( $e );
     }
 
     

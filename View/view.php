@@ -34,18 +34,24 @@
 
     function accueilAgent(){
         $contenu = connectedHeader();
+        $contenu .= '
+        <aside></aside>';
         require_once("View/gabarit.php");
     }
 
 
     function accueilConseiller(){
         $contenu = connectedHeader();
+        $contenu .= '
+        <aside></aside>';
         require_once("View/gabarit.php");
     }
 
 
     function accueilDirecteur(){
         $contenu = connectedHeader();
+        $contenu .= '
+        <aside></aside>';
         require_once("View/gabarit.php");
     }
 

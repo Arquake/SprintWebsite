@@ -24,15 +24,11 @@
         $resultat = $connexion -> query("SELECT * FROM Employe WHERE login='" . $login . "'");
         $resultat = $resultat->fetch(PDO::FETCH_ASSOC);
 
-        echo "<script>console.log('".var_dump($resultat)."')</script>";
-
         if ( $resultat != false ){
 
             //
             // password will be checked according to the hash given from the database
             //
-
-            echo "<script>console.log('".var_dump($resultat)."')</script>";
 
             if ( password_verify($password, $resultat['password']) ) {
 
@@ -50,7 +46,7 @@
 
         $connexion = getConnect();
         
-        $resultat = $connexion -> query("SELECT nomEmploye, prenomEmploye FROM Employe WHERE login='" . $login . "'");
+        $resultat = ($connexion -> query("SELECT nomEmploye, prenomEmploye FROM Employe WHERE login='" . $login . "'"))->fetch(PDO::FETCH_ASSOC);
 
         return $resultat;
 

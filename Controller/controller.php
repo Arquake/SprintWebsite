@@ -27,8 +27,6 @@
 
             $resultat = formConnexion( $login, $password );
 
-            echo "<script>console.log('".($resultat != false && !empty($resultat))."')</script>";
-
             if ( $resultat != false && !empty($resultat)){
 
                 //
@@ -41,19 +39,19 @@
 
                 $resultat = employeInformations( $login );
 
-                $_SESSION['nom'] = $resultat['nom'];
-                $_SESSION['prenom'] = $resultat['prenom'];
+                $_SESSION['nom'] = $resultat['nomEmploye'];
+                $_SESSION['prenom'] = $resultat['prenomEmploye'];
 
                 //
                 // try to match $poste with the correct page to show
                 //
 
                 if ( $_SESSION['poste'] == "Agent" ){
-                    echo "<script>console.log('Agent')</script>";
+                    accueilAgent();
                 } else if ( $_SESSION['poste'] == "Conseiller" ){
-                    echo "<script>console.log('Conseiller')</script>";
+                    accueilConseiller();
                 } else {
-                    echo "<script>console.log('Directeur')</script>";
+                    accueilDirecteur();
                 }
 
             }
