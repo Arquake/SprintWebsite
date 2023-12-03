@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 02 déc. 2023 à 11:38
+-- Généré le : dim. 03 déc. 2023 à 17:22
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -115,6 +115,15 @@ CREATE TABLE IF NOT EXISTS `employe` (
   `dateEmbauche` date NOT NULL,
   PRIMARY KEY (`login`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `employe`
+--
+
+INSERT INTO `employe` (`login`, `password`, `poste`, `nomEmploye`, `prenomEmploye`, `dateEmbauche`) VALUES
+('JeanneDoe', '$2y$12$Z.gVNMSxpdWcGAQ.6oXCKeamsfcoWZ5slPuRBF.JMOF1jfvRJfEAe', 'Directeur', 'Doe', 'Jeanne', '2023-12-02'),
+('JohnDoe', '$2y$12$NR8c3phliX2HcwexgiduMOcXc1PLBOfoyahrYJV72iP8Ez/HgTsx2', 'Agent', 'Doe', 'John', '2023-12-02'),
+('JeanMichel', '$2y$12$5qfBla3n1wBIoSL8dTnqVeXGRcY.mX/o5oTK8/oHxMfRH74RNf1li', 'Conseiller', 'Jean', 'Michel', '2023-12-02');
 
 -- --------------------------------------------------------
 

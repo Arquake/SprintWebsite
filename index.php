@@ -6,6 +6,9 @@
 
     include_once("Controller/controller.php");
 
+    echo "<script>console.log('".var_dump($_SESSION)."')</script>";
+    echo "<script>console.log('".var_dump($_POST)."')</script>";
+
     //
     // Check if user try to sign out
     // if the user try to sign out unset all variables in $_SESSION

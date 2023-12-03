@@ -21,7 +21,10 @@
         $connexion = getConnect();
 
         /*WHERE login='" . $login . "'*/
-        $resultat = $connexion -> query("SELECT * FROM Employe");
+        $resultat = $connexion -> query("SELECT * FROM Employe WHERE login='" . $login . "'");
+        $resultat = $resultat->fetch(PDO::FETCH_ASSOC);
+
+        echo "<script>console.log('".var_dump($resultat)."')</script>";
 
         if ( $resultat != false ){
 
@@ -46,7 +49,8 @@
     function employeInformations( $login ){
 
         $connexion = getConnect();
-        $resultat = $connexion -> query("SELECT nom, prenom FROM Employe WHERE login='" . $login . "'");
+        
+        $resultat = $connexion -> query("SELECT nomEmploye, prenomEmploye FROM Employe WHERE login='" . $login . "'");
 
         return $resultat;
 
