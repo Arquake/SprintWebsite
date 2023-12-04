@@ -4,9 +4,7 @@
     //
     session_start();
 
-    session_unset();
-
-    include_once("Controller/controller.php");
+    require_once("Controller/controller.php");
 
 
     //echo "<script>console.log('".var_dump($_SESSION)."')</script>";
@@ -62,13 +60,38 @@
         
         
         
+        
+        
         //
         // DEFAULT CASES
         // Main pages of : AGENTS | CONSEILLERS | DIRECTEUR | CONNEXION PAGE
         //
         if ( isset($_SESSION['poste'])) {
-            if ( $_SESSION['poste'] == "Agents" ) {
-                CtlAgentHomePage();
+            if ( $_SESSION['poste'] == "Agent" ) {
+
+                //
+                // If an agent try to research a client this page will be loaded
+                //
+
+                if ( isset($_POST['asideAgentClientResearch']) ) {
+                    CtlAgentResearchClient();
+                } 
+
+                //
+                // If an agent try to create a client this page will be loaded
+                //
+                
+                else if ( isset($_POST['asideClientCreation']) ){
+                    CtlAgentCreateClient();
+                }
+
+
+                else {
+                    CtlAgentHomePage();
+                }
+
+
+                
             }
 
             else if ( $_SESSION['poste'] == "Conseiller" ) {

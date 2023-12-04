@@ -2,6 +2,7 @@ body,html {
     width: 100%;
     margin: 0;
     padding: 0;
+    background-color: #f0f0f0;
 }
 
 header {
@@ -69,7 +70,7 @@ p:hover {
     text-shadow: 1px 1px 8px rgba(255, 255, 255, 0.712);
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=number], input[type=date] {
     width: 50%;
     height: 100%;
     float: right;
@@ -87,10 +88,58 @@ input[type=text], input[type=password] {
     letter-spacing: 1px;
 }
 
-input[type=submit] {
+.submitFormInput {
+    background-color: rgb(17, 124, 196);
+    border-radius: 10px;
+
+    color: white;
+    font-family: 'SF Pro Display';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 20px;
+
+    letter-spacing: 1px;
+
     float: right;
     margin-right: 3%;
+    padding-top: 2%;
+    padding-bottom: 2%;
     width: 53%;
+}
+
+.submitFormInput:active {
+    background-color: rgb(15, 97, 151);
+}
+
+.asideInput {
+
+    background-color: rgb(66, 175, 115);
+
+    border:none;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    outline: none;
+
+    width: 100%;
+
+    color: white;
+    font-family: 'SF Pro Display';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 20px;
+
+    padding: 10%;
+
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.asideInput:hover {
+    background-color: rgb(57, 150, 99);
+}
+
+.asideForm {
+    all: unset
 }
 
 select {
@@ -121,10 +170,13 @@ option {
 }
 
 legend {
+    background-color: #f0f0f0;
     letter-spacing: 1px;
-    background-color: white;
+    border: 1px solid gray;
+    border-radius: 100px;
     color: black;
-    padding: 5px 10px;
+    padding: 10px 10px;
+    margin: 10px;
     font-family: 'SF Pro Display';
     font-weight: bold;
     font-style: normal;
@@ -167,12 +219,9 @@ li {
     padding: 0;
     margin: 0;
     padding-left: 0;
+    margin-top: 10%;
     height: 5%;
     list-style-type: none 
-}
-
-li:hover {
-    background-color: rgb(57, 150, 99);
 }
 
 .invalidForm {

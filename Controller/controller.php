@@ -2,6 +2,7 @@
 
     require_once("View/view.php");
     require_once("Modele/modele.php");
+    require_once('agentController.php');
 
 
     function CtlError( $exception ){
@@ -63,9 +64,7 @@
     }
 
 
-    function CtlAgentHomePage(){
-        accueilAgent();
-    }
+    
 
 
     function CtlConseillerHomePage() {
@@ -86,22 +85,6 @@
         echo "<script>console.log('".$created."')</script>";
 
         gestionEmployeDirecteur($created);
-
-    }
-
-    function CtlAjouterClient(){
-        
-    }
-
-    function CtlSupprimerClient( $idClient ){
-
-    }
-
-    function CtlAjouterRendezVous( $dateRDV, $heureDebut, $heureFin){
-
-    }
-
-    function CtlSupprimerRendezVous( $id ){
 
     }
 
