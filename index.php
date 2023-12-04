@@ -82,7 +82,23 @@
                 //
                 
                 else if ( isset($_POST['asideClientCreation']) ){
-                    CtlAgentCreateClient();
+                    CtlAgentCreateationClient();
+                }
+
+                //
+                //
+                //
+
+                else if ( isset($_POST['creationClientAgentSubmit']) ) {
+
+                }
+
+                //
+                //
+                //
+
+                else if ( isset($_POST['rattacherClientSubmit']) ) {
+                    CtlRattacherClient();
                 }
 
 

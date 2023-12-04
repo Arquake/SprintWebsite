@@ -68,3 +68,35 @@
         return false;
 
     }
+
+
+    function createClient($nomClient,$prenomClient,$dateNaissance) {
+
+        $connexion = getConnect();
+
+        $connexion -> query("INSERT INTO Client(nomClient, prenomClient, dateNaissance, estInscrit) VALUES('".$nomClient."', '".$prenomClient."' ,'".$dateNaissance."', 0)");
+
+        $resultat = ($connexion -> query("SELECT idClient FROM Client WHERE idClient=(SELECT MAX(idClient) FROM Client)"))->fetch(PDO::FETCH_ASSOC);
+
+        return $resultat;
+    }
+
+
+    function getAllConseillers() {
+
+        $connexion = getConnect();
+
+        $resultat = ($connexion -> query("SELECT login, nomEmploye, prenomEmploye FROM Employe"))->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultat;
+    }
+
+
+    function rattacherClientAgent() {
+
+        $connexion = getConnect();
+
+        $connexion -> query("INSERT INTO RattacherA(idClient, login, dateRattachement) VALUES('".$_SESSION['idClient']."', '".$_SESSION['login']."' ,CURRENT_DATE) ");
+
+        return true;
+    }

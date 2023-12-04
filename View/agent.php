@@ -100,25 +100,67 @@
     }
 
 
-    function mainPageClientAgent(){
+    function rattacherClient($conseillerList) {
         $contenu = connectedHeader();
-            $contenu .= '
-            <aside>
-                <form action="index.php" method="post">
-                    <ul>
+        $contenu .= '
+        <aside>
+        </aside>
 
-                        <li><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthèse"></li>
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm" onSubmit="rattachageClient(this)">
+            <fieldset>
+                <legend>Création du Client</legend>
 
-                        <li><input class="asideInput" type="submit" value="Modification Client" name="asideClientModification"></li>
+                    <p><label for="nomClientCreation">Nom du Client</label><input type="text" name="nomClientCreation" onBlur="validFormField( this, 1, 45 )"></p>
 
-                        <li><input class="asideInput" type="submit" value="Transaction" name="asideClientModification"></li>
+                    <p><label for="prenomClientCreation">Prénom du Client</label><input type="text" name="prenomClientCreation" onBlur="validFormField( this, 2, 45 )"></p>
 
-                        <li><input class="asideInput" type="submit" value="Prise Rendez-Vous" name="asideClientModification"></li>
+                    <p><label for="dateNaissanceClientCreation">Date de Naissanse du Client</label><input type="date" name="dateNaissanceClientCreation" onBlur="validFormField( this, 2, 32 )"></p>
 
-                        <li><input class="asideInput" type="submit" value="Nouvelle Recherhce" name="asideClientDisconnect"></li>
+                    <p><input class="submitFormInput" type="submit" value="Créer le Client" name="creationClientAgentSubmit"></p>
+            </fieldset>
+        </form>
 
-                    </ul>
-                </form>
-            </aside>';
-            require_once("View/gabarit.php");
+        <form>
+            <fieldset>
+                <p>
+                    <label for="posteRattachement">Employé à Rattacher</label>
+                    <select id="posteRattachement" name="posteRattachement">';
+
+        foreach ( $conseillerList as $conseiller){
+            $contenu .= "<option value=".$conseiller->login.">".$conseiller->nomEmploye."  ".$conseiller->prenomEmploye."</option>";
+        }
+
+
+        $contenu .= '
+                    </select>
+                </p>
+            </fieldset>
+            <p><input class="submitFormInput" type="submit" value="Rattacher" name="rattacherClientSubmit"></p>
+        </form>
+        ';
+        require_once("View/gabarit.php");
     }
+
+
+    function mainPageClientAgent() {
+        $contenu = connectedHeader();
+        $contenu .= '
+        <aside>
+            <form action="index.php" method="post">
+                <ul>
+
+                    <li><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthèse"></li>
+
+                    <li><input class="asideInput" type="submit" value="Modification Client" name="asideClientModification"></li>
+
+                    <li><input class="asideInput" type="submit" value="Transaction" name="asideClientModification"></li>
+
+                    <li><input class="asideInput" type="submit" value="Prise Rendez-Vous" name="asideClientModification"></li>
+
+                    <li><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientDisconnect"></li>
+
+                </ul>
+            </form>
+        </aside>';
+        require_once("View/gabarit.php");
+}
