@@ -37,6 +37,17 @@ header {
     width: 3%;
 }
 
+input[type="radio"] {
+    margin: 0;
+    padding: 0;
+    margin-left: 3%;
+    margin-top: 2.5%;
+    margin-bottom: 2%;
+    -ms-transform: scale(4); /* IE 9 */
+    -webkit-transform: scale(4); /* Chrome, Safari, Opera */
+    transform: scale(3);
+  }
+
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;

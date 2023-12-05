@@ -82,8 +82,6 @@
 
         $created = createEmploye( $login, $password, $poste ,$nom, $prenom);
 
-        echo "<script>console.log('".$created."')</script>";
-
         gestionEmployeDirecteur($created);
 
     }

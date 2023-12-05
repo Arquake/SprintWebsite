@@ -76,7 +76,9 @@
 
         $connexion -> query("INSERT INTO Client(nomClient, prenomClient, dateNaissance, estInscrit) VALUES('".$nomClient."', '".$prenomClient."' ,'".$dateNaissance."', 0)");
 
-        $resultat = ($connexion -> query("SELECT idClient FROM Client WHERE idClient=(SELECT MAX(idClient) FROM Client)"))->fetch(PDO::FETCH_ASSOC);
+        $resultat = (($connexion -> query("SELECT idClient FROM Client WHERE idClient=(SELECT MAX(idClient) FROM Client)"))->fetch(PDO::FETCH_ASSOC))['idClient'];
+
+        $connexion -> query("INSERT INTO CreerClient(idClient, login, dateCreation) VALUES('".$resultat."', '".$_SESSION['login']."' , CURRENT_DATE)");
 
         return $resultat;
     }
@@ -86,7 +88,7 @@
 
         $connexion = getConnect();
 
-        $resultat = ($connexion -> query("SELECT login, nomEmploye, prenomEmploye FROM Employe"))->fetchAll(PDO::FETCH_ASSOC);
+        $resultat = ($connexion -> query("SELECT login, nomEmploye, prenomEmploye FROM Employe WHERE poste='Conseiller'"))->fetchAll(PDO::FETCH_ASSOC);
 
         return $resultat;
     }
@@ -99,4 +101,63 @@
         $connexion -> query("INSERT INTO RattacherA(idClient, login, dateRattachement) VALUES('".$_SESSION['idClient']."', '".$_SESSION['login']."' ,CURRENT_DATE) ");
 
         return true;
+    }
+
+
+    function getClientByID($id){
+
+        $connexion = getConnect();
+
+        $resultat = ($connexion -> query("SELECT nomClient, prenomClient, dateNaissance FROM client WHERE idClient='".$id."'"))->fetch(PDO::FETCH_ASSOC);
+
+        $resultat['idClient'] = $id;
+
+        return $resultat;
+    }
+
+
+    function rechercherClientAgent($clientInformartionList) {
+
+        $connexion = getConnect();
+
+
+        if ( isset($clientInformartionList['ID']) ) {
+
+            return getClientByID($clientInformartionList['ID']);
+
+        }
+
+        if ( !isset($clientInformartionList['nomClient']) && !isset($clientInformartionList['prenomClient']) && !isset($clientInformartionList['naissanceClient']) ) {
+            return false;
+        }
+
+        $req = 'SELECT idClient, nomClient, prenomClient, dateNaissance, estInscrit, numeroTelephone, mail, adresse, codePostale, profession, situation, revenuMensuel FROM client WHERE';
+
+        if ( isset($clientInformartionList['nomClient']) ) {
+            $req .= " nomClient='".$clientInformartionList['nomClient']."'";
+        }
+
+        if ( isset($clientInformartionList['nomClient']) && isset($clientInformartionList['prenomClient']) ) {
+            $req .= " AND ";
+        }
+
+        if ( isset($clientInformartionList['prenomClient']) ) {
+
+            $req .= " prenomClient='".$clientInformartionList['prenomClient']."' ";
+
+        }
+
+        if ( (isset($clientInformartionList['nomClient']) || isset($clientInformartionList['prenomClient'])) && isset($clientInformartionList['naissanceClient']) ) {
+            $req .= " AND ";
+        }
+
+        if ( isset($clientInformartionList['naissanceClient']) ) {
+
+            $req .= " dateNaissance='".$clientInformartionList['naissanceClient']."' ";
+
+        }
+
+        $resultat = ($connexion -> query($req))->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultat;
     }

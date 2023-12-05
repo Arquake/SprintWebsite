@@ -7,8 +7,8 @@
     require_once("Controller/controller.php");
 
 
-    //echo "<script>console.log('".var_dump($_SESSION)."')</script>";
-    //echo "<script>console.log('".var_dump($_POST)."')</script>";
+    echo "<script>console.log('".var_dump($_SESSION)."')</script>";
+    echo "<script>console.log('".var_dump($_POST)."')</script>";
 
 
     //
@@ -90,7 +90,7 @@
                 //
 
                 else if ( isset($_POST['creationClientAgentSubmit']) ) {
-
+                    CtlAgentCreateClient();
                 }
 
                 //
@@ -99,6 +99,19 @@
 
                 else if ( isset($_POST['rattacherClientSubmit']) ) {
                     CtlRattacherClient();
+                }
+                
+
+                else if ( isset($_POST['asideClientDisconnect']) ) {
+                    CtlClientDisconnect();
+                }
+
+                else if ( isset($_POST['rechercheClientSubmit']) ) {
+                    CtlAgentResearchClientSubmitted();
+                }
+
+                else if ( isset($_POST['clientRechercheChoice'])) {
+                    CtlAgentResearchClientChoices();
                 }
 
 
