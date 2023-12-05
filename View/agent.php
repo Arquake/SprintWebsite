@@ -17,7 +17,7 @@
             require_once("View/gabarit.php");
         }
 
-    function creationClientAgent() {
+    function creationClientAgent($error = true) {
         $contenu = connectedHeader();
         $contenu .= '
         <aside>
@@ -30,9 +30,13 @@
 
                 </ul>
             </form>
-        </aside>
+        </aside>';
+        if ( !$error ){
+            $contenu .= '<div class="invalidForm">Formulaire non valide !</div>';
+        };
+        $contenu .= '
         
-        <form action="index.php" method="post" class="topPageForm" id="topPageForm" onSubmit="creationClientAgent(this)">
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
             <fieldset>
                 <legend>Création du Client</legend>
 

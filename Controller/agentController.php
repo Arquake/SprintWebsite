@@ -81,16 +81,25 @@
 
     function CtlAgentCreateClient() {
 
-        $idClient = createClient($_POST['nomClientCreation'], $_POST['prenomClientCreation'], $_POST['dateNaissanceClientCreation']);
+        
 
-        $_SESSION['clientNom'] = $_POST['nomClientCreation'];
-        $_SESSION['clientPrenom'] = $_POST['prenomClientCreation'];
-        $_SESSION['clientNaissance'] = $_POST['dateNaissanceClientCreation'];
-        $_SESSION['idClient'] = $idClient;
+        if ( $_POST['nomClientCreation'] =='' || $_POST['prenomClientCreation'] =='' || $_POST['dateNaissanceClientCreation'] =='' ) {
+            creationClientAgent(false);
+        } else {
 
-        $conseillersList = getAllConseillers();
+            $idClient = createClient($_POST['nomClientCreation'], $_POST['prenomClientCreation'], $_POST['dateNaissanceClientCreation']);
 
-        rattacherClient($conseillersList);
+            $_SESSION['clientNom'] = $_POST['nomClientCreation'];
+            $_SESSION['clientPrenom'] = $_POST['prenomClientCreation'];
+            $_SESSION['clientNaissance'] = $_POST['dateNaissanceClientCreation'];
+            $_SESSION['idClient'] = $idClient;
+
+            $conseillersList = getAllConseillers();
+
+            rattacherClient($conseillersList);
+
+        }
+
     }
 
     function CtlRattacherClient() {
