@@ -45,15 +45,7 @@
 
             CtlConnexion($_POST['login'],$_POST['password']);
 
-        } else if ( isset($_POST['createEmploye']) && $_SESSION['poste'] == 'Directeur') {
-
-            //
-            // if createEmploye submit is clicked and if there's an ongoing session which has the $poste Directeur
-            //
-
-            CtlAjouterEmploye( $_POST['loginCreation'], $_POST['passwordCreation'], $_POST['posteCreation'], $_POST['nomCreation'], $_POST['prenomCreation'] );
-
-        } 
+        }
         
         
         
@@ -131,7 +123,27 @@
             }
 
             else if ( $_SESSION['poste'] == "Directeur" ) {
-                CtlDirecteurHomePage();
+
+                if ( $_POST['asideDirecteurCreerEmploye'] ) {
+                    CtlDirecteurHomePage();
+                } 
+                
+                
+                else if ( isset($_POST['createEmploye']) ) {
+
+                    //
+                    // if createEmploye submit is clicked and if there's an ongoing session which has the $poste Directeur
+                    //
+        
+                    CtlAjouterEmploye( $_POST['loginCreation'], $_POST['passwordCreation'], $_POST['posteCreation'], $_POST['nomCreation'], $_POST['prenomCreation'] );
+        
+                } 
+                
+                
+                
+                else {
+                    CtlDirecteurHomePage();
+                }
             }
         }
         

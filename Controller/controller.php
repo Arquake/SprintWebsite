@@ -3,6 +3,7 @@
     require_once("View/view.php");
     require_once("Modele/modele.php");
     require_once('agentController.php');
+    require_once('directeurController.php');
 
 
     function CtlError( $exception ){
@@ -70,20 +71,3 @@
     function CtlConseillerHomePage() {
         accueilConseiller();
     }
-
-
-    function CtlDirecteurHomePage() {
-        accueilDirecteur();
-    }
-
-
-
-    function CtlAjouterEmploye ( $login, $password, $poste ,$nom, $prenom ){
-
-        $created = createEmploye( $login, $password, $poste ,$nom, $prenom);
-
-        gestionEmployeDirecteur($created);
-
-    }
-
-    

@@ -3,7 +3,15 @@
     function accueilDirecteur(){
         $contenu = connectedHeader();
         $contenu .= '
-        <aside></aside>';
+        <aside>
+            <form action="index.php" method="post">
+                <ul>
+
+                    <li><input class="asideInput" type="submit" value="Créer Employé" name="asideDirecteurCreerEmploye"></li>
+
+                </ul>
+            </form>
+        </aside>';
         require_once("View/gabarit.php");
     }
 

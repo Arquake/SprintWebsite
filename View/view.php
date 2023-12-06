@@ -68,21 +68,21 @@
             $emploiDuTemps .= '<tr>';
             for ( $j = 0 ; $j < 60 ; $j += 15) {
                 if ( $j != 0 ) {
-                    $emploiDuTemps .= '<td>'.$i.' H '.$j.'</td>';
+                    $emploiDuTemps .= '<th>'.$i.' H '.$j.'</th>';
                 } else {
-                    $emploiDuTemps .= '<td>'.$i.' H</td>';
+                    $emploiDuTemps .= '<th>'.$i.' H</th>';
                 }
                 
                 for ( $k = 0 ; $k < 7 ; $k++){
-                    $emploiDuTemps .= '<td></td>';
+                    $emploiDuTemps .= '<td><input type="button" class="priseRDVButton"></td>';
                 }
                 $emploiDuTemps .= '</tr>';
             }
         }
         $emploiDuTemps .= '<tr>';
-        $emploiDuTemps .= '<td>20 H</td>';
+        $emploiDuTemps .= '<th>20 H</th>';
         for ( $k = 0 ; $k < 7 ; $k++){
-            $emploiDuTemps .= '<td></td>';
+            $emploiDuTemps .= '<td><input type="button" class="priseRDVButton"></td>';
         }
         $emploiDuTemps .= '</tr></table>';
 

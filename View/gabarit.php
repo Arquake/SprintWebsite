@@ -14,8 +14,6 @@
     <title>MGN</title>
 </head>
 <body>
-    
-    
 
     <?php
         echo $contenu;
