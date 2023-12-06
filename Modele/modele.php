@@ -9,7 +9,7 @@
 
             return $connexion;
         } catch ( Exception $e ){
-            echo "<script>console.log('".$e."')</script>";
+            echo "<script>console.log('".var_dump($e)."')</script>";
         }
         
 
