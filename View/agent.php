@@ -189,11 +189,11 @@
 
                     <li><input class="asideInput" type="submit" value="Modification Client" name="asideClientModification"></li>
 
-                    <li><input class="asideInput" type="submit" value="Transaction" name="asideClientModification"></li>
+                    <li><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>
 
-                    <li><input class="asideInput" type="submit" value="Prise Rendez-Vous" name="asideClientModification"></li>
+                    <li><input class="asideInput" type="submit" value="Prise Rendez-Vous" name="asideClientPriseRendezVous"></li>
 
-                    <li><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientDisconnect"></li>
+                    <li><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
 
                 </ul>
             </form>

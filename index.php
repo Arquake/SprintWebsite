@@ -114,6 +114,9 @@
                     CtlAgentResearchClientChoices();
                 }
 
+                else if ( isset($_POST['asideClientTransaction']) ) {
+                    CtlAgentTransactionClient();
+                } 
 
                 else {
                     CtlAgentHomePage();
