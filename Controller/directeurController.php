@@ -1,7 +1,7 @@
 <?php
 
-    function CtlDirecteurAccueil() {
-        gestionEmployeDirecteur();
+    function CtlDirecteurCreateAgentSubmit() {
+        gestionEmployeDirecteur('homepage');
     }
 
     function CtlDirecteurHomePage() {

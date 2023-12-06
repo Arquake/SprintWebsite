@@ -32,9 +32,10 @@
 
         $res = rechercherClientAgent($clientInfo);
         
+        echo "<script>console.log('".var_dump($res)."')</script>";
 
         if ($res != false ) {
-            if ( isset($res['idClient']) ) {
+            if ( isset($res['idClient']) && isset($res['nomClient']) ) {
 
                 $_SESSION['clientNom'] = $res['nomClient'];
                 $_SESSION['clientPrenom'] = $res['prenomClient'];
@@ -42,19 +43,21 @@
                 $_SESSION['idClient'] = $res['idClient'];
 
                 mainPageClientAgent();
-            } else if ( gettype($res) == 'array' && count($res) == 1 ) {
+            } else if ( isset($res[0]['nomClient']) ) {
                 $_SESSION['clientNom'] = $res[0]['nomClient'];
                 $_SESSION['clientPrenom'] = $res[0]['prenomClient'];
                 $_SESSION['clientNaissance'] = $res[0]['dateNaissance'];
                 $_SESSION['idClient'] = $res[0]['idClient'];
 
                 mainPageClientAgent();
-            } else {
+            } else if ( isset($res[1]) ) {
                 rechercheApprofondiClient($res);
+            } else {
+                rechercheClientAgentView(false);
             }
 
         } else {
-            rechercheClientAgentView($res);
+            rechercheClientAgentView(false);
         }
     
     }

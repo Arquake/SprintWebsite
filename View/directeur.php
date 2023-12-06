@@ -16,11 +16,23 @@
     }
 
     function gestionEmployeDirecteur($employeCreated = false){
-        $contenu = '<aside></aside>';
-        if ( $employeCreated ){
+        $contenu = connectedHeader();
+        $contenu .= '
+        <aside>
+            <form action="index.php" method="post">
+                <ul>
+
+                    <li><input class="asideInput" type="submit" value="Créer Employé" name="asideDirecteurCreerEmploye"></li>
+
+                </ul>
+            </form>
+        </aside>';
+        if ( $employeCreated != 'homepage' ) {
+            if ( $employeCreated ){
             $contenu .= '<div class="invalidForm">Employé créé</div>';
-        } else {
-            $contenu .= '<div class="invalidForm">Erreur</div>';
+            } else {
+                $contenu .= '<div class="invalidForm">Erreur</div>';
+            }
         }
         $contenu .= '
         <form action="index.php" method="post" class="topPageForm" onSubmit="createEmployeCheck(this)" id="topPageForm">
