@@ -98,7 +98,7 @@
 
         $connexion = getConnect();
 
-        $connexion -> query("INSERT INTO RattacherA(idClient, login, dateRattachement) VALUES('".$_SESSION['idClient']."', '".$_SESSION['login']."' ,CURRENT_DATE) ");
+        $connexion -> query("INSERT INTO RattacherA(idClient, login, dateRattachement) VALUES('".$_SESSION['idClient']."', '".$_POST['posteRattachement']."' ,CURRENT_DATE) ");
 
         return true;
     }

@@ -438,7 +438,7 @@
         font-family: 'SF Pro Display';
         font-weight: bold;
         font-style: normal;
-        font-size: 18px;
+        font-size: 20px;
     
         padding: 10%;
     
@@ -512,7 +512,7 @@
         position: absolute;
         float: left;
         height: 100%;
-        width: 10%;
+        width: 12%;
         max-width: 324px;
         background-color: rgb(66, 175, 115);
     }
