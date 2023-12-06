@@ -49,6 +49,45 @@
     }
 
 
+    function afficherEDT($login=false,$semaineRequete=false) {
+
+        $emploiDuTemps = '
+        <table>
+            <tr>
+            <th>Semaine Du '.$semaineRequete.'</th>
+            <th>Lundi</th>
+            <th>Mardi</th>
+            <th>Mercredi</th>
+            <th>Jeudi</th>
+            <th>Vendredi</th>
+            <th>Samedi</th>
+            <th>Dimanche</th>
+            </tr>';
+
+        for ( $i = 8 ; $i < 20 ; $i++ ) {
+            $emploiDuTemps .= '<tr>';
+            for ( $j = 0 ; $j < 60 ; $j += 15) {
+                if ( $j != 0 ) {
+                    $emploiDuTemps .= '<td>'.$i.' H '.$j.'</td>';
+                } else {
+                    $emploiDuTemps .= '<td>'.$i.' H</td>';
+                }
+                
+                for ( $k = 0 ; $k < 7 ; $k++){
+                    $emploiDuTemps .= '<td></td>';
+                }
+                $emploiDuTemps .= '</tr>';
+            }
+        }
+        $emploiDuTemps .= '<tr>';
+        $emploiDuTemps .= '<td>20 H</td>';
+        for ( $k = 0 ; $k < 7 ; $k++){
+            $emploiDuTemps .= '<td></td>';
+        }
+        $emploiDuTemps .= '</tr></table>';
+
+        return $emploiDuTemps;
+    }
 
 
     

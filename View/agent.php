@@ -14,6 +14,8 @@
                     </ul>
                 </form>
             </aside>';
+            $contenu .= afficherEDT();
+            echo "<script>console.log('".$contenu."')</script>";
             require_once("View/gabarit.php");
         }
 
