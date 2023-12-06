@@ -115,8 +115,16 @@
                 }
 
                 else if ( isset($_POST['asideClientTransaction']) ) {
-                    CtlAgentTransactionClient();
+                    CtlAgentTransactionClientChoice();
                 } 
+
+                else if ( isset($_POST['selectionnerCompteClientSubmit']) ) {
+                    CtlAgentTransactionClient();
+                }
+
+                else if ( isset($_POST['outPutTransactionCompteClient'])){
+                    CtlAgentOutPutTransactionCompteClient ();
+                }
 
                 else {
                     CtlAgentHomePage();

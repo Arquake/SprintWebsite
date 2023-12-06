@@ -278,7 +278,15 @@ body,html {
         text-decoration: underline;
     }
     
+    .afficherBeauP {
     
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 40px;
+        text-align: center; 
+
+    }
     
 }
 

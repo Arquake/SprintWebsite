@@ -112,5 +112,32 @@
         unset($_SESSION['clientPrenom']);
         unset($_SESSION['clientNaissance']);
         unset($_SESSION['idClient']);
+        unset($_SESSION['idCompte']);
         accueilAgent();
     }
+
+    // Lance de quoi afficher la liste des comptes du client en session
+    function CtlAgentTransactionClientChoice(){
+        $compteList = getAllComptes();
+        transactionChoixClientAgentView($compteList);
+    }
+
+    //Lance de quoi afficher les choix pour retirer/deposer sur le compte
+    function CtlAgentTransactionClient(){
+        $_SESSION['compteClient'] = $_POST['compteSelection'];
+        $compte = getCompteViaId($_SESSION['compteClient']);
+        transactionClientAgentView($compte);
+    }
+
+    //Lance de quoi retirer/deposer l'argent voulu sur le compte en session et retourne a l'acceuil
+    function CtlAgentOutPutTransactionCompteClient(){
+        if (isset($_POST['retrait'])) {
+            retraitAgentClient($_POST['retrait']);
+        }
+        else if (isset($_POST['depot'])) {
+            depotAgentClient($_POST['depot']);
+        }
+        accueilAgent();
+    }
+
+    
