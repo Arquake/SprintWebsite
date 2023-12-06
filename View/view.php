@@ -40,8 +40,11 @@
     function connectedHeader() {
         return '
         <header>
-            <img src="View/style/assets/logo.png" alt="" id="logo">
-            <form action="index.php" method="POST" id="signOutForm">
+            <form action="index.php" method="POST" id="topForm">
+                <input type="image" src="View/style/assets/logo.png" alt="Submit" id="logo" name="menu">
+
+                <input class="topFormInformation" type="text" name="login" value="'.$_SESSION['prenom'].'   '.$_SESSION['nom'].'">
+
                 <input type="image" src="View/style/assets/logout.png" alt="Submit" id="signOut" name="deconnexion">
             </form>
         </header>
