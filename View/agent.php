@@ -201,4 +201,70 @@
             </form>
         </aside>';
         require_once("View/gabarit.php");
-}
+    } 
+
+    // SELECTIONNER LE COMPTE SUR LEQUEL EFFECTUER LA TRANSACTION
+    function transactionChoixClientAgentView($compteList){
+        $contenu = connectedHeader();
+        $contenu .= '<aside>
+        </aside>
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+            <fieldset>
+                <p>
+                    <label for="compteSelection">Compte disponible :</label>
+                    <select id="compteSelection" name="compteSelection">';
+
+        foreach ( $compteList as $compte){
+            
+            $contenu .= "<option value=".$compte['idCompte'].">".$compte['type']." - ".$compte['solde']." €</option>";
+
+        }
+
+
+        $contenu .= '
+                    </select>
+                </p>
+            </fieldset>
+            <p><input class="submitFormInput" type="submit" value="Selectionner" name="selectionnerCompteClientSubmit"></p>
+        </form>
+        ';
+        require_once("View/gabarit.php");
+    }
+
+    //Affiche le panel pour deposer/retirer de l'argent sur le compte en session
+    function transactionClientAgentView($compte) {
+        $contenu = connectedHeader();
+        $contenu .= '
+        
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+
+            <p class="afficherBeauP">Compte séléctionner : ';
+            
+            foreach ( $compte as $item){
+            
+                $contenu .= $item['type']." - ".$item['solde']." €</p>";
+    
+            }
+            
+            $contenu .= '
+
+            <fieldset>
+                <legend>Retrait</legend>
+
+                <p><label for="retrait">Montant du retrait</label>
+                <input type="number" name="retrait" onBlur="validFormField( this, 2, 45 )"></p> 
+            </fieldset>
+
+            <fieldset>
+                <legend>Dépot</legend>
+
+                <p><label for="depot">Montant du dépot</label>
+                <input type="number" name="depot" onBlur="validFormField( this, 2, 32 )"></p>
+            </fieldset>
+
+            <p><input class="submitFormInput" type="submit" value="Rechercher" name="outPutTransactionCompteClient"></p>
+        </form>
+        
+        ';
+        require_once("View/gabarit.php");
+    }

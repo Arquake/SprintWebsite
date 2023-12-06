@@ -93,6 +93,25 @@
         return $resultat;
     }
 
+    // Recupere tout les compte du client enrengistrer dans la session
+    function getAllComptes() { 
+
+        $connexion = getConnect();
+
+        $resultat = ($connexion -> query("SELECT idCompte, type, solde FROM Compte NATURAL JOIN PossedeCompte WHERE idClient='".$_SESSION['idClient']."'"))->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultat;
+    }
+
+    // Recupere les infos du compte dont l'id est passé en paramètre 
+    function getCompteViaId($compte) {
+        $connexion = getConnect();
+
+        $resultat = ($connexion -> query("SELECT type, solde FROM Compte WHERE idCompte='".$compte."'"))->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultat;
+
+    }
 
     function rattacherClientAgent() {
 
@@ -161,3 +180,20 @@
 
         return $resultat;
     }
+
+
+      //Depose le montant inscrit en parametre au compte passé en session
+    function depotAgentClient($montantDepot){
+        $connexion = getConnect();
+        
+        $connexion -> query("UPDATE Compte SET solde = solde + ".$montantDepot." WHERE idCompte='".$_SESSION['compteClient']."'");
+    }
+
+    //Retire le montant inscrit en parametre du compte passé en session
+    function retraitAgentClient($montantRetrait){
+        $connexion = getConnect();
+
+        $connexion -> query("UPDATE Compte SET solde = solde - ".$montantRetrait." WHERE idCompte='".$_SESSION['compteClient']."'");
+    }
+
+  
