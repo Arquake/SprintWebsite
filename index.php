@@ -114,9 +114,13 @@
                     CtlAgentTransactionClient();
                 }
 
-                else if ( isset($_POST['outPutTransactionCompteClient'])){
-                    CtlAgentOutPutTransactionCompteClient ();
+                else if ( isset($_POST['outPutTransactionRetraitCompteClient'])){
+                    CtlAgentOutPutTransactionRetraitCompteClient ();
                 }
+
+                else if ( isset($_POST['outPutTransactionDepotCompteClient'])){
+                    CtlAgentOutPutTransactionDepotCompteClient ();
+                } ////////////////////////////////////////
 
                 else {
                     CtlAgentHomePage();

@@ -30,7 +30,7 @@
         <header><img src="View/style/assets/logo.png" alt="" id="logo"></header>
         <aside></aside>
         <div class="invalidForm">Une erreur s\'est produite</div>
-        <div class="error"><a class="errorATag" href="index.php">Cliquez ici pour recharger la page</a></div>';
+        <div class="error"><a class="errorATag" href="index.php">Cliquez ici pour retourner à l\'accueil</a></div>';
         require_once("View/gabarit.php");
     }
 

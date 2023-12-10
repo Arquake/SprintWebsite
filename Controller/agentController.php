@@ -129,18 +129,29 @@
     function CtlAgentTransactionClient(){
         $_SESSION['compteClient'] = $_POST['compteSelection'];
         $compte = getCompteViaId($_SESSION['compteClient']);
-        transactionClientAgentView($compte);
+
+        if (isset($_POST['radioRetrait'])) {
+            transactionRetraitClientAgentView($compte);
+        }
+        else if (isset($_POST['radioDepot'])) {
+            transactionDepotClientAgentView($compte);
+        }
     }
 
-    //Lance de quoi retirer/deposer l'argent voulu sur le compte en session et retourne a l'acceuil
-    function CtlAgentOutPutTransactionCompteClient(){
+    //Lance de quoi retirer l'argent voulu sur le compte en session et retourne a l'acceuil
+    function CtlAgentOutPutTransactionRetraitCompteClient(){
         if (isset($_POST['retrait'])) {
             retraitAgentClient($_POST['retrait']);
         }
-        else if (isset($_POST['depot'])) {
+        CtlAgentTransactionClientChoice();
+    }
+
+    //Lance de quoi deposer l'argent voulu sur le compte en session et retourne a l'acceuil
+    function CtlAgentOutPutTransactionDepotCompteClient(){
+        if (isset($_POST['depot'])) {
             depotAgentClient($_POST['depot']);
         }
-        accueilAgent();
+        CtlAgentTransactionClientChoice();
     }
 
     
