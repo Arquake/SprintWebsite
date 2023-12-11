@@ -134,6 +134,10 @@
                     CtlModificationClient();
                 }
 
+                else if ( isset($_POST['asideClientPriseRendezVous']) ) {
+                    CtlPriseDeRendezVousAgents();
+                }
+
                 else {
                     CtlAgentHomePage();
                 }

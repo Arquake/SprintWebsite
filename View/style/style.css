@@ -353,21 +353,6 @@ body,html {
         margin: 0;
         padding: 0;
     }
-
-    table, th, tr, td {
-        border: 1px solid;
-    }
-
-    td {
-        text-align: center;
-        padding: 3px;
-    }
-
-    table {
-        margin-top: 5%;
-        width: 50%;
-        margin-right: 20%;
-    }
     
     #logo {
         height: 100%;
@@ -446,7 +431,7 @@ body,html {
         text-shadow: 1px 1px 8px rgba(255, 255, 255, 0.712);
     }
     
-    input[type=text], input[type=password], input[type=number], input[type=date] {
+    input[type=text], input[type=password], input[type=number], input[type=date], input[type=time] {
         width: 50%;
         height: 100%;
         float: right;
@@ -575,7 +560,7 @@ body,html {
         padding: 0;
         position: absolute;
         float: left;
-        height: 200%;
+        height: 140%;
         width: 13%;
         max-width: 324px;
         background-color: rgb(66, 175, 115);
@@ -635,11 +620,33 @@ body,html {
         width: 40%;
         margin-left: 40%;
     }
+
+    
     
     .transactionForm {
         width: 42%;
         padding-top: 1%;
         margin-left: 35.1%;
+    }
+
+    .priseRdv {
+        display: flex;
+    }
+
+    .sideFormPriseRendezVous {
+        float: left;
+        width: 35%;
+        padding-top: 1% ;
+        margin-left: 15%;
+    }
+
+    .edtAgents {
+        margin-top: 1%;
+        margin-right: 2.5%;
+        width: 45%;
+        text-align: center;
+        padding: 3px;
+        border: 1px solid;
     }
 
 }

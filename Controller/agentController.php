@@ -120,12 +120,17 @@
     // Lance de quoi afficher la liste des comptes du client en session
     function CtlAgentTransactionClientChoice(){
         $compteList = getAllComptes();
-        transactionChoixClientAgentView($compteList);
+        if ( empty($compteList) ) {
+            errorTransactionNoAccountFound();
+        } else {
+            transactionChoixClientAgentView($compteList);
+        }
     }
 
     //Lance de quoi afficher les choix pour retirer/deposer sur le compte
     function CtlAgentTransactionClient(){
         $compte = getCompteViaId($_POST['compteSelection']);
+        
         $_SESSION['nomCompteClient'] = $compte;
 
         if ($_POST['radioTransaction'] == "retrait") {
@@ -183,4 +188,8 @@
 
     function CtlModificationClient() {
         AgentclientModificationPage();
+    }
+
+    function CtlPriseDeRendezVousAgents() {
+        priseDeRendezVousAgents();
     }

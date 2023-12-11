@@ -52,45 +52,7 @@
     }
 
 
-    function afficherEDT($login=false,$semaineRequete=false) {
-
-        $emploiDuTemps = '
-        <table>
-            <tr>
-            <th>Semaine Du '.$semaineRequete.'</th>
-            <th>Lundi</th>
-            <th>Mardi</th>
-            <th>Mercredi</th>
-            <th>Jeudi</th>
-            <th>Vendredi</th>
-            <th>Samedi</th>
-            <th>Dimanche</th>
-            </tr>';
-
-        for ( $i = 8 ; $i < 20 ; $i++ ) {
-            $emploiDuTemps .= '<tr>';
-            for ( $j = 0 ; $j < 60 ; $j += 15) {
-                if ( $j != 0 ) {
-                    $emploiDuTemps .= '<th>'.$i.' H '.$j.'</th>';
-                } else {
-                    $emploiDuTemps .= '<th>'.$i.' H 00</th>';
-                }
-                
-                for ( $k = 0 ; $k < 7 ; $k++){
-                    $emploiDuTemps .= '<td><input type="button" class="priseRDVButton"></td>';
-                }
-                $emploiDuTemps .= '</tr>';
-            }
-        }
-        $emploiDuTemps .= '<tr>';
-        $emploiDuTemps .= '<th>20 H</th>';
-        for ( $k = 0 ; $k < 7 ; $k++){
-            $emploiDuTemps .= '<td><input type="button" class="priseRDVButton"></td>';
-        }
-        $emploiDuTemps .= '</tr></table>';
-
-        return $emploiDuTemps;
-    }
+    
 
 
     function clientSynthesis($synthèse) {
@@ -120,3 +82,5 @@
         require_once("View/gabarit.php");
 
     }
+
+    

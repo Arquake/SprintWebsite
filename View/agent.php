@@ -43,8 +43,6 @@
                 </form>
             </aside>';
         }
-            
-            $contenu .= afficherEDT();
             require_once("View/gabarit.php");
 
         }
@@ -211,8 +209,7 @@
 
 
     function mainPageClientAgent() {
-        $contenu = connectedHeader();
-        $contenu .= AgentAsideSideBarWhenClientConnected();
+        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected();
         require_once("View/gabarit.php");
     } 
 
@@ -355,5 +352,87 @@
             </fieldset>
         </form>
         ';
+        require_once("View/gabarit.php");
+    }
+
+
+    function priseDeRendezVousAgents() {
+        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() .'
+        <div class"priseRdv">
+            <form action="rdv.php" method="post" class="sideFormPriseRendezVous">
+                <fieldset>
+
+                    <legend>Programmer un RDV</legend>
+                    <p><label for="">Nom Du RDV</label><input type="text" name="nomRDV" id="nomRDV"></p>
+                    <p><label for="">Date</label><input type="date" name="date" id="date"></p>
+                    <p><label for="">Heure de début</label><input type="time" name="heureDebut" id="heureDebut"></p>
+                    <p><label for="">Heure de fin</label><input type="time" name="heureFin" id="heureFin"></p>
+                    <input class="submitFormInput" type="submit" name="create" value="Créer">
+                </fieldset>
+                
+
+                <fieldset>
+                    <legend>Supprimer un RDV</legend>
+                    <p><label for="">Date</label><input type="date" name="dateDel" id="dateDel"></p>
+                    <!--
+                        <p><label for="">Heure de début</label><input type="time" name="heureDebutDel" id="heureDebutDel"></p>
+                        <p><label for="">Heure de fin</label><input type="time" name="heureFinDel" id="heureFinDel"></p> 
+                    -->
+                    <p><label for="">Identifiant du RDV</label><input type="number" name="rdvDel" id="rdvDel"></p> 
+                    <input class="submitFormInput" type="submit"  name="delete" value="Supprimer">
+
+                </fieldset>
+            </form>
+        '.afficherEDTAgents().'</div>';
+
+
+
+    require_once("View/gabarit.php");
+    }
+
+
+    function afficherEDTAgents($login=false,$semaineRequete=false) {
+
+        $emploiDuTemps = '
+        <table class="edtAgents">
+            <tr>
+            <th>Semaine Du '.$semaineRequete.'</th>
+            <th>Lundi</th>
+            <th>Mardi</th>
+            <th>Mercredi</th>
+            <th>Jeudi</th>
+            <th>Vendredi</th>
+            <th>Samedi</th>
+            <th>Dimanche</th>
+            </tr>';
+
+        for ( $i = 8 ; $i < 20 ; $i++ ) {
+            $emploiDuTemps .= '<tr>';
+            for ( $j = 0 ; $j < 60 ; $j += 15) {
+                if ( $j != 0 ) {
+                    $emploiDuTemps .= '<th>'.$i.' H '.$j.'</th>';
+                } else {
+                    $emploiDuTemps .= '<th>'.$i.' H 00</th>';
+                }
+                
+                for ( $k = 0 ; $k < 7 ; $k++){
+                    $emploiDuTemps .= '<td><input type="button" class="priseRDVButton"></td>';
+                }
+                $emploiDuTemps .= '</tr>';
+            }
+        }
+        $emploiDuTemps .= '<tr>';
+        $emploiDuTemps .= '<th>20 H</th>';
+        for ( $k = 0 ; $k < 7 ; $k++){
+            $emploiDuTemps .= '<td><input type="button" class="priseRDVButton"></td>';
+        }
+        $emploiDuTemps .= '</tr></table>';
+
+        return $emploiDuTemps;
+    }
+
+
+    function errorTransactionNoAccountFound(){
+        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '<div class="invalidForm">Aucun client ne<br>correspond à la recherche</div>';
         require_once("View/gabarit.php");
     }
