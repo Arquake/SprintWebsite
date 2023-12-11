@@ -93,4 +93,30 @@
     }
 
 
-    
+    function clientSynthesis($synthèse) {
+        $contenu = connectedHeader();
+
+        if ( $_SESSION['poste'] == 'Agent' ) {
+
+                $contenu .= AgentAsideSideBarWhenClientConnected();
+
+                $contenu .= '<div class="clientSynthesis">
+                <h1>Synthèse du client</h1>
+                <p>ID du client : ' . $synthèse['idClient'] . '</p>
+                <p>Nom du client : ' . $synthèse['nomClient'] . '</p>
+                <p>Prénom du client : ' . $synthèse['prenomClient'] . '</p>
+                </div>';
+
+        } else if ( $_SESSION['poste'] == 'Conseiller' ) {
+
+            $contenu .= '';
+
+        } else { 
+
+            $contenu .= '';
+
+        }
+
+        require_once("View/gabarit.php");
+
+    }

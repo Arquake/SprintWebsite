@@ -174,3 +174,7 @@
         }
     }
     
+
+    function CtlModificationClient() {
+        AgentclientModificationPage();
+    }
