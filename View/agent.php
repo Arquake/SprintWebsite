@@ -115,7 +115,7 @@
                 <fieldset>
                     <legend>Rechercher par ID</legend>
 
-                    <p><label for="nomCreation">ID Client</label><input type="number" name="idClientRecherche" onBlur="validFormField( this, 2, 45 )"></p>
+                    <p><label for="nomCreation">ID Client</label><input type="number" name="idClientRecherche" onBlur="validFormField( this, 1, 45 )"></p>
                         
                 </fieldset>
 
@@ -237,8 +237,9 @@
                 </ul>
             </form>
         </aside>
-        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+        <form action="index.php" method="post" class="transactionForm" id="transactionForm">
             <fieldset>
+                <legend>Effectuer Transaction</legend>
                 <p>
                     <label for="compteSelection">Compte disponible :</label>
                     <select id="compteSelection" name="compteSelection">';
@@ -254,14 +255,14 @@
                     </select>
                 </p>
                 <p>
-                <input id="retrait" type="radio" name="radioTransaction" value="retrait" checked><label for"retrait">Retrait</label>
+                    <label for"retrait">Retrait</label><input id="retrait" type="radio" name="radioTransaction" value="retrait" checked>
                 </p>
                 <p>
-                <input id="depot" type="radio" name="radioTransaction" value="depot"><label for"depot">Dépot</label>
+                    <label for"depot">Dépot</label><input id="depot" type="radio" name="radioTransaction" value="depot">
                 </p>
-
+                <p><input class="submitFormInput" type="submit" value="Selectionner" name="selectionnerCompteClientSubmit"></p>
             </fieldset>
-            <p><input class="submitFormInput" type="submit" value="Selectionner" name="selectionnerCompteClientSubmit"></p>
+            
         </form>
         ';
         
@@ -291,9 +292,10 @@
 
                 <p><label for="retrait">Montant du retrait</label>
                 <input type="number" name="retrait"></p> 
+                <p><input class="submitFormInput" type="submit" value="Soumettre" name="outPutTransactionRetraitCompteClient"></p>
             </fieldset>
 
-            <p><input class="submitFormInput" type="submit" value="Soumettre" name="outPutTransactionRetraitCompteClient"></p>
+            
         </form>
         
         ';
@@ -323,9 +325,10 @@
 
                 <p><label for="depot">Montant du dépot</label>
                 <input type="number" name="depot"></p>
+                <p><input class="submitFormInput" type="submit" value="Soumettre" name="outPutTransactionDepotCompteClient"></p>
             </fieldset>
 
-            <p><input class="submitFormInput" type="submit" value="Soumettre" name="outPutTransactionDepotCompteClient"></p>
+            
         </form>
         
         ';
