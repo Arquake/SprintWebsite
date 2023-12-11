@@ -197,3 +197,18 @@
     }
 
   
+
+    function DataClient($idClient) {
+            
+        $connexion = getConnect();
+    
+            $query = "SELECT idClient, nomClient, prenomClient, dateNaissance, estInscrit, numeroTelphone, mail, adresse, codePostale, profession, situation, revenuMensuel, montantDecouvert FROM client WHERE idClient = '{$idClient}'";
+    
+            // Exécution de la requête
+            $resultat = $connexion->query($query)->fetch(PDO::FETCH_ASSOC);
+    
+            // Retourner les données du client
+            return $resultat;
+    }
+    
+    

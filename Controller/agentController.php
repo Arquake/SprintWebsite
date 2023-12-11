@@ -154,4 +154,23 @@
         CtlAgentTransactionClientChoice();
     }
 
+
+
+    function CtlAgentSyntheseClientPage($idClient) {
+        // Récupérer les informations du client
+        $clientData = DataClient($idClient);
+    
+        // Vérifier si les données du client existent
+        if ($clientData) {
+            // Afficher les informations du client dans la page de synthèse
+            echo "<h1>Synthèse du client</h1>";
+            echo "<p>ID du client : " . $clientData['idClient'] . "</p>";
+            echo "<p>Nom du client : " . $clientData['nomClient'] . "</p>";
+            echo "<p>Prénom du client : " . $clientData['prenomClient'] . "</p>";
+    
+        } else {
+            // Gérer le cas où les données du client ne peuvent pas être récupérées
+            echo "Impossible de récupérer les informations du client.";
+        }
+    }
     
