@@ -110,7 +110,18 @@
         $resultat = ($connexion -> query("SELECT type, solde FROM Compte WHERE idCompte='".$compte."'"))->fetchAll(PDO::FETCH_ASSOC);
 
         return $resultat;
+    }
 
+    function getSolde($compte){
+        
+    }
+
+    function getPlafond($idCompte){
+        //get plafond
+    }
+
+    function getDecouvert($idClient){
+        //get le decouvert client-bind si le compte-bind n'existe pas 
     }
 
     function rattacherClientAgent() {

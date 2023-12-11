@@ -265,6 +265,7 @@
     function transactionRetraitClientAgentView($compte) {
         $contenu = connectedHeader();
         $contenu .= '
+        <aside></aside>
         
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
@@ -285,7 +286,7 @@
                 <input type="number" name="retrait"></p> 
             </fieldset>
 
-            <p><input class="submitFormInput" type="submit" value="Rechercher" name="outPutTransactionRetraitCompteClient"></p>
+            <p><input class="submitFormInput" type="submit" value="Soumettre" name="outPutTransactionRetraitCompteClient"></p>
         </form>
         
         ';
@@ -296,7 +297,8 @@
      function transactionDepotClientAgentView($compte) {
         $contenu = connectedHeader();
         $contenu .= AgentAsideSideBarWhenClientConnected() .'
-        
+        <aside></aside>
+
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
             <p class="afficherBeauP">Compte séléctionné pour <strong>dépot</strong> : ';
@@ -316,7 +318,7 @@
                 <input type="number" name="depot"></p>
             </fieldset>
 
-            <p><input class="submitFormInput" type="submit" value="Rechercher" name="outPutTransactionDepotCompteClient"></p>
+            <p><input class="submitFormInput" type="submit" value="Soumettre" name="outPutTransactionDepotCompteClient"></p>
         </form>
         
         ';
