@@ -128,10 +128,10 @@
         $_SESSION['compteClient'] = $_POST['compteSelection'];
         $compte = getCompteViaId($_SESSION['compteClient']);
 
-        if (isset($_POST['radioRetrait'])) {
+        if ($_POST['radioTransaction'] == "retrait") {
             transactionRetraitClientAgentView($compte);
         }
-        else if (isset($_POST['radioDepot'])) {
+        else if ($_POST['radioTransaction'] == "depot") {
             transactionDepotClientAgentView($compte);
         }
     }
@@ -140,6 +140,8 @@
     function CtlAgentOutPutTransactionRetraitCompteClient(){
         if (isset($_POST['retrait'])) {
             retraitAgentClient($_POST['retrait']);
+        } else {
+            echo '<script>alert("Indiquer le montant voulu");</script>';
         }
         CtlAgentTransactionClientChoice();
     }
@@ -148,6 +150,8 @@
     function CtlAgentOutPutTransactionDepotCompteClient(){
         if (isset($_POST['depot'])) {
             depotAgentClient($_POST['depot']);
+        } else {
+            echo '<script>alert("Indiquer le montant voulu");</script>';
         }
         CtlAgentTransactionClientChoice();
     }
