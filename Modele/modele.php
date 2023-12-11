@@ -198,21 +198,17 @@
 
   
 
-    function DataClient($idClient) {
+    function DataClient() {
             
         $connexion = getConnect();
     
-            $query = "SELECT * FROM client WHERE idClient = '".$idClient;
+        $query = "SELECT * FROM client WHERE idClient = '".$_SESSION['idClient']."'";
 
-            echo "<scrip>console.log(".var_dump($query).")</script>";
-    
-            // Exécution de la requête
-            $resultat = ($connexion->query($query))->fetch(PDO::FETCH_ASSOC);
+        // Exécution de la requête
+        $resultat = ($connexion->query($query))->fetch(PDO::FETCH_ASSOC);
 
-            echo "<scrip>console.log(".var_dump($resultat).")</script>";
-    
-            // Retourner les données du client
-            return $resultat;
+        // Retourner les données du client
+        return $resultat;
     }
     
     

@@ -156,7 +156,7 @@
 
     function CtlAgentSyntheseClientPage() {
         // Récupérer les informations du client
-        $clientData = DataClient($_SESSION['idClient']);
+        $clientData = DataClient();
     
         // Vérifier si les données du client existent
         if ($clientData) {
