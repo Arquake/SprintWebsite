@@ -104,24 +104,54 @@
     }
 
     // Recupere les infos du compte dont l'id est passé en paramètre 
-    function getCompteViaId($compte) {
+    function getTypeCompteViaId($idCompte) {
         $connexion = getConnect();
 
-        $resultat = ($connexion -> query("SELECT type, solde FROM Compte WHERE idCompte='".$compte."'"))->fetchAll(PDO::FETCH_ASSOC);
+        $resultat = ($connexion -> query("SELECT type FROM Compte WHERE idCompte='".$idCompte."'"))->fetch(PDO::FETCH_ASSOC);
 
-        return $resultat;
+        return $resultat['type'];
     }
 
-    function getSolde($compte){
-        
+    function getSoldeCompteViaId($idCompte){
+        $connexion = getConnect();
+
+        $resultat = ($connexion -> query("SELECT solde FROM Compte where idCompte='".$idCompte."'"))->fetch(PDO::FETCH_ASSOC);
+
+        return $resultat['solde'];
     }
 
-    function getPlafond($idCompte){
-        //get plafond
+    function getPlafondViaType($typeCompte){
+        $connexion = getConnect();
+
+        $resultat = ($connexion -> query("SELECT plafond FROM TypeCompte where typeCompte='".$typeCompte."'"))->fetch(PDO::FETCH_ASSOC);
+
+        return $resultat['plafond'];
     }
 
-    function getDecouvert($idClient){
-        //get le decouvert client-bind si le compte-bind n'existe pas 
+    function getDecouvertCompte($typeCompte){
+        $connexion = getConnect();
+
+        $resultat = ($connexion -> query("SELECT decouvert FROM TypeCompte where typeCompte='".$typeCompte."'"))->fetch(PDO::FETCH_ASSOC);
+
+        return $resultat['decouvert'];
+    }
+
+    function getDecouvertClient($idClient){
+        $connexion = getConnect();
+
+        $resultat = ($connexion -> query("SELECT montantDecouvert FROM Client where idClient='".$idClient."'"))->fetch(PDO::FETCH_ASSOC);
+
+        return $resultat['montantDecouvert'];
+    }
+
+    function getDecouvert(){
+        $decouvertCompte = intval(getDecouvertCompte($_SESSION['typeCompteClient']));
+       
+        if ( $decouvertCompte != Null ){
+            return $decouvertCompte;
+        } else {
+            return getDecouvertClient($_SESSION['idClient']);
+        }
     }
 
     function rattacherClientAgent() {
@@ -197,14 +227,14 @@
     function retraitAgentClient($montantRetrait){
         $connexion = getConnect();
 
-        $connexion -> query("UPDATE Compte SET solde = solde - ".$montantRetrait." WHERE idCompte='".$_SESSION['compteClient']."'");
+        $connexion -> query("UPDATE Compte SET solde = solde - ".$montantRetrait." WHERE idCompte='".$_SESSION['idCompteClient']."'");
     }
 
     //Depose le montant inscrit en parametre au compte passé en session
     function depotAgentClient($montantDepot){
         $connexion = getConnect();
         
-        $connexion -> query("UPDATE Compte SET solde = solde + ".$montantDepot." WHERE idCompte='".$_SESSION['compteClient']."'");
+        $connexion -> query("UPDATE Compte SET solde = solde + ".$montantDepot." WHERE idCompte='".$_SESSION['idCompteClient']."'");
     }
 
   

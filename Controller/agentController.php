@@ -129,28 +129,36 @@
 
     //Lance de quoi afficher les choix pour retirer/deposer sur le compte
     function CtlAgentTransactionClient(){
+<<<<<<< Updated upstream
         $compte = getCompteViaId($_POST['compteSelection']);
         
         $_SESSION['nomCompteClient'] = $compte;
+=======
+        $_SESSION['idCompteClient'] = $_POST['compteSelection'];
+        $_SESSION['typeCompteClient'] = getTypeCompteViaId($_SESSION['idCompteClient'] );
+        $_SESSION['soldeCompteClient'] = getSoldeCompteViaId($_SESSION['idCompteClient'] );
+        
+>>>>>>> Stashed changes
 
         if ($_POST['radioTransaction'] == "retrait") {
-            transactionRetraitClientAgentView($compte);
+            transactionRetraitClientAgentView();
         }
         else if ($_POST['radioTransaction'] == "depot") {
-            transactionDepotClientAgentView($compte);
+            transactionDepotClientAgentView();
         }
     }
 
     //Lance de quoi retirer l'argent voulu sur le compte en session et retourne a l'acceuil
-    function CtlAgentOutPutTransactionRetraitCompteClient($compte){
-        $soldeActuel = getSolde($compte);
-        $plafond = getPlafond($_SESSION['idCompteClient']);
-        $decouvert = getDecouvert($_SESSION['idClient']);
+    function CtlAgentOutPutTransactionDepotCompteClient(){
+        $soldeActuel = getSoldeCompteViaId($_SESSION['idCompteClient']);
+        $plafond = getPlafondViaType($_SESSION['typeCompteClient']);
 
-
-        if (isset($_POST['retrait'])) {
-            if ( $plafond )
-                retraitAgentClient($_POST['retrait']);
+        if (isset($_POST['depot']) && (intval($_POST['depot'] > 0))) {
+            if ( $soldeActuel + $_POST['depot'] <= $plafond ) {
+                depotAgentClient($_POST['depot']);
+            } else{
+                echo '<script>alert("Plafond depassé");</script>';
+            }
         } else {
             echo '<script>alert("Indiquer le montant voulu");</script>';
         }
@@ -158,11 +166,18 @@
     }
 
     //Lance de quoi deposer l'argent voulu sur le compte en session et retourne a l'acceuil
-    function CtlAgentOutPutTransactionDepotCompteClient(){
-        if (isset($_POST['depot'])) {
-            depotAgentClient($_POST['depot']);
+    function CtlAgentOutPutTransactionRetraitCompteClient(){
+        $soldeActuel = getSoldeCompteViaId($_SESSION['idCompteClient']);
+        $decouvert = getDecouvert($_SESSION['idClient']);
+
+        if (isset($_POST['retrait']) && (intval($_POST['retrait'] > 0))) {
+            if ( $soldeActuel - $_POST['retrait'] >= $decouvert ) {
+                retraitAgentClient($_POST['retrait']);
+            } else{
+                echo '<script>alert("Decouvert depassé");</script>';
+            }
         } else {
-            echo '<script>alert("Indiquer le montant voulu");</script>';
+            echo '<script>alert("Indiquer le montant positif voulu");</script>';
         }
         CtlAgentTransactionClientChoice();
     }

@@ -243,7 +243,7 @@
 
         foreach ( $compteList as $compte){
             
-            $contenu .= "<option value=".$compte['idCompte'].">".$compte['type']." - ".$compte['solde']." €</option>";
+            $contenu .= "<option value=".$compte['idCompte'].">".$compte['type']." : ".$compte['solde']." €</option>";
 
         }
 
@@ -267,66 +267,65 @@
     }
 
     //Affiche le panel pour retirer de l'argent sur le compte en session
-    function transactionRetraitClientAgentView($compte) {
+    function transactionRetraitClientAgentView() {
         $contenu = connectedHeader();
         $contenu .= '
         <aside></aside>
         
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
-            <p class="afficherBeauP">Compte séléctionné pour <strong>retrait</strong> : ';
-            
-            foreach ( $compte as $item){
-            
-                $contenu .= $item['type']." - ".$item['solde']." €</p>";
+        <p class="afficherBeauP">Compte séléctionné pour <strong>retrait</strong> : '.$_SESSION['typeCompteClient'].' : '.$_SESSION['soldeCompteClient'].' €</p>
     
-            }
-            
-            $contenu .= '
-
             <fieldset>
                 <legend>Retrait</legend>
 
                 <p><label for="retrait">Montant du retrait</label>
                 <input type="number" name="retrait"></p> 
+<<<<<<< Updated upstream
                 <p><input class="submitFormInput" type="submit" value="Soumettre" name="outPutTransactionRetraitCompteClient"></p>
             </fieldset>
 
             
         </form>
+=======
+        
+
+            <p><input class="submitFormInput" type="submit" value="Soumettre" name="outPutTransactionRetraitCompteClient"></p>
+            </fieldset>
+            </form>
+>>>>>>> Stashed changes
         
         ';
         require_once("View/gabarit.php");
     }
 
      //Affiche le panel pour deposer de l'argent sur le compte en session
-     function transactionDepotClientAgentView($compte) {
+     function transactionDepotClientAgentView() {
 
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() .'
         <aside></aside>        
 
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
-            <p class="afficherBeauP">Compte séléctionné pour <strong>dépot</strong> : ';
-            
-            foreach ( $compte as $item){
-            
-                $contenu .= $item['type']." - ".$item['solde']." €</p>";
+            <p class="afficherBeauP">Compte séléctionné pour <strong>dépot</strong> : '.$_SESSION['typeCompteClient'].' : '.$_SESSION['soldeCompteClient'].' €</p>
     
-            }
-            
-            $contenu .= '
 
             <fieldset>
                 <legend>Dépot</legend>
 
                 <p><label for="depot">Montant du dépot</label>
                 <input type="number" name="depot"></p>
+<<<<<<< Updated upstream
                 <p><input class="submitFormInput" type="submit" value="Soumettre" name="outPutTransactionDepotCompteClient"></p>
             </fieldset>
 
             
         </form>
+=======
+            <p><input class="submitFormInput" type="submit" value="Soumettre" name="outPutTransactionDepotCompteClient"></p>
+            </fieldset>
+            </form>
+>>>>>>> Stashed changes
         
         ';
         require_once("View/gabarit.php");
