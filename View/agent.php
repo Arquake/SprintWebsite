@@ -433,6 +433,6 @@
 
 
     function errorTransactionNoAccountFound(){
-        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '<div class="invalidForm">Aucun client ne<br>correspond à la recherche</div>';
+        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '<div class="invalidForm">Aucun Compte n\'existe<br>Pour ce Client</div>';
         require_once("View/gabarit.php");
     }
