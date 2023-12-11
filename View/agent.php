@@ -1,5 +1,28 @@
 <?php
 
+    function AgentAsideSideBarWhenClientConnected() {
+        $contenu = '
+        <aside>
+            <form action="index.php" method="post">
+                <ul>
+
+                    <li><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthese"></li>
+
+                    <li><input class="asideInput" type="submit" value="Modification Client" name="asideClientModification"></li>
+
+                    <li><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>
+
+                    <li><input class="asideInput" type="submit" value="Prise Rendez-Vous" name="asideClientPriseRendezVous"></li>
+
+                    <li><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
+
+                </ul>
+            </form>
+        </aside>';
+
+        return $contenu;
+    }
+
     function accueilAgent(){
             $contenu = connectedHeader();
             $contenu .= '
@@ -182,24 +205,7 @@
 
     function mainPageClientAgent() {
         $contenu = connectedHeader();
-        $contenu .= '
-        <aside>
-            <form action="index.php" method="post">
-                <ul>
-
-                    <li><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthèse"></li>
-
-                    <li><input class="asideInput" type="submit" value="Modification Client" name="asideClientModification"></li>
-
-                    <li><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>
-
-                    <li><input class="asideInput" type="submit" value="Prise Rendez-Vous" name="asideClientPriseRendezVous"></li>
-
-                    <li><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
-
-                </ul>
-            </form>
-        </aside>';
+        $contenu .= AgentAsideSideBarWhenClientConnected();
         require_once("View/gabarit.php");
     } 
 
@@ -272,7 +278,7 @@
      //Affiche le panel pour deposer de l'argent sur le compte en session
      function transactionDepotClientAgentView($compte) {
         $contenu = connectedHeader();
-        $contenu .= '
+        $contenu .= AgentAsideSideBarWhenClientConnected() .'
         
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
@@ -298,4 +304,33 @@
         
         ';
         require_once("View/gabarit.php");
+    }
+
+
+    function clientSynthesis($synthèse) {
+        $contenu = connectedHeader();
+
+        if ( $_SESSION['poste'] == 'Agent' ) {
+
+                $contenu .= AgentAsideSideBarWhenClientConnected();
+
+                $contenu .= "<div>
+                <h1>Synthèse du client</h1>
+                <p>ID du client : " . $synthèse['idClient'] . "</p>
+                <p>Nom du client : " . $synthèse['nomClient'] . "</p>
+                <p>Prénom du client : " . $synthèse['prenomClient'] . "</p>
+                </div>";
+
+        } else if ( $_SESSION['poste'] == 'Conseiller' ) {
+
+            $contenu .= '';
+
+        } else { 
+
+            $contenu .= '';
+
+        }
+
+        require_once("View/gabarit.php");
+
     }

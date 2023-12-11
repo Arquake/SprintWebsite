@@ -122,7 +122,7 @@
                     CtlAgentOutPutTransactionDepotCompteClient ();
                 } ////////////////////////////////////////
 
-                else if (isset($_POST['asideClientSynthèse'])) {
+                else if (isset($_POST['asideClientSynthese'])) {
                     CtlAgentSyntheseClientPage();
                 }
 
