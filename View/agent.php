@@ -24,7 +24,12 @@
     }
 
     function accueilAgent(){
-            $contenu = connectedHeader();
+        $contenu = connectedHeader();
+        if ( isset($_SESSION['idClient']) ) {
+
+            $contenu .= AgentAsideSideBarWhenClientConnected();
+
+        } else {
             $contenu .= '
             <aside>
                 <form action="index.php" method="post">
@@ -37,9 +42,11 @@
                     </ul>
                 </form>
             </aside>';
+        }
+            
             $contenu .= afficherEDT();
-            echo "<script>console.log('".$contenu."')</script>";
             require_once("View/gabarit.php");
+
         }
 
     function creationClientAgent($error = true) {
