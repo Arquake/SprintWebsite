@@ -202,10 +202,14 @@
             
         $connexion = getConnect();
     
-            $query = "SELECT idClient, nomClient, prenomClient, dateNaissance, estInscrit, numeroTelphone, mail, adresse, codePostale, profession, situation, revenuMensuel, montantDecouvert FROM client WHERE idClient = '{$idClient}'";
+            $query = "SELECT * FROM client WHERE idClient = '".$idClient;
+
+            echo "<scrip>console.log(".var_dump($query).")</script>";
     
             // Exécution de la requête
-            $resultat = $connexion->query($query)->fetch(PDO::FETCH_ASSOC);
+            $resultat = ($connexion->query($query))->fetch(PDO::FETCH_ASSOC);
+
+            echo "<scrip>console.log(".var_dump($resultat).")</script>";
     
             // Retourner les données du client
             return $resultat;

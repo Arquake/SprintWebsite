@@ -31,8 +31,6 @@
         }
 
         $res = rechercherClientAgent($clientInfo);
-        
-        echo "<script>console.log('".var_dump($res)."')</script>";
 
         if ($res != false ) {
             if ( isset($res['idClient']) && isset($res['nomClient']) ) {
@@ -156,9 +154,9 @@
 
 
 
-    function CtlAgentSyntheseClientPage($idClient) {
+    function CtlAgentSyntheseClientPage() {
         // Récupérer les informations du client
-        $clientData = DataClient($idClient);
+        $clientData = DataClient($_SESSION['idClient']);
     
         // Vérifier si les données du client existent
         if ($clientData) {

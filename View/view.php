@@ -73,7 +73,7 @@
                 if ( $j != 0 ) {
                     $emploiDuTemps .= '<th>'.$i.' H '.$j.'</th>';
                 } else {
-                    $emploiDuTemps .= '<th>'.$i.' H</th>';
+                    $emploiDuTemps .= '<th>'.$i.' H 00</th>';
                 }
                 
                 for ( $k = 0 ; $k < 7 ; $k++){
