@@ -180,3 +180,7 @@
         }
     }
     
+
+    function CtlModificationClient() {
+        AgentclientModificationPage();
+    }

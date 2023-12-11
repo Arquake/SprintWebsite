@@ -122,12 +122,16 @@
                     CtlAgentOutPutTransactionDepotCompteClient ();
                 } //////////////////////////////////////// MP
 
-                else if (isset($_POST['asideClientSynthese'])) {
+                else if ( isset($_POST['asideClientSynthese']) ) {
                     CtlAgentSyntheseClientPage();
                 }
 
-                else if (isset($_POST['asideClientNouvelleRecherche'])) {
+                else if ( isset($_POST['asideClientNouvelleRecherche']) ) {
                     CtlAgentResearchClient();
+                }
+
+                else if ( isset($_POST['asideClientModification']) ) {
+                    CtlModificationClient();
                 }
 
                 else {

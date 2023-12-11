@@ -295,9 +295,9 @@
 
      //Affiche le panel pour deposer de l'argent sur le compte en session
      function transactionDepotClientAgentView($compte) {
-        $contenu = connectedHeader();
-        $contenu .= AgentAsideSideBarWhenClientConnected() .'
-        <aside></aside>
+
+        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() .'
+        <aside></aside>        
 
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
@@ -326,30 +326,24 @@
     }
 
 
-    function clientSynthesis($synthèse) {
-        $contenu = connectedHeader();
+    function AgentclientModificationPage() {
+        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
-        if ( $_SESSION['poste'] == 'Agent' ) {
+            <fieldset>
 
-                $contenu .= AgentAsideSideBarWhenClientConnected();
+                <legend>Modifier Client</legend>
 
-                $contenu .= "<div>
-                <h1>Synthèse du client</h1>
-                <p>ID du client : " . $synthèse['idClient'] . "</p>
-                <p>Nom du client : " . $synthèse['nomClient'] . "</p>
-                <p>Prénom du client : " . $synthèse['prenomClient'] . "</p>
-                </div>";
+                <p><label for="nomClientModification">Nom du Client</label><input type="text" name="nomClientModification" value="'.$_SESSION['clientNom'].'"></p>
 
-        } else if ( $_SESSION['poste'] == 'Conseiller' ) {
+                <p><label for="prenomClientModification">Prénom du Client</label><input type="text" name="prenomClientModification" value="'.$_SESSION['clientPrenom'].'"></p>
 
-            $contenu .= '';
+                <p><label for="dateNaissanceClientModification">Date de Naissanse du Client</label><input type="date" name="dateNaissanceClientModification" value="'.$_SESSION['clientNaissance'].'"></p>
 
-        } else { 
 
-            $contenu .= '';
-
-        }
-
+                <p><input class="submitFormInput" type="submit" value="Modifier" name="ModificationClientSubmit"></p>
+            </fieldset>
+        </form>
+        ';
         require_once("View/gabarit.php");
-
     }
