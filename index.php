@@ -7,8 +7,8 @@
     require_once("Controller/controller.php");
 
 
-    //echo "<script>console.log('".var_dump($_SESSION)."')</script>";
-    //echo "<script>console.log('".var_dump($_POST)."')</script>";
+    echo "<script>console.log('".var_dump($_SESSION)."')</script>";
+    echo "<script>console.log('".var_dump($_POST)."')</script>";
 
 
     //

@@ -129,16 +129,9 @@
 
     //Lance de quoi afficher les choix pour retirer/deposer sur le compte
     function CtlAgentTransactionClient(){
-<<<<<<< Updated upstream
-        $compte = getCompteViaId($_POST['compteSelection']);
-        
-        $_SESSION['nomCompteClient'] = $compte;
-=======
         $_SESSION['idCompteClient'] = $_POST['compteSelection'];
         $_SESSION['typeCompteClient'] = getTypeCompteViaId($_SESSION['idCompteClient'] );
         $_SESSION['soldeCompteClient'] = getSoldeCompteViaId($_SESSION['idCompteClient'] );
-        
->>>>>>> Stashed changes
 
         if ($_POST['radioTransaction'] == "retrait") {
             transactionRetraitClientAgentView();
