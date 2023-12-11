@@ -206,7 +206,23 @@
     // SELECTIONNER LE COMPTE SUR LEQUEL EFFECTUER LA TRANSACTION
     function transactionChoixClientAgentView($compteList){
         $contenu = connectedHeader();
-        $contenu .= '<aside>
+        $contenu .= '
+        <aside>
+            <form action="index.php" method="post">
+                <ul>
+
+                    <li><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthèse"></li>
+
+                    <li><input class="asideInput" type="submit" value="Modification Client" name="asideClientModification"></li>
+
+                    <li><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>
+
+                    <li><input class="asideInput" type="submit" value="Prise Rendez-Vous" name="asideClientPriseRendezVous"></li>
+
+                    <li><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
+
+                </ul>
+            </form>
         </aside>
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
             <fieldset>
@@ -225,16 +241,17 @@
                     </select>
                 </p>
                 <p>
-                <input id="retrait" type="radio" name="radioRetrait"><label for"retrait">Retrait</label>
+                <input id="retrait" type="radio" name="radioTransaction" value="retrait" checked><label for"retrait">Retrait</label>
                 </p>
                 <p>
-                <input id="depot" type="radio" name="radioDepot"><label for"depot">Dépot</label>
+                <input id="depot" type="radio" name="radioTransaction" value="depot"><label for"depot">Dépot</label>
                 </p>
 
             </fieldset>
             <p><input class="submitFormInput" type="submit" value="Selectionner" name="selectionnerCompteClientSubmit"></p>
         </form>
         ';
+        
         require_once("View/gabarit.php");
     }
 
