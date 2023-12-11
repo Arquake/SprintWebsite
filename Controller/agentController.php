@@ -125,8 +125,8 @@
 
     //Lance de quoi afficher les choix pour retirer/deposer sur le compte
     function CtlAgentTransactionClient(){
-        $_SESSION['compteClient'] = $_POST['compteSelection'];
-        $compte = getCompteViaId($_SESSION['compteClient']);
+        $compte = getCompteViaId($_POST['compteSelection']);
+        $_SESSION['nomCompteClient'] = $compte;
 
         if ($_POST['radioTransaction'] == "retrait") {
             transactionRetraitClientAgentView($compte);
@@ -137,9 +137,15 @@
     }
 
     //Lance de quoi retirer l'argent voulu sur le compte en session et retourne a l'acceuil
-    function CtlAgentOutPutTransactionRetraitCompteClient(){
+    function CtlAgentOutPutTransactionRetraitCompteClient($compte){
+        $soldeActuel = getSolde($compte);
+        $plafond = getPlafond($_SESSION['idCompteClient']);
+        $decouvert = getDecouvert($_SESSION['idClient']);
+
+
         if (isset($_POST['retrait'])) {
-            retraitAgentClient($_POST['retrait']);
+            if ( $plafond )
+                retraitAgentClient($_POST['retrait']);
         } else {
             echo '<script>alert("Indiquer le montant voulu");</script>';
         }
