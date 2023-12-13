@@ -18,7 +18,6 @@
     <?php
         echo $contenu;
     ?>
-    
 
 </body>
 </html>

@@ -373,7 +373,7 @@ body,html {
 
     th {
         margin-right: 4%;
-        height: 50px;
+        height: 10px;
         text-align: center;
         padding: 0px;
         border-right: 1px solid;
@@ -434,6 +434,42 @@ body,html {
         letter-spacing: 1px;
     }
 
+    .edtSubmitWeekChange {
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        border: none;
+        outline: none;
+
+        color: white;
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 20px;
+        text-align: center;
+        letter-spacing: 1px;
+
+        background-color: rgb(17, 124, 196);
+
+        transition: background-color 0.25s;
+    }
+
+    .edtSubmitWeekChange:hover {
+        background: rgb(41, 85, 168);
+    }    
+
+    .edtWeekChangeForm {
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .tdWeekChange {
+        padding: 0;
+        margin: 0;
+    }
 }
 
 
@@ -452,7 +488,7 @@ body,html {
         height: 7%;
         background-color: rgb(81, 214, 141);
         margin: 0;
-        padding: 0;
+        padding-bottom: 10px;
     }
     
     #logo {
@@ -467,6 +503,7 @@ body,html {
         height: 70%;
         width: 3%;
         padding-left: 1%;
+        margin-top: 0;
         margin-bottom: 1.5%;
         
     }
@@ -751,10 +788,14 @@ body,html {
     }
 
     th.edtAgents {
-        height: 10%;
+        height: 6%;
         text-align: center;
         padding: 3px;
         border: 1px solid;
     }
 
+    .edtSubmitWeekChange {
+        height: 100%;
+        width: 100%;
+    }
 }

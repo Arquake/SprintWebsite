@@ -251,5 +251,19 @@
         // Retourner les données du client
         return $resultat;
     }
+
+
+    //
+    // Renvoi le login de l'agent rattacher au client
+    //
     
+    function getConseillerRattacherAuClient($idClient) {
+
+        $connexion = getConnect();
     
+        $query = "SELECT login FROM rattachera WHERE idClient = '".$idClient."'";
+
+        $resultat = ($connexion->query($query))->fetch(PDO::FETCH_ASSOC)['login'];
+
+        return $resultat;
+    }

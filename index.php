@@ -7,8 +7,8 @@
     require_once("Controller/controller.php");
 
 
-    //echo "<script>console.log('".var_dump($_SESSION)."')</script>";
-    //echo "<script>console.log('".var_dump($_POST)."')</script>";
+    echo "<script>console.log('".var_dump($_SESSION)."')</script>";
+    echo "<script>console.log('".var_dump($_POST)."')</script>";
 
 
     //
@@ -134,7 +134,7 @@
                     CtlModificationClient();
                 }
 
-                else if ( isset($_POST['asideClientPriseRendezVous']) ) {
+                else if ( isset($_POST['asideClientPriseRendezVous']) || isset($_POST['weekMinusOne']) || isset($_POST['weekAddOne']) ) {
                     CtlPriseDeRendezVousAgents();
                 }
 

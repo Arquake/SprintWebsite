@@ -355,7 +355,7 @@
     function priseDeRendezVousAgents() {
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() .'
         <div class"priseRdv">
-            <form action="rdv.php" method="post" class="sideFormPriseRendezVous">
+            <form action="index.php" method="post" class="sideFormPriseRendezVous">
                 <fieldset>
 
                     <legend>Programmer un RDV</legend>
@@ -382,23 +382,50 @@
     }
 
 
-    function afficherEDTAgents($login=false,$semaineRequete=false) {
+    //
+    // dateRequete est le nombre de semaine de différence
+    // recupère l'emploi du temps d'un agent par rapport à son login
+    // dateRequete 0 = cette semaine
+    //
 
-        $ddate = "2012-10-27";
+    function afficherEDTAgents($login=false) {
+
+        $ddate = date("y-m-d",strtotime("this week"));
         $date = new DateTime($ddate);
-        $week = $date->format("W");
+        
+        if ( isset($_POST['weekMinusOne']) ) {
+            $_SESSION['$week'] -= 1;
+        } else if ( isset($_POST['weekAddOne']) ) {
+            $_SESSION['$week'] += 1;
+        } else {
+            $_SESSION['$week'] = 0;
+        }
+
+        $date->modify('+'.($_SESSION['$week']*7).' days');
 
         $emploiDuTemps = '
         <table class="edtAgents">
-            <tr><th colspan="7">Semaine du '.$semaineRequete.' '.$week.'</th></tr>
             <tr>
-            <th>Lundi</th>
-            <th>Mardi</th>
-            <th>Mercredi</th>
-            <th>Jeudi</th>
-            <th>Vendredi</th>
-            <th>Samedi</th>
-            <th>Dimanche</th>
+                <td class="tdWeekChange">
+                    <form action="index.php" method="post" class="edtWeekChangeForm">
+                        <input class="edtSubmitWeekChange" type="submit" name="weekMinusOne" value="'.($date->format("W")-1).'">
+                    </form>
+                </td>
+                <th colspan="5">Semaine '.($date->format("W")).' de l\'année '.$date->format("Y").'</th>
+                <td class="tdWeekChange">
+                    <form action="index.php" method="post" class="edtWeekChangeForm">
+                        <input class="edtSubmitWeekChange" type="submit" name="weekAddOne" value="'.($date->format("W")+1).'">
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <th>Lundi '.$date->format('d M').'</th>
+                <th>Mardi '.$date->modify('+1 days')->format('d M').'</th>
+                <th>Mercredi '.$date->modify('+1 days')->format('d M').'</th>
+                <th>Jeudi '.$date->modify('+1 days')->format('d M').'</th>
+                <th>Vendredi '.$date->modify('+1 days')->format('d M').'</th>
+                <th>Samedi '.$date->modify('+1 days')->format('d M').'</th>
+                <th>Dimanche '.$date->modify('+1 days')->format('d M').'</th>
             </tr>
             <tr>
                 <td>

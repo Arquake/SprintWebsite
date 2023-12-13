@@ -10,6 +10,13 @@
 
     }
 
+
+
+    //
+    // Recherche le client selon les critères donnés
+    // sur la page de recherche client des Agents
+    //
+
     function CtlAgentResearchClientSubmitted() {
 
         $clientInfo = array ();
@@ -61,6 +68,12 @@
     }
 
 
+    //
+    // Recherche appronfondi des client si plusieurs
+    // sont trouvés avec les mêmes critères
+    //
+
+
     function CtlAgentResearchClientChoices() {
 
         $res = getClientByID($_POST['clientRechercheChoice']);
@@ -79,6 +92,12 @@
     function CtlAgentCreateationClient(){
         creationClientAgent();
     }
+
+
+
+    //
+    // Creation de client par un agent
+    //
 
     function CtlAgentCreateClient() {
 
@@ -103,7 +122,16 @@
 
     }
 
+
+    //
+    // rattachement d'un client
+    //
+
+
     function CtlRattacherClient() {
+
+        $_SESSION['conseillerRattacherClient'] = $_POST['posteRattachement'];
+
         rattacherClientAgent();
         mainPageClientAgent();
     }
@@ -199,5 +227,16 @@
     }
 
     function CtlPriseDeRendezVousAgents() {
-        priseDeRendezVousAgents();
+        priseDeRendezVousAgents(getAndSetConseillerLoginDuClientDansSession($_SESSION['idClient']));
+    }
+
+
+    //
+    // récupère le login du conseiller selon l'id du client donné
+    // le login est mit dans la session
+    //
+
+    function getAndSetConseillerLoginDuClientDansSession($idClient) {
+        $SESSION['conseillerRattacherClient'] = getConseillerRattacherAuClient($idClient);
+        return employeInformations($SESSION['conseillerRattacherClient']);
     }
