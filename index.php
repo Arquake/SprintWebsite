@@ -136,6 +136,14 @@
 
                 else if ( isset($_POST['asideClientPriseRendezVous']) || isset($_POST['weekMinusOne']) || isset($_POST['weekAddOne']) ) {
                     CtlPriseDeRendezVousAgents();
+                } 
+                
+                else if ( isset($_POST['creerRDVAgent']) ) {
+                    CtlCreationRendezVousAgent();
+                } 
+                
+                else if ( isset($_POST['deleteRDVAgent']) ) {
+                    CtlSupprimerRendezVousAgent();
                 }
 
                 else {

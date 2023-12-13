@@ -352,25 +352,36 @@
     }
 
 
-    function priseDeRendezVousAgents() {
+    function priseDeRendezVousAgents( $motifs ) {
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() .'
         <div class"priseRdv">
             <form action="index.php" method="post" class="sideFormPriseRendezVous">
                 <fieldset>
 
                     <legend>Programmer un RDV</legend>
-                    <p><label for="">Motif Du RDV</label><input type="text" name="nomRDV" id="nomRDV"></p>
+                    <p>
+                        <label for="motifRDV">Motif Du RDV</label>
+                        <select id="motifRDV" name="motifRDV">
+                        ';
+        foreach ( $motifs as $motif){
+
+            $contenu .= "<option value=".$motif['type'].">".$motif['type']."</option>";
+
+        }
+        
+        $contenu .= '
+                    </p>
                     <p><label for="">Date</label><input type="date" name="date" id="date"></p>
                     <p><label for="">Heure de début</label><input type="time" name="heureDebut" id="heureDebut"></p>
                     <p><label for="">Heure de fin</label><input type="time" name="heureFin" id="heureFin"></p>
-                    <input class="submitFormInput" type="submit" name="create" value="Créer">
+                    <input class="submitFormInput" type="submit" name="creerRDVAgent" value="Créer">
                 </fieldset>
                 
 
                 <fieldset>
                     <legend>Supprimer un RDV</legend>
                     <p><label for="">Identifiant du RDV</label><input type="number" name="rdvDel" id="rdvDel"></p> 
-                    <input class="submitFormInput" type="submit"  name="delete" value="Supprimer">
+                    <input class="submitFormInput" type="submit"  name="deleteRDVAgent" value="Supprimer">
 
                 </fieldset>
             </form>
@@ -378,15 +389,10 @@
 
 
 
-    require_once("View/gabarit.php");
+        require_once("View/gabarit.php");
     }
 
 
-    //
-    // dateRequete est le nombre de semaine de différence
-    // recupère l'emploi du temps d'un agent par rapport à son login
-    // dateRequete 0 = cette semaine
-    //
 
     function afficherEDTAgents($login=false) {
 
@@ -401,56 +407,85 @@
             $_SESSION['$week'] = 0;
         }
 
-        $date->modify('+'.($_SESSION['$week']*7).' days');
+        $date->modify('+'.(($_SESSION['$week']-1)*7).' days');
 
         $emploiDuTemps = '
         <table class="edtAgents">
             <tr>
                 <td class="tdWeekChange">
                     <form action="index.php" method="post" class="edtWeekChangeForm">
-                        <input class="edtSubmitWeekChange" type="submit" name="weekMinusOne" value="'.($date->format("W")-1).'">
+                        <input class="edtSubmitWeekChange" type="submit" name="weekMinusOne" value="'.($date->format("W")).'">
                     </form>
                 </td>
-                <th colspan="5">Semaine '.($date->format("W")).' de l\'année '.$date->format("Y").'</th>
+                <th colspan="5" class="semainetd">Semaine '.($date->modify('+7 days')->format("W")).' de l\'année '.$date->format("Y").'</th>
                 <td class="tdWeekChange">
                     <form action="index.php" method="post" class="edtWeekChangeForm">
-                        <input class="edtSubmitWeekChange" type="submit" name="weekAddOne" value="'.($date->format("W")+1).'">
+                        <input class="edtSubmitWeekChange" type="submit" name="weekAddOne" value="'.($date->modify('+7 days')->format("W")).'">
                     </form>
                 </td>
             </tr>
             <tr>
-                <th>Lundi '.$date->format('d M').'</th>
-                <th>Mardi '.$date->modify('+1 days')->format('d M').'</th>
-                <th>Mercredi '.$date->modify('+1 days')->format('d M').'</th>
-                <th>Jeudi '.$date->modify('+1 days')->format('d M').'</th>
-                <th>Vendredi '.$date->modify('+1 days')->format('d M').'</th>
-                <th>Samedi '.$date->modify('+1 days')->format('d M').'</th>
-                <th>Dimanche '.$date->modify('+1 days')->format('d M').'</th>
+                <th class="jourth">Lundi '.$date->modify('-7 days')->format('d M').'</th>
+                <th class="jourth">Mardi '.$date->modify('+1 days')->format('d M').'</th>
+                <th class="jourth">Mercredi '.$date->modify('+1 days')->format('d M').'</th>
+                <th class="jourth">Jeudi '.$date->modify('+1 days')->format('d M').'</th>
+                <th class="jourth">Vendredi '.$date->modify('+1 days')->format('d M').'</th>
+                <th class="jourth">Samedi '.$date->modify('+1 days')->format('d M').'</th>
+                <th class="jourth">Dimanche '.$date->modify('+1 days')->format('d M').'</th>
             </tr>
             <tr>
-                <td>
+                <td class="edttdHoraire">
                     <div class="insidetd">
                         <div class="horaires">
-                            test
+                            00H00
+                            <br>
+                            00H00
+                        </div>
+                        <div class="indordvtd">
+                            idRDV : 
+                        </div>
+                        <div class="indordvtd">
+                            client :
+                        </div>
+                        <div class="indordvtd">
+                            motif :
                         </div>
                     </div>
                 </td>
-                <td><div class="insidetd">&nbsp</div></td>
-                <td><div class="insidetd">&nbsp</div></td>
-                <td><div class="insidetd">&nbsp</div></td>
-                <td><div class="insidetd">&nbsp</div></td>
-                <td><div class="insidetd">&nbsp</div></td>
-                <td><div class="insidetd">&nbsp</div></td>
+                <td class="edttdHoraire">&nbsp</td>
+                <td class="edttdHoraire">&nbsp</td>
+                <td class="edttdHoraire">&nbsp</td>
+                <td class="edttdHoraire">&nbsp</td>
+                <td class="edttdHoraire">&nbsp</td>
+                <td class="edttdHoraire">&nbsp</td>
             </tr>
             <tr>
-                <td>test</td>
-                <td>&nbsp</td>
-                <td>&nbsp</td>
-                <td>&nbsp</td>
-                <td>&nbsp</td>
-                <td>&nbsp</td>
-                <td>&nbsp</td>
+                <td class="edttdHoraire">
+                    <div class="insidetd">
+                        <div class="horaires">
+                            00H00
+                            <br>
+                            00H00
+                        </div>
+                        <div class="indordvtd">
+                            agent : 
+                        </div>
+                        <div class="indordvtd">
+                            client :
+                        </div>
+                        <div class="indordvtd">
+                            motif :
+                        </div>
+                    </div>
+                </td>
+                <td class="edttdHoraire">&nbsp</td>
+                <td class="edttdHoraire">&nbsp</td>
+                <td class="edttdHoraire">&nbsp</td>
+                <td class="edttdHoraire">&nbsp</td>
+                <td class="edttdHoraire">&nbsp</td>
+                <td class="edttdHoraire">&nbsp</td>
             </tr>
+            
             ';
 
         //for ( $i = 8 ; $i < 20 ; $i++ ) {

@@ -227,7 +227,8 @@
     }
 
     function CtlPriseDeRendezVousAgents() {
-        priseDeRendezVousAgents(getAndSetConseillerLoginDuClientDansSession($_SESSION['idClient']));
+        getAndSetConseillerLoginDuClientDansSession($_SESSION['idClient']);
+        priseDeRendezVousAgents( getMotifsType() );
     }
 
 
@@ -239,4 +240,14 @@
     function getAndSetConseillerLoginDuClientDansSession($idClient) {
         $SESSION['conseillerRattacherClient'] = getConseillerRattacherAuClient($idClient);
         return employeInformations($SESSION['conseillerRattacherClient']);
+    }
+
+
+    function CtlCreationRendezVousAgent() {
+
+    }
+
+
+    function CtlSupprimerRendezVousAgent() {
+        
     }

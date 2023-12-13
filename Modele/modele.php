@@ -267,3 +267,17 @@
 
         return $resultat;
     }
+
+
+    //
+    // Renvoi les type de motifs
+    //
+    
+    function getMotifsType() {
+
+        $connexion = getConnect();
+
+        $resultat = ($connexion->query("SELECT * FROM type"))->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultat;
+    }

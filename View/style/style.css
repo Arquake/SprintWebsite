@@ -371,24 +371,51 @@ body,html {
         border: 1px solid;
     }
 
-    th {
+    .semainetd {
         margin-right: 4%;
-        height: 10px;
+        height: 0px;
         text-align: center;
         padding: 0px;
         border-right: 1px solid;
         border-top: 1px solid;
         border-bottom: 1px solid;
+
+        color: rgb(44, 44, 44);
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 32px;
+        text-align: center;
     }
 
-    td {
+    .jourth {
+        margin: 0;
+        padding: 0;
+        height: 3%;
+        text-align: center;
+        padding: 0px;
+        border-right: 1px solid;
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+
+        color: rgb(44, 44, 44);
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .edttdHoraire {
         margin-top: 1%;
         margin-bottom: 1%;
         top: 0;
         height: 10%;
         text-align: center;
-        padding: 10px;
+        padding: 0px;
         border-right: 1px solid;
+        padding-left: 7px;
+        padding-right: 17px;
     }
 
     .insidetd {
@@ -397,41 +424,26 @@ body,html {
     
         background-color: green;
         border-radius: 10px;
-        padding: 1.2%;
+        padding: 0%;
+        padding-left: 4%;
         width: 100%;
         height: 80px;
         margin-bottom: 1%;
     }
 
     .horaires {
+        float: left;
         color: white;
         font-family: 'SF Pro Display';
         font-weight: bold;
         font-style: normal;
         font-size: 14px;
-        text-align: right;
+        text-align: left;
+
+        padding-top: 12.5%;
+
         letter-spacing: 1px;
         left: 0px;
-    }
-
-    .motif {
-        color: white;
-        font-family: 'SF Pro Display';
-        font-weight: bold;
-        font-style: normal;
-        font-size: 20px;
-        text-align: right;
-        letter-spacing: 1px;
-    }
-
-    .identifiantRDV {
-        color: white;
-        font-family: 'SF Pro Display';
-        font-weight: bold;
-        font-style: normal;
-        font-size: 20px;
-        text-align: right;
-        letter-spacing: 1px;
     }
 
     .edtSubmitWeekChange {
@@ -467,8 +479,25 @@ body,html {
     }
 
     .tdWeekChange {
+        height: 10%;
         padding: 0;
         margin: 0;
+    }
+ 
+    .indordvtd {
+        margin-top: 5%;
+        padding-right: 5%;
+        display: block;
+
+        color: white;
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 12px;
+        text-align: right;
+        letter-spacing: 1px;
+
+        overflow: hidden;
     }
 }
 
