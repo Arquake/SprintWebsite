@@ -352,9 +352,16 @@
     }
 
 
-    function priseDeRendezVousAgents( $motifs ) {
-        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() .'
-        <div class"priseRdv">
+    function priseDeRendezVousAgents( $motifs, $error=false, $cree=false ) {
+        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected();
+
+        if ( $error ) {
+            $contenu .= '<div class="invalidForm">Le RDV n\'a pas pu être créé<br>veuillez rentrer des informations valides</div>';
+        } else if ( $cree ) {
+            $contenu .= '<div class="invalidForm">RDV Créé</div>';
+        }
+
+        $contenu .= '<div class"priseRdv">
             <form action="index.php" method="post" class="sideFormPriseRendezVous">
                 <fieldset>
 
@@ -370,6 +377,7 @@
         }
         
         $contenu .= '
+                        </select>
                     </p>
                     <p><label for="">Date</label><input type="date" name="date" id="date"></p>
                     <p><label for="">Heure de début</label><input type="time" name="heureDebut" id="heureDebut"></p>

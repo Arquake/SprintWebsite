@@ -244,7 +244,24 @@
 
 
     function CtlCreationRendezVousAgent() {
+        //
+        // on verifie si les information sont remplient puis on vérifie si la date se trouve bien après la date du jour
+        // on vérifie au ssi si les heures sont bien dans l'ordre
+        //
 
+        echo "<script>console.log('".empty(checkRDVCreation())."')</script>";
+
+        if ( $_POST['motifRDV'] == '' || $_POST['date'] == '' || $_POST['heureDebut'] == '' || $_POST['heureFin'] == '' || $_POST['date'] <= date("Y-m-d") || $_POST['heureDebut'] > $_POST['heureFin'] || !empty(checkRDVCreation()) ) {
+            getAndSetConseillerLoginDuClientDansSession($_SESSION['idClient']);
+            priseDeRendezVousAgents( getMotifsType(), true );
+        }
+        
+        else {
+            createRDVAgent();
+            getAndSetConseillerLoginDuClientDansSession($_SESSION['idClient']);
+            priseDeRendezVousAgents( getMotifsType(), false, true );
+        }
+        
     }
 
 

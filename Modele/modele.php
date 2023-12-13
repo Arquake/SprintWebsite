@@ -281,3 +281,23 @@
 
         return $resultat;
     }
+
+
+    //
+    // créé un rdv
+    //
+    function createRDVAgent() {
+        $connexion = getConnect();
+
+        $connexion->query("INSERT INTO rendezvous(jourReunion, heureDebut, heureFin, dateCreationRdv, login, idClient, Motif) VALUES ('".$_POST['date']."','".$_POST['heureDebut']."','".$_POST['heureFin']."',CURRENT_DATE,'".getConseillerRattacherAuClient($_SESSION['idClient'])."','".$_SESSION['idClient']."','".$_POST['motifRDV']."')");
+    }
+
+    function checkRDVCreation() {
+        $connexion = getConnect();
+
+        $query = "SELECT idRdv FROM rendezvous WHERE (jourReunion = '".$_POST['date']."') AND ((CAST('".$_POST['heureDebut'].":00' AS time) >= heureDebut AND CAST('".$_POST['heureDebut'].":00' AS time) < heureFin) OR (CAST('".$_POST['heureFin'].":00' AS time) > heureDebut AND CAST('".$_POST['heureFin'].":00' AS time) <= heureFin))";
+        
+        $resultat = ($connexion->query($query))->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultat;
+    }
