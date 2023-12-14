@@ -301,3 +301,10 @@
 
         return $resultat;
     }
+
+
+    function deleteRDVAgent() {
+        $connexion = getConnect();
+
+        $connexion->query("DELETE FROM rendezvous WHERE idRDV=".$_POST['rdvDel']); 
+    }

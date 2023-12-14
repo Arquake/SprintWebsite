@@ -266,5 +266,8 @@
 
 
     function CtlSupprimerRendezVousAgent() {
-        
+        if ($_POST['rdvDel'] != '' ) {
+            deleteRDVAgent();
+        }
+        priseDeRendezVousAgents( getMotifsType(), false, false, true );
     }

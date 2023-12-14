@@ -352,13 +352,15 @@
     }
 
 
-    function priseDeRendezVousAgents( $motifs, $error=false, $cree=false ) {
+    function priseDeRendezVousAgents( $motifs, $error=false, $cree=false, $supprime=false ) {
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected();
 
         if ( $error ) {
             $contenu .= '<div class="invalidForm">Le RDV n\'a pas pu être créé<br>veuillez rentrer des informations valides</div>';
         } else if ( $cree ) {
             $contenu .= '<div class="invalidForm">RDV Créé</div>';
+        } else if ( $supprime ) {
+            $contenu .= '<div class="invalidForm">RDV Supprimé</div>';
         }
 
         $contenu .= '<div class"priseRdv">
