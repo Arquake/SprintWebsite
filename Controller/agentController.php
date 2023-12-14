@@ -37,7 +37,7 @@
             $clientInfo['naissanceClient'] = $_POST['dateNaissanceClientRecherche'];
         }
 
-        $res = rechercherClientAgent($clientInfo);
+        $res = rechercherClient($clientInfo);
 
         if ($res != false ) {
             if ( isset($res['idClient']) && isset($res['nomClient']) ) {

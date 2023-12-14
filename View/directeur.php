@@ -16,8 +16,7 @@
     }
 
     function gestionEmployeDirecteur($employeCreated = false){
-        $contenu = connectedHeader();
-        $contenu .= '
+        $contenu = connectedHeader() . '
         <aside>
             <form action="index.php" method="post">
                 <ul>

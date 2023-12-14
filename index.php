@@ -155,7 +155,46 @@
             }
 
             else if ( $_SESSION['poste'] == "Conseiller" ) {
-                CtlConseillerHomePage();
+
+                //
+                //
+                //
+
+                if ( isset($_POST['asideConseillerClientResearch']) ) {
+                    CtlAgentResearchClient();
+                } 
+
+                //
+                // 
+                //
+                
+                else if ( isset($_POST['asideClientCreation']) ){
+                    CtlAgentCreateationClient();
+                }
+
+                //
+                //
+                //
+
+                else if ( isset($_POST['creationClientAgentSubmit']) ) {
+                    CtlAgentCreateClient();
+                }
+
+                //
+                //
+                //
+
+                else if ( isset($_POST['rattacherClientSubmit']) ) {
+                    CtlRattacherClient();
+                } 
+                
+                //
+                // base case
+                //
+
+                else {
+                    CtlConseillerHomePage();
+                }
             }
 
             else if ( $_SESSION['poste'] == "Directeur" ) {

@@ -176,7 +176,7 @@
     }
 
 
-    function rechercherClientAgent($clientInformartionList) {
+    function rechercherClient($clientInformartionList) {
 
         $connexion = getConnect();
 
@@ -191,7 +191,7 @@
             return false;
         }
 
-        $req = 'SELECT idClient, nomClient, prenomClient, dateNaissance, estInscrit, numeroTelephone, mail, adresse, codePostale, profession, situation, revenuMensuel FROM client WHERE';
+        $req = 'SELECT * FROM client WHERE';
 
         if ( isset($clientInformartionList['nomClient']) ) {
             $req .= " nomClient='".$clientInformartionList['nomClient']."'";
