@@ -308,3 +308,33 @@
 
         $connexion->query("DELETE FROM rendezvous WHERE idRDV=".$_POST['rdvDel']); 
     }
+
+
+    function getEDTConseillerByDate(){
+        $connexion = getConnect();
+
+        $ddate = date("y-m-d",strtotime("this week"));
+        $date = new DateTime($ddate);
+        
+        if ( isset($_POST['weekMinusOne']) ) {
+            $_SESSION['$week'] -= 1;
+        } else if ( isset($_POST['weekAddOne']) ) {
+            $_SESSION['$week'] += 1;
+        } else {
+            $_SESSION['$week'] = 0;
+        }
+
+        $date->modify('+'.($_SESSION['$week']*7).' days');
+
+        $weekArr = [];
+
+        for ( $i=0 ; $i < 7 ; $i++) {
+            $query = "SELECT idRdv, idClient, heureDebut, heureFin, Motif FROM rendezvous WHERE jourReunion = CAST('".$date->format("Y-m-d")."' AS date)";
+
+            $weekArr[$i] = ($connexion->query($query))->fetchAll(PDO::FETCH_ASSOC);
+
+            $date->modify('+1 days');
+        }
+
+        return $weekArr;
+    }

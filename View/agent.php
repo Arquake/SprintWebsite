@@ -352,7 +352,7 @@
     }
 
 
-    function priseDeRendezVousAgents( $motifs, $error=false, $cree=false, $supprime=false ) {
+    function priseDeRendezVousAgents( $motifs, $arr, $error=false, $cree=false, $supprime=false ) {
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected();
 
         if ( $error ) {
@@ -395,7 +395,7 @@
 
                 </fieldset>
             </form>
-        '.afficherEDTAgents().'</div>';
+        '.afficherEDTAgents($arr).'</div>';
 
 
 
@@ -404,7 +404,15 @@
 
 
 
-    function afficherEDTAgents($login=false) {
+    function afficherEDTAgents($arr, $login=false) {
+
+        $maxlengthArray = 0;
+
+        //
+        // get maximum length of sub-array in array
+        //
+
+        for ( $i = 0 ; $i < 7 ; $i++) { if ( count($arr[$i]) > $maxlengthArray ) { $maxlengthArray = count($arr[$i]); } }
 
         $ddate = date("y-m-d",strtotime("this week"));
         $date = new DateTime($ddate);
@@ -442,83 +450,22 @@
                 <th class="jourth">Vendredi '.$date->modify('+1 days')->format('d M').'</th>
                 <th class="jourth">Samedi '.$date->modify('+1 days')->format('d M').'</th>
                 <th class="jourth">Dimanche '.$date->modify('+1 days')->format('d M').'</th>
-            </tr>
-            <tr>
-                <td class="edttdHoraire">
-                    <div class="insidetd">
-                        <div class="horaires">
-                            00H00
-                            <br>
-                            00H00
-                        </div>
-                        <div class="indordvtd">
-                            idRDV : 
-                        </div>
-                        <div class="indordvtd">
-                            client :
-                        </div>
-                        <div class="indordvtd">
-                            motif :
-                        </div>
-                    </div>
-                </td>
-                <td class="edttdHoraire">&nbsp</td>
-                <td class="edttdHoraire">&nbsp</td>
-                <td class="edttdHoraire">&nbsp</td>
-                <td class="edttdHoraire">&nbsp</td>
-                <td class="edttdHoraire">&nbsp</td>
-                <td class="edttdHoraire">&nbsp</td>
-            </tr>
-            <tr>
-                <td class="edttdHoraire">
-                    <div class="insidetd">
-                        <div class="horaires">
-                            00H00
-                            <br>
-                            00H00
-                        </div>
-                        <div class="indordvtd">
-                            agent : 
-                        </div>
-                        <div class="indordvtd">
-                            client :
-                        </div>
-                        <div class="indordvtd">
-                            motif :
-                        </div>
-                    </div>
-                </td>
-                <td class="edttdHoraire">&nbsp</td>
-                <td class="edttdHoraire">&nbsp</td>
-                <td class="edttdHoraire">&nbsp</td>
-                <td class="edttdHoraire">&nbsp</td>
-                <td class="edttdHoraire">&nbsp</td>
-                <td class="edttdHoraire">&nbsp</td>
-            </tr>
-            
-            ';
+            </tr>';
 
-        //for ( $i = 8 ; $i < 20 ; $i++ ) {
-        //    $emploiDuTemps .= '<tr>';
-        //    for ( $j = 0 ; $j < 60 ; $j += 15) {
-        //        if ( $j != 0 ) {
-        //            $emploiDuTemps .= '<th>'.$i.' H '.$j.'</th>';
-        //        } else {
-        //            $emploiDuTemps .= '<th>'.$i.' H 00</th>';
-        //        }
-        //        
-        //        for ( $k = 0 ; $k < 7 ; $k++){
-        //            $emploiDuTemps .= '<td><input type="button" class="priseRDVButton"></td>';
-        //        }
-        //        $emploiDuTemps .= '</tr>';
-        //    }
-        //}
-        //$emploiDuTemps .= '<tr>';
-        //$emploiDuTemps .= '<th>20 H</th>';
-        //for ( $k = 0 ; $k < 7 ; $k++){
-        //    $emploiDuTemps .= '<td rowspan="2"><input type="button" class="priseRDVButton"></td>';
-        //}
-        //$emploiDuTemps .= '</tr></table>';
+
+            for ( $i = 0 ; $i < $maxlengthArray ; $i++ ) {
+                $emploiDuTemps .= '<tr>';
+                for ( $j = 0 ; $j < 7 ; $j++) {
+                    if ( count($arr[$j]) <= $i ) {
+                        $emploiDuTemps .= '<td class="edttdHoraire">&nbsp</td>';
+                    } else {
+                        $emploiDuTemps .= EDTAgentBubble($arr[$j][$i]);
+                    }
+                }
+                $emploiDuTemps .= '</tr>';
+            }
+
+        $emploiDuTemps .= '</table>';
 
         return $emploiDuTemps;
     }
@@ -527,4 +474,26 @@
     function errorTransactionNoAccountFound(){
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '<div class="invalidForm">Aucun Compte n\'existe<br>Pour ce Client</div>';
         require_once("View/gabarit.php");
+    }
+
+    function EDTAgentBubble($arr){
+        return '
+        <td class="edttdHoraire">
+            <div class="insidetd">
+                <div class="horaires">
+                    '.$arr['heureDebut'].'
+                    <br>
+                    '.$arr['heureFin'].'
+                </div>
+                <div class="indordvtd">
+                    idRDV : '.$arr['idRdv'].'
+                </div>
+                <div class="indordvtd">
+                    client : '.$arr['idClient'].'
+                </div>
+                <div class="indordvtd">
+                    motif : '.$arr['Motif'].'
+                </div>
+            </div>
+        </td>';
     }

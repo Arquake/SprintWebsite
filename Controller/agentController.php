@@ -227,8 +227,11 @@
     }
 
     function CtlPriseDeRendezVousAgents() {
+
+        $arr=getEDTConseillerByDate();
+
         getAndSetConseillerLoginDuClientDansSession($_SESSION['idClient']);
-        priseDeRendezVousAgents( getMotifsType() );
+        priseDeRendezVousAgents( getMotifsType(), $arr );
     }
 
 
@@ -249,25 +252,29 @@
         // on vérifie au ssi si les heures sont bien dans l'ordre
         //
 
-        echo "<script>console.log('".empty(checkRDVCreation())."')</script>";
-
         if ( $_POST['motifRDV'] == '' || $_POST['date'] == '' || $_POST['heureDebut'] == '' || $_POST['heureFin'] == '' || $_POST['date'] <= date("Y-m-d") || $_POST['heureDebut'] > $_POST['heureFin'] || !empty(checkRDVCreation()) ) {
             getAndSetConseillerLoginDuClientDansSession($_SESSION['idClient']);
-            priseDeRendezVousAgents( getMotifsType(), true );
+            $arr=getEDTConseillerByDate();
+            priseDeRendezVousAgents( getMotifsType(), $arr, true );
         }
         
         else {
             createRDVAgent();
+            $arr=getEDTConseillerByDate();
             getAndSetConseillerLoginDuClientDansSession($_SESSION['idClient']);
-            priseDeRendezVousAgents( getMotifsType(), false, true );
+            priseDeRendezVousAgents( getMotifsType(), $arr, false, true );
         }
         
     }
 
 
     function CtlSupprimerRendezVousAgent() {
+
         if ($_POST['rdvDel'] != '' ) {
             deleteRDVAgent();
         }
-        priseDeRendezVousAgents( getMotifsType(), false, false, true );
+
+        $arr=getEDTConseillerByDate();
+
+        priseDeRendezVousAgents( getMotifsType(), $arr, false, false, true );
     }
