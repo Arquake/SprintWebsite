@@ -319,7 +319,7 @@
         
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
-        <p class="afficherBeauP">Compte séléctionné pour <strong>retrait</strong> : '.$_SESSION['typeCompteClient'].' : '.$_SESSION['soldeCompteClient'].' €</p>
+            <p class="afficherBeauP">Compte séléctionné pour <strong>retrait</strong> : '.$_SESSION['typeCompteClient'].' : '.$_SESSION['soldeCompteClient'].' €</p>
     
             <fieldset>
                 <legend>Retrait</legend>
@@ -329,18 +329,7 @@
 
                 <p><input class="submitFormInput" type="submit" value="Soumettre" name="outPutTransactionRetraitCompteClient"></p>
             </fieldset>
-
-            
-        </form>
-
-        
-
-            <p><input class="submitFormInput" type="submit" value="Soumettre" name="outPutTransactionRetraitCompteClient"></p>
-            </fieldset>
-            </form>
-
-        
-        ';
+        </form>';
         require_once("View/gabarit.php");
     }
 
@@ -369,23 +358,19 @@
                 <p><input class="submitFormInput" type="submit" value="Soumettre" name="outPutTransactionDepotCompteClient"></p>
             </fieldset>
 
-            
-        </form>
-            <p><input class="submitFormInput" type="submit" value="Soumettre" name="outPutTransactionDepotCompteClient"></p>
-            </fieldset>
-            </form>
-        
-        ';
+        </form>';
         require_once("View/gabarit.php");
     }
 
 
-    //
-    // MP
-    //
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// MP beacon
+    
+    
+    ///TODO
+    // Up date dans le session les infos editées
     // 
-    //
 
+    // Affiche la page de modification Agent(client simplifié) des infos client avec leur affichage de base à l'interieur.
     function AgentclientModificationPage() {
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
