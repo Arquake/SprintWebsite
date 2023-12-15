@@ -4,6 +4,7 @@
     require_once("Modele/modele.php");
     require_once('agentController.php');
     require_once('directeurController.php');
+    require_once('conseillerController.php');
 
 
     function CtlError( $exception ){
@@ -68,6 +69,4 @@
     
 
 
-    function CtlConseillerHomePage() {
-        accueilConseiller();
-    }
+    

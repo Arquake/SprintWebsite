@@ -62,6 +62,8 @@
             if ( $_SESSION['poste'] == "Agent" ) {
 
                 //
+                // NV
+                //
                 // If an agent try to research a client this page will be loaded
                 //
 
@@ -69,6 +71,8 @@
                     CtlAgentResearchClient();
                 } 
 
+                //
+                // NV
                 //
                 // If an agent try to create a client this page will be loaded
                 //
@@ -78,7 +82,9 @@
                 }
 
                 //
+                // NV
                 //
+                // quand le bouton de création est appuyé par un agent
                 //
 
                 else if ( isset($_POST['creationClientAgentSubmit']) ) {
@@ -86,65 +92,141 @@
                 }
 
                 //
+                // NV
                 //
+                // quand le bouton de rattachement client est cliqué
                 //
 
                 else if ( isset($_POST['rattacherClientSubmit']) ) {
                     CtlRattacherClient();
                 }
-                
 
-                else if ( isset($_POST['asideClientDisconnect']) ) {
-                    CtlClientDisconnect();
-                }
+                //
+                // NV
+                //
+                // quand l'agent clique sur le bouton de recherche 
+                // dans les forms de recherche client
+                //
 
                 else if ( isset($_POST['rechercheClientSubmit']) ) {
                     CtlAgentResearchClientSubmitted();
                 }
 
+                //
+                // NV
+                //
+                // quand le bouton de recherche approfondi est cliqué
+                //
+
                 else if ( isset($_POST['clientRechercheChoice'])) {
                     CtlAgentResearchClientChoices();
                 }
+
+                //
+                // MP
+                //
+                // Quand le bouton de transaction sur la gauche est cliqué
+                //
 
                 else if ( isset($_POST['asideClientTransaction']) ) {
                     CtlAgentTransactionClientChoice();
                 } 
 
+                //
+                // MP
+                //
+                // 
+                //
+
                 else if ( isset($_POST['selectionnerCompteClientSubmit']) ) {
                     CtlAgentTransactionClient();
                 }
+
+                //
+                // MP
+                //
+                //
+                //
 
                 else if ( isset($_POST['outPutTransactionRetraitCompteClient'])){
                     CtlAgentOutPutTransactionRetraitCompteClient ();
                 }
 
+                //
+                // MP
+                //
+                //
+                //
+
                 else if ( isset($_POST['outPutTransactionDepotCompteClient'])){
                     CtlAgentOutPutTransactionDepotCompteClient ();
                 } //////////////////////////////////////// MP
+
+                //
+                // G
+                //
+                // quand le bouton synthèse dans le aside est cliqué
+                //
 
                 else if ( isset($_POST['asideClientSynthese']) ) {
                     CtlAgentSyntheseClientPage();
                 }
 
+                //
+                // NV
+                //
+                // quand le bouton nouvelle recherche dans le aside est cliqué
+                //
+
                 else if ( isset($_POST['asideClientNouvelleRecherche']) ) {
                     CtlAgentResearchClient();
                 }
+
+                //
+                // MP
+                //
+                // quand le bouton modification client dans le aside est cliqué
+                //
 
                 else if ( isset($_POST['asideClientModification']) ) {
                     CtlModificationClient();
                 }
 
+                //
+                // NV
+                //
+                // quand le bouton de prise de rendez vous dans le aside est cliqué
+                //
+
                 else if ( isset($_POST['asideClientPriseRendezVous']) || isset($_POST['weekMinusOne']) || isset($_POST['weekAddOne']) ) {
                     CtlPriseDeRendezVousAgents();
                 } 
+
+                //
+                // NV
+                //
+                // quand le bouton créé rendez vous est cliqué
+                //
                 
                 else if ( isset($_POST['creerRDVAgent']) ) {
                     CtlCreationRendezVousAgent();
                 } 
+
+                //
+                // NV
+                //
+                // quand le bouton de suppression rendez-vous est cliqué
+                //
                 
                 else if ( isset($_POST['deleteRDVAgent']) ) {
                     CtlSupprimerRendezVousAgent();
                 }
+
+                //
+                // NV
+                //
+                // default case
+                //
 
                 else {
                     CtlAgentHomePage();
@@ -157,7 +239,9 @@
             else if ( $_SESSION['poste'] == "Conseiller" ) {
 
                 //
-                //
+                // NV
+                // 
+                // Quand le bouton de recherche client par un agent est cliqué sans le aside
                 //
 
                 if ( isset($_POST['asideConseillerClientResearch']) ) {
@@ -165,29 +249,28 @@
                 } 
 
                 //
-                // 
+                // NV
                 //
-                
-                else if ( isset($_POST['asideClientCreation']) ){
-                    CtlAgentCreateationClient();
+                // quand le conseiller clique sur le bouton de recherche 
+                // dans les forms de recherche client
+                //
+
+                else if ( isset($_POST['rechercheClientSubmit']) ) {
+                    CtlConseillerResearchClientSubmitted();
                 }
 
                 //
+                // NV
                 //
-                //
-
-                else if ( isset($_POST['creationClientAgentSubmit']) ) {
-                    CtlAgentCreateClient();
-                }
-
-                //
-                //
+                // quand le bouton nouvelle recherche est cliqué
                 //
 
-                else if ( isset($_POST['rattacherClientSubmit']) ) {
-                    CtlRattacherClient();
+                else if ( isset($_POST['asideClientNouvelleRecherche']) ) {
+                    CtlClientDisconnectConseiller();
                 } 
                 
+                //
+                // NV
                 //
                 // base case
                 //
@@ -206,6 +289,8 @@
                 
                 else if ( isset($_POST['createEmploye']) ) {
 
+                    //
+                    // NV
                     //
                     // if createEmploye submit is clicked and if there's an ongoing session which has the $poste Directeur
                     //

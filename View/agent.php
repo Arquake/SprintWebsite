@@ -1,5 +1,11 @@
 <?php
 
+    //
+    // NV
+    //
+    // fonction pour récupérer le aside si l'agent est connecté
+    //
+
     function AgentAsideSideBarWhenClientConnected() {
         $contenu = '
         <aside>
@@ -23,6 +29,13 @@
         return $contenu;
     }
 
+
+    //
+    // NV
+    //
+    // page d'accueil de l'agent
+    //
+
     function accueilAgent(){
         $contenu = connectedHeader();
         if ( isset($_SESSION['idClient']) ) {
@@ -45,7 +58,14 @@
         }
             require_once("View/gabarit.php");
 
-        }
+    }
+
+
+    //
+    // NV
+    //
+    // page de la création client
+    //
 
     function creationClientAgent($error = true) {
         $contenu = connectedHeader();
@@ -84,6 +104,13 @@
         require_once("View/gabarit.php");
         
     }
+
+
+    //
+    // NV
+    //
+    // page de la recherche client
+    //
 
     function rechercheClientAgentView($valid = true){
         $contenu = connectedHeader();
@@ -138,7 +165,13 @@
     }
 
 
-    function rechercheApprofondiClient($res) {
+    //
+    // NV
+    //
+    // page de la recherche approfondi client
+    //
+
+    function rechercheApprofondiClientAgent($res) {
         $contenu = connectedHeader();
         $contenu .= '
         <aside>
@@ -179,6 +212,12 @@
     }
 
 
+    //
+    // NV
+    //
+    // page du rattachement client
+    //
+
     function rattacherClient($conseillerList) {
         $contenu = connectedHeader();
         $contenu .= '
@@ -208,12 +247,12 @@
     }
 
 
-    function mainPageClientAgent() {
-        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected();
-        require_once("View/gabarit.php");
-    } 
-
+    //
+    // MP
+    //
     // SELECTIONNER LE COMPTE SUR LEQUEL EFFECTUER LA TRANSACTION
+    //
+
     function transactionChoixClientAgentView($compteList){
         $contenu = connectedHeader();
         $contenu .= '
@@ -266,7 +305,13 @@
         require_once("View/gabarit.php");
     }
 
+
+    //
+    // MP
+    //
     //Affiche le panel pour retirer de l'argent sur le compte en session
+    //
+
     function transactionRetraitClientAgentView() {
         $contenu = connectedHeader();
         $contenu .= '
@@ -299,7 +344,13 @@
         require_once("View/gabarit.php");
     }
 
-     //Affiche le panel pour deposer de l'argent sur le compte en session
+
+    //
+    // MP
+    //
+    //Affiche le panel pour deposer de l'argent sur le compte en session
+    //
+
      function transactionDepotClientAgentView() {
 
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() .'
@@ -329,6 +380,12 @@
     }
 
 
+    //
+    // MP
+    //
+    // 
+    //
+
     function AgentclientModificationPage() {
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
@@ -351,6 +408,12 @@
         require_once("View/gabarit.php");
     }
 
+
+    //
+    // NV
+    //
+    // Page avec l'EDT du conseiller du client et les forms de prise et suppression de rendez vous
+    //
 
     function priseDeRendezVousAgents( $motifs, $arr, $error=false, $cree=false, $supprime=false ) {
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected();
@@ -403,8 +466,13 @@
     }
 
 
+    //
+    // NV
+    //
+    // renvoi l'edt de l'agent dans une table
+    //
 
-    function afficherEDTAgents($arr, $login=false) {
+    function afficherEDTAgents($arr) {
 
         $maxlengthArray = 0;
 
@@ -459,7 +527,7 @@
                     if ( count($arr[$j]) <= $i ) {
                         $emploiDuTemps .= '<td class="edttdHoraire">&nbsp</td>';
                     } else {
-                        $emploiDuTemps .= EDTAgentBubble($arr[$j][$i]);
+                        $emploiDuTemps .= EDTBubble($arr[$j][$i]);
                     }
                 }
                 $emploiDuTemps .= '</tr>';
@@ -471,29 +539,13 @@
     }
 
 
+    //
+    // MP
+    //
+    // Si le client n'a aucun compte 
+    //
+
     function errorTransactionNoAccountFound(){
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '<div class="invalidForm">Aucun Compte n\'existe<br>Pour ce Client</div>';
         require_once("View/gabarit.php");
-    }
-
-    function EDTAgentBubble($arr){
-        return '
-        <td class="edttdHoraire">
-            <div class="insidetd">
-                <div class="horaires">
-                    '.$arr['heureDebut'].'
-                    <br>
-                    '.$arr['heureFin'].'
-                </div>
-                <div class="indordvtd">
-                    idRDV : '.$arr['idRdv'].'
-                </div>
-                <div class="indordvtd">
-                    client : '.$arr['idClient'].'
-                </div>
-                <div class="indordvtd">
-                    motif : '.$arr['Motif'].'
-                </div>
-            </div>
-        </td>';
     }

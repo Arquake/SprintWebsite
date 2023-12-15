@@ -4,6 +4,13 @@
     require_once("conseiller.php");
     require_once("directeur.php");
 
+
+    //
+    // NV
+    //
+    // affiche la page de connexion
+    //
+
     function accueil($validForm = true){
         $contenu = '
         <header><img src="View/style/assets/logo.png" alt="" id="logo"></header>
@@ -24,6 +31,11 @@
     }
 
 
+    //
+    // NV
+    //
+    // Affiche cette page en cas d'erreur dans l'index
+    //
 
     function error(){
         $contenu = '
@@ -35,7 +47,11 @@
     }
 
 
-
+    //
+    // NV
+    //
+    // Header avec le logo le bouton de déconnexion et le Prénom et Nom de l'agent connecté
+    //
 
     function connectedHeader() {
         return '
@@ -52,8 +68,11 @@
     }
 
 
-    
-
+    //
+    // G
+    //
+    // page de la synthèse client
+    //
 
     function clientSynthesis($synthèse) {
         $contenu = connectedHeader();
@@ -84,3 +103,30 @@
     }
 
     
+    //
+    // NV
+    //
+    // création de bulle dans l'EDT
+    //
+
+    function EDTBubble($arr){
+        return '
+        <td class="edttdHoraire">
+            <div class="insidetd">
+                <div class="horaires">
+                    '.$arr['heureDebut'].'
+                    <br>
+                    '.$arr['heureFin'].'
+                </div>
+                <div class="indordvtd">
+                    idRDV : '.$arr['idRdv'].'
+                </div>
+                <div class="indordvtd">
+                    client : '.$arr['idClient'].'
+                </div>
+                <div class="indordvtd">
+                    motif : '.$arr['Motif'].'
+                </div>
+            </div>
+        </td>';
+    }

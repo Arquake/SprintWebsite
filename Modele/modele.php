@@ -1,6 +1,11 @@
 <?php
     require_once("connect.php");
 
+
+    //
+    // Créé la connexion à la BDD
+    //
+
     function getConnect() {
         try {
             $connexion=new PDO('mysql:host='.SERVEUR.';dbname='.BDD,USER,PASSWORD);
@@ -16,11 +21,19 @@
         
     }
 
+
+    //
+    // NV
+    //
+    // On récupère toutes les infos de l'employe
+    // si il esxiste on utilise la méthode de vérification de mot de passe pour le comparé à celui donné
+    // si ils correspondent on retourne les informations récupérés
+    //
+
     function formConnexion( $login, $password ){
 
         $connexion = getConnect();
 
-        /*WHERE login='" . $login . "'*/
         $resultat = $connexion -> query("SELECT * FROM Employe WHERE login='" . $login . "'");
         $resultat = $resultat->fetch(PDO::FETCH_ASSOC);
 
@@ -42,6 +55,13 @@
 
     }
 
+
+    //
+    // NV
+    //
+    // On récupère le nom et prénom de l'Employe
+    //
+
     function employeInformations( $login ){
 
         $connexion = getConnect();
@@ -51,6 +71,14 @@
         return $resultat;
 
     }
+
+
+    //
+    // NV
+    //
+    // on vérifie si le login n'existe pas déjà
+    // Si il n'existe pas on créé l'employé en chiffrant le mot de passe avec un coût de 12
+    //
 
     function createEmploye( $login, $password, $poste, $nomEmploye, $prenomEmploye ){
 
@@ -70,6 +98,12 @@
     }
 
 
+    //
+    // NV
+    //
+    // On crée un nouveau client
+    //
+
     function createClient($nomClient,$prenomClient,$dateNaissance) {
 
         $connexion = getConnect();
@@ -84,6 +118,12 @@
     }
 
 
+    //
+    // NV
+    //
+    // récupère la liste de tout les conseillers
+    //
+
     function getAllConseillers() {
 
         $connexion = getConnect();
@@ -93,7 +133,12 @@
         return $resultat;
     }
 
+
+    //
+    // MP
+    //
     // Recupere tout les compte du client enrengistrer dans la session
+    //
     function getAllComptes() { 
 
         $connexion = getConnect();
@@ -103,7 +148,12 @@
         return $resultat;
     }
 
+    //
+    // MP
+    //
     // Recupere les infos du compte dont l'id est passé en paramètre 
+    //
+
     function getTypeCompteViaId($idCompte) {
         $connexion = getConnect();
 
@@ -111,6 +161,13 @@
 
         return $resultat['type'];
     }
+
+
+    //
+    // MP
+    //
+    // Recupere le solde du compte dont l'id est passé en paramètre 
+    //
 
     function getSoldeCompteViaId($idCompte){
         $connexion = getConnect();
@@ -120,6 +177,13 @@
         return $resultat['solde'];
     }
 
+
+    //
+    // MP
+    //
+    // 
+    //
+
     function getPlafondViaType($typeCompte){
         $connexion = getConnect();
 
@@ -127,6 +191,13 @@
 
         return $resultat['plafond'];
     }
+
+
+    //
+    // MP
+    //
+    // 
+    //
 
     function getDecouvertCompte($typeCompte){
         $connexion = getConnect();
@@ -136,6 +207,13 @@
         return $resultat['decouvert'];
     }
 
+
+    //
+    // MP
+    //
+    // 
+    //
+
     function getDecouvertClient($idClient){
         $connexion = getConnect();
 
@@ -143,6 +221,13 @@
 
         return $resultat['montantDecouvert'];
     }
+
+
+    //
+    // MP
+    //
+    // 
+    //
 
     function getDecouvert(){
         $decouvertCompte = intval(getDecouvertCompte($_SESSION['typeCompteClient']));
@@ -154,6 +239,13 @@
         }
     }
 
+
+    //
+    // NV
+    //
+    // créé le lien de rattachement Client / Conseiller
+    //
+
     function rattacherClientAgent() {
 
         $connexion = getConnect();
@@ -164,17 +256,33 @@
     }
 
 
+    //
+    // NV
+    //
+    // Recupere les infos du client selon l'id 
+    //
+
     function getClientByID($id){
 
         $connexion = getConnect();
 
-        $resultat = ($connexion -> query("SELECT nomClient, prenomClient, dateNaissance FROM client WHERE idClient='".$id."'"))->fetch(PDO::FETCH_ASSOC);
+        $resultat = ($connexion -> query("SELECT * FROM client WHERE idClient='".$id."'"))->fetch(PDO::FETCH_ASSOC);
 
         $resultat['idClient'] = $id;
 
         return $resultat;
     }
 
+
+    //
+    // NV
+    //
+    // Recherche le client selon les infos donnés en paramètre
+    //
+    // si l'id est donné il sera rentourné
+    //
+    // si l'id n'est pas donné il retournera la liste les clients avec leurs informations qui ont les mêmes caractéristiques
+    //
 
     function rechercherClient($clientInformartionList) {
 
@@ -223,21 +331,37 @@
     }
 
 
-    //Retire le montant inscrit en parametre du compte passé en session
+    //
+    // MP
+    //
+    // Retire le montant inscrit en parametre du compte passé en session
+    //
+
     function retraitAgentClient($montantRetrait){
         $connexion = getConnect();
 
         $connexion -> query("UPDATE Compte SET solde = solde - ".$montantRetrait." WHERE idCompte='".$_SESSION['idCompteClient']."'");
     }
 
-    //Depose le montant inscrit en parametre au compte passé en session
+
+    //
+    // MP
+    //
+    // Depose le montant inscrit en parametre au compte passé en session
+    //
+    
     function depotAgentClient($montantDepot){
         $connexion = getConnect();
         
         $connexion -> query("UPDATE Compte SET solde = solde + ".$montantDepot." WHERE idCompte='".$_SESSION['idCompteClient']."'");
     }
 
-  
+    
+    //
+    // G
+    //
+    // Recupere les infos du client selon l'id client de la session
+    //
 
     function DataClient() {
             
@@ -253,6 +377,8 @@
     }
 
 
+    //
+    // NV
     //
     // Renvoi le login de l'agent rattacher au client
     //
@@ -270,6 +396,8 @@
 
 
     //
+    // NV
+    //
     // Renvoi les type de motifs
     //
     
@@ -284,13 +412,23 @@
 
 
     //
+    // NV
+    //
     // créé un rdv
     //
+
     function createRDVAgent() {
         $connexion = getConnect();
 
         $connexion->query("INSERT INTO rendezvous(jourReunion, heureDebut, heureFin, dateCreationRdv, login, idClient, Motif) VALUES ('".$_POST['date']."','".$_POST['heureDebut']."','".$_POST['heureFin']."',CURRENT_DATE,'".getConseillerRattacherAuClient($_SESSION['idClient'])."','".$_SESSION['idClient']."','".$_POST['motifRDV']."')");
     }
+
+
+    //
+    // NV
+    //
+    // Vérifie si un autre rendez-vous ne risque pas de chevaucher
+    //
 
     function checkRDVCreation() {
         $connexion = getConnect();
@@ -329,7 +467,7 @@
         $weekArr = [];
 
         for ( $i=0 ; $i < 7 ; $i++) {
-            $query = "SELECT idRdv, idClient, heureDebut, heureFin, Motif FROM rendezvous WHERE jourReunion = CAST('".$date->format("Y-m-d")."' AS date)";
+            $query = "SELECT idRdv, idClient, heureDebut, heureFin, Motif FROM rendezvous WHERE jourReunion = CAST('".$date->format("Y-m-d")."' AS date) AND login='".$_SESSION['conseillerRattacherClient']."'";
 
             $weekArr[$i] = ($connexion->query($query))->fetchAll(PDO::FETCH_ASSOC);
 
