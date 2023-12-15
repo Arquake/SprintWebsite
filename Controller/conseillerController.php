@@ -34,14 +34,16 @@
                 $_SESSION['clientNaissance'] = $res['dateNaissance'];
                 $_SESSION['idClient'] = $res['idClient'];
 
-                accueilConseiller();
+                agentInscrit();
+
             } else if ( isset($res[0]['nomClient']) ) {
                 $_SESSION['clientNom'] = $res[0]['nomClient'];
                 $_SESSION['clientPrenom'] = $res[0]['prenomClient'];
                 $_SESSION['clientNaissance'] = $res[0]['dateNaissance'];
                 $_SESSION['idClient'] = $res[0]['idClient'];
 
-                accueilConseiller();
+                agentInscrit();
+
             } else if ( isset($res[1]) ) {
                 rechercheApprofondiClientConseiller($res);
             } else {
@@ -78,4 +80,41 @@
         accueilConseiller();
     }
 
+
+    function CtlInscrireClient() {
+
+        // \w = [:alnum:]_
+        if (preg_match("/^[[:alpha:]-]/",$_POST['nomClientInscription']) &&
+            preg_match("/^[[:alpha:]-]/",$_POST['prenomClientInscription']) &&
+            preg_match("/^[[:digit:]]+-+[[:digit:]]+-+[[:digit:]]/",$_POST['dateNaissanceClientInscription']) &&
+            preg_match("/^[[:digit:]]{10,10}/",$_POST['telephoneClientInscription']) &&
+            preg_match("/^[\w-]+@+[\w-]+\.+[\w-]/",$_POST['mailClientInscription']) && 
+            $_POST['adresseClientInscription'] != "" &&
+            preg_match("/^[[:digit:]]/",$_POST['codePostalClientInscription']) &&
+            preg_match("/^[[:alpha:]]/",$_POST['professionClientInscription']) &&
+            preg_match("/^[[:alpha:]]/",$_POST['situationClientInscription']) &&
+            preg_match("/^[[:digit:]]/",$_POST['revenuClientInscription']) &&
+            preg_match("/^[[:digit:]]/",$_POST['decouvertClientInscription'])
+            ) {
+                inscriptionClientConseiller();
+                accueilConseiller();
+        }
+        else {
+            inscrireClient( DataClient() );
+        }
+    }
+
     
+    function agentInscrit(){
+        //
+        // si le client n'est pas inscrit le faire inscrire
+        //
+
+        $res = clientInscritCheck();
+
+        if ( $res == true ) {
+            accueilConseiller();
+        } else {
+            inscrireClient( DataClient() );
+        }
+    }

@@ -29,7 +29,6 @@
         <form action="index.php" method="post">
                 <ul>
 
-                    <li><input class="asideInput" type="submit" value="Inscrire Client" name="asideConseillerInscrireClient"></li>
                     <li><input class="asideInput" type="submit" value="Vendre Contrat" name="asideConseillerVendreContrat"></li>
                     <li><input class="asideInput" type="submit" value="Ouvrir Compte" name="asideConseillerOuvrirCompte"></li>
                     <li><input class="asideInput" type="submit" value="Modifier Découvert" name="asideConseillerModifDecouvert"></li>
@@ -141,6 +140,51 @@
     } 
 
 
-    function inscrireClient() {
+    function inscrireClient( $clientInformation) {
 
+        $contenu = connectedHeader() . '
+            <aside>
+                <form action="index.php" method="post">
+                    <ul>
+
+                        <li><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
+
+                    </ul>
+                </form>
+            </aside>
+            
+            
+            <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+
+                <fieldset>
+
+                    <legend>Inscrire Client</legend>
+
+                        <p><label for="nomClientInscription">Nom du Client</label><input type="text" name="nomClientInscription" value="'.$clientInformation['nomClient'].'"></p>
+
+                        <p><label for="prenomClientInscription">Prénom du Client</label><input type="text" name="prenomClientInscription" value="'.$clientInformation['prenomClient'].'"></p>
+
+                        <p><label for="dateNaissanceClientInscription">Date de Naissanse du Client</label><input type="date" name="dateNaissanceClientInscription" value="'.$clientInformation['dateNaissance'].'"></p>
+
+                        <p><label for="telephoneClientInscription">Numéro de téléphone</label><input type="number" name="telephoneClientInscription"></p>
+
+                        <p><label for="mailClientInscription">Adresse mail</label><input type="text" name="mailClientInscription"></p>
+
+                        <p><label for="adresseClientInscription">Adresse</label><input type="text" name="adresseClientInscription"></p>
+
+                        <p><label for="codePostalClientInscription">Code Postal</label><input type="number" name="codePostalClientInscription"></p>
+
+                        <p><label for="professionClientInscription">Profession</label><input type="text" name="professionClientInscription"></p>
+
+                        <p><label for="situationClientInscription">Situation</label><input type="text" name="situationClientInscription"></p>
+
+                        <p><label for="revenuClientInscription">Revenu Mensuel</label><input type="number" name="revenuClientInscription"></p>
+
+                        <p><label for="decouvertClientInscription">Montant Decouvert</label><input type="number" name="decouvertClientInscription"></p>
+
+                    <p><input class="submitFormInput" type="submit" value="Inscrire" name="inscrireClientSubmit"></p>
+                </fieldset>
+            </form>';
+
+        require_once("View/gabarit.php");
     }

@@ -1,5 +1,7 @@
 <?php
     require_once("connect.php");
+    require_once("Modele/modeleAgent.php");
+    require_once("Modele/modeleDirecteur.php");
 
 
     //
@@ -70,51 +72,6 @@
 
         return $resultat;
 
-    }
-
-
-    //
-    // NV
-    //
-    // on vérifie si le login n'existe pas déjà
-    // Si il n'existe pas on créé l'employé en chiffrant le mot de passe avec un coût de 12
-    //
-
-    function createEmploye( $login, $password, $poste, $nomEmploye, $prenomEmploye ){
-
-        $connexion = getConnect();
-        $resultat = $connexion -> query("SELECT login FROM Employe WHERE login='" . $login . "'");
-        
-        if ( $resultat != false && empty($resultat) == 0 ){
-
-            $connexion -> query("INSERT INTO Employe(login,password,poste,nomEmploye,prenomEmploye,dateEmbauche) VALUES('" . $login . "', '" . password_hash($password, PASSWORD_DEFAULT, ['cost' => 12] ) . "', '" . $poste . "', '" . $nomEmploye . "', '" . $prenomEmploye . "', '" . date('Ymd') . "')");
-
-            return true;
-
-        }
-
-        return false;
-
-    }
-
-
-    //
-    // NV
-    //
-    // On crée un nouveau client
-    //
-
-    function createClient($nomClient,$prenomClient,$dateNaissance) {
-
-        $connexion = getConnect();
-
-        $connexion -> query("INSERT INTO Client(nomClient, prenomClient, dateNaissance, estInscrit) VALUES('".$nomClient."', '".$prenomClient."' ,'".$dateNaissance."', 0)");
-
-        $resultat = (($connexion -> query("SELECT idClient FROM Client WHERE idClient=(SELECT MAX(idClient) FROM Client)"))->fetch(PDO::FETCH_ASSOC))['idClient'];
-
-        $connexion -> query("INSERT INTO CreerClient(idClient, login, dateCreation) VALUES('".$resultat."', '".$_SESSION['login']."' , CURRENT_DATE)");
-
-        return $resultat;
     }
 
 
@@ -255,22 +212,6 @@
     //
     // NV
     //
-    // créé le lien de rattachement Client / Conseiller
-    //
-
-    function rattacherClientAgent() {
-
-        $connexion = getConnect();
-
-        $connexion -> query("INSERT INTO RattacherA(idClient, login, dateRattachement) VALUES('".$_SESSION['idClient']."', '".$_POST['posteRattachement']."' ,CURRENT_DATE) ");
-
-        return true;
-    }
-
-
-    //
-    // NV
-    //
     // Recupere les infos du client selon l'id 
     //
 
@@ -342,32 +283,6 @@
         return $resultat;
     }
 
-
-    //
-    // MP
-    //
-    // Retire le montant inscrit en parametre du compte passé en session
-    //
-
-    function retraitAgentClient($montantRetrait){
-        $connexion = getConnect();
-
-        $connexion -> query("UPDATE Compte SET solde = solde - ".$montantRetrait." WHERE idCompte='".$_SESSION['idCompteClient']."'");
-    }
-
-
-    //
-    // MP
-    //
-    // Depose le montant inscrit en parametre au compte passé en session
-    //
-    
-    function depotAgentClient($montantDepot){
-        $connexion = getConnect();
-        
-        $connexion -> query("UPDATE Compte SET solde = solde + ".$montantDepot." WHERE idCompte='".$_SESSION['idCompteClient']."'");
-    }
-
     
     //
     // G
@@ -426,19 +341,6 @@
     //
     // NV
     //
-    // créé un rdv
-    //
-
-    function createRDVAgent() {
-        $connexion = getConnect();
-
-        $connexion->query("INSERT INTO rendezvous(jourReunion, heureDebut, heureFin, dateCreationRdv, login, idClient, Motif) VALUES ('".$_POST['date']."','".$_POST['heureDebut']."','".$_POST['heureFin']."',CURRENT_DATE,'".getConseillerRattacherAuClient($_SESSION['idClient'])."','".$_SESSION['idClient']."','".$_POST['motifRDV']."')");
-    }
-
-
-    //
-    // NV
-    //
     // Vérifie si un autre rendez-vous ne risque pas de chevaucher
     //
 
@@ -450,19 +352,6 @@
         $resultat = ($connexion->query($query))->fetchAll(PDO::FETCH_ASSOC);
 
         return $resultat;
-    }
-
-
-    //
-    // NV
-    //
-    // Supprime le RDV
-    //
-
-    function deleteRDVAgent() {
-        $connexion = getConnect();
-
-        $connexion->query("DELETE FROM rendezvous WHERE idRDV=".$_POST['rdvDel']); 
     }
 
 
@@ -499,4 +388,20 @@
         }
 
         return $weekArr;
+    }
+
+
+    //
+    // NV
+    //
+    // inscription d'un client
+    //
+
+    function inscriptionClientConseiller() {
+        $connexion = getConnect();
+
+        $query = "UPDATE client SET nomClient='".$_POST['nomClientInscription']."',prenomClient='".$_POST['prenomClientInscription']."',dateNaissance='".$_POST['dateNaissanceClientInscription']."',estInscrit='1',numeroTelephone='".$_POST['telephoneClientInscription']."',mail='".$_POST['mailClientInscription']."',adresse='".$_POST['adresseClientInscription']."',codePostale='".$_POST['codePostalClientInscription']."',profession='".$_POST['professionClientInscription']."',situation='".$_POST['situationClientInscription']."',revenuMensuel='".$_POST['revenuClientInscription']."',montantDecouvert='".$_POST['decouvertClientInscription']."' WHERE idClient='".$_SESSION['idClient']."'";
+
+        $resultat = $connexion->query($query);
+
     }

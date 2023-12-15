@@ -243,7 +243,7 @@
                 //
                 // NV
                 // 
-                // Quand le bouton de recherche client par un agent est cliqué sans le aside
+                // Quand le bouton de recherche client par un agent est cliqué dans le aside
                 //
 
                 if ( isset($_POST['asideConseillerClientResearch']) ) {
@@ -279,6 +279,16 @@
 
                 else if ( isset($_POST['asideConseillerInscrireClient']) ) {
                     CtlConseillerHomePage();
+                } 
+
+                //
+                // NV
+                //
+                // Quand le bouton Incrire est cliqué
+                //
+
+                else if ( isset($_POST['inscrireClientSubmit']) ) {
+                    CtlInscrireClient();
                 } 
 
                 //

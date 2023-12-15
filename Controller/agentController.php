@@ -19,17 +19,7 @@
 
     function CtlAgentResearchClient() {
 
-        //
-        // si le client n'est pas inscrit le faire inscrire
-        //
-
-        $res = clientInscritCheck();
-
-        if ( $res != false ) {
-            rechercheClientConseillerView();
-        } else {
-
-        }
+        rechercheClientConseillerView();
 
     }
 
