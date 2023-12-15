@@ -485,14 +485,7 @@
         $ddate = date("y-m-d",strtotime("this week"));
         $date = new DateTime($ddate);
         
-        if ( isset($_POST['weekMinusOne']) ) {
-            $_SESSION['$week'] -= 1;
-        } else if ( isset($_POST['weekAddOne']) ) {
-            $_SESSION['$week'] += 1;
-        } else {
-            $_SESSION['$week'] = 0;
-        }
-
+        
         $date->modify('+'.(($_SESSION['$week']-1)*7).' days');
 
         $emploiDuTemps = '

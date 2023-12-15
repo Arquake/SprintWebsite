@@ -315,6 +315,14 @@
     //
 
     function getAndSetConseillerLoginDuClientDansSession($idClient) {
+        if ( isset($_POST['weekMinusOne']) ) {
+            $_SESSION['$week'] -= 1;
+        } else if ( isset($_POST['weekAddOne']) ) {
+            $_SESSION['$week'] += 1;
+        } else {
+            $_SESSION['$week'] = 0;
+        }
+
         $_SESSION['conseillerRattacherClient'] = getConseillerRattacherAuClient($idClient);
         return employeInformations($_SESSION['conseillerRattacherClient']);
     }
