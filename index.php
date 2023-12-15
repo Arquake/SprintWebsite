@@ -135,7 +135,7 @@
                 //
                 // MP
                 //
-                // 
+                // Bouton "Selectionner" de la selection de l'action à effectué (dépot/retrait) et du compte sur lequel l'effectué 
                 //
 
                 else if ( isset($_POST['selectionnerCompteClientSubmit']) ) {
@@ -145,7 +145,8 @@
                 //
                 // MP
                 //
-                //
+                // Bouton "soumettre" du retrait sur le compte
+                // -Prend le montant indiqué et le retire du compte
                 //
 
                 else if ( isset($_POST['outPutTransactionRetraitCompteClient'])){
@@ -155,12 +156,13 @@
                 //
                 // MP
                 //
-                //
+                // Bouton "soumettre" du dépot sur le compte
+                // -Prend le montant indiqué et le depose sur le compte
                 //
 
                 else if ( isset($_POST['outPutTransactionDepotCompteClient'])){
                     CtlAgentOutPutTransactionDepotCompteClient ();
-                } //////////////////////////////////////// MP
+                }
 
                 //
                 // G

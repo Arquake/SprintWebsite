@@ -166,7 +166,9 @@
     //
     // MP
     //
-    // Recupere le solde du compte dont l'id est passé en paramètre 
+    // Recupere le solde du compte dont l'$idCompte est passé en paramètre 
+    //
+    // -Renvoie un int correspondant au solde actuel du compte
     //
 
     function getSoldeCompteViaId($idCompte){
@@ -181,7 +183,9 @@
     //
     // MP
     //
-    // 
+    // Récupere le plafond du $typeCompte passé en paramètre
+    //
+    // -Renvoie un int correspondant au plafond lié au type de compte
     //
 
     function getPlafondViaType($typeCompte){
@@ -196,7 +200,9 @@
     //
     // MP
     //
-    // 
+    // Recupere le decouvert du $typeCompte passé en paramètre
+    //
+    // -Renvoie un int correspondant au montant de decouvert lié au type de compte
     //
 
     function getDecouvertCompte($typeCompte){
@@ -211,7 +217,9 @@
     //
     // MP
     //
-    // 
+    // Recupere le decouvert personnel du client dont l'$idClient est passé en paramètre 
+    //
+    // -Renvoie un int correspondant au montant de decouvert du client
     //
 
     function getDecouvertClient($idClient){
@@ -226,7 +234,11 @@
     //
     // MP
     //
+    // Gere si le type du compte séléctionné à un decouvert : 
+    //  si oui prendre celui-ci pour limité les actions liés au solde
+    //  sinon prendre celui du client
     // 
+    // -Renvoie un int correspondant au montant de decouvert 
     //
 
     function getDecouvert(){

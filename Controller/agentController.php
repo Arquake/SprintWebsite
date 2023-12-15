@@ -237,7 +237,7 @@
     //
     // MP
     //
-    //Lance de quoi deposer l'argent voulu sur le compte en session et retourne a l'acceuil
+    // Lance de quoi deposer l'argent voulu sur le compte en session et retourne a l'acceuil
     //
 
     function CtlAgentOutPutTransactionRetraitCompteClient(){
@@ -283,7 +283,7 @@
     //
     // MP
     //
-    //
+    // IN PROGRES ____________
     //
 
     function CtlModificationClient() {
