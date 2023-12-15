@@ -62,6 +62,8 @@
                 $_SESSION['idClient'] = $res['idClient'];
 
                 accueilAgent();
+            } else if ( isset($res[1]) ) {
+                rechercheApprofondiClientAgent($res);
             } else if ( isset($res[0]['nomClient']) ) {
                 $_SESSION['clientNom'] = $res[0]['nomClient'];
                 $_SESSION['clientPrenom'] = $res[0]['prenomClient'];
@@ -69,8 +71,6 @@
                 $_SESSION['idClient'] = $res[0]['idClient'];
 
                 accueilAgent();
-            } else if ( isset($res[1]) ) {
-                rechercheApprofondiClientAgent($res);
             } else {
                 rechercheClientAgentView(false);
             }

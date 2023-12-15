@@ -188,3 +188,125 @@
 
         require_once("View/gabarit.php");
     }
+
+
+    function venteContrat( $typeContrats ) {
+        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected() . '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+
+            <fieldset>
+
+                <legend>Vendre Contrat</legend>
+
+                    <label for="contratType">Type de Contrat</label>
+                    <select id="contratType" name="contratType">';
+
+                    foreach ( $typeContrats as $contrat){
+                        
+                        $contenu .= "<option value=".$contrat['type'].">".$contrat['type']."</option>";
+
+                    }
+
+
+        $contenu .= '
+                    </select>
+
+                <p><input class="submitFormInput" type="submit" value="Inscrire" name="venteContratSubmit"></p>
+            </fieldset>
+        </form>';
+
+        require_once("View/gabarit.php");
+    }
+
+
+    function ouvertureCompte( $typeCompte ) {
+        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected() . '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+
+            <fieldset>
+
+                <legend>Ouvrir Compte</legend>
+
+                    <label for="compteType">Type de Compte</label>
+                    <select id="compteType" name="compteType">';
+
+                    foreach ( $typeCompte as $compte){
+                        
+                        $contenu .= "<option value=".$compte['type'].">".$compte['type']."</option>";
+
+                    }
+
+
+        $contenu .= '
+                    </select>
+
+                <p><input class="submitFormInput" type="submit" value="Inscrire" name="creerCompteSubmit"></p>
+            </fieldset>
+        </form>';
+
+        require_once("View/gabarit.php");
+    }
+
+
+    function modificationDecouvert( $listeCompte ) {
+        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected() . '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+
+            <fieldset>
+
+                <legend>Modifier Découvert</legend>
+
+                    <label for="decouvertList">Type de Compte</label>
+                    <select id="decouvertList" name="decouvertList">';
+
+                    foreach ( $listeCompte as $compte){
+                        
+                        $contenu .= "<option value=".$compte['idCompte'].">".$compte['type']." - ".$compte['idCompte']." - [ ".$compte['Decouvert']." ]</option>";
+
+                    }
+
+
+        $contenu .= '
+                    </select>
+
+                <p><input class="submitFormInput" type="submit" value="Inscrire" name="creerCompteSubmit"></p>
+            </fieldset>
+        </form>';
+
+        require_once("View/gabarit.php");
+    }
+
+
+    function resilier( $comptes, $contrats) {
+        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected() . '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+
+            <fieldset>
+
+                <legend>Résilier</legend>
+
+                    <label for="resiliation">Type de Compte</label>
+                    <select id="resiliation" name="resiliation">';
+
+                    foreach ( $comptes as $compte){
+                        
+                        $contenu .= "<option value=".$compte['idCompte'].">".$compte['type']." - ".$compte['idCompte']."</option>";
+
+                    }
+
+                    foreach ( $contrats as $contrat){
+                        
+                        $contenu .= "<option value=".$contrat['idContrat'].">".$contrat['type']." - ".$contrat['idContrat']."</option>";
+
+                    }
+
+
+        $contenu .= '
+                    </select>
+
+                <p><input class="submitFormInput" type="submit" value="Inscrire" name="creerCompteSubmit"></p>
+            </fieldset>
+        </form>';
+
+        require_once("View/gabarit.php");
+    }

@@ -264,6 +264,16 @@
                 //
                 // NV
                 //
+                // quand le bouton de recherche approfondi est cliqué
+                //
+
+                else if ( isset($_POST['clientRechercheChoice'])) {
+                    CtlAgentResearchClientChoices();
+                }
+
+                //
+                // NV
+                //
                 // quand le bouton nouvelle recherche est cliqué
                 //
 
@@ -298,7 +308,7 @@
                 //
 
                 else if ( isset($_POST['asideConseillerVendreContrat']) ) {
-                    CtlConseillerHomePage();
+                    CtlvendreContrat();
                 } 
 
                 //
@@ -308,7 +318,7 @@
                 //
 
                 else if ( isset($_POST['asideConseillerOuvrirCompte']) ) {
-                    CtlConseillerHomePage();
+                    CtlouvrirCompte();
                 } 
 
                 //
@@ -318,7 +328,7 @@
                 //
 
                 else if ( isset($_POST['asideConseillerModifDecouvert']) ) {
-                    CtlConseillerHomePage();
+                    CtlmodifierDecouvert();
                 } 
 
                 //
@@ -328,7 +338,7 @@
                 //
 
                 else if ( isset($_POST['asideConseillerResiliation']) ) {
-                    CtlConseillerHomePage();
+                    Ctlresilier();
                 } 
                 
                 //

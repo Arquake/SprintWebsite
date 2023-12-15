@@ -36,6 +36,8 @@
 
                 agentInscrit();
 
+            } else if ( isset($res[1]) ) {
+                rechercheApprofondiClientConseiller($res);
             } else if ( isset($res[0]['nomClient']) ) {
                 $_SESSION['clientNom'] = $res[0]['nomClient'];
                 $_SESSION['clientPrenom'] = $res[0]['prenomClient'];
@@ -43,10 +45,7 @@
                 $_SESSION['idClient'] = $res[0]['idClient'];
 
                 agentInscrit();
-
-            } else if ( isset($res[1]) ) {
-                rechercheApprofondiClientConseiller($res);
-            } else {
+            }  else {
                 rechercheClientConseillerView(false);
             }
 
@@ -66,9 +65,7 @@
         $_SESSION['clientNaissance'] = $res['dateNaissance'];
         $_SESSION['idClient'] = $_POST['clientRechercheChoice'];
 
-
-
-        mainPageClientConseiller();
+        agentInscrit();
     }
 
     function CtlClientDisconnectConseiller() {
@@ -117,4 +114,84 @@
         } else {
             inscrireClient( DataClient() );
         }
+    }
+
+
+    function Ctlresilier(){
+
+        // Modifier pour recupérer comptes et contrats dans le modèle
+
+        $comptes = [ 0 => [
+            'idCompte' => 0, 'type' => 'CCP'
+        ],
+        1 => [
+            'idCompte' => 1, 'type' => 'CEL'
+        ]];
+        
+
+        $contrats = [ 0 => [
+            'idContrat' => 0, 'type' => 'Assurance Vie'
+        ],
+        1 => [
+            'idContrat' => 1, 'type' => 'Assurance Décès'
+        ]];
+
+        //
+
+        resilier( $comptes, $contrats);
+        
+    }
+
+
+    function CtlouvrirCompte(){
+
+        // Modifier pour recupérer Type comptes dans le modèle
+
+        $typeCompte = [ 0 => [
+            'type' => 'CCP'
+        ],
+        1 => [
+            'type' => 'CEL'
+        ]];
+
+        //
+
+        ouvertureCompte( $typeCompte );
+        
+    }
+
+
+    function CtlvendreContrat(){
+
+        // Modifier pour recupérer comptes et contrats dans le modèle       
+
+        $typeContrats = [ 0 => [
+            'type' => 'Assurance Vie'
+        ],
+        1 => [
+            'type' => 'Assurance Décès'
+        ]];
+
+        //
+
+        venteContrat( $typeContrats );
+        
+    }
+
+
+    function CtlmodifierDecouvert(){
+
+        // Modifier pour recupérer Type comptes dans le modèle
+
+        $listeCompte = [ 0 => [
+            'idCompte' => 0, 'type' => 'CCP', 'Decouvert' => -300
+        ],
+        1 => [
+            'idCompte' => 1, 'type' => 'CEL', 'Decouvert' => 0
+        ]];
+
+        //
+
+        modificationDecouvert( $listeCompte );
+        
     }
