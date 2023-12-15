@@ -453,12 +453,24 @@
     }
 
 
+    //
+    // NV
+    //
+    // Supprime le RDV
+    //
+
     function deleteRDVAgent() {
         $connexion = getConnect();
 
         $connexion->query("DELETE FROM rendezvous WHERE idRDV=".$_POST['rdvDel']); 
     }
 
+
+    //
+    // NV
+    //
+    // retourne tout les rdv de la semaine du conseiller
+    //
 
     function getEDTConseillerByDate(){
         $connexion = getConnect();

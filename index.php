@@ -270,6 +270,56 @@
                 else if ( isset($_POST['asideClientNouvelleRecherche']) ) {
                     CtlClientDisconnectConseiller();
                 } 
+
+                //
+                // NV
+                //
+                // Quand le bouton Incrire dans le aside est cliqué
+                //
+
+                else if ( isset($_POST['asideConseillerInscrireClient']) ) {
+                    CtlConseillerHomePage();
+                } 
+
+                //
+                // NV
+                //
+                // Quand le bouton Vendre Contrat dans le aside est cliqué
+                //
+
+                else if ( isset($_POST['asideConseillerVendreContrat']) ) {
+                    CtlConseillerHomePage();
+                } 
+
+                //
+                // NV
+                //
+                // Quand le bouton Ouvrir Compte dans le aside est cliqué
+                //
+
+                else if ( isset($_POST['asideConseillerOuvrirCompte']) ) {
+                    CtlConseillerHomePage();
+                } 
+
+                //
+                // NV
+                //
+                // Quand le bouton Modifier Decouvert dans le aside est cliqué
+                //
+
+                else if ( isset($_POST['asideConseillerModifDecouvert']) ) {
+                    CtlConseillerHomePage();
+                } 
+
+                //
+                // NV
+                //
+                // Quand le bouton Résiliation dans le aside est cliqué
+                //
+
+                else if ( isset($_POST['asideConseillerResiliation']) ) {
+                    CtlConseillerHomePage();
+                } 
                 
                 //
                 // NV
