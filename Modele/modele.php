@@ -332,7 +332,7 @@
 
         $connexion = getConnect();
 
-        $resultat = ($connexion->query("SELECT * FROM type"))->fetchAll(PDO::FETCH_ASSOC);
+        $resultat = ($connexion->query("SELECT * FROM Motif"))->fetchAll(PDO::FETCH_ASSOC);
 
         return $resultat;
     }

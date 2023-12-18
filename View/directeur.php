@@ -1,31 +1,33 @@
 <?php
 
+
+function directeurAside() {
+    return '
+    <aside>
+        <form action="index.php" method="post">
+            <ul>
+
+                <li><input class="asideInput" type="submit" value="Créer Employé" name="asideDirecteurCreerEmploye"></li>
+                
+                <li><input class="asideInput" type="submit" value="Modifier Employé" name="asideDirecteurModifierEmploye"></li>
+
+                <li><input class="asideInput" type="submit" value="Modifier pièces" name="asideDirecteurModifierPiece"></li>
+
+                <li><input class="asideInput" type="submit" value="Statistiques" name="asideDirecteurStats"></li>
+
+            </ul>
+        </form>
+    </aside>';
+}
+
+
     function accueilDirecteur(){
-        $contenu = connectedHeader();
-        $contenu .= '
-        <aside>
-            <form action="index.php" method="post">
-                <ul>
-
-                    <li><input class="asideInput" type="submit" value="Créer Employé" name="asideDirecteurCreerEmploye"></li>
-
-                </ul>
-            </form>
-        </aside>';
+        $contenu = connectedHeader() . directeurAside();
         require_once("View/gabarit.php");
     }
 
     function gestionEmployeDirecteur($employeCreated = false){
-        $contenu = connectedHeader() . '
-        <aside>
-            <form action="index.php" method="post">
-                <ul>
-
-                    <li><input class="asideInput" type="submit" value="Créer Employé" name="asideDirecteurCreerEmploye"></li>
-
-                </ul>
-            </form>
-        </aside>';
+        $contenu = connectedHeader() . directeurAside() ;
         if ( $employeCreated != 'homepage' ) {
             if ( $employeCreated ){
             $contenu .= '<div class="invalidForm">Employé créé</div>';
@@ -52,5 +54,23 @@
                 <p><input type="submit" value="Créer" name="createEmploye"></p>
             </fieldset>
         </form>';
+        require_once("View/gabarit.php");
+    }
+
+
+    function modifierEmployeForms(){
+        $contenu = connectedHeader() . directeurAside();
+        require_once("View/gabarit.php");
+    }
+
+
+    function modifierPiece(){
+        $contenu = connectedHeader() . directeurAside();
+        require_once("View/gabarit.php");
+    }
+
+
+    function directeursStats(){
+        $contenu = connectedHeader() . directeurAside();
         require_once("View/gabarit.php");
     }

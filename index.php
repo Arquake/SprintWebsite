@@ -358,16 +358,55 @@
                     CtlDirecteurCreateAgentSubmit();
                 } 
                 
+
+                //
+                // NV
+                //
+                // if createEmploye submit is clicked and if there's an ongoing session which has the $poste Directeur
+                //
                 
                 else if ( isset($_POST['createEmploye']) ) {
-
-                    //
-                    // NV
-                    //
-                    // if createEmploye submit is clicked and if there's an ongoing session which has the $poste Directeur
-                    //
         
                     CtlAjouterEmploye( $_POST['loginCreation'], $_POST['passwordCreation'], $_POST['posteCreation'], $_POST['nomCreation'], $_POST['prenomCreation'] );
+        
+                } 
+
+
+                //
+                // 
+                //
+                // 
+                //
+                
+                else if ( isset($_POST['asideDirecteurModifierEmploye']) ) {
+        
+                    
+        
+                } 
+
+
+                //
+                // 
+                //
+                // 
+                //
+                
+                else if ( isset($_POST['asideDirecteurModifierPiece']) ) {
+        
+                    
+        
+                } 
+
+
+                //
+                // 
+                //
+                // 
+                //
+                
+                else if ( isset($_POST['asideDirecteurStats']) ) {
+        
+                    
         
                 } 
                 

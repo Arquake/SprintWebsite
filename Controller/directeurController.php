@@ -4,9 +4,11 @@
         gestionEmployeDirecteur('homepage');
     }
 
+
     function CtlDirecteurHomePage() {
         accueilDirecteur();
     }
+
 
     function CtlAjouterEmploye ( $login, $password, $poste ,$nom, $prenom ){
 
@@ -14,4 +16,19 @@
 
         gestionEmployeDirecteur($created);
 
+    }
+
+
+    function CtlModifierEmploye() {
+        modifierEmployeForms();
+    }
+
+
+    function CtlModifierPiece() {
+        
+    }
+
+
+    function CtlStats() {
+        
     }
