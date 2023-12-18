@@ -203,6 +203,8 @@
         $_SESSION['idCompteClient'] = $_POST['compteSelection'];
         $_SESSION['typeCompteClient'] = getTypeCompteViaId($_SESSION['idCompteClient'] );
         $_SESSION['soldeCompteClient'] = getSoldeCompteViaId($_SESSION['idCompteClient'] );
+        $_SESSION['plafondCompteClient'] = getPlafondCompteViaId($_SESSION['idCompteClient']);
+        $_SESSION['decouvertCompteClient'] = getDecouvertCompteViaId($_SESSION['idCompteClient']);
 
         if ($_POST['radioTransaction'] == "retrait") {
             transactionRetraitClientAgentView();
@@ -219,8 +221,8 @@
     //
     
     function CtlAgentOutPutTransactionDepotCompteClient(){
-        $soldeActuel = getSoldeCompteViaId($_SESSION['idCompteClient']);
-        $plafond = getPlafondViaType($_SESSION['typeCompteClient']);
+        $soldeActuel = $_SESSION['soldeCompteClient'];
+        $plafond = $_SESSION['plafondCompteClient'];
 
         if (isset($_POST['depot']) && (intval($_POST['depot'] > 0))) {
             if ( $soldeActuel + $_POST['depot'] <= $plafond ) {
@@ -241,8 +243,8 @@
     //
 
     function CtlAgentOutPutTransactionRetraitCompteClient(){
-        $soldeActuel = getSoldeCompteViaId($_SESSION['idCompteClient']);
-        $decouvert = getDecouvert($_SESSION['idClient']);
+        $soldeActuel = $_SESSION['soldeCompteClient'];
+        $decouvert = $_SESSION['decouvertCompteClient'];
 
         if (isset($_POST['retrait']) && (intval($_POST['retrait'] > 0))) {
             if ( $soldeActuel - $_POST['retrait'] >= $decouvert ) {

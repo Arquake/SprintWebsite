@@ -100,7 +100,7 @@
 
         $connexion = getConnect();
 
-        $resultat = ($connexion -> query("SELECT idCompte, type, solde FROM Compte NATURAL JOIN PossedeCompte WHERE idClient='".$_SESSION['idClient']."'"))->fetchAll(PDO::FETCH_ASSOC);
+        $resultat = ($connexion -> query("SELECT idCompte, typeCompte, solde FROM compteclient WHERE idClient='".$_SESSION['idClient']."'"))->fetchAll(PDO::FETCH_ASSOC);
 
         return $resultat;
     }
@@ -114,9 +114,9 @@
     function getTypeCompteViaId($idCompte) {
         $connexion = getConnect();
 
-        $resultat = ($connexion -> query("SELECT type FROM Compte WHERE idCompte='".$idCompte."'"))->fetch(PDO::FETCH_ASSOC);
+        $resultat = ($connexion -> query("SELECT typeCompte FROM CompteClient WHERE idCompte='".$idCompte."'"))->fetch(PDO::FETCH_ASSOC);
 
-        return $resultat['type'];
+        return $resultat['typeCompte'];
     }
 
 
@@ -131,7 +131,7 @@
     function getSoldeCompteViaId($idCompte){
         $connexion = getConnect();
 
-        $resultat = ($connexion -> query("SELECT solde FROM Compte where idCompte='".$idCompte."'"))->fetch(PDO::FETCH_ASSOC);
+        $resultat = ($connexion -> query("SELECT solde FROM CompteClient where idCompte='".$idCompte."'"))->fetch(PDO::FETCH_ASSOC);
 
         return $resultat['solde'];
     }
@@ -145,10 +145,10 @@
     // -Renvoie un int correspondant au plafond lié au type de compte
     //
 
-    function getPlafondViaType($typeCompte){
+    function getPlafondCompteViaId($idCompte){
         $connexion = getConnect();
 
-        $resultat = ($connexion -> query("SELECT plafond FROM TypeCompte where typeCompte='".$typeCompte."'"))->fetch(PDO::FETCH_ASSOC);
+        $resultat = ($connexion -> query("SELECT plafond FROM CompteClient where idCompte='".$idCompte."'"))->fetch(PDO::FETCH_ASSOC);
 
         return $resultat['plafond'];
     }
@@ -162,52 +162,13 @@
     // -Renvoie un int correspondant au montant de decouvert lié au type de compte
     //
 
-    function getDecouvertCompte($typeCompte){
+    function getDecouvertCompteViaId($idCompte){
         $connexion = getConnect();
 
-        $resultat = ($connexion -> query("SELECT decouvert FROM TypeCompte where typeCompte='".$typeCompte."'"))->fetch(PDO::FETCH_ASSOC);
-
-        return $resultat['decouvert'];
-    }
-
-
-    //
-    // MP
-    //
-    // Recupere le decouvert personnel du client dont l'$idClient est passé en paramètre 
-    //
-    // -Renvoie un int correspondant au montant de decouvert du client
-    //
-
-    function getDecouvertClient($idClient){
-        $connexion = getConnect();
-
-        $resultat = ($connexion -> query("SELECT montantDecouvert FROM Client where idClient='".$idClient."'"))->fetch(PDO::FETCH_ASSOC);
+        $resultat = ($connexion -> query("SELECT montantDecouvert FROM CompteClient where idCompte='".$idCompte."'"))->fetch(PDO::FETCH_ASSOC);
 
         return $resultat['montantDecouvert'];
     }
-
-
-    //
-    // MP
-    //
-    // Gere si le type du compte séléctionné à un decouvert : 
-    //  si oui prendre celui-ci pour limité les actions liés au solde
-    //  sinon prendre celui du client
-    // 
-    // -Renvoie un int correspondant au montant de decouvert 
-    //
-
-    function getDecouvert(){
-        $decouvertCompte = intval(getDecouvertCompte($_SESSION['typeCompteClient']));
-       
-        if ( $decouvertCompte != Null ){
-            return $decouvertCompte;
-        } else {
-            return getDecouvertClient($_SESSION['idClient']);
-        }
-    }
-
 
     //
     // NV

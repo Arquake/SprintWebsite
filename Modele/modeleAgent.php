@@ -9,7 +9,7 @@
     function retraitAgentClient($montantRetrait){
         $connexion = getConnect();
 
-        $connexion -> query("UPDATE Compte SET solde = solde - ".$montantRetrait." WHERE idCompte='".$_SESSION['idCompteClient']."'");
+        $connexion -> query("UPDATE compteclient SET solde = solde - ".$montantRetrait." WHERE idCompte='".$_SESSION['idCompteClient']."'");
     }
 
 
@@ -22,7 +22,7 @@
     function depotAgentClient($montantDepot){
         $connexion = getConnect();
         
-        $connexion -> query("UPDATE Compte SET solde = solde + ".$montantDepot." WHERE idCompte='".$_SESSION['idCompteClient']."'");
+        $connexion -> query("UPDATE compteclient SET solde = solde + ".$montantDepot." WHERE idCompte='".$_SESSION['idCompteClient']."'");
     }
 
 

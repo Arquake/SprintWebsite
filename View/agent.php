@@ -312,7 +312,7 @@
 
         foreach ( $compteList as $compte){
             
-            $contenu .= "<option value=".$compte['idCompte'].">".$compte['type']." : ".$compte['solde']." €</option>";
+            $contenu .= "<option value=".$compte['idCompte'].">".$compte['typeCompte']." : ".$compte['solde']." €</option>";
 
         }
 
@@ -350,6 +350,7 @@
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
             <p class="afficherBeauP">Compte séléctionné pour <strong>retrait</strong> : '.$_SESSION['typeCompteClient'].' : '.$_SESSION['soldeCompteClient'].' €</p>
+            <p class="afficherBeauP">Decouvert : '.$_SESSION['decouvertCompteClient'].' €</p>
     
             <fieldset>
                 <legend>Retrait</legend>
@@ -378,7 +379,7 @@
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
             <p class="afficherBeauP">Compte séléctionné pour <strong>dépot</strong> : '.$_SESSION['typeCompteClient'].' : '.$_SESSION['soldeCompteClient'].' €</p>
-    
+            <p class="afficherBeauP">Decouvert : '.$_SESSION['plafondCompteClient'].' €</p>
 
             <fieldset>
                 <legend>Dépot</legend>
