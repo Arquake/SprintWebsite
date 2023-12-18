@@ -481,7 +481,9 @@
                         <input class="edtSubmitWeekChange" type="submit" name="weekMinusOne" value="'.($date->format("W")).'">
                     </form>
                 </td>
+
                 <th colspan="5" class="semainetd">Semaine '.($date->modify('+7 days')->format("W")).' de l\'année '.$date->format("Y").'</th>
+                
                 <td class="tdWeekChange">
                     <form action="index.php" method="post" class="edtWeekChangeForm">
                         <input class="edtSubmitWeekChange" type="submit" name="weekAddOne" value="'.($date->modify('+7 days')->format("W")).'">
