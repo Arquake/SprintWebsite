@@ -35,9 +35,11 @@
     function createRDVAgent() {
         $connexion = getConnect();
 
-        $connexion->query("INSERT INTO rendezvous(jourReunion, heureDebut, heureFin, dateCreationRdv, login, idClient, Motif) VALUES ('".$_POST['date']."','".$_POST['heureDebut']."','".$_POST['heureFin']."',CURRENT_DATE,'".getConseillerRattacherAuClient($_SESSION['idClient'])."','".$_SESSION['idClient']."','".$_POST['motifRDV']."')");
+        $connexion->query("INSERT INTO rendezvous(jourReunion, heureDebut, heureFin, dateCreationRdv, login, idClient, idMotif) VALUES ('".$_POST['date']."','".$_POST['heureDebut']."','".$_POST['heureFin']."',CURRENT_DATE,'".getConseillerRattacherAuClient($_SESSION['idClient'])."','".$_SESSION['idClient']."','".$_POST['motifRDV']."')");
     }
-//
+
+
+    //
     // NV
     //
     // Supprime le RDV
@@ -60,7 +62,7 @@
 
         $connexion = getConnect();
 
-        $connexion -> query("INSERT INTO RattacherA(idClient, login, dateRattachement) VALUES('".$_SESSION['idClient']."', '".$_POST['posteRattachement']."' ,CURRENT_DATE) ");
+        $connexion -> query("INSERT INTO RattacherA(idClient, login) VALUES('".$_SESSION['idClient']."', '".$_POST['posteRattachement']."') ");
 
         return true;
     }
@@ -79,8 +81,6 @@
         $connexion -> query("INSERT INTO Client(nomClient, prenomClient, dateNaissance, estInscrit) VALUES('".$nomClient."', '".$prenomClient."' ,'".$dateNaissance."', 0)");
 
         $resultat = (($connexion -> query("SELECT idClient FROM Client WHERE idClient=(SELECT MAX(idClient) FROM Client)"))->fetch(PDO::FETCH_ASSOC))['idClient'];
-
-        $connexion -> query("INSERT INTO CreerClient(idClient, login, dateCreation) VALUES('".$resultat."', '".$_SESSION['login']."' , CURRENT_DATE)");
 
         return $resultat;
     }

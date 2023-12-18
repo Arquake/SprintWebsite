@@ -19,7 +19,9 @@
 
     function CtlAgentResearchClient() {
 
-        rechercheClientConseillerView();
+        CtlClientDisconnect();
+
+        rechercheClientAgentView();
 
     }
 
@@ -124,8 +126,6 @@
 
     function CtlAgentCreateClient() {
 
-        
-
         if ( $_POST['nomClientCreation'] =='' || $_POST['prenomClientCreation'] =='' || $_POST['dateNaissanceClientCreation'] =='' ) {
             creationClientAgent(false);
         } else {
@@ -138,6 +138,8 @@
             $_SESSION['idClient'] = $idClient;
 
             $conseillersList = getAllConseillers();
+
+            
 
             rattacherClient($conseillersList);
 
@@ -173,8 +175,6 @@
         unset($_SESSION['clientPrenom']);
         unset($_SESSION['clientNaissance']);
         unset($_SESSION['idClient']);
-        unset($_SESSION['idCompte']);
-        accueilAgent();
     }
 
 
@@ -340,9 +340,8 @@
         
         else {
             createRDVAgent();
-            $arr=getEDTConseillerByDate();
-            getAndSetConseillerLoginDuClientDansSession($_SESSION['idClient']);
-            priseDeRendezVousAgents( getMotifsType(), $arr, false, true );
+            $motif = getMotifsAll();
+            affichageRDVPieceNecessaires( $motif );
         }
         
     }

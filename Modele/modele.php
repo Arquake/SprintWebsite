@@ -380,7 +380,7 @@
         $weekArr = [];
 
         for ( $i=0 ; $i < 7 ; $i++) {
-            $query = "SELECT idRdv, idClient, heureDebut, heureFin, Motif FROM rendezvous WHERE jourReunion = CAST('".$date->format("Y-m-d")."' AS date) AND login='".$_SESSION['conseillerRattacherClient']."' ORDER BY heureDebut ASC";
+            $query = "SELECT idRdv, idClient, heureDebut, heureFin, idMotif FROM rendezvous WHERE jourReunion = CAST('".$date->format("Y-m-d")."' AS date) AND login='".$_SESSION['conseillerRattacherClient']."' ORDER BY heureDebut ASC";
 
             $weekArr[$i] = ($connexion->query($query))->fetchAll(PDO::FETCH_ASSOC);
 
@@ -404,4 +404,19 @@
 
         $resultat = $connexion->query($query);
 
+    }
+
+
+    //
+    // NV
+    //
+    // récupère toutes les infos du motif
+    //
+
+    function getMotifsAll() {
+        $connexion = getConnect();
+
+        $resultat = ($connexion->query("SELECT * FROM Motif WHERE idMotif='".$_POST['motifRDV']."'"))->fetch(PDO::FETCH_ASSOC);
+
+        return $resultat;
     }

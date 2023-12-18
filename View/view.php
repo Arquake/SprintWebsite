@@ -125,7 +125,7 @@
                     client : '.$arr['idClient'].'
                 </div>
                 <div class="indordvtd">
-                    motif : '.$arr['Motif'].'
+                    motif : '.$arr['idMotif'].'
                 </div>
             </div>
         </td>';

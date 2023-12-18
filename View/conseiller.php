@@ -47,9 +47,9 @@
             <form action="index.php" method="post">
                 <ul>
 
-                <li><input class="asideInput" type="submit" value="Recherche Client" name="asideConseillerClientResearch"></li>
+                    <li><input class="asideInput" type="submit" value="Recherche Client" name="asideConseillerClientResearch"></li>
 
-                <li><input class="asideInput" type="submit" value="Plannings" name="asideConseillerPlanning"></li>
+                    <li><input class="asideInput" type="submit" value="Plannings" name="asideConseillerPlanning"></li>
 
                 </ul>
             </form>

@@ -33,6 +33,36 @@
     //
     // NV
     //
+    // fonction pour récupérer le aside si l'agent n'est pas connecté
+    //
+
+    function AgentAsideSideBarIfNoClient() {
+        $contenu = '
+        <aside>
+            <form action="index.php" method="post">
+                <ul>
+
+                    <li><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthese"></li>
+
+                    <li><input class="asideInput" type="submit" value="Modification Client" name="asideClientModification"></li>
+
+                    <li><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>
+
+                    <li><input class="asideInput" type="submit" value="Prise Rendez-Vous" name="asideClientPriseRendezVous"></li>
+
+                    <li><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
+
+                </ul>
+            </form>
+        </aside>';
+
+        return $contenu;
+    }
+
+
+    //
+    // NV
+    //
     // page d'accueil de l'agent
     //
 
@@ -422,7 +452,7 @@
                         ';
         foreach ( $motifs as $motif){
 
-            $contenu .= "<option value=".$motif['type'].">".$motif['type']."</option>";
+            $contenu .= "<option value=".$motif['idMotif'].">".$motif['libelleMotif']."</option>";
 
         }
         
@@ -527,5 +557,34 @@
 
     function errorTransactionNoAccountFound(){
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '<div class="invalidForm">Aucun Compte n\'existe<br>Pour ce Client</div>';
+        require_once("View/gabarit.php");
+    }
+
+
+    //
+    // NV
+    //
+    // Prise de RDV valide affiche page avec les pièces nécessaires
+    //
+
+    function affichageRDVPieceNecessaires( $arr ) {
+        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected();
+
+        $contenu .= '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+            <fieldset>
+
+                <legend>Supprimer un RDV</legend>
+
+                <p><label class="listePiece" for="">Libelle</label><textarea name="listePiece" id="listePiece" disabled="disabled" class="libelle">'.$arr['libelleMotif'].'</textarea></p> 
+
+                <p><label class="listePiece" for="">Liste De Pieces A prévoir</label><textarea name="listePiece" id="listePiece" disabled="disabled" class="liste">'.$arr['listePiece'].'</textarea></p> 
+
+                <input class="submitFormInput" type="submit" value="Suivant" name="asideClientPriseRendezVous">
+            </fieldset>
+        </form>';
+
+
+
         require_once("View/gabarit.php");
     }
