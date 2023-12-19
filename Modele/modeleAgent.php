@@ -29,32 +29,6 @@
     //
     // NV
     //
-    // créé un rdv
-    //
-
-    function createRDVAgent() {
-        $connexion = getConnect();
-
-        $connexion->query("INSERT INTO rendezvous(jourReunion, heureDebut, heureFin, dateCreationRdv, login, idClient, idMotif) VALUES ('".$_POST['date']."','".$_POST['heureDebut']."','".$_POST['heureFin']."',CURRENT_DATE,'".getConseillerRattacherAuClient($_SESSION['idClient'])."','".$_SESSION['idClient']."','".$_POST['motifRDV']."')");
-    }
-
-
-    //
-    // NV
-    //
-    // Supprime le RDV
-    //
-
-    function deleteRDVAgent() {
-        $connexion = getConnect();
-
-        $connexion->query("DELETE FROM rendezvous WHERE idRDV=".$_POST['rdvDel']); 
-    }
-
-
-    //
-    // NV
-    //
     // créé le lien de rattachement Client / Conseiller
     //
 

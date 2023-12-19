@@ -28,9 +28,6 @@
             session_unset();
         }
 
-        // echo "<script>console.log('".var_dump($_SESSION)."')</script>";
-        // echo "<script>console.log('".var_dump($_POST)."')</script>";
-
         //
         // if the user is connected a $poste is assigned to him
         // controller is gonna be accessed to match the $poste of the user
@@ -243,12 +240,52 @@
                 //
                 // NV
                 // 
-                // Quand le bouton de recherche client par un agent est cliqué dans le aside
+                // Quand le bouton de recherche client est cliqué dans le aside
                 //
 
                 if ( isset($_POST['asideConseillerClientResearch']) ) {
-                    CtlAgentResearchClient();
+                    CtlConseillerResearchClient();
                 } 
+
+
+                //
+                // NV
+                // 
+                // Quand le bouton planning est cliqué dans le aside
+                //
+
+                else if ( isset($_POST['asideConseillerPlanning']) || isset($_POST['weekMinusOne']) || isset($_POST['weekAddOne']) ||isset($_POST['conseillerEDTSubmit']) ) {
+                    if ( isset($_POST['conseillerEDTSubmit']) ) {
+                        $_SESSION['conseillerRattacherClient'] = $_POST['conseillerEDTChoice'];
+                    } else if ( isset($_POST['asideConseillerPlanning']) ) {
+                        $_SESSION['conseillerRattacherClient'] = $_SESSION['login'];
+                    }
+
+                    CtlPriseDeRendezVousConseiller();
+                    
+                }
+
+
+                //
+                // NV
+                //
+                // quand le bouton créé formation est cliqué
+                //
+                
+                else if ( isset($_POST['creerRDVConseiller']) ) {
+                    CtlCreationRendezVousConseiller();
+                } 
+
+                //
+                // NV
+                //
+                // quand le bouton de suppression rendez-vous est cliqué
+                //
+                
+                else if ( isset($_POST['deleteRDVConseiller']) ) {
+                    CtlSupprimerRendezVousConseiller();
+                }
+
 
                 //
                 // NV

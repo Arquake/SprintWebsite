@@ -273,6 +273,10 @@
     
     function getConseillerRattacherAuClient($idClient) {
 
+        if ( $idClient == -1 ) {
+            return $_SESSION['login'];
+        }
+
         $connexion = getConnect();
     
         $query = "SELECT login FROM rattachera WHERE idClient = '".$idClient."'";
@@ -280,6 +284,19 @@
         $resultat = ($connexion->query($query))->fetch(PDO::FETCH_ASSOC)['login'];
 
         return $resultat;
+    }
+
+
+    //
+    // NV
+    //
+    // créé un rdv
+    //
+
+    function createRDV() {
+        $connexion = getConnect();
+
+        $connexion->query("INSERT INTO rendezvous(jourReunion, heureDebut, heureFin, dateCreationRdv, login, idClient, idMotif) VALUES ('".$_POST['date']."','".$_POST['heureDebut']."','".$_POST['heureFin']."',CURRENT_DATE,'".getConseillerRattacherAuClient($_SESSION['idClient'])."','".$_SESSION['idClient']."','".$_POST['motifRDV']."')");
     }
 
 
@@ -308,8 +325,10 @@
     function checkRDVCreation() {
         $connexion = getConnect();
 
-        $query = "SELECT idRdv FROM rendezvous WHERE (jourReunion = '".$_POST['date']."') AND ((CAST('".$_POST['heureDebut'].":00' AS time) >= heureDebut AND CAST('".$_POST['heureDebut'].":00' AS time) < heureFin) OR (CAST('".$_POST['heureFin'].":00' AS time) > heureDebut AND CAST('".$_POST['heureFin'].":00' AS time) <= heureFin))";
-        
+        $query = "SELECT idRdv FROM rendezvous WHERE (jourReunion = '".$_POST['date']."') AND ((CAST('".$_POST['heureDebut'].":00' AS time) >= heureDebut AND CAST('".$_POST['heureDebut'].":00' AS time) < heureFin) OR (CAST('".$_POST['heureFin'].":00' AS time) > heureDebut AND CAST('".$_POST['heureFin'].":00' AS time) <= heureFin)) AND login='".$_SESSION['conseillerRattacherClient']."'";
+       
+        echo "<script>console.log('".$query."')</script>";
+
         $resultat = ($connexion->query($query))->fetchAll(PDO::FETCH_ASSOC);
 
         return $resultat;
@@ -380,4 +399,30 @@
         $resultat = ($connexion->query("SELECT * FROM Motif WHERE idMotif='".$_POST['motifRDV']."'"))->fetch(PDO::FETCH_ASSOC);
 
         return $resultat;
+    }
+
+
+    //
+    // NV
+    //
+    // Supprime le RDV
+    //
+
+    function deleteRDV() {
+        $connexion = getConnect();
+
+        $connexion->query("DELETE FROM rendezvous WHERE idRDV=".$_POST['rdvDel']); 
+    }
+
+
+    //
+    // NV
+    //
+    // Récupère l'id client du rdv
+    //
+
+    function rdvToIdClient() {
+        $connexion = getConnect();
+
+        return ($connexion->query("SELECT idClient FROM rendezvous WHERE idRDV='".$_POST['rdvDel']."' "))->fetch(PDO::FETCH_ASSOC); 
     }

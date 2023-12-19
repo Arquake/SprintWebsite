@@ -4,6 +4,21 @@
         accueilConseiller();
     }
 
+
+    //
+    // NV
+    //
+    // Charge la page de recher client du conseiller
+    //
+
+    function CtlConseillerResearchClient() {
+
+        CtlClientDisconnect();
+
+        rechercheClientConseillerView();
+
+    }
+
     function CtlConseillerResearchClientSubmitted() {
 
         $clientInfo = array ();
@@ -194,4 +209,89 @@
 
         modificationDecouvert( $listeCompte );
         
+    }
+
+
+    //
+    // NV
+    //
+    // On retourne l'edt du conseiller relié au client
+    // on l'affiche les forms de créations et suppression de rdv
+    //
+
+    function CtlPriseDeRendezVousConseiller() {
+
+        $infoConseiller = employeInformations( $_SESSION['conseillerRattacherClient'] );
+
+        $_SESSION['conseillerNom'] = $infoConseiller['nomEmploye'];
+
+        $_SESSION['conseillerPrenom'] = $infoConseiller['prenomEmploye'];
+
+        $arr=getEDTConseillerByDate();
+
+        priseDeRendezVousConseillers( getAllConseillers(), $arr );
+    }
+
+
+    //
+    // NV
+    //
+    // on créé la formation ou non puis on affiche à nouveau la page avec l'emploi du temps du conseiller
+    //
+
+    function CtlCreationRendezVousConseiller() {
+        //
+        // on verifie si les information sont remplient puis on vérifie si la date se trouve bien après la date du jour
+        // on vérifie au ssi si les heures sont bien dans l'ordre
+        //
+
+        echo "<script>console.log('".var_dump(checkRDVCreation())."')</script>";
+
+        if ( $_POST['date'] == '' || $_POST['heureDebut'] == '' || $_POST['heureFin'] == '' || $_POST['date'] <= date("Y-m-d") || $_POST['heureDebut'] > $_POST['heureFin'] ) {
+
+
+            $arr=getEDTConseillerByDate();
+            priseDeRendezVousConseillers( getAllConseillers(), $arr, true );
+
+            
+        }
+        
+        else if ( empty(checkRDVCreation() ) ){
+            $_SESSION['idClient'] = -1;
+            $_POST['motifRDV'] = "formation";
+            createRDV();
+            unset($_SESSION['idClient']);
+            unset($_POST['motifRDV']);
+            
+            $arr=getEDTConseillerByDate();
+
+            priseDeRendezVousConseillers( getAllConseillers(), $arr, false, true );
+        } else {
+            suppressionRDVSuiteAFormation();
+        }
+        
+    }
+
+
+    //
+    // NV
+    //
+    // supprime le rdv puis on affiche à nouveau la page avec l'emploi du temps du conseiller
+    //
+
+    function CtlSupprimerRendezVousConseiller() {
+
+        $arr=getEDTConseillerByDate();
+
+        if ($_POST['rdvDel'] != '' ) {
+            if( $_SESSION['login'] == $_SESSION['conseillerRattacherClient'] ) {
+                deleteRDV();
+                priseDeRendezVousConseillers( getAllConseillers(), $arr);
+            } else {
+                priseDeRendezVousConseillers( getAllConseillers(), $arr, false, false, false, true );
+            }
+            
+        } else {
+            priseDeRendezVousConseillers( getAllConseillers(), $arr, true, false, true );
+        }
     }

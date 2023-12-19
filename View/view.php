@@ -110,23 +110,43 @@
     //
 
     function EDTBubble($arr){
+        if ( $arr['idClient'] != -1 ) {
+            return '
+            <td class="edttdHoraire">
+                <div class="insidetd">
+                    <div class="horaires">
+                        '.$arr['heureDebut'].'
+                        <br>
+                        '.$arr['heureFin'].'
+                    </div>
+                    <div class="indordvtd">
+                        idRDV : '.$arr['idRdv'].'
+                    </div>
+                    <div class="indordvtd">
+                        client : '.$arr['idClient'].'
+                    </div>
+                    <div class="indordvtd">
+                        motif : '.$arr['idMotif'].'
+                    </div>
+                </div>
+            </td>';
+        }
+
         return '
-        <td class="edttdHoraire">
-            <div class="insidetd">
-                <div class="horaires">
-                    '.$arr['heureDebut'].'
-                    <br>
-                    '.$arr['heureFin'].'
+            <td class="edttdHoraire">
+                <div class="formation">
+                    <div class="horaires">
+                        '.$arr['heureDebut'].'
+                        <br>
+                        '.$arr['heureFin'].'
+                    </div>
+                    <div class="indordvtd">
+                        idRDV : '.$arr['idRdv'].'
+                    </div>
+                    <div class="indordvtd">
+                        motif : '.$arr['idMotif'].'
+                    </div>
                 </div>
-                <div class="indordvtd">
-                    idRDV : '.$arr['idRdv'].'
-                </div>
-                <div class="indordvtd">
-                    client : '.$arr['idClient'].'
-                </div>
-                <div class="indordvtd">
-                    motif : '.$arr['idMotif'].'
-                </div>
-            </div>
-        </td>';
+            </td>';
     }
+

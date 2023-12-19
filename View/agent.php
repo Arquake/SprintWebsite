@@ -431,15 +431,17 @@
     // Page avec l'EDT du conseiller du client et les forms de prise et suppression de rendez vous
     //
 
-    function priseDeRendezVousAgents( $motifs, $arr, $error=false, $cree=false, $supprime=false ) {
+    function priseDeRendezVousAgents( $motifs, $arr, $error=false, $cree=false, $supprime=false, $suppression=false ) {
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected();
 
         if ( $error ) {
-            $contenu .= '<div class="invalidForm">Le RDV n\'a pas pu être créé<br>veuillez rentrer des informations valides</div>';
+            $contenu .= '<div class="invalidForm">Le RDV n\'a pas pu être créé <br>veuillez rentrer des informations valides</div>';
         } else if ( $cree ) {
             $contenu .= '<div class="invalidForm">RDV Créé</div>';
         } else if ( $supprime ) {
             $contenu .= '<div class="invalidForm">RDV Supprimé</div>';
+        } else if ( $suppression ) {
+            $contenu .= '<div class="invalidForm">Il n\'est pas possible de supprimer une formation</div>';
         }
 
         $contenu .= '<div class"priseRdv">

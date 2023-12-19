@@ -341,7 +341,7 @@
         }
         
         else {
-            createRDVAgent();
+            createRDV();
             $motif = getMotifsAll();
             affichageRDVPieceNecessaires( $motif );
         }
@@ -357,11 +357,19 @@
 
     function CtlSupprimerRendezVousAgent() {
 
-        if ($_POST['rdvDel'] != '' ) {
-            deleteRDVAgent();
-        }
-
         $arr=getEDTConseillerByDate();
 
-        priseDeRendezVousAgents( getMotifsType(), $arr, false, false, true );
+        if ($_POST['rdvDel'] != '' ) {
+
+            if ( !empty( rdvToIdClient() ) ) {
+                priseDeRendezVousAgents( getMotifsType(), $arr, false, false, false,true );
+            } else {
+                deleteRDV();
+                priseDeRendezVousAgents( getMotifsType(), $arr, false, false, true );
+            }
+
+        } else {
+            priseDeRendezVousAgents( getMotifsType(), $arr, true );
+        }
+
     }

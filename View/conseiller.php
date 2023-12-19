@@ -24,6 +24,7 @@
         require_once("View/gabarit.php");
     }
 
+
     function ConseillerAsideSideBarWhenClientConnected() {
         return '<aside>
         <form action="index.php" method="post">
@@ -135,7 +136,7 @@
 
 
     function mainPageClientConseiller() {
-        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected();
+        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected();
         require_once("View/gabarit.php");
     } 
 
@@ -305,6 +306,181 @@
                     </select>
 
                 <p><input class="submitFormInput" type="submit" value="Inscrire" name="creerCompteSubmit"></p>
+            </fieldset>
+        </form>';
+
+        require_once("View/gabarit.php");
+    }
+
+
+    //
+    // NV
+    //
+    // Page avec l'EDT du conseiller du client et les forms de prise et suppression de rendez vous
+    //
+
+    function priseDeRendezVousConseillers( $conseillers, $arr, $error=false, $cree=false, $supprime=false, $suppression = false ) {
+        $contenu = connectedHeader() . '
+        <aside>
+                <form action="index.php" method="post">
+                    <ul>
+
+                        <li><input class="asideInput" type="submit" value="Recherche Client" name="asideConseillerClientResearch"></li>
+
+                        <li><input class="asideInput" type="submit" value="Plannings" name="asideConseillerPlanning"></li>
+
+                    </ul>
+                </form>
+            </aside>';
+
+        if ( $error ) {
+            $contenu .= '<div class="invalidForm">Le RDV n\'a pas pu être supprimé<br>veuillez rentrer des informations valides</div>';
+        } else if ( $cree ) {
+            $contenu .= '<div class="invalidForm">RDV Créé</div>';
+        } else if ( $supprime ) {
+            $contenu .= '<div class="invalidForm">RDV Supprimé</div>';
+        } else if ( $suppression ) {
+            $contenu .= '<div class="invalidForm">Vous ne pouvez pas supprimer <br> le RDV d\'un autre conseiller</div>';
+        }
+
+        $contenu .= '<div class"priseRdv">
+            <form action="index.php" method="post" class="sideFormPriseRendezVous">
+
+                <fieldset>
+                    <legend>Selectionner Conseiller</legend>
+                    <p><label for="">Conseiller</label><select id="conseillerEDTChoice" name="conseillerEDTChoice"> ';
+                    foreach ( $conseillers as $conseiller){
+            
+                        $contenu .= "<option value=".$conseiller['login'].">". $conseiller['nomEmploye'] .' '. $conseiller['prenomEmploye'] ."</option>";
+            
+                    }
+                    
+        $contenu .= '
+                    </select>
+                    </p>
+                    <input class="submitFormInput" type="submit"  name="conseillerEDTSubmit" value="Selectionner">
+
+                </fieldset>
+
+                <fieldset>
+
+                    <legend>Programmer une Formation</legend>
+
+                    <p><label for="">Date</label><input type="date" name="date" id="date"></p>
+                    <p><label for="">Heure de début</label><input type="time" name="heureDebut" id="heureDebut"></p>
+                    <p><label for="">Heure de fin</label><input type="time" name="heureFin" id="heureFin"></p>
+                    <input class="submitFormInput" type="submit" name="creerRDVConseiller" value="Créer">
+                </fieldset>
+                
+
+                <fieldset>
+                    <legend>Supprimer un RDV</legend>
+                    <p><label for="">Identifiant du RDV</label><input type="number" name="rdvDel" id="rdvDel"></p> 
+                    <input class="submitFormInput" type="submit"  name="deleteRDVConseiller" value="Supprimer">
+
+                </fieldset>
+            </form>
+        '.afficherEDTConseiller($arr).'</div>';
+
+
+
+        require_once("View/gabarit.php");
+    }
+
+
+    //
+    // NV
+    //
+    // renvoi l'edt de l'agent dans une table
+    //
+
+    function afficherEDTConseiller($arr) {
+
+        $maxlengthArray = 0;
+
+        //
+        // get maximum length of sub-array in array
+        //
+
+        for ( $i = 0 ; $i < 7 ; $i++) { if ( count($arr[$i]) > $maxlengthArray ) { $maxlengthArray = count($arr[$i]); } }
+
+        $ddate = date("y-m-d",strtotime("this week"));
+        $date = new DateTime($ddate);
+        
+        
+        $date->modify('+'.(($_SESSION['$week']-1)*7).' days');
+
+        $emploiDuTemps = '
+        <table class="edtAgents">
+            <tr>
+                <td class="tdWeekChange">
+                    <form action="index.php" method="post" class="edtWeekChangeForm">
+                        <input class="edtSubmitWeekChange" type="submit" name="weekMinusOne" value="'.($date->format("W")).'">
+                    </form>
+                </td>
+
+                <th colspan="5" class="semainetd">Semaine '.($date->modify('+7 days')->format("W")).' de l\'année '.$date->format("Y").'<br> De '.$_SESSION['conseillerNom'].' '.$_SESSION['conseillerPrenom'].'</th>
+                
+                <td class="tdWeekChange">
+                    <form action="index.php" method="post" class="edtWeekChangeForm">
+                        <input class="edtSubmitWeekChange" type="submit" name="weekAddOne" value="'.($date->modify('+7 days')->format("W")).'">
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <th class="jourth">Lundi '.$date->modify('-7 days')->format('d M').'</th>
+                <th class="jourth">Mardi '.$date->modify('+1 days')->format('d M').'</th>
+                <th class="jourth">Mercredi '.$date->modify('+1 days')->format('d M').'</th>
+                <th class="jourth">Jeudi '.$date->modify('+1 days')->format('d M').'</th>
+                <th class="jourth">Vendredi '.$date->modify('+1 days')->format('d M').'</th>
+                <th class="jourth">Samedi '.$date->modify('+1 days')->format('d M').'</th>
+                <th class="jourth">Dimanche '.$date->modify('+1 days')->format('d M').'</th>
+            </tr>';
+
+
+            for ( $i = 0 ; $i < $maxlengthArray ; $i++ ) {
+                $emploiDuTemps .= '<tr>';
+                for ( $j = 0 ; $j < 7 ; $j++) {
+                    if ( count($arr[$j]) <= $i ) {
+                        $emploiDuTemps .= '<td class="edttdHoraire">&nbsp</td>';
+                    } else {
+                        $emploiDuTemps .= EDTBubble($arr[$j][$i]);
+                    }
+                }
+                $emploiDuTemps .= '</tr>';
+            }
+
+        $emploiDuTemps .= '</table>';
+
+        return $emploiDuTemps;
+    }
+
+
+    //
+    //
+    //
+    //
+    //
+
+    function suppressionRDVSuiteAFormation() {
+        $contenu = connectedHeader() . '
+        <aside>
+            <form action="index.php" method="post">
+                <ul>
+
+                    <li><input class="asideInput" type="submit" value="Recherche Client" name="asideConseillerClientResearch"></li>
+
+                    <li><input class="asideInput" type="submit" value="Plannings" name="asideConseillerPlanning"></li>
+
+                </ul>
+            </form>
+        </aside>
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+
+            <fieldset>
+
+                <p>Veuillez supprimer le rendez-vous prévu à cette heure</p>
+
             </fieldset>
         </form>';
 
