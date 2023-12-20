@@ -23,3 +23,29 @@
         return false;
 
     }
+
+
+    //
+    // NV
+    //
+    // récupère les logins, nom, prenoms, postes
+    // 
+
+    function informationConnexionDirecteur() {
+        $connexion = getConnect();
+        $resultat = ($connexion -> query("SELECT login, nomEmploye, prenomEmploye, poste FROM Employe"))->fetchAll(PDO::FETCH_ASSOC);
+        return $resultat;
+    }
+
+
+    //
+    // NV
+    //
+    //
+    //
+
+    function informationConnexionEmployeDirecteur() {
+        $connexion = getConnect();
+        $resultat = ($connexion -> query("SELECT login, nomEmploye, prenomEmploye, poste FROM Employe WHERE login='".$_POST['modifierLemploye']."'"))->fetch(PDO::FETCH_ASSOC);
+        return $resultat;
+    }

@@ -410,16 +410,25 @@
 
 
                 //
-                // 
+                // NV
                 //
-                // 
+                // Quand le bouton Modifier dans le Aside est cliqué
                 //
                 
                 else if ( isset($_POST['asideDirecteurModifierEmploye']) ) {
-        
-                    
-        
+                    CtlModifierEmploye();
                 } 
+
+
+                //
+                // NV 
+                //
+                // Quand le bouton modifier dans le form de modification employe est cliqué
+                //
+
+                else if ( isset($_POST['modifierEmployeSubmit']) ) {
+                    CtlModifierEmployeSelected();
+                }
 
 
                 //

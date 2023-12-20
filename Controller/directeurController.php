@@ -1,14 +1,33 @@
 <?php
 
+
+    //
+    // NV
+    //
+    //
+    //
+
     function CtlDirecteurCreateAgentSubmit() {
         gestionEmployeDirecteur('homepage');
     }
 
 
+    //
+    // NV
+    //
+    //
+    //
+
     function CtlDirecteurHomePage() {
         accueilDirecteur();
     }
 
+
+    //
+    // NV
+    //
+    //
+    //
 
     function CtlAjouterEmploye ( $login, $password, $poste ,$nom, $prenom ){
 
@@ -19,15 +38,46 @@
     }
 
 
+    //
+    // NV
+    //
+    //
+    //
+
     function CtlModifierEmploye() {
-        modifierEmployeForms();
+        $arr = informationConnexionDirecteur();
+        modifierEmployeForms($arr);
     }
 
+
+    //
+    // NV
+    //
+    //
+    //
+
+    function CtlModifierEmployeSelected() {
+        $arr = informationConnexionEmployeDirecteur();
+        modificationSelectedEmploye($arr);
+    }
+
+
+    //
+    // NV
+    //
+    //
+    //
 
     function CtlModifierPiece() {
         
     }
 
+
+    //
+    // NV
+    //
+    //
+    //
 
     function CtlStats() {
         
