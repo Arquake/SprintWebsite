@@ -66,7 +66,7 @@
     function modificationInformationEmployeDirecteur() {
         $connexion = getConnect();
         if ( isset($_POST['passwordCheckbox'])) {
-            $connexion -> query("UPDATE employe SET login='".$_POST['loginCreation']."',password='".$_POST['passwordCreation']."',poste='".$_POST['posteCreation']."',nomEmploye='".$_POST['nomCreation']."',prenomEmploye='".$_POST['prenomCreation']."' WHERE login='".$_SESSION['employeChoisiInformationLogin']."'");
+            $connexion -> query("UPDATE employe SET login='".$_POST['loginCreation']."',password='".password_hash($_POST['passwordCreation'], PASSWORD_DEFAULT, ['cost' => 12] )."',poste='".$_POST['posteCreation']."',nomEmploye='".$_POST['nomCreation']."',prenomEmploye='".$_POST['prenomCreation']."' WHERE login='".$_SESSION['employeChoisiInformationLogin']."'");
         } else {
             $connexion -> query("UPDATE employe SET login='".$_POST['loginCreation']."',poste='".$_POST['posteCreation']."',nomEmploye='".$_POST['nomCreation']."',prenomEmploye='".$_POST['prenomCreation']."' WHERE login='".$_SESSION['employeChoisiInformationLogin']."'");
         }

@@ -587,3 +587,32 @@
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '<div class="invalidForm">Aucun Compte n\'existe<br>Pour ce Client</div>';
         require_once("View/gabarit.php");
     }
+
+
+    //
+    // NV
+    //
+    // Prise de RDV valide affiche page avec les pièces nécessaires
+    //
+
+    function affichageRDVPieceNecessaires( $arr ) {
+        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected();
+
+        $contenu .= '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+            <fieldset>
+
+                <legend>Supprimer un RDV</legend>
+
+                <p><label class="listePiece" for="">Libelle</label><textarea name="listePiece" id="listePiece" disabled="disabled" class="libelle">'.$arr['libelleMotif'].'</textarea></p> 
+
+                <p><label class="listePiece" for="">Liste De Pieces A prévoir</label><textarea name="listePiece" id="listePiece" disabled="disabled" class="liste">'.$arr['listePiece'].'</textarea></p> 
+
+                <input class="submitFormInput" type="submit" value="Suivant" name="asideClientPriseRendezVous">
+            </fieldset>
+        </form>';
+
+
+
+        require_once("View/gabarit.php");
+    }
