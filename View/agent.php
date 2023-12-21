@@ -375,10 +375,14 @@
 
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
-            <p class="afficherBeauP">Dépot sur le '.$_SESSION['typeCompteClient'].' : '.$_SESSION['soldeCompteClient'].' €</p>
-            <p class="afficherBeauP">Plafond : '.$_SESSION['plafondCompteClient'].' €</p>
+            <p class="afficherBeauP">Dépot sur le '.$_SESSION['typeCompteClient'].' : '.$_SESSION['soldeCompteClient'].' €</p>';
 
-            <fieldset>
+        if( intval($_SESSION['plafondCompteClient']) != 0) {
+            $contenu .= '<p class="afficherBeauP">Plafond : '.$_SESSION['plafondCompteClient'].' €</p>';
+        }
+
+
+        $contenu .= '<fieldset>
                 <legend>Dépot</legend>
 
                 <p><label for="depot">Montant du dépot</label>

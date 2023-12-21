@@ -227,7 +227,7 @@
         $plafond = $_SESSION['plafondCompteClient'];
 
         if (isset($_POST['depot']) && (intval($_POST['depot'] > 0))) {
-            if ( $soldeActuel + $_POST['depot'] <= $plafond ) {
+            if ( $soldeActuel + $_POST['depot'] <= $plafond || $plafond == 0 ) {
                 depotAgentClient($_POST['depot']);
             } else{
                 echo '<script>alert("Plafond depassé");</script>';
