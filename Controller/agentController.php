@@ -327,9 +327,11 @@
 
         getAndSetConseillerLoginDuClientDansSession($_SESSION['idClient']);
 
-        $arr=getEDTConseillerByDate();
+        $arr = getEDTConseillerByDate();
 
-        priseDeRendezVousAgents( getMotifsType(), $arr );
+        $conseillersInfos = employeInformations( $_SESSION['conseillerRattacherClient'] );
+
+        priseDeRendezVousAgents( getMotifsType(), $arr, $conseillersInfos );
     }
 
     //
@@ -360,7 +362,8 @@
         if ( $_POST['motifRDV'] == '' || $_POST['date'] == '' || $_POST['heureDebut'] == '' || $_POST['heureFin'] == '' || $_POST['date'] <= date("Y-m-d") || $_POST['heureDebut'] > $_POST['heureFin'] || !empty(checkRDVCreation()) ) {
             getAndSetConseillerLoginDuClientDansSession($_SESSION['idClient']);
             $arr=getEDTConseillerByDate();
-            priseDeRendezVousAgents( getMotifsType(), $arr, true );
+            $conseillersInfos = employeInformations( $_SESSION['conseillerRattacherClient'] );
+            priseDeRendezVousAgents( getMotifsType(), $arr, $conseillersInfos, true );
         }
         
         else {
@@ -385,14 +388,17 @@
         if ($_POST['rdvDel'] != '' ) {
 
             if ( !empty( rdvToIdClient() ) ) {
-                priseDeRendezVousAgents( getMotifsType(), $arr, false, false, false,true );
+                $conseillersInfos = employeInformations( $_SESSION['conseillerRattacherClient'] );
+                priseDeRendezVousAgents( getMotifsType(), $arr, $conseillersInfos, false, false, false,true );
             } else {
                 deleteRDV();
-                priseDeRendezVousAgents( getMotifsType(), $arr, false, false, true );
+                $conseillersInfos = employeInformations( $_SESSION['conseillerRattacherClient'] );
+                priseDeRendezVousAgents( getMotifsType(), $arr, $conseillersInfos, false, false, true );
             }
 
         } else {
-            priseDeRendezVousAgents( getMotifsType(), $arr, true );
+            $conseillersInfos = employeInformations( $_SESSION['conseillerRattacherClient'] );
+            priseDeRendezVousAgents( getMotifsType(), $arr, $conseillersInfos, true );
         }
 
     }
