@@ -460,6 +460,17 @@
 
 
                 //
+                // NV 
+                //
+                // Quand le bouton modifier dans le form de modification de l'employe choisi est cliqué
+                //
+
+                else if ( isset($_POST['modifierEmployeChoisiSubmit']) ) {
+                    CtlAppliquerModificationEmploye();
+                }
+
+
+                //
                 // 
                 //
                 // 

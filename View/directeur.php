@@ -1,30 +1,49 @@
 <?php
 
 
-function directeurAside() {
-    return '
-    <aside>
-        <form action="index.php" method="post">
-            <ul>
+    //
+    // NV
+    //
+    // 
+    //
 
-                <li><input class="asideInput" type="submit" value="Créer Employé" name="asideDirecteurCreerEmploye"></li>
-                
-                <li><input class="asideInput" type="submit" value="Modifier Employé" name="asideDirecteurModifierEmploye"></li>
+    function directeurAside() {
+        return '
+        <aside>
+            <form action="index.php" method="post">
+                <ul>
 
-                <li><input class="asideInput" type="submit" value="Modifier pièces" name="asideDirecteurModifierPiece"></li>
+                    <li><input class="asideInput" type="submit" value="Créer Employé" name="asideDirecteurCreerEmploye"></li>
+                    
+                    <li><input class="asideInput" type="submit" value="Modifier Employé" name="asideDirecteurModifierEmploye"></li>
 
-                <li><input class="asideInput" type="submit" value="Statistiques" name="asideDirecteurStats"></li>
+                    <li><input class="asideInput" type="submit" value="Modifier pièces" name="asideDirecteurModifierPiece"></li>
 
-            </ul>
-        </form>
-    </aside>';
-}
+                    <li><input class="asideInput" type="submit" value="Statistiques" name="asideDirecteurStats"></li>
 
+                </ul>
+            </form>
+        </aside>';
+    }
+
+
+    //
+    // NV
+    //
+    // 
+    //
 
     function accueilDirecteur(){
         $contenu = connectedHeader() . directeurAside();
         require_once("View/gabarit.php");
     }
+
+
+    //
+    // NV
+    //
+    // 
+    //
 
     function gestionEmployeDirecteur($employeCreated = false){
         $contenu = connectedHeader() . directeurAside() ;
@@ -58,8 +77,20 @@ function directeurAside() {
     }
 
 
-    function modifierEmployeForms($employes){
-        $contenu = connectedHeader() . directeurAside() . '
+    //
+    // NV
+    //
+    // page de selection de l'employe à modifier
+    //
+
+    function modifierEmployeForms($employes, $created=false){
+        $contenu = connectedHeader() . directeurAside(); 
+        
+        if ( $created ) {
+            $contenu .= '<div class="invalidForm">Les informations ont été enregistrés</div>';
+        }
+        
+        $contenu .= '
         <form action="index.php" method="post" class="topPageForm" onSubmit="createEmployeCheck(this)" id="topPageForm">
             <fieldset>
                 <legend>Choisir l\'employé à modifier</legend>
@@ -82,15 +113,42 @@ function directeurAside() {
     }
 
 
-    function modificationSelectedEmploye( $employe ) {
-        $contenu = connectedHeader() . directeurAside() . '
-        <form action="index.php" method="post" class="topPageForm" onSubmit="createEmployeCheck(this)" id="topPageForm">
+    //
+    // NV
+    //
+    // quand on à selectionner l'employe à modifier ou que les informations rentrés sont incorrect on arrive sur cette page
+    //
+
+    function modificationSelectedEmploye( $employe, $errorLogin = false, $errorPassword = false, $errorName = false, $errorSurname = false ) {
+
+        $contenu = connectedHeader() . directeurAside();
+
+        
+        if ( $errorLogin ) {
+            $contenu .= '<div class="invalidForm">Le login existe déjà</div>';
+        }
+        if ( $errorPassword ) {
+            $contenu .= '<div class="invalidForm">Le mot de passe n\'est pas valide</div>';
+        }
+        if ( $errorName ) {
+            $contenu .= '<div class="invalidForm">Le nom de l\'employe n\'est pas valide</div>';
+        }
+        if ( $errorSurname ) {
+            $contenu .= '<div class="invalidForm">Le prenom de l\'employe n\'est pas valide</div>';
+        }
+
+        
+        $contenu .= '
+        <form action="index.php" method="post" class="topPageForm" id="modificationEmploye" onSubmit="modifierEmploye(this)">
             <fieldset>
                 <legend>Création d\'employé</legend>
-                <p><label for="nomCreation">Nom de l\'employé</label><input type="text" name="nomCreation" onBlur="validFormField( this, 2, 45 )" required="required" value="'.$employe['nomEmploye'].'"></p>
-                <p><label for="prenomCreation">Prénom de l\'employé</label><input type="text" name="prenomCreation" onBlur="validFormField( this, 2, 45 )" required="required" value="'.$employe['prenomEmploye'].'"></p>
-                <p><label for="loginCreation">Login de l\'employé</label><input type="text" name="loginCreation" onBlur="validFormField( this, 2, 32 )" required="required" value="'.$employe['login'].'"></p>
-                <p><label for="password">Mot De Passe de l\'employé</label><input type="password" name="passwordCreation" onBlur="validFormField( this, 8, 32 )" required="required"></p>
+                <p><label for="nomCreation">Nom de l\'employé</label><input type="text" name="nomCreation" required="required" value="'.$employe['nomEmploye'].'"></p>
+                <p><label for="prenomCreation">Prénom de l\'employé</label><input type="text" name="prenomCreation" required="required" value="'.$employe['prenomEmploye'].'"></p>
+                <p><label for="loginCreation">Login de l\'employé</label><input type="text" name="loginCreation" required="required" value="'.$employe['login'].'"></p>
+                <p>
+                    <label for="password">Mot De Passe de l\'employé</label>
+                    <input type="checkbox" id="passwordCheckbox" name="passwordCheckbox" class="checkboxModification">
+                    <input type="password" id="passwordChp" name="passwordCreation" disabled class="passwordModificationEmploye"></p>
                 <p>
                     <label for="posteCreation">Poste de l\'empolyé</label>
                     <select id="posteCreation" name="posteCreation">
@@ -105,9 +163,28 @@ function directeurAside() {
                                         $contenu .='>Directeur</option>
                     </select>
                 </p>
-                <p><input class="submitFormInput" type="submit" value="Créer" name="modifierEmployeChoisiSubmit"></p>
+                <p><input class="submitFormInput" type="submit" value="Modifier" name="modifierEmployeChoisiSubmit"></p>
             </fieldset>
-        </form>';
+        </form>
+        
+        <script>
+            var checkbox = document.getElementById(\'passwordCheckbox\')
+            function modifierEmploye(form) {
+                var form = document.getElementById(\'modificationEmploye\')
+            
+                if ( form[1].value.length == 0 || form[2].value.length == 0 || form[3].value.length == 0 || ( form[4].checked && form[5].value.length == 0 )) {
+                    alert(\'Veuillez remplir tout les champs\')
+                    event.preventDefault();
+                }
+                
+            }
+            
+            
+            checkbox.addEventListener(\'change\', () => {
+                document.getElementById(\'passwordChp\').disabled = !document.getElementById(\'passwordChp\').disabled
+                document.getElementById(\'passwordChp\').value = ""
+            })
+        </script>';
         require_once("View/gabarit.php");
     }
 

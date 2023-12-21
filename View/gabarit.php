@@ -8,8 +8,8 @@
     <link rel="stylesheet" type="text/css" href="View/style/style.css">
     <link rel="preload" href="View/style/fonts/SFProDisplay-Bold.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="View/style/fonts/SFProDisplay-Bold.woff" as="font" type="font/woff" crossorigin>
+    <script src="app.js"></script>
 
-    <script src="app.js"></script> 
 
     <title>MGN</title>
 </head>
