@@ -13,11 +13,13 @@
             <form action="index.php" method="post">
                 <ul>
 
-                    <li><input class="asideInput" type="submit" value="Créer Employé" name="asideDirecteurCreerEmploye"></li>
-                    
-                    <li><input class="asideInput" type="submit" value="Modifier Employé" name="asideDirecteurModifierEmploye"></li>
+                    <li><input class="asideInput" type="submit" value="Gestion Employé" name="asideDirecteurGestionEmploye"></li>
 
-                    <li><input class="asideInput" type="submit" value="Modifier pièces" name="asideDirecteurModifierPiece"></li>
+                    <li><input class="asideInput" type="submit" value="Gestion RDV" name="asideDirecteurGestionRendezVous"></li>
+
+                    <li><input class="asideInput" type="submit" value="Gestion Compte" name="asideDirecteurGestionCompte"></li>
+                    
+                    <li><input class="asideInput" type="submit" value="Gestion Contrat" name="asideDirecteurGestionContrat"></li>
 
                     <li><input class="asideInput" type="submit" value="Statistiques" name="asideDirecteurStats"></li>
 
@@ -188,6 +190,25 @@
         require_once("View/gabarit.php");
     }
 
+    //
+    // MP
+    //
+    // Affichage du choix entre creer employé et modifier employe
+    //
+    function gestionEmploye(){
+        $contenu = connectedHeader() . directeurAside().'
+        <form action="index.php" method="post" class="topPageForm" onSubmit="createEmployeCheck(this)" id="topPageForm">
+            <fieldset>
+                <legend>Action souhaitée</legend>
+                <p>
+                <li><input class="listePiece" type="submit" value="Créer Employé" name="DirecteurCreerEmploye"></li>
+
+                <li><input class="listePiece" type="submit" value="Modifier Employé" name="DirecteurModifierEmploye"></li>
+                </p>
+            </fildset>    
+        </form>';
+        require_once("View/gabarit.php");
+    }
 
     function modifierPiece(){
         $contenu = connectedHeader() . directeurAside();

@@ -419,10 +419,74 @@
 
             else if ( $_SESSION['poste'] == "Directeur" ) {
 
-                if ( isset($_POST['asideDirecteurCreerEmploye'] )) {
+                //// ---- ASIDE ---- 
+
+                //
+                // MP
+                //
+                // Quand le bouton "Gestion employé" dans le Aside est cliqué
+                //
+                if ( isset($_POST['asideDirecteurGestionEmploye']) ) {
+                    gestionEmploye();
+                }
+
+                //
+                //
+                //
+                // 
+                //
+                else if ( isset($_POST['asideDirecteurGestionRendezVous']) ) {
+        
+                } 
+
+                //
+                //
+                //
+                // 
+                //
+                else if ( isset($_POST['asideDirecteurGestionCompte']) ) {
+        
+                } 
+
+                //
+                //
+                //
+                // 
+                //
+                else if ( isset($_POST['asideDirecteurGestionContrat']) ) {
+        
+                } 
+
+                //
+                // 
+                //
+                // 
+                //
+                else if ( isset($_POST['asideDirecteurStats']) ) {
+        
+                } 
+
+
+                //// --- Plus ASIDE ---
+
+                //
+                // MP
+                //
+                // Link le bouton "Creer employé" au code correspondant
+                //
+                else if ( isset($_POST['DirecteurCreerEmploye'] )) {
                     CtlDirecteurCreateAgentSubmit();
                 } 
                 
+                //
+                // MP
+                //
+                // Link le bouton "Modifier employé" au code correspondant
+                //
+                else if ( isset($_POST['DirecteurModifierEmploye'] )) {
+                    CtlModifierEmploye();
+                } 
+
 
                 //
                 // NV
@@ -436,18 +500,6 @@
         
                 } 
 
-
-                //
-                // NV
-                //
-                // Quand le bouton Modifier dans le Aside est cliqué
-                //
-                
-                else if ( isset($_POST['asideDirecteurModifierEmploye']) ) {
-                    CtlModifierEmploye();
-                } 
-
-
                 //
                 // NV 
                 //
@@ -458,7 +510,6 @@
                     CtlModifierEmployeSelected();
                 }
 
-
                 //
                 // NV 
                 //
@@ -467,35 +518,7 @@
 
                 else if ( isset($_POST['modifierEmployeChoisiSubmit']) ) {
                     CtlAppliquerModificationEmploye();
-                }
-
-
-                //
-                // 
-                //
-                // 
-                //
-                
-                else if ( isset($_POST['asideDirecteurModifierPiece']) ) {
-        
-                    
-        
                 } 
-
-
-                //
-                // 
-                //
-                // 
-                //
-                
-                else if ( isset($_POST['asideDirecteurStats']) ) {
-        
-                    
-        
-                } 
-                
-                
                 
                 else {
                     CtlDirecteurHomePage();
