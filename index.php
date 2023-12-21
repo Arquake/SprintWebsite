@@ -419,6 +419,39 @@
                 else if ( isset($_POST['creerContratSubmit']) ) {
                     CtlouvertureContratClientSuite();
                 } 
+
+
+                //
+                // NV
+                //
+                // Quand le bouton modifier dans le forme de modification découvert est cliqué
+                //
+
+                else if ( isset($_POST['modifierDecouvertSubmit']) ) {
+                    CtlmodifierDecouvertSuite();
+                } 
+
+
+                //
+                // NV
+                //
+                // si le bouton submit pour résilier son compte est cliqué
+                //
+
+                else if ( isset($_POST['resilierCompteSubmit']) ) {
+                    CtlRésilierCompte();
+                } 
+
+
+                //
+                // NV
+                //
+                // 
+                //
+
+                else if ( isset($_POST['resilierContratSubmit']) ) {
+                    CtlRésilierContrat();
+                } 
                 
                 //
                 // NV

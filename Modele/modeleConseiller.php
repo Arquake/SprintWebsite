@@ -75,3 +75,89 @@
 
         $connexion->query($query);
     }
+
+
+    //
+    // NV
+    //
+    // récupère tout les comptes du client
+    //
+
+    function getAllCompteClient() {
+        $connexion = getConnect();
+
+        $resultat = ($connexion->query("SELECT idCompte, montantDecouvert, typeCompte, solde FROM compteclient WHERE idClient='".$_SESSION['idClient']."'"))->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultat;
+    }
+
+
+    //
+    // NV
+    //
+    // récupère tout les contrats du client
+    //
+
+    function getAllContratClient() {
+        $connexion = getConnect();
+
+        $resultat = ($connexion->query("SELECT idContrat, typeContrat, tarifMensuel FROM contratclient WHERE idClient='".$_SESSION['idClient']."'"))->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultat;
+    }
+
+
+    //
+    // NV
+    //
+    // modifie le découvert du compte choisi
+    //
+
+    function modifierDecouvert() {
+        $connexion = getConnect();
+
+        $resultat = $connexion->query("UPDATE compteclient SET montantDecouvert='".$_POST['decouvertModification']."' WHERE idCompte='".$_POST['listeComptes']."'");
+
+        return $resultat;
+    }
+
+
+    //
+    // NV
+    //
+    // récupère le solde du compte
+    //
+
+    function getSoldeClient() {
+        $connexion = getConnect();
+
+        $resultat = ($connexion->query("SELECT solde FROM compteclient WHERE idCompte='".$_POST['resiliationCompte']."'"))->fetch(PDO::FETCH_ASSOC)['solde'];
+
+        return $resultat;
+    }
+
+
+    //
+    // NV
+    //
+    // résilie le contrat selectionner
+    //
+
+    function resilierContrat() {
+        $connexion = getConnect();
+
+        $connexion->query("DELETE FROM contratclient WHERE idContrat='".$_POST['resiliationContrat']."'");
+    }
+
+
+    //
+    // NV
+    //
+    // résilie le compte selectionner
+    //
+
+    function resilierCompte() {
+        $connexion = getConnect();
+
+        $connexion->query("DELETE FROM compteclient WHERE idCompte='".$_POST['resiliationCompte']."'");
+    }

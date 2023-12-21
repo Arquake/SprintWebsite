@@ -348,25 +348,33 @@
 
 
     //
+    // NV
     //
-    //
-    //
+    // vue de modification de découvert
     //
 
-    function modificationDecouvert( $listeCompte ) {
-        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected() . '
+    function modificationDecouvert( $listeCompte, $modifier = false, $erreur = false ) {
+        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected(); 
+        
+        if ( $modifier ){
+            $contenu .= '<div class="invalidForm">Modification Appliqué</div>';
+        } else if ( $erreur ) {
+            $contenu .= '<div class="invalidForm">Une erreur a été rencontré durant<br>la modification du découvert</div>';
+        }
+        
+        $contenu .= '
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
             <fieldset>
 
                 <legend>Modifier Découvert</legend>
 
-                    <label for="decouvertList">Type de Compte</label>
-                    <select id="decouvertList" name="decouvertList">';
+                    <label for="listeComptes">Compte</label>
+                    <select id="listeComptes" name="listeComptes">';
 
                     foreach ( $listeCompte as $compte){
                         
-                        $contenu .= "<option value=".$compte['idCompte'].">".$compte['type']." - ".$compte['idCompte']." - [ ".$compte['Decouvert']." ]</option>";
+                        $contenu .= "<option value=".$compte['idCompte'].">".$compte['idCompte']." - ".$compte['typeCompte']." - [ ".$compte['montantDecouvert']." ]</option>";
 
                     }
 
@@ -374,7 +382,9 @@
         $contenu .= '
                     </select>
 
-                <p><input class="submitFormInput" type="submit" value="Inscrire" name="modifierCompteSubmit"></p>
+                    <p><label for="decouvertModification">Nouveau Découvert</label><input type="number" name="decouvertModification"" id="decouvert" onBlur="soldeCheckPositive(this)"></p>
+
+                <p><input class="submitFormInput" type="submit" value="Créer" name="modifierDecouvertSubmit"></p>
             </fieldset>
         </form>';
 
@@ -388,36 +398,68 @@
     //
     //
 
-    function resilier( $comptes, $contrats) {
-        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected() . '
-        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+    function resilier( $comptes, $contrats, $errorCompte = false, $resilierCompteSucess = false, $resilierContratSucess = false) {
+        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected(); 
+        
+        if ( $errorCompte ){
+            $contenu .= '<div class="invalidForm">Le compte doit avoir régularisé sa situation et être complètement vide</div>';
+        } else if ( $resilierCompteSucess ) {
+            $contenu .= '<div class="invalidForm">Le compte a été résilié</div>';
+        } else if ( $resilierContratSucess ) {
+            $contenu .= '<div class="invalidForm">Le contrat a été résilié</div>';
+        }
+        
+        $contenu .= '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">';
+
+        if( !empty($comptes) ) {
+            $contenu .= '
 
             <fieldset>
 
-                <legend>Résilier</legend>
+                <legend>Résilier Compte</legend>
 
-                    <label for="resiliation">Type de Compte</label>
-                    <select id="resiliation" name="resiliation">';
+                    <label for="resiliationCompte">Compte</label>
+                    <select id="resiliationCompte" name="resiliationCompte">';
 
                     foreach ( $comptes as $compte){
                         
-                        $contenu .= "<option value=".$compte['idCompte'].">".$compte['type']." - ".$compte['idCompte']."</option>";
+                        $contenu .= "<option value=".$compte['idCompte'].">".$compte['typeCompte']." - [".$compte['solde']."]</option>";
 
                     }
 
-                    foreach ( $contrats as $contrat){
-                        
-                        $contenu .= "<option value=".$contrat['idContrat'].">".$contrat['type']." - ".$contrat['idContrat']."</option>";
 
-                    }
+            $contenu .= '
+                    </select>
+
+                <p><input class="submitFormInput" type="submit" value="Résilier" name="resilierCompteSubmit"></p>
+            </fieldset>';
+        }
+
+        if( !empty($contrats) ) {
+            $contenu .= '<fieldset>
+
+            <legend>Résilier Contrat</legend>
+
+                <label for="resiliationContrat">Contrat</label>
+                <select id="resiliationContrat" name="resiliationContrat">';
+
+                foreach ( $contrats as $contrat){
+                    
+                    $contenu .= "<option value=".$contrat['idContrat'].">".$contrat['typeContrat']." - [".$contrat['tarifMensuel']."]</option>";
+
+                }
 
 
         $contenu .= '
-                    </select>
+                        </select>
 
-                <p><input class="submitFormInput" type="submit" value="Inscrire" name="resilierCompteSubmit"></p>
-            </fieldset>
-        </form>';
+                    <p><input class="submitFormInput" type="submit" value="Résilier" name="resilierContratSubmit"></p>
+                </fieldset>';
+        }
+
+        
+        $contenu .= '</form>';
 
         require_once("View/gabarit.php");
     }

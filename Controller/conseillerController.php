@@ -83,6 +83,13 @@
         agentInscrit();
     }
 
+
+    //
+    // NV
+    //
+    // Deconnecte le client de la session
+    //
+
     function CtlClientDisconnectConseiller() {
         unset($_SESSION['clientNom']);
         unset($_SESSION['clientPrenom']);
@@ -92,6 +99,12 @@
         accueilConseiller();
     }
 
+
+    //
+    // NV
+    //
+    // vérifie la validité des informations dans le form d'inscription client
+    //
 
     function CtlInscrireClient() {
 
@@ -114,6 +127,12 @@
         }
     }
 
+
+    //
+    // NV
+    //
+    // si la connexion client établi vérifie si le client est inscrit si il ne l'est pas oblige à l'inscrire sinon se connecte normaement
+    //
     
     function agentInscrit(){
         //
@@ -130,28 +149,19 @@
     }
 
 
+    //
+    // NV
+    //
+    // fonction pour résilier le contrat
+    //
+
+
     function Ctlresilier(){
 
-        // Modifier pour recupérer comptes et contrats dans le modèle
+        $comptes = getAllCompteClient();
+        $contrats = getAllContratClient();
 
-        $comptes = [ 0 => [
-            'idCompte' => 0, 'type' => 'CCP'
-        ],
-        1 => [
-            'idCompte' => 1, 'type' => 'CEL'
-        ]];
-        
-
-        $contrats = [ 0 => [
-            'idContrat' => 0, 'type' => 'Assurance Vie'
-        ],
-        1 => [
-            'idContrat' => 1, 'type' => 'Assurance Décès'
-        ]];
-
-        //
-
-        resilier( $comptes, $contrats);
+        resilier( $comptes, $contrats );
         
     }
 
@@ -245,25 +255,42 @@
 
 
     //
+    // NV
     //
-    //
-    //
+    // récupère les comptes du client
     //
 
     function CtlmodifierDecouvert(){
 
-        // Modifier pour recupérer Type comptes dans le modèle
+        $comptes = getAllCompteClient();
 
-        $listeCompte = [ 0 => [
-            'idCompte' => 0, 'type' => 'CCP', 'Decouvert' => -300
-        ],
-        1 => [
-            'idCompte' => 1, 'type' => 'CEL', 'Decouvert' => 0
-        ]];
+        modificationDecouvert( $comptes );
+        
+    }
 
-        //
 
-        modificationDecouvert( $listeCompte );
+    //
+    // NV
+    //
+    // vérifie les informations fourni si elles sont bonne modifie le découvert sinon retouner une erreur
+    //
+
+    function CtlmodifierDecouvertSuite(){
+
+        if ( !isset($_POST['decouvertModification']) || $_POST['decouvertModification'] == '' || intval($_POST['decouvertModification']) > 0 ) {
+
+            $comptes = getAllCompteClient();
+
+            modificationDecouvert( $comptes, false, true );
+
+        } else {
+            
+            modifierDecouvert();
+
+            $comptes = getAllCompteClient();
+            
+            modificationDecouvert( $comptes, true );
+        }
         
     }
 
@@ -352,6 +379,50 @@
 
 
     //
+    // NV
+    //
+    // résilie le contrat
+    //
+
+    function CtlRésilierContrat() {
+
+        resilierContrat();
+
+        $comptes = getAllCompteClient();
+        $contrats = getAllContratClient();
+
+        resilier( $comptes, $contrats, false, false, true );
+    }
+
+
+    //
+    // NV
+    //
+    // résilie le compte si le solde dessus est 0 
+    //
+
+    function CtlRésilierCompte() {
+
+        $solde = getSoldeClient();
+
+        echo "<script>console.log('".var_dump($solde)."')</script>";
+
+        if ( intval($solde) == 0 ) {
+            resilierCompte();
+            $comptes = getAllCompteClient();
+            $contrats = getAllContratClient();
+
+            resilier( $comptes, $contrats, false, true );
+        } else {
+            $comptes = getAllCompteClient();
+            $contrats = getAllContratClient();
+
+            resilier( $comptes, $contrats, true);
+        }
+    }
+
+
+    //
     // G
     //
     // récupère les informations du client et les affiches
@@ -372,3 +443,4 @@
             echo "Impossible de récupérer les informations du client.";
         }
     }
+

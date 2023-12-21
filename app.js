@@ -82,6 +82,19 @@ function soldeCheckNegative( field ) {
 //
 // NV
 //
+// si la valeur est négative la mettre à 0
+//
+
+function soldeCheckPositive( field ) {
+    if ( field.value > 0 ) {
+        field.value = 0
+    }
+}
+
+
+//
+// NV
+//
 // modification employe du directeur si tout les champs ne sont pas rempli
 //
 
