@@ -405,8 +405,6 @@
 
         $solde = getSoldeClient();
 
-        echo "<script>console.log('".var_dump($solde)."')</script>";
-
         if ( intval($solde) == 0 ) {
             resilierCompte();
             $comptes = getAllCompteClient();
@@ -419,6 +417,26 @@
 
             resilier( $comptes, $contrats, true);
         }
+    }
+
+
+    //
+    // NV
+    //
+    // prend le client correspondant à l'id
+    //
+
+    function CtlRechercheClientPlanning() {
+
+        $res = getClientByID($_POST['clientButtonResearch']);
+
+        $_SESSION['clientNom'] = $res['nomClient'];
+        $_SESSION['clientPrenom'] = $res['prenomClient'];
+        $_SESSION['clientNaissance'] = $res['dateNaissance'];
+        $_SESSION['idClient'] = $_POST['clientButtonResearch'];
+
+        agentInscrit();
+
     }
 
 

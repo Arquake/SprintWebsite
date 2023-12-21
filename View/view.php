@@ -108,7 +108,8 @@
         if ( $arr['idClient'] != -1 ) {
             return '
             <td class="edttdHoraire">
-                <div class="insidetd">
+            <form method="post">
+                <button name="clientButtonResearch" class="insidetd" value="'.$arr['idClient'].'">
                     <div class="horaires">
                         '.$arr['heureDebut'].'
                         <br>
@@ -123,7 +124,8 @@
                     <div class="indordvtd">
                         motif : '.$arr['idMotif'].'
                     </div>
-                </div>
+                </button>
+            </form>
             </td>';
         }
 

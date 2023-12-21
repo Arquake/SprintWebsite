@@ -446,12 +446,24 @@
                 //
                 // NV
                 //
-                // 
+                // si le bouton submit pour résilier son contrat est cliqué
                 //
 
                 else if ( isset($_POST['resilierContratSubmit']) ) {
                     CtlRésilierContrat();
                 } 
+
+
+                //
+                // NV
+                //
+                // si le bouton submit pour résilier son contrat est cliqué
+                //
+
+                else if ( isset($_POST['clientButtonResearch']) ) {
+                    CtlRechercheClientPlanning();
+                } 
+
                 
                 //
                 // NV
