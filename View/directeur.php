@@ -187,15 +187,125 @@
     //
     function gestionEmploye(){
         $contenu = connectedHeader() . directeurAside().'
-        <form action="index.php" method="post" class="topPageForm" onSubmit="createEmployeCheck(this)" id="topPageForm">
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
             <fieldset>
                 <legend>Action souhaitée</legend>
                 <p>
-                <li><input class="listePiece" type="submit" value="Créer Employé" name="DirecteurCreerEmploye"></li>
+                <input class="submitFormInput" type="submit" value="Créer Employé" name="DirecteurCreerEmploye">
 
-                <li><input class="listePiece" type="submit" value="Modifier Employé" name="DirecteurModifierEmploye"></li>
+                <input class="submitFormInput" type="submit" value="Modifier Employé" name="DirecteurModifierEmploye">
                 </p>
             </fildset>    
+        </form>';
+        require_once("View/gabarit.php");
+    }
+
+    //
+    // MP
+    //
+    // Affichage du choix pour la gestion compte
+    //
+    function gestionCompte($typeList, $sortie = 0){
+        $contenu = connectedHeader() . directeurAside();
+
+        if ( $sortie == 1 ){
+            $contenu .= '<div class="invalidForm">Ajout effectif</div>';
+        } else if ( $sortie == 4 ){
+            $contenu .= '<div class="invalidForm">Ajout impossible : type déjà existant </div>';
+        } else if ( $sortie == 2 ){
+            $contenu .= '<div class="invalidForm">Suppression effective</div>';
+        } else if ( $sortie == 3 ){
+            $contenu .= '<div class="invalidForm">Suppression impossible : type encore utilisé </div>';
+        }
+
+        $contenu .= '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+            <fieldset>
+                <legend>Ajouter un type de compte</legend>
+                
+                <p><label for="typeSelection">Type de Compte :</label>
+                <input type="text" name="DirecteurAjouterCompteType" required></p>
+
+            <input class="submitFormInput" type="submit" value="Ajouter" name="DirecteurAjouterCompteSubmit">
+            </fieldset>
+        </form>
+
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+            <fieldset>
+                <legend>Retirer un type de compte</legend>
+                </p>
+
+                <p>
+                    <label for="typeSelection">Type de Compte :</label>
+                    <select id="typeSelection" name="DirecteurSupprimerCompteType">';
+
+                foreach ( $typeList as $type){
+
+                    $contenu .= "<option value=".$type['typeCompte'].">".$type['typeCompte']."</option>";
+                
+                }
+
+                $contenu .= '
+                    </select>
+                </p>
+
+            <input class="submitFormInput" type="submit" value="Retirer" name="DirecteurRetirerCompteSubmit">
+            </fieldset>
+        </form>';
+        require_once("View/gabarit.php");
+    }
+
+    //
+    // MP
+    //
+    // Affichage du choix pour la gestion contrat
+    //
+    function gestionContrat($typeList, $sortie = 0){
+        $contenu = connectedHeader() . directeurAside();
+
+        if ( $sortie == 1 ){
+            $contenu .= '<div class="invalidForm">Ajout effectif</div>';
+        } else if ( $sortie == 4 ){
+            $contenu .= '<div class="invalidForm">Ajout impossible : type déjà existant </div>';
+        } else if ( $sortie == 2 ){
+            $contenu .= '<div class="invalidForm">Suppression effective</div>';
+        } else if ( $sortie == 3 ){
+            $contenu .= '<div class="invalidForm">Suppression impossible : type encore utilisé </div>';
+        }
+
+        $contenu .= '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+            <fieldset>
+                <legend>Ajouter un type de contrat</legend>
+                
+                <p><label for="typeSelection">Type de Contrat :</label>
+                <input type="text" name="DirecteurAjouterContratType" required></p>
+
+            <input class="submitFormInput" type="submit" value="Ajouter" name="DirecteurAjouterContratSubmit">
+            </fieldset>
+        </form>
+
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+            <fieldset>
+                <legend>Retirer un type de contrat</legend>
+                </p>
+
+                <p>
+                    <label for="typeSelection">Type de Contrat :</label>
+                    <select id="typeSelection" name="DirecteurSupprimerContratType">';
+
+                foreach ( $typeList as $type){
+
+                    $contenu .= "<option value=".$type['typeContrat'].">".$type['typeContrat']."</option>";
+                
+                }
+
+                $contenu .= '
+                    </select>
+                </p>
+
+            <input class="submitFormInput" type="submit" value="Retirer" name="DirecteurRetirerContratSubmit">
+            </fieldset>
         </form>';
         require_once("View/gabarit.php");
     }
@@ -205,7 +315,7 @@
         require_once("View/gabarit.php");
     }
 
-
+    
     function directeursStats(){
         $contenu = connectedHeader() . directeurAside();
         require_once("View/gabarit.php");
