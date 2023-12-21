@@ -466,6 +466,7 @@
             $contenu .= '<div class="invalidForm">RDV Supprimé</div>';
         }
 
+
         $contenu .= '<div class"priseRdv">
             <form action="index.php" method="post" class="sideFormPriseRendezVous">
                 <fieldset>
@@ -475,9 +476,10 @@
                         <label for="motifRDV">Motif Du RDV</label>
                         <select id="motifRDV" name="motifRDV">
                         ';
+
         foreach ( $motifs as $motif){
 
-            $contenu .= "<option value=".$motif['type'].">".$motif['type']."</option>";
+            $contenu .= "<option value=".$motif['idMotif'].">".$motif['libelleMotif']."</option>";
 
         }
         
