@@ -119,3 +119,97 @@
     function CtlStats() {
         
     }
+
+    //
+    // MP
+    //
+    // Repond au bouton "Gestion compte" du aside 
+    //
+    function CtlDirecteurCompte( $sortie = 0){
+        $typeList = getTypeCompteList();
+        gestionCompte($typeList,$sortie);
+    }
+
+    //
+    // MP
+    //
+    // Repond au bouton "Ajouter" de la page de gestion de compte
+    //
+    function CtlDirecteurAjouterCompte(){
+        if (VerificationExistanceTypeCompte($_POST['DirecteurAjouterCompteType'])){        
+            ajouterLeTypeCompte($_POST['DirecteurAjouterCompteType']);
+            CtlDirecteurCompte(1);
+        }else {
+            CtlDirecteurCompte(4);
+        }
+    }
+
+    //
+    // MP
+    //
+    // Repond au bouton "Retirer" de la page de gestion de compte
+    //
+    function CtlDirecteurSupprimerCompte(){
+        if (VerificationPossessionTypeCompte($_POST['DirecteurSupprimerCompteType'])){
+            supprimerLeTypeCompte($_POST['DirecteurSupprimerCompteType']);
+            CtlDirecteurCompte(2);
+        } else {
+            CtlDirecteurCompte(3);
+        }
+    }
+
+
+    //
+    // MP
+    //
+    // Repond au bouton "Gestion contrat" du aside 
+    //
+    function CtlDirecteurContrat( $sortie = 0){
+        $typeList = getTypeContratList();
+        gestionContrat($typeList,$sortie);
+    }
+
+    //
+    // MP
+    //
+    // Repond au bouton "Ajouter" de la page de gestion de contrat
+    //
+    function CtlDirecteurAjouterContrat(){
+        if (VerificationExistanceTypeContrat($_POST['DirecteurAjouterContratType'])){        
+            ajouterLeTypeContrat($_POST['DirecteurAjouterContratType']);
+            CtlDirecteurContrat(1);
+        }else {
+            CtlDirecteurContrat(4);
+        }
+    }
+
+    //
+    // MP
+    //
+    // Repond au bouton "Retirer" de la page de gestion de contrat
+    //
+    function CtlDirecteurSupprimerContrat(){
+        if (VerificationPossessionTypeContrat($_POST['DirecteurSupprimerContratType'])){
+            supprimerLeTypeContrat($_POST['DirecteurSupprimerContratType']);
+            CtlDirecteurContrat(2);
+        } else {
+            CtlDirecteurContrat(3);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

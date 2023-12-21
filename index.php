@@ -504,7 +504,7 @@
                 // 
                 //
                 else if ( isset($_POST['asideDirecteurGestionCompte']) ) {
-                    CtlDirecteurHomePage();
+                    CtlDirecteurCompte();
                 } 
 
                 //
@@ -513,7 +513,7 @@
                 // 
                 //
                 else if ( isset($_POST['asideDirecteurGestionContrat']) ) {
-                    CtlDirecteurHomePage();
+                    CtlDirecteurContrat();
                 } 
 
                 //
@@ -544,8 +544,47 @@
                 //
                 else if ( isset($_POST['DirecteurModifierEmploye'] )) {
                     CtlModifierEmploye();
+                }
+
+                /// COMPTE
+        
+                //
+                // MP
+                //
+                // Link le bouton "Ajouter type compte" au code correspondant
+                //
+                else if ( isset($_POST['DirecteurAjouterCompteSubmit'] )) {
+                    CtlDirecteurAjouterCompte();
                 } 
 
+                //
+                // MP
+                //
+                // Link le bouton "Supprimer type compte" au code correspondant
+                //
+                else if ( isset($_POST['DirecteurRetirerCompteSubmit'] )) {
+                    CtlDirecteurSupprimerCompte();
+                } 
+
+                /// CONTRAT
+        
+                //
+                // MP
+                //
+                // Link le bouton "Ajouter type contrat" au code correspondant
+                //
+                else if ( isset($_POST['DirecteurAjouterContratSubmit'] )) {
+                    CtlDirecteurAjouterContrat();
+                } 
+
+                //
+                // MP
+                //
+                // Link le bouton "Supprimer type contrat" au code correspondant
+                //
+                else if ( isset($_POST['DirecteurRetirerContratSubmit'] )) {
+                    CtlDirecteurSupprimerContrat();
+                } 
 
                 //
                 // NV

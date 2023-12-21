@@ -86,3 +86,121 @@
         if ( !empty($resultat) ) { return true; }
         return false;
     }
+
+    ///COMPTE
+
+    //
+    // MP
+    //
+    // Retourne tout les type de compte existants
+    //
+    function getTypeCompteList(){
+        $connexion = getConnect();
+        $resultat = ($connexion -> query("SELECT typeCompte FROM Compte"))->fetchAll(PDO::FETCH_ASSOC);
+        return $resultat;
+    }
+
+    //
+    // MP
+    //
+    // Retourne vrai si aucun client ne possede ce type de compte  
+    // Retourne faux si qqn possede un compte de ce type
+    //
+    function VerificationPossessionTypeCompte($type){
+        $connexion = getConnect();
+        $resultat = ($connexion -> query("SELECT idCompte FROM CompteClient WHERE typeCompte='".$type."'"))->fetchAll(PDO::FETCH_ASSOC);
+        
+        return empty($resultat);
+    }
+
+    //
+    // MP
+    //
+    // Retourne vrai si le type de compte n'existe pas  
+    // Retourne faux si le type de compte existe 
+    //
+    function VerificationExistanceTypeCompte($type){
+        $connexion = getConnect();
+        $resultat = ($connexion -> query("SELECT typeCompte FROM Compte WHERE typeCompte='".$type."'"))->fetchAll(PDO::FETCH_ASSOC);
+        
+        return empty($resultat);
+    }
+
+    //
+    // MP
+    //
+    // Ajoute le type aux types de compte  
+    // 
+    function ajouterLeTypeCompte($type){
+        $connexion = getConnect();
+        $connexion -> query("INSERT INTO Compte(typeCompte) VALUES('".$type."')");
+    }
+
+    //
+    // MP
+    //
+    // Supprime le type des types de compte  
+    // 
+    function supprimerLeTypeCompte($type){
+        $connexion = getConnect();
+        $connexion -> query("DELETE FROM Compte WHERE typeCompte='".$type."'");
+    }
+
+    ///CONTRAT
+
+    //
+    // MP
+    //
+    // Retourne tout les types de contrat existants
+    //
+    function getTypeContratList(){
+        $connexion = getConnect();
+        $resultat = ($connexion -> query("SELECT typeContrat FROM Contrat"))->fetchAll(PDO::FETCH_ASSOC);
+        return $resultat;
+    }
+
+    //
+    // MP
+    //
+    // Retourne vrai si aucun client ne possede ce type de contrat 
+    // Retourne faux si qqn possede un contrat de ce type
+    //
+    function VerificationPossessionTypeContrat($type){
+        $connexion = getConnect();
+        $resultat = ($connexion -> query("SELECT idContrat FROM ContratClient WHERE typeContrat='".$type."'"))->fetchAll(PDO::FETCH_ASSOC);
+        
+        return empty($resultat);
+    }
+
+    //
+    // MP
+    //
+    // Retourne vrai si le type de contrat n'existe pas  
+    // Retourne faux si le type de contrat existe 
+    //
+    function VerificationExistanceTypeContrat($type){
+        $connexion = getConnect();
+        $resultat = ($connexion -> query("SELECT typeContrat FROM Contrat WHERE typeContrat='".$type."'"))->fetchAll(PDO::FETCH_ASSOC);
+        
+        return empty($resultat);
+    }
+
+    //
+    // MP
+    //
+    // Ajoute le type aux types de contrat 
+    // 
+    function ajouterLeTypeContrat($type){
+        $connexion = getConnect();
+        $connexion -> query("INSERT INTO Contrat(typeContrat) VALUES('".$type."')");
+    }
+
+    //
+    // MP
+    //
+    // Supprime le type des types de contrat
+    // 
+    function supprimerLeTypeContrat($type){
+        $connexion = getConnect();
+        $connexion -> query("DELETE FROM Contrat WHERE typeContrat='".$type."'");
+    }
