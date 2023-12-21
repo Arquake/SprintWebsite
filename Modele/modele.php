@@ -2,6 +2,7 @@
     require_once("connect.php");
     require_once("Modele/modeleAgent.php");
     require_once("Modele/modeleDirecteur.php");
+    require_once("Modele/modeleConseiller.php");
 
 
     //
@@ -337,8 +338,6 @@
         $connexion = getConnect();
 
         $query = "SELECT idRdv FROM rendezvous WHERE (jourReunion = '".$_POST['date']."') AND ((CAST('".$_POST['heureDebut'].":00' AS time) >= heureDebut AND CAST('".$_POST['heureDebut'].":00' AS time) < heureFin) OR (CAST('".$_POST['heureFin'].":00' AS time) > heureDebut AND CAST('".$_POST['heureFin'].":00' AS time) <= heureFin)) AND login='".$_SESSION['conseillerRattacherClient']."'";
-       
-        echo "<script>console.log('".$query."')</script>";
 
         $resultat = ($connexion->query($query))->fetchAll(PDO::FETCH_ASSOC);
 
@@ -379,22 +378,6 @@
         }
 
         return $weekArr;
-    }
-
-
-    //
-    // NV
-    //
-    // inscription d'un client
-    //
-
-    function inscriptionClientConseiller() {
-        $connexion = getConnect();
-
-        $query = "UPDATE client SET nomClient='".$_POST['nomClientInscription']."',prenomClient='".$_POST['prenomClientInscription']."',dateNaissance='".$_POST['dateNaissanceClientInscription']."',estInscrit='1',numeroTelephone='".$_POST['telephoneClientInscription']."',mail='".$_POST['mailClientInscription']."',adresse='".$_POST['adresseClientInscription']."',codePostale='".$_POST['codePostalClientInscription']."',profession='".$_POST['professionClientInscription']."',situation='".$_POST['situationClientInscription']."',revenuMensuel='".$_POST['revenuClientInscription']."',montantDecouvert='".$_POST['decouvertClientInscription']."' WHERE idClient='".$_SESSION['idClient']."'";
-
-        $resultat = $connexion->query($query);
-
     }
 
 

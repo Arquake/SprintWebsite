@@ -150,7 +150,7 @@
                 <p>
                     <label for="password">Mot De Passe de l\'employé</label>
                     <input type="checkbox" id="passwordCheckbox" name="passwordCheckbox" class="checkboxModification">
-                    <input type="password" id="passwordChp" name="passwordCreation" disabled class="passwordModificationEmploye"></p>
+                    <input type="password" id="passwordChp" name="passwordCreation" disabled class="inputNextToCheckbox"></p>
                 <p>
                     <label for="posteCreation">Poste de l\'empolyé</label>
                     <select id="posteCreation" name="posteCreation">
@@ -171,16 +171,6 @@
         
         <script>
             var checkbox = document.getElementById(\'passwordCheckbox\')
-            function modifierEmploye(form) {
-                var form = document.getElementById(\'modificationEmploye\')
-            
-                if ( form[1].value.length == 0 || form[2].value.length == 0 || form[3].value.length == 0 || ( form[4].checked && form[5].value.length == 0 )) {
-                    alert(\'Veuillez remplir tout les champs\')
-                    event.preventDefault();
-                }
-                
-            }
-            
             
             checkbox.addEventListener(\'change\', () => {
                 document.getElementById(\'passwordChp\').disabled = !document.getElementById(\'passwordChp\').disabled

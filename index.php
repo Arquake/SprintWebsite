@@ -200,16 +200,6 @@
 
 
                 //
-                // G
-                //
-                // quand le bouton synthèse dans le aside est cliqué
-                //
-
-                else if ( isset($_POST['asideClientSynthese']) ) {
-                    CtlAgentSyntheseClientPage();
-                }
-
-                //
                 // NV
                 //
                 // quand le bouton nouvelle recherche dans le aside est cliqué
@@ -346,15 +336,6 @@
                     CtlClientDisconnectConseiller();
                 } 
 
-                //
-                // NV
-                //
-                // Quand le bouton Incrire dans le aside est cliqué
-                //
-
-                else if ( isset($_POST['asideConseillerInscrireClient']) ) {
-                    CtlConseillerHomePage();
-                } 
 
                 //
                 // NV
@@ -404,6 +385,28 @@
 
                 else if ( isset($_POST['asideConseillerResiliation']) ) {
                     Ctlresilier();
+                } 
+
+
+                //
+                // G
+                //
+                // quand le bouton synthèse dans le aside est cliqué
+                //
+
+                else if ( isset($_POST['asideClientSynthese']) ) {
+                    CtlConseillerSyntheseClientPage();
+                }
+
+
+                //
+                // NV
+                //
+                // Quand le bouton Résiliation dans le aside est cliqué
+                //
+
+                else if ( isset($_POST['creerCompteSubmit']) ) {
+                    CtlouvertureCompteClientSuite();
                 } 
                 
                 //

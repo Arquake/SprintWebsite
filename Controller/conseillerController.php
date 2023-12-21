@@ -104,9 +104,7 @@
             $_POST['adresseClientInscription'] != "" &&
             preg_match("/^[[:digit:]]/",$_POST['codePostalClientInscription']) &&
             preg_match("/^[[:alpha:]]/",$_POST['professionClientInscription']) &&
-            preg_match("/^[[:alpha:]]/",$_POST['situationClientInscription']) &&
-            preg_match("/^[[:digit:]]/",$_POST['revenuClientInscription']) &&
-            preg_match("/^[[:digit:]]/",$_POST['decouvertClientInscription'])
+            preg_match("/^[[:alpha:]]/",$_POST['situationClientInscription']) 
             ) {
                 inscriptionClientConseiller();
                 accueilConseiller();
@@ -158,23 +156,60 @@
     }
 
 
+    //
+    // NV
+    //
+    // récupère les types de compte possible et affiche la vue de selection
+    //
+
     function CtlouvrirCompte(){
 
-        // Modifier pour recupérer Type comptes dans le modèle
+        $typeComptes = getAllTypeCompte();
 
-        $typeCompte = [ 0 => [
-            'type' => 'CCP'
-        ],
-        1 => [
-            'type' => 'CEL'
-        ]];
-
-        //
-
-        ouvertureCompte( $typeCompte );
+        ouvertureCompte( $typeComptes );
         
     }
 
+
+    //
+    // NV
+    //
+    // récupère les types de compte possible et affiche la vue de selection
+    //
+
+    function CtlouvertureCompteClientSuite(){
+
+        $typeComptes = getAllTypeCompte();
+
+        if ( !isset($_POST['decouvertCheckbox']) ) {
+            $_POST['decouvertCreation'] = 0;
+        }
+        if ( !isset($_POST['plafondCheckbox']) ) {
+            $_POST['plafondCreation'] = 0;
+        }
+        if ( !isset($_POST['interetCheckbox']) ) {
+            $_POST['interetCreation'] = 0;
+        }
+
+        if ( intval($_POST['decouvertCreation']) > 0 || intval($_POST['plafondCreation']) < 0 || intval($_POST['interetCreation']) < 0 || intval($_POST['soldeInitial']) < 0 ) {
+
+            ouvertureCompte( $typeComptes, false, true );
+
+        } else {
+            
+            creerCompteConseiller();
+            
+            ouvertureCompte( $typeComptes, true );
+        }
+
+    }
+
+
+    //
+    //
+    //
+    //
+    //
 
     function CtlvendreContrat(){
 
@@ -193,6 +228,12 @@
         
     }
 
+
+    //
+    //
+    //
+    //
+    //
 
     function CtlmodifierDecouvert(){
 
@@ -245,8 +286,6 @@
         // on vérifie au ssi si les heures sont bien dans l'ordre
         //
 
-        echo "<script>console.log('".var_dump(checkRDVCreation())."')</script>";
-
         if ( $_POST['date'] == '' || $_POST['heureDebut'] == '' || $_POST['heureFin'] == '' || $_POST['date'] <= date("Y-m-d") || $_POST['heureDebut'] > $_POST['heureFin'] ) {
 
 
@@ -293,5 +332,28 @@
             
         } else {
             priseDeRendezVousConseillers( getAllConseillers(), $arr, true, false, true );
+        }
+    }
+
+
+    //
+    // G
+    //
+    // récupère les informations du client et les affiches
+    //
+
+    function CtlConseillerSyntheseClientPage() {
+        // Récupérer les informations du client
+        $clientData = DataClient();
+    
+        // Vérifier si les données du client existent
+        if ($clientData) {
+            // Afficher les informations du client dans la page de synthèse
+
+            clientSynthesis($clientData);
+    
+        } else {
+            // Gérer le cas où les données du client ne peuvent pas être récupérées
+            echo "Impossible de récupérer les informations du client.";
         }
     }

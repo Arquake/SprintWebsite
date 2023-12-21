@@ -146,7 +146,7 @@ body,html {
         text-shadow: 1px 1px 8px rgba(255, 255, 255, 0.712);
     }
     
-    input[type=text], input[type=password]:not(.passwordModificationEmploye), input[type=number], input[type=date], input[type=time] {
+    input[type=text]:not(.inputNextToCheckbox), input[type=password]:not(.inputNextToCheckbox), input[type=number]:not(.inputNextToCheckbox), input[type=date], input[type=time] {
         width: 50%;
         height: 100%;
         float: right;
@@ -164,7 +164,8 @@ body,html {
         letter-spacing: 1px;
     }
 
-    .passwordModificationEmploye {
+
+    .inputNextToCheckbox {
         width: 42%;
         height: 100%;
         float: right;
@@ -236,7 +237,7 @@ body,html {
         margin-right: 3%;
         padding-top: 2%;
         padding-bottom: 2%;
-        width: 53%;
+        width: 50%;
     }
     
     .submitFormInput:active {
@@ -275,10 +276,10 @@ body,html {
     }
     
     select {
-        width: 53%;
+        width: 50%;
         height: 100%;
         float: right;
-        margin-right: 3%;
+        margin-right: 2.7%;
         padding-top: 1.5%;
         padding-bottom: 1%;
         margin-bottom: 1%;

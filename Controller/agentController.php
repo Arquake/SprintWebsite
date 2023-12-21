@@ -257,30 +257,6 @@
         }
         CtlAgentTransactionClientChoice();
     }
-
-    
-
-    //
-    // G
-    //
-    // récupère les informations du client et les affiches
-    //
-
-    function CtlAgentSyntheseClientPage() {
-        // Récupérer les informations du client
-        $clientData = DataClient();
-    
-        // Vérifier si les données du client existent
-        if ($clientData) {
-            // Afficher les informations du client dans la page de synthèse
-
-            clientSynthesis($clientData);
-    
-        } else {
-            // Gérer le cas où les données du client ne peuvent pas être récupérées
-            echo "Impossible de récupérer les informations du client.";
-        }
-    }
     
 
     //

@@ -12,8 +12,6 @@
             <form action="index.php" method="post">
                 <ul>
 
-                    <li><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthese"></li>
-
                     <li><input class="asideInput" type="submit" value="Modification Client" name="asideClientModification"></li>
 
                     <li><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>

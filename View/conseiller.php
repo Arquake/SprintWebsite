@@ -1,6 +1,12 @@
 <?php
 
 
+    //
+    // NV
+    //
+    // page d'accueil du conseiller
+    //
+
     function accueilConseiller(){
         $contenu = connectedHeader();
         if ( isset($_SESSION['idClient']) ) {
@@ -25,11 +31,20 @@
     }
 
 
+    //
+    // NV
+    //
+    // aside conseiller
+    //
+    // DOIT UNIQUEMENT ETRE APPELE POUR RETOURNER SON CONTENU
+    //
+
     function ConseillerAsideSideBarWhenClientConnected() {
         return '<aside>
         <form action="index.php" method="post">
                 <ul>
 
+                    <li><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthese"></li>
                     <li><input class="asideInput" type="submit" value="Vendre Contrat" name="asideConseillerVendreContrat"></li>
                     <li><input class="asideInput" type="submit" value="Ouvrir Compte" name="asideConseillerOuvrirCompte"></li>
                     <li><input class="asideInput" type="submit" value="Modifier Découvert" name="asideConseillerModifDecouvert"></li>
@@ -40,6 +55,13 @@
             </form>
         </aside>';
     }
+
+
+    //
+    // NV
+    //
+    // vue de la recherche client
+    //
 
     function rechercheClientConseillerView($valid = true){
         $contenu = connectedHeader();
@@ -76,7 +98,7 @@
                 <fieldset>
                     <legend>Rechercher par Informations Client</legend>
 
-                    <p><label for="nomClientrRecherche">Nom du Client</label><input type="text" name="nomClientRecherche" onBlur="validFormField( this, 1, 45 )"></p>
+                    <p><label for="nomClientrRecherche">Nom du Client</label><input type="text" name="nomClientRecherche""></p>
 
                     <p><label for="prenomClientRecherche">Prénom du Client</label><input type="text" name="prenomClientRecherche" onBlur="validFormField( this, 2, 45 )"></p>
 
@@ -93,6 +115,12 @@
         require_once("View/gabarit.php");
     }
 
+
+    //
+    // NV
+    //
+    // vue de la recherche approffondi de client
+    //
 
     function rechercheApprofondiClientConseiller($res) {
         $contenu = connectedHeader();
@@ -135,11 +163,11 @@
     }
 
 
-    function mainPageClientConseiller() {
-        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected();
-        require_once("View/gabarit.php");
-    } 
-
+    //
+    // NV 
+    //
+    // vue de l'inscription d'un client à la banque
+    //
 
     function inscrireClient( $clientInformation) {
 
@@ -179,10 +207,6 @@
 
                         <p><label for="situationClientInscription">Situation</label><input type="text" name="situationClientInscription"></p>
 
-                        <p><label for="revenuClientInscription">Revenu Mensuel</label><input type="number" name="revenuClientInscription"></p>
-
-                        <p><label for="decouvertClientInscription">Montant Decouvert</label><input type="number" name="decouvertClientInscription"></p>
-
                     <p><input class="submitFormInput" type="submit" value="Inscrire" name="inscrireClientSubmit"></p>
                 </fieldset>
             </form>';
@@ -190,6 +214,12 @@
         require_once("View/gabarit.php");
     }
 
+
+    //
+    //
+    //
+    //
+    //
 
     function venteContrat( $typeContrats ) {
         $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected() . '
@@ -220,9 +250,23 @@
     }
 
 
-    function ouvertureCompte( $typeCompte ) {
-        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected() . '
-        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+    //
+    // NV
+    //
+    // vue pour choisir le type de compte à ouvrir
+    //
+
+    function ouvertureCompte( $typeCompte, $creer = false, $erreur = false ) {
+        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected(); 
+        
+        if ( $creer ){
+            $contenu .= '<div class="invalidForm">Compte Créé</div>';
+        } else if ( $erreur ) {
+            $contenu .= '<div class="invalidForm">Une erreur a été rencontré durant<br>la création du compte</div>';
+        }
+        
+        $contenu .= '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm" onSubmit="creationCompteInformationCheck( this )">
 
             <fieldset>
 
@@ -233,7 +277,7 @@
 
                     foreach ( $typeCompte as $compte){
                         
-                        $contenu .= "<option value=".$compte['type'].">".$compte['type']."</option>";
+                        $contenu .= "<option value=".$compte['typeCompte'].">".$compte['typeCompte']."</option>";
 
                     }
 
@@ -241,13 +285,60 @@
         $contenu .= '
                     </select>
 
-                <p><input class="submitFormInput" type="submit" value="Inscrire" name="creerCompteSubmit"></p>
+                    <p>
+                        <label for="decouvertCreation">Montant Découvert</label>
+                        <input type="checkbox" id="decouvertCheckbox" name="decouvertCheckbox" class="checkboxModification">
+                        <input type="number" name="decouvertCreation"" id="decouvert" class="inputNextToCheckbox" disabled onBlur="decouvertCheckPositive(this)">
+                    </p>
+
+                    <p>
+                        <label for="plafondCreation">Plafond</label>
+                        <input type="checkbox" id="plafondCheckbox" name="plafondCheckbox" class="checkboxModification">
+                        <input type="number" name="plafondCreation"" id="plafond" class="inputNextToCheckbox" disabled onBlur="plafondInterestSoldeCheckNegative(this)">
+                    </p>
+
+                    <p>
+                        <label for="interetCreation">Interet %</label>
+                        <input type="checkbox" id="interetCheckbox" name="interetCheckbox" class="checkboxModification">
+                        <input type="number" name="interetCreation"" id="interet" class="inputNextToCheckbox" disabled onBlur="plafondInterestSoldeCheckNegative(this)">
+                    </p>
+
+                    <p><label for="soldeInitial">Solde initial</label><input type="number" name="soldeInitial" id="soldeInitial" value="0" onBlur="soldeCheckNegative(this)"></p>
+
+                <p><input class="submitFormInput" type="submit" value="Créer" name="creerCompteSubmit"></p>
             </fieldset>
-        </form>';
+        </form>
+        
+        <script>
+            var decouvert = document.getElementById(\'decouvertCheckbox\')
+            var plafond = document.getElementById(\'plafondCheckbox\')
+            var interet = document.getElementById(\'interetCheckbox\')
+            
+            plafond.addEventListener(\'change\', () => {
+                document.getElementById(\'plafond\').disabled = !document.getElementById(\'plafond\').disabled
+                document.getElementById(\'plafond\').value = ""
+            })
+
+            interet.addEventListener(\'change\', () => {
+                document.getElementById(\'interet\').disabled = !document.getElementById(\'interet\').disabled
+                document.getElementById(\'interet\').value = ""
+            })
+
+            decouvert.addEventListener(\'change\', () => {
+                document.getElementById(\'decouvert\').disabled = !document.getElementById(\'decouvert\').disabled
+                document.getElementById(\'decouvert\').value = ""
+            })
+        </script>';
 
         require_once("View/gabarit.php");
     }
 
+
+    //
+    //
+    //
+    //
+    //
 
     function modificationDecouvert( $listeCompte ) {
         $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected() . '
@@ -270,13 +361,19 @@
         $contenu .= '
                     </select>
 
-                <p><input class="submitFormInput" type="submit" value="Inscrire" name="creerCompteSubmit"></p>
+                <p><input class="submitFormInput" type="submit" value="Inscrire" name="modifierCompteSubmit"></p>
             </fieldset>
         </form>';
 
         require_once("View/gabarit.php");
     }
 
+
+    //
+    //
+    //
+    //
+    //
 
     function resilier( $comptes, $contrats) {
         $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected() . '
@@ -305,7 +402,7 @@
         $contenu .= '
                     </select>
 
-                <p><input class="submitFormInput" type="submit" value="Inscrire" name="creerCompteSubmit"></p>
+                <p><input class="submitFormInput" type="submit" value="Inscrire" name="resilierCompteSubmit"></p>
             </fieldset>
         </form>';
 
@@ -457,9 +554,9 @@
 
 
     //
+    // NV
     //
-    //
-    //
+    // vue si la suppression de rdv n'est pas possible
     //
 
     function suppressionRDVSuiteAFormation() {
@@ -486,3 +583,5 @@
 
         require_once("View/gabarit.php");
     }
+
+
