@@ -146,7 +146,7 @@ body,html {
         text-shadow: 1px 1px 8px rgba(255, 255, 255, 0.712);
     }
     
-    input[type=text], input[type=password], input[type=number], input[type=date], input[type=time] {
+    input[type=text], input[type=password]:not(.passwordModificationEmploye), input[type=number], input[type=date], input[type=time] {
         width: 50%;
         height: 100%;
         float: right;
@@ -163,6 +163,35 @@ body,html {
     
         letter-spacing: 1px;
     }
+
+    .passwordModificationEmploye {
+        width: 42%;
+        height: 100%;
+        float: right;
+        margin-right: 2.7%;
+        padding-top: 1.5%;
+        padding-bottom: 1%;
+        margin-bottom: 1%;
+        padding-left: 2%;
+    
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 20px;
+    
+        letter-spacing: 1px;
+    }
+
+
+    .checkboxModification {
+        float: left;
+        margin-top: 2%;
+        margin-left: 5%;
+        width: 2%;
+        height: 80%;
+        transform: scale(3.3);
+    }
+
 
     .topFormInformation {
         
