@@ -402,11 +402,22 @@
                 //
                 // NV
                 //
-                // Quand le bouton Résiliation dans le aside est cliqué
+                // Quand le bouton créer le compte dans le form est cliqué
                 //
 
                 else if ( isset($_POST['creerCompteSubmit']) ) {
                     CtlouvertureCompteClientSuite();
+                } 
+
+
+                //
+                // NV
+                //
+                // Quand le bouton créer le contrat dans le form est cliqué
+                //
+
+                else if ( isset($_POST['creerContratSubmit']) ) {
+                    CtlouvertureContratClientSuite();
                 } 
                 
                 //

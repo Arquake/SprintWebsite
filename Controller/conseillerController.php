@@ -174,7 +174,7 @@
     //
     // NV
     //
-    // récupère les types de compte possible et affiche la vue de selection
+    // vérifie les informations fourni si elles sont bonne créer le compte sinon retouner une erreur
     //
 
     function CtlouvertureCompteClientSuite(){
@@ -206,26 +206,41 @@
 
 
     //
+    // NV
     //
-    //
-    //
+    // récupère les types de contrat possible et affiche la vue de selection
     //
 
     function CtlvendreContrat(){
 
-        // Modifier pour recupérer comptes et contrats dans le modèle       
-
-        $typeContrats = [ 0 => [
-            'type' => 'Assurance Vie'
-        ],
-        1 => [
-            'type' => 'Assurance Décès'
-        ]];
-
-        //
+        $typeContrats = getAllTypeContrat();
 
         venteContrat( $typeContrats );
         
+    }
+
+
+    //
+    // NV
+    //
+    // vérifie les informations fourni si elles sont bonne créer le contrat sinon retouner une erreur
+    //
+
+    function CtlouvertureContratClientSuite(){
+
+        $typeContrats = getAllTypeContrat();
+
+        if ( !isset($_POST['tarifCreation']) || $_POST['tarifCreation'] == '' || intval($_POST['tarifCreation']) < 0 ) {
+
+            venteContrat( $typeContrats, false, true );
+
+        } else {
+            
+            creerContratConseiller();
+            
+            venteContrat( $typeContrats, true );
+        }
+
     }
 
 

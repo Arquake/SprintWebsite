@@ -121,3 +121,22 @@ function creationCompteInformationCheck(form) {
         elements[8].value = 0
     }
 }
+
+
+//
+// NV
+//
+// creation de contrat vérifie si les charactère sont tous vérifiés
+//
+
+function creationContratOuverture(form) {
+
+    elements = form.elements
+
+    if ( elements[2].value.toString().length == 0 ) {
+        elements[2].value = 0
+        alert('veuillez rentrer une valeur valide')
+        event.preventDefault()
+    }
+
+}

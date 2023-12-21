@@ -45,3 +45,33 @@
 
         $connexion->query($query);
     }
+
+
+    //
+    // NV
+    //
+    // récupère tout les types de contrats
+    //
+
+    function getAllTypeContrat() {
+        $connexion = getConnect();
+
+        $resultat = ($connexion->query("SELECT * FROM contrat"))->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultat;
+    }
+
+
+    //
+    // NV
+    //
+    // créé le compte en accordance avec les paramètres fourni et vérifié
+    //
+
+    function creerContratConseiller() {
+        $connexion = getConnect();
+
+        $query = "INSERT INTO contratclient(idClient, dateVente, tarifMensuel, typeContrat) VALUES ('".$_SESSION['idClient']."',CURRENT_DATE,'".$_POST['tarifCreation']."','".$_POST['contratType']."')";
+
+        $connexion->query($query);
+    }

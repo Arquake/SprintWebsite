@@ -216,14 +216,22 @@
 
 
     //
+    // NV
     //
-    //
-    //
+    // vue pour choisir le type de compte à ouvrir
     //
 
-    function venteContrat( $typeContrats ) {
-        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected() . '
-        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+    function venteContrat( $typeContrat, $creer = false, $erreur = false ) {
+        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected(); 
+        
+        if ( $creer ){
+            $contenu .= '<div class="invalidForm">Contrat Créé</div>';
+        } else if ( $erreur ) {
+            $contenu .= '<div class="invalidForm">Une erreur a été rencontré durant<br>la création du contrat</div>';
+        }
+        
+        $contenu .= '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm" onSubmit="creationContratOuverture( this )">
 
             <fieldset>
 
@@ -232,9 +240,9 @@
                     <label for="contratType">Type de Contrat</label>
                     <select id="contratType" name="contratType">';
 
-                    foreach ( $typeContrats as $contrat){
+                    foreach ( $typeContrat as $contrat){
                         
-                        $contenu .= "<option value=".$contrat['type'].">".$contrat['type']."</option>";
+                        $contenu .= "<option value=".$contrat['typeContrat'].">".$contrat['typeContrat']."</option>";
 
                     }
 
@@ -242,7 +250,12 @@
         $contenu .= '
                     </select>
 
-                <p><input class="submitFormInput" type="submit" value="Inscrire" name="venteContratSubmit"></p>
+                    <p>
+                        <label for="tarifCreation">Tarif Mensuel</label>
+                        <input type="number" name="tarifCreation" id="tarif" onBlur="soldeCheckNegative(this)">
+                    </p>
+
+                <p><input class="submitFormInput" type="submit" value="Créer" name="creerContratSubmit"></p>
             </fieldset>
         </form>';
 
@@ -294,13 +307,13 @@
                     <p>
                         <label for="plafondCreation">Plafond</label>
                         <input type="checkbox" id="plafondCheckbox" name="plafondCheckbox" class="checkboxModification">
-                        <input type="number" name="plafondCreation"" id="plafond" class="inputNextToCheckbox" disabled onBlur="plafondInterestSoldeCheckNegative(this)">
+                        <input type="number" name="plafondCreation"" id="plafond" class="inputNextToCheckbox" disabled onBlur="plafondInterestCheckNegative(this)">
                     </p>
 
                     <p>
                         <label for="interetCreation">Interet %</label>
                         <input type="checkbox" id="interetCheckbox" name="interetCheckbox" class="checkboxModification">
-                        <input type="number" name="interetCreation"" id="interet" class="inputNextToCheckbox" disabled onBlur="plafondInterestSoldeCheckNegative(this)">
+                        <input type="number" name="interetCreation"" id="interet" class="inputNextToCheckbox" disabled onBlur="plafondInterestCheckNegative(this)">
                     </p>
 
                     <p><label for="soldeInitial">Solde initial</label><input type="number" name="soldeInitial" id="soldeInitial" value="0" onBlur="soldeCheckNegative(this)"></p>
