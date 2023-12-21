@@ -171,6 +171,17 @@
     }
 
     //
+    // MP
+    //
+    // Modifie les informations du client en session avec celle fournie
+    //
+    function editInformationClient(){
+        $connexion = getConnect();
+
+        $connexion->query("UPDATE Client SET nomClient = '".$_SESSION['nomClientModification']."', prenomClient = '".$_SESSION['prenomClientModification']."', dateNaissance = '".$_SESSION['dateNaissanceClientModification']."'  WHERE idClient='".$_SESSION['idClient']."'");
+    }
+
+    //
     // NV
     //
     // Recupere les infos du client selon l'id 

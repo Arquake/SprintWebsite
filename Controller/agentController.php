@@ -258,6 +258,7 @@
         CtlAgentTransactionClientChoice();
     }
 
+    
 
     //
     // G
@@ -285,11 +286,55 @@
     //
     // MP
     //
-    // IN PROGRES ____________
+    // Bouton "Modification Client" present dans le ASIDE.
     //
 
     function CtlModificationClient() {
-        AgentclientModificationPage();
+        AgentclientModificationPage($_SESSION['clientNom'], $_SESSION['clientPrenom'], $_SESSION['clientNaissance']);
+    }
+
+    //
+    // MP
+    //
+    // Bouton "Modifier" de la modification des infos clients.
+    // Appel la page et sauvegarde la modification des informations du client. 
+    //
+    function CtlAgentModificationClient(){
+        $_SESSION['nomClientModification'] = $_POST['nomClientModification'];
+        $_SESSION['prenomClientModification'] = $_POST['prenomClientModification'];
+        $_SESSION['dateNaissanceClientModification'] = $_POST['dateNaissanceClientModification'];
+        
+        AgentclientModificationPageVerification();
+    }
+
+    //
+    // MP
+    //
+    // Bouton "Valider" de la modification des infos clients
+    // Retour a l'acceuil et effectue les modification sur la base de donnée et dans la session
+    //
+    function CtlAgentValiderModificationClient() {
+        editInformationClient();
+
+        $_SESSION['clientNom'] = $_SESSION['nomClientModification'];
+        $_SESSION['clientPrenom'] = $_SESSION['prenomClientModification']; 
+        $_SESSION['clientNaissance'] = $_SESSION['dateNaissanceClientModification'];
+
+        unset($_SESSION['nomClientModification']);
+        unset($_SESSION['prenomClientModification']);
+        unset($_SESSION['dateNaissanceClientModification']);
+
+        accueilAgent();
+    }
+    
+    //
+    // MP
+    //
+    // Bouton "Editer" de la modification des infos clients
+    // 
+    //
+    function CtlAgentReModificationClient(){
+        AgentclientModificationPage($_SESSION['nomClientModification'],$_SESSION['prenomClientModification'],$_SESSION['dateNaissanceClientModification']);
     }
 
 

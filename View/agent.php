@@ -393,16 +393,16 @@
         require_once("View/gabarit.php");
     }
 
-
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// MP beacon
-    
-    
     ///TODO
     // Up date dans le session les infos editées
-    // 
 
+    //
+    //MP
+    //
     // Affiche la page de modification Agent(client simplifié) des infos client avec leur affichage de base à l'interieur.
-    function AgentclientModificationPage() {
+    //
+    function AgentclientModificationPage($nom,$prenom,$dateNaissance) {
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
@@ -410,14 +410,41 @@
 
                 <legend>Modifier Client</legend>
 
-                <p><label for="nomClientModification">Nom du Client</label><input type="text" name="nomClientModification" value="'.$_SESSION['clientNom'].'"></p>
+                <p><label for="nomClientModification">Nom du Client</label><input type="text" name="nomClientModification" value="'.$nom.'" required></p>
 
-                <p><label for="prenomClientModification">Prénom du Client</label><input type="text" name="prenomClientModification" value="'.$_SESSION['clientPrenom'].'"></p>
+                <p><label for="prenomClientModification">Prénom du Client</label><input type="text" name="prenomClientModification" value="'.$prenom.'"required ></p>
 
-                <p><label for="dateNaissanceClientModification">Date de Naissanse du Client</label><input type="date" name="dateNaissanceClientModification" value="'.$_SESSION['clientNaissance'].'"></p>
+                <p><label for="dateNaissanceClientModification">Date de Naissanse du Client</label><input type="date" name="dateNaissanceClientModification" value="'.$dateNaissance.'" required></p>
 
 
                 <p><input class="submitFormInput" type="submit" value="Modifier" name="ModificationClientSubmit"></p>
+            </fieldset>
+        </form>
+        ';
+        require_once("View/gabarit.php");
+    }
+
+    //
+    //MP
+    //
+    // Affiche la page de modification Agent(client simplifié) des infos client avec leur affichage de base à l'interieur.
+    //
+    function AgentclientModificationPageVerification() {
+        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+
+            <fieldset>
+
+                <legend>Nouvelles informations</legend>
+
+                <p><label for="nomClientModif">Nom du Client</label><input type="text" name="nomClientModif" value="'.$_SESSION['nomClientModification'].'" disabled="disabled"></p>
+
+                <p><label for="prenomClientModif">Prénom du Client</label><input type="text" name="prenomClientModif" value="'.$_SESSION['prenomClientModification'].'" disabled="disabled"></p>
+
+                <p><label for="dateNaissanceClientModif">Date de Naissanse du Client</label><input type="date" name="dateNaissanceClientModif" value="'.$_SESSION['dateNaissanceClientModification'].'" disabled="disabled"></p>
+
+                <p><input class="submitFormInput" type="submit" value="Valider" name="ValiderModificationClientSubmit"></p>
+                <p><input class="submitFormInput" type="submit" value="Editer" name="ReModificationClientSubmit"></p>
             </fieldset>
         </form>
         ';
@@ -431,17 +458,15 @@
     // Page avec l'EDT du conseiller du client et les forms de prise et suppression de rendez vous
     //
 
-    function priseDeRendezVousAgents( $motifs, $arr, $error=false, $cree=false, $supprime=false, $suppression=false ) {
+    function priseDeRendezVousAgents( $motifs, $arr, $error=false, $cree=false, $supprime=false ) {
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected();
 
         if ( $error ) {
-            $contenu .= '<div class="invalidForm">Le RDV n\'a pas pu être créé <br>veuillez rentrer des informations valides</div>';
+            $contenu .= '<div class="invalidForm">Le RDV n\'a pas pu être créé<br>veuillez rentrer des informations valides</div>';
         } else if ( $cree ) {
             $contenu .= '<div class="invalidForm">RDV Créé</div>';
         } else if ( $supprime ) {
             $contenu .= '<div class="invalidForm">RDV Supprimé</div>';
-        } else if ( $suppression ) {
-            $contenu .= '<div class="invalidForm">Il n\'est pas possible de supprimer une formation</div>';
         }
 
         $contenu .= '<div class"priseRdv">
@@ -455,7 +480,7 @@
                         ';
         foreach ( $motifs as $motif){
 
-            $contenu .= "<option value=".$motif['idMotif'].">".$motif['libelleMotif']."</option>";
+            $contenu .= "<option value=".$motif['type'].">".$motif['type']."</option>";
 
         }
         
@@ -560,34 +585,5 @@
 
     function errorTransactionNoAccountFound(){
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '<div class="invalidForm">Aucun Compte n\'existe<br>Pour ce Client</div>';
-        require_once("View/gabarit.php");
-    }
-
-
-    //
-    // NV
-    //
-    // Prise de RDV valide affiche page avec les pièces nécessaires
-    //
-
-    function affichageRDVPieceNecessaires( $arr ) {
-        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected();
-
-        $contenu .= '
-        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
-            <fieldset>
-
-                <legend>Supprimer un RDV</legend>
-
-                <p><label class="listePiece" for="">Libelle</label><textarea name="listePiece" id="listePiece" disabled="disabled" class="libelle">'.$arr['libelleMotif'].'</textarea></p> 
-
-                <p><label class="listePiece" for="">Liste De Pieces A prévoir</label><textarea name="listePiece" id="listePiece" disabled="disabled" class="liste">'.$arr['listePiece'].'</textarea></p> 
-
-                <input class="submitFormInput" type="submit" value="Suivant" name="asideClientPriseRendezVous">
-            </fieldset>
-        </form>';
-
-
-
         require_once("View/gabarit.php");
     }

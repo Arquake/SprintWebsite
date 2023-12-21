@@ -147,7 +147,7 @@
                 //
 
                 else if ( isset($_POST['outPutTransactionRetraitCompteClient'])){
-                    CtlAgentOutPutTransactionRetraitCompteClient ();
+                    CtlAgentOutPutTransactionRetraitCompteClient();
                 }
 
                 //
@@ -158,8 +158,46 @@
                 //
 
                 else if ( isset($_POST['outPutTransactionDepotCompteClient'])){
-                    CtlAgentOutPutTransactionDepotCompteClient ();
+                    CtlAgentOutPutTransactionDepotCompteClient();
                 }
+
+                //
+                // MP
+                //
+                // quand le bouton modification client dans le aside est cliqué
+                //
+
+                else if ( isset($_POST['asideClientModification']) ) {
+                    CtlModificationClient();
+                }
+
+                //
+                // MP
+                //
+                // Bouton "Modifier" de la modification des infos clients
+                //
+                else if ( isset($_POST['ModificationClientSubmit'])){
+                    CtlAgentModificationClient();
+                }
+
+                //
+                // MP
+                //
+                // Bouton "Editer" de la modification des infos clients
+                //
+                else if ( isset($_POST['ReModificationClientSubmit'])){
+                    CtlAgentReModificationClient();
+                }
+                
+                //
+                // MP
+                //
+                // Bouton "Valider" de la modification des infos clients
+                //
+                else if ( isset($_POST['ValiderModificationClientSubmit'])){
+                    CtlAgentValiderModificationClient();
+                }
+
 
                 //
                 // G
@@ -179,16 +217,6 @@
 
                 else if ( isset($_POST['asideClientNouvelleRecherche']) ) {
                     CtlAgentResearchClient();
-                }
-
-                //
-                // MP
-                //
-                // quand le bouton modification client dans le aside est cliqué
-                //
-
-                else if ( isset($_POST['asideClientModification']) ) {
-                    CtlModificationClient();
                 }
 
                 //
