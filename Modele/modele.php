@@ -112,63 +112,12 @@
     // Recupere les infos du compte dont l'id est passé en paramètre 
     //
 
-    function getTypeCompteViaId($idCompte) {
+    function getCompteViaId($idCompte) {
         $connexion = getConnect();
 
-        $resultat = ($connexion -> query("SELECT typeCompte FROM CompteClient WHERE idCompte='".$idCompte."'"))->fetch(PDO::FETCH_ASSOC);
+        $resultat = ($connexion -> query("SELECT typeCompte, solde, plafond, montantDecouvert FROM CompteClient WHERE idCompte='".$idCompte."'"))->fetch(PDO::FETCH_ASSOC);
 
-        return $resultat['typeCompte'];
-    }
-
-
-    //
-    // MP
-    //
-    // Recupere le solde du compte dont l'$idCompte est passé en paramètre 
-    //
-    // -Renvoie un int correspondant au solde actuel du compte
-    //
-
-    function getSoldeCompteViaId($idCompte){
-        $connexion = getConnect();
-
-        $resultat = ($connexion -> query("SELECT solde FROM CompteClient where idCompte='".$idCompte."'"))->fetch(PDO::FETCH_ASSOC);
-
-        return $resultat['solde'];
-    }
-
-
-    //
-    // MP
-    //
-    // Récupere le plafond du $typeCompte passé en paramètre
-    //
-    // -Renvoie un int correspondant au plafond lié au type de compte
-    //
-
-    function getPlafondCompteViaId($idCompte){
-        $connexion = getConnect();
-
-        $resultat = ($connexion -> query("SELECT plafond FROM CompteClient where idCompte='".$idCompte."'"))->fetch(PDO::FETCH_ASSOC);
-
-        return $resultat['plafond'];
-    }
-
-
-    //
-    // MP
-    //
-    // Recupere le decouvert du $typeCompte passé en paramètre
-    //
-    // -Renvoie un int correspondant au montant de decouvert lié au type de compte
-    //
-
-    function getDecouvertCompteViaId($idCompte){
-        $connexion = getConnect();
-
-        $resultat = ($connexion -> query("SELECT montantDecouvert FROM CompteClient where idCompte='".$idCompte."'"))->fetch(PDO::FETCH_ASSOC);
-
-        return $resultat['montantDecouvert'];
+        return $resultat;
     }
 
     //

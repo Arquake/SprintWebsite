@@ -201,10 +201,12 @@
 
     function CtlAgentTransactionClient(){
         $_SESSION['idCompteClient'] = $_POST['compteSelection'];
-        $_SESSION['typeCompteClient'] = getTypeCompteViaId($_SESSION['idCompteClient'] );
-        $_SESSION['soldeCompteClient'] = getSoldeCompteViaId($_SESSION['idCompteClient'] );
-        $_SESSION['plafondCompteClient'] = getPlafondCompteViaId($_SESSION['idCompteClient']);
-        $_SESSION['decouvertCompteClient'] = getDecouvertCompteViaId($_SESSION['idCompteClient']);
+        $res = getCompteViaId($_SESSION['idCompteClient']);
+        echo "<script>console.log('".var_dump($res)."')</script>";
+        $_SESSION['typeCompteClient'] = $res['typeCompte'];
+        $_SESSION['soldeCompteClient'] = $res['solde'];
+        $_SESSION['plafondCompteClient'] = $res['plafond'];
+        $_SESSION['decouvertCompteClient'] = $res['montantDecouvert'];
 
         if ($_POST['radioTransaction'] == "retrait") {
             transactionRetraitClientAgentView();

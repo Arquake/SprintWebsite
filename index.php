@@ -457,7 +457,7 @@
                 //
                 // NV
                 //
-                // si le bouton submit pour résilier son contrat est cliqué
+                // si le bouton dans le planning est cliqué
                 //
 
                 else if ( isset($_POST['clientButtonResearch']) ) {

@@ -228,7 +228,6 @@
         
                 }
 
-
         $contenu .= '
 
                 <p><input class="submitFormInput" type="submit" value="Selectionner" name="rechercheSelectionClientSubmit"></p>
@@ -347,7 +346,7 @@
         
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
-            <p class="afficherBeauP">Compte séléctionné pour <strong>retrait</strong> : '.$_SESSION['typeCompteClient'].' : '.$_SESSION['soldeCompteClient'].' €</p>
+            <p class="afficherBeauP">Retrait sur le '.$_SESSION['typeCompteClient'].' : '.$_SESSION['soldeCompteClient'].' €</p>
             <p class="afficherBeauP">Decouvert : '.$_SESSION['decouvertCompteClient'].' €</p>
     
             <fieldset>
@@ -376,8 +375,8 @@
 
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
-            <p class="afficherBeauP">Compte séléctionné pour <strong>dépot</strong> : '.$_SESSION['typeCompteClient'].' : '.$_SESSION['soldeCompteClient'].' €</p>
-            <p class="afficherBeauP">Decouvert : '.$_SESSION['plafondCompteClient'].' €</p>
+            <p class="afficherBeauP">Dépot sur le '.$_SESSION['typeCompteClient'].' : '.$_SESSION['soldeCompteClient'].' €</p>
+            <p class="afficherBeauP">Plafond : '.$_SESSION['plafondCompteClient'].' €</p>
 
             <fieldset>
                 <legend>Dépot</legend>
