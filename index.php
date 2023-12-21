@@ -439,7 +439,7 @@
                 // 
                 //
                 else if ( isset($_POST['asideDirecteurGestionRendezVous']) ) {
-        
+                    CtlDirecteurHomePage();
                 } 
 
                 //
@@ -448,7 +448,7 @@
                 // 
                 //
                 else if ( isset($_POST['asideDirecteurGestionCompte']) ) {
-        
+                    CtlDirecteurHomePage();
                 } 
 
                 //
@@ -457,7 +457,7 @@
                 // 
                 //
                 else if ( isset($_POST['asideDirecteurGestionContrat']) ) {
-        
+                    CtlDirecteurHomePage();
                 } 
 
                 //
@@ -466,7 +466,7 @@
                 // 
                 //
                 else if ( isset($_POST['asideDirecteurStats']) ) {
-        
+                    CtlDirecteurHomePage();
                 } 
 
 
