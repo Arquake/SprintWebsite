@@ -63,7 +63,13 @@
                 $_SESSION['clientNaissance'] = $res['dateNaissance'];
                 $_SESSION['idClient'] = $res['idClient'];
 
-                accueilAgent();
+                if ( getEmployeExist($_SESSION['idClient']) ) {
+                    accueilAgent();
+                } else {
+                    $conseillersList = getAllConseillers();
+        
+                    rattacherClient($conseillersList);
+                }
             } else if ( isset($res[1]) ) {
                 rechercheApprofondiClientAgent($res);
             } else if ( isset($res[0]['nomClient']) ) {
@@ -72,7 +78,13 @@
                 $_SESSION['clientNaissance'] = $res[0]['dateNaissance'];
                 $_SESSION['idClient'] = $res[0]['idClient'];
 
-                accueilAgent();
+                if ( getEmployeExist($_SESSION['idClient']) ) {
+                    accueilAgent();
+                } else {
+                    $conseillersList = getAllConseillers();
+        
+                    rattacherClient($conseillersList);
+                }
             } else {
                 rechercheClientAgentView(false);
             }
@@ -100,9 +112,13 @@
         $_SESSION['clientNaissance'] = $res['dateNaissance'];
         $_SESSION['idClient'] = $_POST['clientRechercheChoice'];
 
+        if ( getEmployeExist($_SESSION['idClient']) ) {
+            accueilAgent();
+        } else {
+            $conseillersList = getAllConseillers();
 
-
-        accueilAgent();
+            rattacherClient($conseillersList);
+        }
     }
 
 
@@ -138,8 +154,6 @@
             $_SESSION['idClient'] = $idClient;
 
             $conseillersList = getAllConseillers();
-
-            
 
             rattacherClient($conseillersList);
 

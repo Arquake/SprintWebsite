@@ -73,3 +73,25 @@
 
         return $resultat;
     }
+
+
+    //
+    // NV
+    //
+    // retourne true si l'employe existe
+    //
+
+    function getEmployeExist($idClient) {
+        $connexion = getConnect();
+
+        $resultat = ($connexion->query("SELECT login FROM RattacherA WHERE idClient='".$idClient."'"))->fetch(PDO::FETCH_ASSOC)['login'];
+
+        $resultat = ($connexion->query("SELECT login FROM Employe WHERE login='".$resultat."'"))->fetch(PDO::FETCH_ASSOC);
+
+        if ( !empty( $resultat ) ) {
+            return true;
+        } else {
+            $connexion->query("DELETE FROM rattachera WHERE idClient='".$idClient."'");
+            return false;
+        }
+    }
