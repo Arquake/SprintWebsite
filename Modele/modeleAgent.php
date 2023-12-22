@@ -84,7 +84,13 @@
     function getEmployeExist($idClient) {
         $connexion = getConnect();
 
-        $resultat = ($connexion->query("SELECT login FROM RattacherA WHERE idClient='".$idClient."'"))->fetch(PDO::FETCH_ASSOC)['login'];
+        $resultat = ($connexion->query("SELECT login FROM RattacherA WHERE idClient='".$idClient."'"))->fetch(PDO::FETCH_ASSOC);
+
+        if ( !empty( $resultat ) ) {
+            $resultat['login'];
+        } else {
+            return false;
+        }
 
         $resultat = ($connexion->query("SELECT login FROM Employe WHERE login='".$resultat."'"))->fetch(PDO::FETCH_ASSOC);
 
