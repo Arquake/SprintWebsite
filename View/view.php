@@ -106,7 +106,8 @@
 
     function EDTBubble($arr){
         if ( $arr['idClient'] != -1 ) {
-            return '
+            if( $_SESSION['poste'] == 'Conseiller' ) {
+                return '
             <td class="edttdHoraire">
             <form method="post">
                 <button name="clientButtonResearch" class="insidetd" value="'.$arr['idClient'].'">
@@ -127,6 +128,27 @@
                 </button>
             </form>
             </td>';
+            } else {
+                return '
+            <td class="edttdHoraire">
+                <div class="insidetd" value="'.$arr['idClient'].'">
+                    <div class="horaires">
+                        '.$arr['heureDebut'].'
+                        <br>
+                        '.$arr['heureFin'].'
+                    </div>
+                    <div class="indordvtd">
+                        idRDV : '.$arr['idRdv'].'
+                    </div>
+                    <div class="indordvtd">
+                        client : '.$arr['idClient'].'
+                    </div>
+                    <div class="indordvtd">
+                        motif : '.$arr['idMotif'].'
+                    </div>
+                </div>
+            </td>';
+            }
         }
 
         return '
