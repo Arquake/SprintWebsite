@@ -538,7 +538,7 @@
                     </form>
                 </td>
 
-                <th colspan="5" class="semainetd">Emploi du temps de<br>'.$_POST['nomEmploye'].' '.$_POST['prenomEmploye'].'<br>Semaine '.($date->modify('+7 days')->format("W")).' de l\'année '.$date->format("Y").'</th>
+                <th colspan="5" class="semainetd">Emploi du temps de<br>'.$conseiller['nomEmploye'].' '.$conseiller['prenomEmploye'].'<br>Semaine '.($date->modify('+7 days')->format("W")).' de l\'année '.$date->format("Y").'</th>
                 
                 <td class="tdWeekChange">
                     <form action="index.php" method="post" class="edtWeekChangeForm">
