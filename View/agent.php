@@ -16,6 +16,8 @@
 
                     <li><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>
 
+                    <li><input class="asideInput" type="submit" value="Modifier Découvert" name="asideConseillerModifDecouvert"></li>
+
                     <li><input class="asideInput" type="submit" value="Prise Rendez-Vous" name="asideClientPriseRendezVous"></li>
 
                     <li><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
@@ -614,3 +616,6 @@
 
         require_once("View/gabarit.php");
     }
+
+
+    

@@ -257,47 +257,6 @@
     //
     // NV
     //
-    // récupère les comptes du client
-    //
-
-    function CtlmodifierDecouvert(){
-
-        $comptes = getAllCompteClient();
-
-        modificationDecouvert( $comptes );
-        
-    }
-
-
-    //
-    // NV
-    //
-    // vérifie les informations fourni si elles sont bonne modifie le découvert sinon retouner une erreur
-    //
-
-    function CtlmodifierDecouvertSuite(){
-
-        if ( !isset($_POST['decouvertModification']) || $_POST['decouvertModification'] == '' || intval($_POST['decouvertModification']) > 0 ) {
-
-            $comptes = getAllCompteClient();
-
-            modificationDecouvert( $comptes, false, true );
-
-        } else {
-            
-            modifierDecouvert();
-
-            $comptes = getAllCompteClient();
-            
-            modificationDecouvert( $comptes, true );
-        }
-        
-    }
-
-
-    //
-    // NV
-    //
     // On retourne l'edt du conseiller relié au client
     // on l'affiche les forms de créations et suppression de rdv
     //

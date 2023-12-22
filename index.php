@@ -239,6 +239,26 @@
                     CtlSupprimerRendezVousAgent();
                 }
 
+
+                //
+                // NV
+                //
+                // Quand le bouton Modifier Decouvert dans le aside est cliqué
+                //
+
+                else if ( isset($_POST['asideConseillerModifDecouvert']) ) {
+                    CtlmodifierDecouvert();
+                } 
+//
+                // NV
+                //
+                // Quand le bouton modifier dans le forme de modification découvert est cliqué
+                //
+
+                else if ( isset($_POST['modifierDecouvertSubmit']) ) {
+                    CtlmodifierDecouvertSuite();
+                } 
+
                 //
                 // NV
                 //

@@ -147,3 +147,51 @@
             </td>';
     }
 
+
+    //
+    // NV
+    //
+    // vue de modification de découvert
+    //
+
+    function modificationDecouvert( $listeCompte, $modifier = false, $erreur = false ) {
+        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected(); 
+        
+        if ( $modifier ){
+            $contenu .= '<div class="invalidForm">Modification Appliqué</div>';
+        } else if ( $erreur ) {
+            $contenu .= '<div class="invalidForm">Une erreur a été rencontré durant<br>la modification du découvert</div>';
+        }
+
+        if ( empty($listeCompte) ) {
+            $contenu .= '<div class="invalidForm">Pas de compte lié au client</div>';
+        } else {
+            $contenu .= '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+
+            <fieldset>
+
+                <legend>Modifier Découvert</legend>
+
+                    <label for="listeComptes">Compte</label>
+                    <select id="listeComptes" name="listeComptes">';
+
+                    foreach ( $listeCompte as $compte){
+                        
+                        $contenu .= "<option value=".$compte['idCompte'].">".$compte['idCompte']." - ".$compte['typeCompte']." - [ ".$compte['montantDecouvert']." ]</option>";
+
+                    }
+
+
+        $contenu .= '
+                    </select>
+
+                    <p><label for="decouvertModification">Nouveau Découvert</label><input type="number" name="decouvertModification"" id="decouvert" onBlur="soldeCheckPositive(this)"></p>
+
+                <p><input class="submitFormInput" type="submit" value="Créer" name="modifierDecouvertSubmit"></p>
+            </fieldset>
+        </form>';
+        }
+        
+        require_once("View/gabarit.php");
+    }
