@@ -62,10 +62,10 @@
                 <legend>Création d\'employé</legend>
                 <p><label for="nomCreation">Nom de l\'employé</label><input type="text" name="nomCreation" onBlur="validFormField( this, 2, 45 )" required="required"></p>
                 <p><label for="prenomCreation">Prénom de l\'employé</label><input type="text" name="prenomCreation" onBlur="validFormField( this, 2, 45 )" required="required"></p>
-                <p><label for="loginCreation">Login de l\'employé</label><input type="text" name="loginCreation" onBlur="validFormField( this, 2, 32 )" required="required"></p>
-                <p><label for="password">Mot De Passe de l\'employé</label><input type="password" name="passwordCreation" onBlur="validFormField( this, 8, 32 )" required="required"></p>
+                <p><label for="loginCreation">Identifiant de l\'employé</label><input type="text" name="loginCreation" onBlur="validFormField( this, 2, 32 )" required="required"></p>
+                <p><label for="password">Mot de passe de l\'employé</label><input type="password" name="passwordCreation" onBlur="validFormField( this, 8, 32 )" required="required"></p>
                 <p>
-                    <label for="posteCreation">Poste de l\'empolyé</label>
+                    <label for="posteCreation">Poste de l\'employé</label>
                     <select id="posteCreation" name="posteCreation">
                         <option value="Agent">Agent</option>
                         <option value="Conseiller">Conseiller</option>
@@ -96,7 +96,7 @@
         <form action="index.php" method="post" class="topPageForm" onSubmit="createEmployeCheck(this)" id="topPageForm">
             <fieldset>
                 <legend>Choisir l\'employé à modifier</legend>
-                <p><label for="modifierLemploye">Employe</label>
+                <p><label for="modifierLemploye">Employé</label>
                     <select id="modifierLemploye" name="modifierLemploye">';
 
                     foreach ( $employes as $employe){
@@ -146,7 +146,7 @@
                 <legend>Création d\'employé</legend>
                 <p><label for="nomCreation">Nom de l\'employé</label><input type="text" name="nomCreation" required="required" value="'.$employe['nomEmploye'].'"></p>
                 <p><label for="prenomCreation">Prénom de l\'employé</label><input type="text" name="prenomCreation" required="required" value="'.$employe['prenomEmploye'].'"></p>
-                <p><label for="loginCreation">Login de l\'employé</label><input type="text" name="loginCreation" required="required" value="'.$employe['login'].'"></p>
+                <p><label for="loginCreation">Identifiant de l\'employé</label><input type="text" name="loginCreation" required="required" value="'.$employe['login'].'"></p>
                 <p>
                     <label for="password">Mot De Passe de l\'employé</label>
                     <input type="checkbox" id="passwordCheckbox" name="passwordCheckbox" class="checkboxModification">
@@ -191,9 +191,9 @@
             <fieldset>
                 <legend>Action souhaitée</legend>
                 <p>
-                <input class="submitFormInput" type="submit" value="Créer Employé" name="DirecteurCreerEmploye">
+                <input class="submitFormInput" type="submit" value="Créer employé" name="DirecteurCreerEmploye">
 
-                <input class="submitFormInput" type="submit" value="Modifier Employé" name="DirecteurModifierEmploye">
+                <input class="submitFormInput" type="submit" value="Modifier employé" name="DirecteurModifierEmploye">
                 </p>
             </fildset>    
         </form>';
