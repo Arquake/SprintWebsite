@@ -402,10 +402,7 @@ body,html {
 
     }
     
-    .clientSynthesis {
-        width: 40%;
-        margin-left: 40%;
-    }
+    
 
     
     
@@ -499,8 +496,11 @@ body,html {
         width: 100%;
         height: 80px;
         margin-bottom: 1%;
-        cursor: pointer;
         transition: background-color 0.25s;
+    }
+
+    button.insidetd {
+        cursor: pointer;
     }
 
     button.insidetd:active {
@@ -589,6 +589,114 @@ body,html {
 
         overflow: hidden;
     }
+
+    .clientSynthesis {
+        width: 60%;
+        height: 10%;
+        margin-top: 2%;
+        margin-left: 15%;
+    }
+
+    .clientSynthesisInformation {
+        width: 70%;
+        float: left;
+        
+        border: solid;
+        border-top-left-radius: 10px;
+        border-width: 3px;
+        border-color: #AAA;
+        background-color: #2057cc;
+        padding: 0.5%;
+        padding-left: 3%;
+        color: #EAEAEA;
+        margin-bottom: 0;
+        margin-right: 0;
+    }
+
+    .clientInscritSupplementInfoBottom {
+        width: 70%;
+        float: left;
+
+        border: solid;
+        border-color: #AAA;
+        border-bottom-left-radius: 10px;
+        border-top: none;
+        border-width: 3px;
+
+        margin-top: 0;
+        margin-right: 0;
+        padding: 0.5%;
+        padding-left: 3%;
+    }
+
+    .clientInscritSupplementInfoRight {
+        width: 22.4%;
+        height: 89%;
+        float: right;
+
+        border: solid;
+        border-left: none;
+        border-color: #AAA;
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+        border-width: 3px;
+
+        margin-top: 0;
+        margin-right: 0;
+        padding: 0.5%;
+        padding-left: 3%;
+    }
+
+    .topinfoClientSynthesis {
+        margin-top: 1%;
+        margin-bottom: 1%;
+        margin-left: 20%;
+        padding: 0;
+
+        color: white;
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 26px;
+        text-align: center;
+        letter-spacing: 1px;
+        display: inline-block;
+    }
+
+    .bottominfoClientSynthesis {
+        margin-top: 1%;
+        margin-bottom: 1%;
+        margin-right: 3%;
+        padding: 0;
+
+        color: rgb(119, 119, 119);
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 18px;
+        text-align: center;
+        letter-spacing: 1px;
+        display: inline-block;
+    }
+
+    .rightinfoClientSynthesis {
+        margin-top: 6%;
+        margin-bottom: 6%;
+        margin-right: 3%;
+        margin-left: 0;
+        padding: 0;
+
+
+        color: rgb(119, 119, 119);
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 22px;
+        text-align: left;
+        letter-spacing: 1px;
+        display: block;
+    }
+
 }
 
 

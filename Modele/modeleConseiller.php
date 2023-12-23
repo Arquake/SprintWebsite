@@ -161,3 +161,18 @@
 
         $connexion->query("DELETE FROM compteclient WHERE idCompte='".$_POST['resiliationCompte']."'");
     }
+
+
+    //
+    // NV
+    //
+    // récupère le client lié au rdv
+    //
+
+    function getclientByRDV() {
+        $connexion = getConnect();
+
+        $res = ($connexion->query("SELECT idClient FROM rendezvous WHERE idRDV='".$_POST['clientButtonResearch']."'"))->fetch(PDO::FETCH_ASSOC)['idClient'];
+
+        return $res;
+    }

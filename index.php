@@ -7,8 +7,8 @@
     require_once("Controller/controller.php");
 
 
-    echo "<script>console.log('".var_dump($_SESSION)."')</script>";
-    echo "<script>console.log('".var_dump($_POST)."')</script>";
+    //echo "<script>console.log('".var_dump($_SESSION)."')</script>";
+    //echo "<script>console.log('".var_dump($_POST)."')</script>";
 
 
     //
@@ -290,6 +290,7 @@
                 // NV
                 // 
                 // Quand le bouton planning est cliqué dans le aside
+                // Ou quand les boutons pour se déplacer dans l'emploi du temps sont cliqués
                 //
 
                 else if ( isset($_POST['asideConseillerPlanning']) || isset($_POST['weekMinusOne']) || isset($_POST['weekAddOne']) ||isset($_POST['conseillerEDTSubmit']) ) {
@@ -415,7 +416,7 @@
                 //
 
                 else if ( isset($_POST['asideClientSynthese']) ) {
-                    CtlConseillerSyntheseClientPage();
+                    CtlClientSynthèse();
                 }
 
 
@@ -482,7 +483,18 @@
 
                 else if ( isset($_POST['clientButtonResearch']) ) {
                     CtlRechercheClientPlanning();
-                } 
+                }
+
+
+                //
+                // NV
+                //
+                // si le bouton dans le planning est cliqué
+                //
+
+                else if ( isset($_POST['asideConseillerInscrireClient']) ) {
+                    CtlInscriptionClientAside();
+                }
 
                 
                 //

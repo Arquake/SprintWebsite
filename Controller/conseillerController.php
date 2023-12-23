@@ -49,7 +49,7 @@
                 $_SESSION['clientNaissance'] = $res['dateNaissance'];
                 $_SESSION['idClient'] = $res['idClient'];
 
-                agentInscrit();
+                CtlClientSynthèse();
 
             } else if ( isset($res[1]) ) {
                 rechercheApprofondiClientConseiller($res);
@@ -59,7 +59,7 @@
                 $_SESSION['clientNaissance'] = $res[0]['dateNaissance'];
                 $_SESSION['idClient'] = $res[0]['idClient'];
 
-                agentInscrit();
+                CtlClientSynthèse();
             }  else {
                 rechercheClientConseillerView(false);
             }
@@ -80,7 +80,7 @@
         $_SESSION['clientNaissance'] = $res['dateNaissance'];
         $_SESSION['idClient'] = $_POST['clientRechercheChoice'];
 
-        agentInscrit();
+        CtlClientSynthèse();
     }
 
 
@@ -123,8 +123,19 @@
                 accueilConseiller();
         }
         else {
-            inscrireClient( DataClient() );
+            inscrireClient( DataClient(), true );
         }
+    }
+
+
+    //
+    // NV
+    //
+    // renvoie sur la page pour inscrire le client
+    //
+
+    function CtlInscriptionClientAside() {
+        inscrireClient( DataClient() );
     }
 
 
@@ -134,18 +145,25 @@
     // si la connexion client établi vérifie si le client est inscrit si il ne l'est pas oblige à l'inscrire sinon se connecte normaement
     //
     
-    function agentInscrit(){
+    function CtlClientSynthèse(){
         //
         // si le client n'est pas inscrit le faire inscrire
         //
 
         $res = clientInscritCheck();
 
-        if ( $res == true ) {
-            accueilConseiller();
+        if( !empty($res) ) {
+            if ( $res['estInscrit'] == true ) {
+                clientInscritSynthèseConseiller( DataClient() );
+            } else {
+                clientNonInscritSynthèseConseiller( DataClient() );
+            }
         } else {
-            inscrireClient( DataClient() );
+            echo "erreur synthèse";
         }
+
+
+        
     }
 
 
@@ -387,37 +405,15 @@
 
     function CtlRechercheClientPlanning() {
 
-        $res = getClientByID($_POST['clientButtonResearch']);
+        $res = getclientByRDV($_POST['clientButtonResearch']);
+
+        $res = getClientByID($res);
 
         $_SESSION['clientNom'] = $res['nomClient'];
         $_SESSION['clientPrenom'] = $res['prenomClient'];
         $_SESSION['clientNaissance'] = $res['dateNaissance'];
-        $_SESSION['idClient'] = $_POST['clientButtonResearch'];
+        $_SESSION['idClient'] = $res['idClient'];
 
-        agentInscrit();
+        CtlClientSynthèse();
 
     }
-
-
-    //
-    // G
-    //
-    // récupère les informations du client et les affiches
-    //
-
-    function CtlConseillerSyntheseClientPage() {
-        // Récupérer les informations du client
-        $clientData = DataClient();
-    
-        // Vérifier si les données du client existent
-        if ($clientData) {
-            // Afficher les informations du client dans la page de synthèse
-
-            clientSynthesis($clientData);
-    
-        } else {
-            // Gérer le cas où les données du client ne peuvent pas être récupérées
-            echo "Impossible de récupérer les informations du client.";
-        }
-    }
-

@@ -10,6 +10,8 @@
         $connexion = getConnect();
 
         $connexion -> query("UPDATE compteclient SET solde = solde - ".$montantRetrait." WHERE idCompte='".$_SESSION['idCompteClient']."'");
+        
+        $connexion -> query("INSERT INTO operation(idCompte, typeOperation, montant) VALUES ('".$_SESSION['idCompteClient']."','retrait','".$montantRetrait."')");
     }
 
 
@@ -23,6 +25,8 @@
         $connexion = getConnect();
         
         $connexion -> query("UPDATE compteclient SET solde = solde + ".$montantDepot." WHERE idCompte='".$_SESSION['idCompteClient']."'");
+
+        $connexion -> query("INSERT INTO operation(idCompte, typeOperation, montant) VALUES ('".$_SESSION['idCompteClient']."','dépot','".$montantDepot."')");
     }
 
 
@@ -69,7 +73,7 @@
     function clientInscritCheck() {
         $connexion = getConnect();
 
-        $resultat = ($connexion->query("SELECT estInscrit FROM client WHERE idClient='".$_SESSION['idClient']."'"))->fetch(PDO::FETCH_ASSOC)['estInscrit'];
+        $resultat = ($connexion->query("SELECT estInscrit FROM client WHERE idClient='".$_SESSION['idClient']."'"))->fetch(PDO::FETCH_ASSOC);
 
         return $resultat;
     }

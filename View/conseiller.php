@@ -169,20 +169,15 @@
     // vue de l'inscription d'un client à la banque
     //
 
-    function inscrireClient( $clientInformation) {
+    function inscrireClient( $clientInformation, $error=false) {
 
-        $contenu = connectedHeader() . '
-            <aside>
-                <form action="index.php" method="post">
-                    <ul>
-
-                        <li><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
-
-                    </ul>
-                </form>
-            </aside>
-            
-            
+        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnectedNonInscrit(); 
+        
+        if ( $error ){
+            $contenu .= '<div class="invalidForm">Le formulaire n\'est pas conforme</div>';
+        };
+        
+        $contenu .= '
             <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
                 <fieldset>
@@ -595,3 +590,99 @@
     }
 
 
+    //
+    // G
+    //
+    // page de la synthèse client si il est inscrit
+    //
+
+    function clientInscritSynthèseConseiller($synthese) {
+        $contenu = connectedHeader();
+
+        $contenu .= ConseillerAsideSideBarWhenClientConnected() . '
+        <div class="clientSynthesis">
+            <h1 style="color:gray; text-align:center;">Synthèse du client</h1>
+            <div class="clientSynthesisInformation">
+                <div class="topinfoClientSynthesis">
+                    ID client : ' . $synthese['idClient'] . '
+                </div>
+                <div class="topinfoClientSynthesis">
+                    Client : ' . $synthese['nomClient'] . ' '.$synthese['prenomClient'] . '
+                </div>
+            </div>
+
+            <div class="clientInscritSupplementInfoRight">
+                <div class="rightinfoClientSynthesis">
+                    profession : ' . $synthese['profession'] . '
+                </div>
+                <div class="rightinfoClientSynthesis">
+                    situation : ' . $synthese['situation'] . '
+                </div>
+            </div>
+
+            <div class="clientInscritSupplementInfoBottom">
+                <div class="bottominfoClientSynthesis">
+                    adresse : ' . $synthese['adresse'] . ' '. $synthese['codePostale'] . '
+                </div>
+                <div class="bottominfoClientSynthesis">
+                    mail : ' . $synthese['mail'] . '
+                </div>
+                <div class="bottominfoClientSynthesis">
+                    numéro de téléphone : ' . $synthese['numeroTelephone'] . '
+                </div>
+                
+            </div>
+
+            
+            
+        </div>';
+
+        require_once("View/gabarit.php");
+
+    }
+
+
+    //
+    // NV
+    //
+    // page de la synthèse client si il n'est pas inscrit
+    // DOIT UNIQUEMENT ETRE APPELE POUR RETOURNER SON CONTENU
+    //
+
+    function ConseillerAsideSideBarWhenClientConnectedNonInscrit(){
+        return '<aside>
+        <form action="index.php" method="post">
+                <ul>
+
+                    <li><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthese"></li>
+                    <li><input class="asideInput" type="submit" value="Inscrire Client" name="asideConseillerInscrireClient"></li>
+                    <li><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
+
+                </ul>
+            </form>
+        </aside>';
+    }
+
+
+    //
+    // NV
+    //
+    // page de la synthèse client si il n'est pas inscrit
+    //
+
+    function clientNonInscritSynthèseConseiller( $synthese ) {
+        $contenu = connectedHeader();
+
+        $contenu .= ConseillerAsideSideBarWhenClientConnectedNonInscrit() . '
+        <div class="clientSynthesis">
+            <div class="clientSynthesisInformation">
+            
+            </div>
+            <h1>Synthèse du client</h1>
+            <p>ID client : ' . $synthese['idClient'] . '</p>
+            <p>client : ' . $synthese['nomClient'] . ' '.$synthese['prenomClient'].'</p>
+        </div>';
+
+        require_once("View/gabarit.php");
+
+    }

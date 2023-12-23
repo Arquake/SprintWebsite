@@ -67,36 +67,6 @@
         ';
     }
 
-
-    //
-    // G
-    //
-    // page de la synthèse client
-    //
-
-    function clientSynthesis($synthèse) {
-        $contenu = connectedHeader();
-
-        if ( $_SESSION['poste'] == 'Conseiller' ) {
-
-                $contenu .= ConseillerAsideSideBarWhenClientConnected() . '
-                <div class="clientSynthesis">
-                    <h1>Synthèse du client</h1>
-                    <p>ID du client : ' . $synthèse['idClient'] . '</p>
-                    <p>Nom du client : ' . $synthèse['nomClient'] . '</p>
-                    <p>Prénom du client : ' . $synthèse['prenomClient'] . '</p>
-                </div>';
-
-        }  else { 
-
-            $contenu .= '';
-
-        }
-
-        require_once("View/gabarit.php");
-
-    }
-
     
     //
     // NV
@@ -110,7 +80,7 @@
                 return '
             <td class="edttdHoraire">
             <form method="post">
-                <button name="clientButtonResearch" class="insidetd" value="'.$arr['idClient'].'">
+                <button name="clientButtonResearch" class="insidetd" value="'.$arr['idRdv'].'">
                     <div class="horaires">
                         '.$arr['heureDebut'].'
                         <br>
