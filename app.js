@@ -153,3 +153,111 @@ function creationContratOuverture(form) {
     }
 
 }
+
+
+function getFiveElementsVenir(){
+    i=0;
+    list="";
+
+    if(this.indexOfPageRdvVenir > 0) {
+        list = '<input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinus" style="visibility: visible; cursor: pointer;" onClick="minusVenirButtonEvent()">';
+    } else {
+        list = '<input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinus" style="visibility: hidden">';
+    }
+
+    while( i < 5 && this.indexOfPageRdvVenir*5+i < this.arrVenir.length ) {
+        list += '<div class="bulleDansInfoRdvSynthèse" style="cursor: pointer;">'+
+            '<div class="horraireSynthese">'+
+                this.arrVenir[this.indexOfPageRdvVenir*5+i][1]+
+                '<br>'+
+                this.arrVenir[this.indexOfPageRdvVenir*5+i][2]+
+                '<br>'+
+                this.arrVenir[this.indexOfPageRdvVenir*5+i][3]+
+            '</div>'+
+            '<div class="inbubbleSynthese">'+
+                'idRDV : '+ this.arrVenir[this.indexOfPageRdvVenir*5+i][0] +
+            '</div>'+
+            '<div class="inbubbleSynthese">'+
+                'motif : '+ this.arrVenir[this.indexOfPageRdvVenir*5+i][5] +
+            '</div>'+
+        '</div>';
+        i+=1;
+    };
+    
+    if( this.arrVenir.length > this.indexOfPageRdvVenir*5+i ) {
+        list += '<input type="image" src="View/style/assets/Right-Arrow.png" class="smallarrowNextPage" id="rdvVenirAdd" style="visibility: visible; cursor: pointer;" onClick="addVenirButtonEvent()"></input>';
+    } else {
+        list += '<input type="image" src="View/style/assets/Right-Arrow.png" class="smallarrowNextPage" id="rdvVenirAdd" style="visibility: hidden"></input>';
+    }
+
+    document.getElementById("RdvVenir").innerHTML = list
+}
+
+
+function getFiveElementsPasse(){
+    i=0;
+    list="";
+
+    if(this.indexOfPageRdvPasse > 0) {
+        list = '<input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinus" style="visibility: visible; cursor: pointer;" onClick="minusPasseButtonEvent()">';
+    } else {
+        list = '<input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinus" style="visibility: hidden">';
+    }
+
+    while( i < 5 && this.indexOfPageRdvPasse*5+i < this.arrPasse.length ) {
+        list += '<div class="bulleDansInfoRdvSynthèse" style="cursor: pointer;">'+
+            '<div class="horraireSynthese">'+
+                this.arrPasse[this.indexOfPageRdvPasse*5+i][1]+
+                '<br>'+
+                this.arrPasse[this.indexOfPageRdvPasse*5+i][2]+
+                '<br>'+
+                this.arrPasse[this.indexOfPageRdvPasse*5+i][3]+
+            '</div>'+
+            '<div class="inbubbleSynthese">'+
+                'idRDV : '+ this.arrPasse[this.indexOfPageRdvPasse*5+i][0] +
+            '</div>'+
+            '<div class="inbubbleSynthese">'+
+                'motif : '+ this.arrPasse[this.indexOfPageRdvPasse*5+i][5] +
+            '</div>'+
+        '</div>';
+        i+=1;
+    };
+    
+    if( this.arrPasse.length > this.indexOfPageRdvPasse*5+i ) {
+        list += '<input type="image" src="View/style/assets/Right-Arrow.png" class="smallarrowNextPage" id="rdvVenirAdd" style="visibility: visible; cursor: pointer;" onClick="addPasseButtonEvent()"></input>';
+    } else {
+        list += '<input type="image" src="View/style/assets/Right-Arrow.png" class="smallarrowNextPage" id="rdvVenirAdd" style="visibility: hidden"></input>';
+    }
+
+    document.getElementById("RdvPasse").innerHTML = list
+}
+
+
+
+function minusVenirButtonEvent() {
+    if( this.indexOfPageRdvVenir > 0){
+        this.indexOfPageRdvVenir-=1;
+        getFiveElementsVenir();
+    }
+}
+
+function addVenirButtonEvent() {
+    if( this.indexOfPageRdvVenir*5 < this.arrVenir.length ){
+        this.indexOfPageRdvVenir+=1;
+        getFiveElementsVenir();
+    }
+}
+
+function minusPasseButtonEvent() {
+    if( this.indexOfPageRdvPasse > 0){
+        this.indexOfPageRdvPasse-=1;
+        getFiveElementsPasse();
+    }
+}
+
+function addPasseButtonEvent() {
+    if( this.indexOfPageRdvPasse*5 < this.arrPasse.length ){
+        this.indexOfPageRdvPasse+=1;
+        getFiveElementsPasse();
+    }
+}

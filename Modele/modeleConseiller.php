@@ -86,7 +86,7 @@
     function getAllCompteClient() {
         $connexion = getConnect();
 
-        $resultat = ($connexion->query("SELECT idCompte, montantDecouvert, typeCompte, solde FROM compteclient WHERE idClient='".$_SESSION['idClient']."'"))->fetchAll(PDO::FETCH_ASSOC);
+        $resultat = ($connexion->query("SELECT * FROM compteclient WHERE idClient='".$_SESSION['idClient']."'"))->fetchAll(PDO::FETCH_ASSOC);
 
         return $resultat;
     }
@@ -101,7 +101,7 @@
     function getAllContratClient() {
         $connexion = getConnect();
 
-        $resultat = ($connexion->query("SELECT idContrat, typeContrat, tarifMensuel FROM contratclient WHERE idClient='".$_SESSION['idClient']."'"))->fetchAll(PDO::FETCH_ASSOC);
+        $resultat = ($connexion->query("SELECT * FROM contratclient WHERE idClient='".$_SESSION['idClient']."'"))->fetchAll(PDO::FETCH_ASSOC);
 
         return $resultat;
     }
@@ -173,6 +173,21 @@
         $connexion = getConnect();
 
         $res = ($connexion->query("SELECT idClient FROM rendezvous WHERE idRDV='".$_POST['clientButtonResearch']."'"))->fetch(PDO::FETCH_ASSOC)['idClient'];
+
+        return $res;
+    }
+
+
+    //
+    // NV
+    //
+    // récupère tout les RDV liés au client
+    //
+
+    function getAllRdvOfClient() {
+        $connexion = getConnect();
+
+        $res = ($connexion->query("SELECT * FROM rendezvous WHERE idClient='".$_SESSION['idClient']."'"))->fetchAll(PDO::FETCH_ASSOC);
 
         return $res;
     }

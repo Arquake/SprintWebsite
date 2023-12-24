@@ -144,22 +144,51 @@
     //
     // si la connexion client établi vérifie si le client est inscrit si il ne l'est pas oblige à l'inscrire sinon se connecte normaement
     //
+    // $researchtype : 1 = synthèse comptes | 2 = synthèse contrats | 3 = rdv | 4 = rdv venant du planning
+    //
     
-    function CtlClientSynthèse(){
-        //
-        // si le client n'est pas inscrit le faire inscrire
-        //
+    function CtlClientSynthèse( $researchtype = 1 ){
+
+        if ( $researchtype == 1 ) {
+            $arr = getAllCompteClient();
+        } else if ( $researchtype == 2 ) {
+            $arr = getAllContratClient();
+        } else {
+            $arr = getAllRdvOfClient();
+        }
+
+        $motifsArr = getMotifsType();
+
+        $motifs = [];
+
+        for ( $i = 0 ; $i < count($motifsArr) ; $i++ ) {
+            $motifs[$motifsArr[$i]['idMotif']] = [ 'libelleMotif' => $motifsArr[$i]['libelleMotif'], 'listePiece' => $motifsArr[$i]['listePiece']];
+        }
 
         $res = clientInscritCheck();
 
         if( !empty($res) ) {
+
             if ( $res['estInscrit'] == true ) {
-                clientInscritSynthèseConseiller( DataClient() );
+
+                if ( $researchtype == 4 ) {
+                    clientInscritSynthèseConseiller( DataClient(), 4, $arr, $arr, $motifs, $_POST['clientButtonResearch']);
+                } else {
+                    clientInscritSynthèseConseiller( DataClient(), $researchtype, $arr, $arr, $motifs );
+                }
+
             } else {
-                clientNonInscritSynthèseConseiller( DataClient() );
+                if ( $researchtype == 4 ) {
+                    clientNonInscritSynthèseConseiller( DataClient(), 4, $arr, $_POST['clientButtonResearch'] );
+                } else {
+                    clientNonInscritSynthèseConseiller( DataClient(), 3, $arr );
+                }
             }
+
         } else {
+
             echo "erreur synthèse";
+
         }
 
 
@@ -414,6 +443,6 @@
         $_SESSION['clientNaissance'] = $res['dateNaissance'];
         $_SESSION['idClient'] = $res['idClient'];
 
-        CtlClientSynthèse();
+        CtlClientSynthèse( 4 );
 
     }

@@ -207,7 +207,7 @@
 
     
     //
-    // G
+    // NV
     //
     // Recupere les infos du client selon l'id client de la session
     //

@@ -591,51 +591,136 @@
 
 
     //
-    // G
+    // NV
     //
     // page de la synthèse client si il est inscrit
     //
+    // $page : 1 = synthèse comptes | 2 = synthèse contrats | 3 = rdv
+    // $rdv si la fonction est utilisé par planning met en valeur le RDV choisi
+    //
 
-    function clientInscritSynthèseConseiller($synthese) {
-        $contenu = connectedHeader();
+    function clientInscritSynthèseConseiller( $synthese, $page, $relevantArrayVenir, $relevantArrayPasse, $motifList, $rdv = false ) {
+        $contenu = '
+        <script>
+
+            var arrVenir = [';
+            $i = 0;
+            while ( $i < count($relevantArrayVenir)-1 ) {
+                $arr=$relevantArrayVenir[$i];
+                $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$motifList[$arr['idMotif']]['libelleMotif'].'", "'.$motifList[$arr['idMotif']]['listePiece'].'"],';
+                $i++;
+            }
+            $arr=$relevantArrayVenir[$i];
+            $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$arr['idMotif'].'"]';
+            $contenu .= '];
+
+            var arrPasse = [';
+                $i = 0;
+                while ( $i < count($relevantArrayPasse)-1 ) {
+                    $arr=$relevantArrayPasse[$i];
+                    $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$motifList[$arr['idMotif']]['libelleMotif'].'", "'.$motifList[$arr['idMotif']]['listePiece'].'"],';
+                    $i++;
+                }
+                $arr=$relevantArrayPasse[$i];
+                $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$arr['idMotif'].'"]';
+                $contenu .= '];
+
+            
+        </script>
+        ';
+
+        $contenu .= connectedHeader();
 
         $contenu .= ConseillerAsideSideBarWhenClientConnected() . '
         <div class="clientSynthesis">
             <h1 style="color:gray; text-align:center;">Synthèse du client</h1>
             <div class="clientSynthesisInformation">
+
                 <div class="topinfoClientSynthesis">
                     ID client : ' . $synthese['idClient'] . '
                 </div>
+
                 <div class="topinfoClientSynthesis">
                     Client : ' . $synthese['nomClient'] . ' '.$synthese['prenomClient'] . '
                 </div>
+
             </div>
 
             <div class="clientInscritSupplementInfoRight">
+
                 <div class="rightinfoClientSynthesis">
                     profession : ' . $synthese['profession'] . '
                 </div>
+
                 <div class="rightinfoClientSynthesis">
                     situation : ' . $synthese['situation'] . '
                 </div>
+
             </div>
 
             <div class="clientInscritSupplementInfoBottom">
+
                 <div class="bottominfoClientSynthesis">
                     adresse : ' . $synthese['adresse'] . ' '. $synthese['codePostale'] . '
                 </div>
+
                 <div class="bottominfoClientSynthesis">
                     mail : ' . $synthese['mail'] . '
                 </div>
+
                 <div class="bottominfoClientSynthesis">
                     numéro de téléphone : ' . $synthese['numeroTelephone'] . '
                 </div>
                 
             </div>
+            
+            <h1 style="color:gray; text-align:center; margin-top:13%;">Rdv à venir</h1>
+            <div class="listeRDV" id="RdvVenir">
+
+                <input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinusVenir">
+
+                
+
+                <input type="image" src="View/style/assets/Right-Arrow.png" class="smallarrowNextPage" id="rdvVenirAddVenir"></input>
+
+                
+            </div>
+            
+            <h1 style="color:gray; text-align:center; margin-top:13%;">précédent rdv</h1>
+            <div class="listeRDV" id="RdvPasse">
+
+                <input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinusPasse">
+
+                
+
+                <input type="image" src="View/style/assets/Right-Arrow.png" class="smallarrowNextPage" id="rdvVenirAddPasse"></input>
+
+            </div>
+            
+            
+            <h1 style="color:gray; text-align:center; margin-top:13%;">Information rdv</h1>
+            <div class="informationRDVSynthèse">
+
+            </div>';
 
             
             
-        </div>';
+        $contenu .='</div>
+        <script>
+
+        var indexOfPageRdvVenir = 0;
+        var indexOfPageRdvPasse = 0;
+
+        getFiveElementsVenir();
+        getFiveElementsPasse();
+
+
+        function rendezVousInformation(idRDV) {
+
+        }
+
+        </script>
+        ';
 
         require_once("View/gabarit.php");
 
@@ -669,8 +754,11 @@
     //
     // page de la synthèse client si il n'est pas inscrit
     //
+    // $page : 1 = synthèse comptes | 2 = synthèse contrats | 3 = rdv
+    // $rdv si la fonction est utilisé par planning met en valeur le RDV choisi
+    //
 
-    function clientNonInscritSynthèseConseiller( $synthese ) {
+    function clientNonInscritSynthèseConseiller( $synthese, $page, $relevantArray, $rdv = false ) {
         $contenu = connectedHeader();
 
         $contenu .= ConseillerAsideSideBarWhenClientConnectedNonInscrit() . '
@@ -685,4 +773,29 @@
 
         require_once("View/gabarit.php");
 
+    }
+
+
+    //
+    //
+    //
+    //
+    //
+
+    function synthesisRdvBubble() {
+        '<div class="bulleDansInfoRdvSynthèse">
+                    <div class="horraireSynthese">
+                        23-12-2023
+                        <br>
+                        10h00
+                        <br>
+                        12h00
+                    </div>
+                    <div class="inbubbleSynthese">
+                        idRDV : 1224
+                    </div>
+                    <div class="inbubbleSynthese">
+                        motif : Ouverture CCP
+                    </div>
+                </div>';
     }
