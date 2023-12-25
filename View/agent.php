@@ -10,17 +10,17 @@
         $contenu = '
         <aside>
             <form action="index.php" method="post">
-                <ul>
+                <ul class="asideUl">
 
-                    <li><input class="asideInput" type="submit" value="Modification client" name="asideClientModification"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Modification client" name="asideClientModification"></li>
 
-                    <li><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>
 
-                    <li><input class="asideInput" type="submit" value="Modifier découvert" name="asideConseillerModifDecouvert"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Modifier découvert" name="asideConseillerModifDecouvert"></li>
 
-                    <li><input class="asideInput" type="submit" value="Prise rendez-vous" name="asideClientPriseRendezVous"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Prise rendez-vous" name="asideClientPriseRendezVous"></li>
 
-                    <li><input class="asideInput" type="submit" value="Nouvelle recherche" name="asideClientNouvelleRecherche"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Nouvelle recherche" name="asideClientNouvelleRecherche"></li>
 
                 </ul>
             </form>
@@ -40,17 +40,17 @@
         $contenu = '
         <aside>
             <form action="index.php" method="post">
-                <ul>
+                <ul class="asideUl">
 
-                    <li><input class="asideInput" type="submit" value="Synthèse client" name="asideClientSynthese"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Synthèse client" name="asideClientSynthese"></li>
 
-                    <li><input class="asideInput" type="submit" value="Modification client" name="asideClientModification"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Modification client" name="asideClientModification"></li>
 
-                    <li><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>
 
-                    <li><input class="asideInput" type="submit" value="Prise rendez-vous" name="asideClientPriseRendezVous"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Prise rendez-vous" name="asideClientPriseRendezVous"></li>
 
-                    <li><input class="asideInput" type="submit" value="Nouvelle recherche" name="asideClientNouvelleRecherche"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Nouvelle recherche" name="asideClientNouvelleRecherche"></li>
 
                 </ul>
             </form>
@@ -76,11 +76,11 @@
             $contenu .= '
             <aside>
                 <form action="index.php" method="post">
-                    <ul>
+                    <ul class="asideUl">
 
-                        <li><input class="asideInput" type="submit" value="Recherche client" name="asideAgentClientResearch"></li>
+                        <li class="asideLi"><input class="asideInput" type="submit" value="Recherche client" name="asideAgentClientResearch"></li>
 
-                        <li><input class="asideInput" type="submit" value="Créer client" name="asideClientCreation"></li>
+                        <li class="asideLi"><input class="asideInput" type="submit" value="Créer client" name="asideClientCreation"></li>
 
                     </ul>
                 </form>
@@ -102,11 +102,11 @@
         $contenu .= '
         <aside>
             <form action="index.php" method="post">
-                <ul>
+                <ul class="asideUl">
 
-                    <li><input class="asideInput" type="submit" value="Recherche client" name="asideAgentClientResearch"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Recherche client" name="asideAgentClientResearch"></li>
 
-                    <li><input class="asideInput" type="submit" value="Créer client" name="asideClientCreation"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Créer client" name="asideClientCreation"></li>
 
                 </ul>
             </form>
@@ -147,11 +147,11 @@
         $contenu .= '
         <aside>
             <form action="index.php" method="post">
-                <ul>
+                <ul class="asideUl">
 
-                    <li><input class="asideInput" type="submit" value="Recherche client" name="asideAgentClientResearch"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Recherche client" name="asideAgentClientResearch"></li>
 
-                    <li><input class="asideInput" type="submit" value="Créer client" name="asideClientCreation"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Créer client" name="asideClientCreation"></li>
 
                 </ul>
             </form>
@@ -206,11 +206,11 @@
         $contenu .= '
         <aside>
             <form action="index.php" method="post">
-                <ul>
+                <ul class="asideUl">
 
-                    <li><input class="asideInput" type="submit" value="Recherche Client" name="asideAgentClientResearch"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Recherche Client" name="asideAgentClientResearch"></li>
 
-                    <li><input class="asideInput" type="submit" value="Créer Client" name="asideClientCreation"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Créer Client" name="asideClientCreation"></li>
 
                 </ul>
             </form>
@@ -287,17 +287,17 @@
         $contenu .= '
         <aside>
             <form action="index.php" method="post">
-                <ul>
+                <ul class="asideUl">
 
-                    <li><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthèse"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthèse"></li>
 
-                    <li><input class="asideInput" type="submit" value="Modification Client" name="asideClientModification"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Modification Client" name="asideClientModification"></li>
 
-                    <li><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>
 
-                    <li><input class="asideInput" type="submit" value="Prise Rendez-Vous" name="asideClientPriseRendezVous"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Prise Rendez-Vous" name="asideClientPriseRendezVous"></li>
 
-                    <li><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
 
                 </ul>
             </form>

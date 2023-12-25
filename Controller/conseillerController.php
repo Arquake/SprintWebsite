@@ -49,7 +49,7 @@
                 $_SESSION['clientNaissance'] = $res['dateNaissance'];
                 $_SESSION['idClient'] = $res['idClient'];
 
-                CtlClientSynthèse();
+                CtlClientSynthèse( 3 );
 
             } else if ( isset($res[1]) ) {
                 rechercheApprofondiClientConseiller($res);
@@ -59,7 +59,7 @@
                 $_SESSION['clientNaissance'] = $res[0]['dateNaissance'];
                 $_SESSION['idClient'] = $res[0]['idClient'];
 
-                CtlClientSynthèse();
+                CtlClientSynthèse( 3 );
             }  else {
                 rechercheClientConseillerView(false);
             }
@@ -80,7 +80,7 @@
         $_SESSION['clientNaissance'] = $res['dateNaissance'];
         $_SESSION['idClient'] = $_POST['clientRechercheChoice'];
 
-        CtlClientSynthèse();
+        CtlClientSynthèse( 3 );
     }
 
 
@@ -147,7 +147,7 @@
     // $researchtype : 1 = synthèse comptes | 2 = synthèse contrats | 3 = rdv | 4 = rdv venant du planning
     //
     
-    function CtlClientSynthèse( $researchtype = 1 ){
+    function CtlClientSynthèse( $researchtype = 1, $rdvChoice = -1 ){
 
         if ( $researchtype == 1 ) {
             $arr = getAllCompteClient();
@@ -155,6 +155,31 @@
             $arr = getAllContratClient();
         } else {
             $arr = getAllRdvOfClient();
+            
+            $currentDate = date('Y-m-d');
+            $index = 0;
+
+            while ( $index < count($arr) && $arr[$index]['jourReunion'] < $currentDate ) {
+                if ( $rdvChoice != -1 && $arr[$index]['idRdv'] == $rdvChoice) {
+                    $rdvChoisi = $arr[$index];
+                } else {
+                    $rdvChoisi = "";
+                }
+                $index++;
+            }
+
+            if ( $index == 0) {
+                $arrPasse = [];
+            } else {
+                $arrPasse = array_slice($arr, 0, $index);
+            }
+
+            if ( $index == count($arr)) {
+                $arrVenir = [];
+            } else {
+                $arrVenir = array_slice($arr, $index);
+            }
+            
         }
 
         $motifsArr = getMotifsType();
@@ -172,16 +197,16 @@
             if ( $res['estInscrit'] == true ) {
 
                 if ( $researchtype == 4 ) {
-                    clientInscritSynthèseConseiller( DataClient(), 4, $arr, $arr, $motifs, $_POST['clientButtonResearch']);
+                    clientInscritSynthèseConseiller( DataClient(), true, $arrVenir, $arrPasse, $motifs, $rdvChoisi );
                 } else {
-                    clientInscritSynthèseConseiller( DataClient(), $researchtype, $arr, $arr, $motifs );
+                    clientInscritSynthèseConseiller( DataClient(), true, $arrVenir, $arrPasse, $motifs );
                 }
 
             } else {
                 if ( $researchtype == 4 ) {
-                    clientNonInscritSynthèseConseiller( DataClient(), 4, $arr, $_POST['clientButtonResearch'] );
+                    clientInscritSynthèseConseiller( DataClient(), false, $arrVenir, $arrPasse, $motifs, $rdvChoisi );
                 } else {
-                    clientNonInscritSynthèseConseiller( DataClient(), 3, $arr );
+                    clientInscritSynthèseConseiller( DataClient(), false, $arrVenir, $arrPasse, $motifs );
                 }
             }
 
@@ -443,6 +468,6 @@
         $_SESSION['clientNaissance'] = $res['dateNaissance'];
         $_SESSION['idClient'] = $res['idClient'];
 
-        CtlClientSynthèse( 4 );
+        CtlClientSynthèse( 4, $_POST['clientButtonResearch'] );
 
     }

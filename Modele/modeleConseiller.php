@@ -187,7 +187,7 @@
     function getAllRdvOfClient() {
         $connexion = getConnect();
 
-        $res = ($connexion->query("SELECT * FROM rendezvous WHERE idClient='".$_SESSION['idClient']."'"))->fetchAll(PDO::FETCH_ASSOC);
+        $res = ($connexion->query("SELECT * FROM rendezvous WHERE idClient='".$_SESSION['idClient']."' ORDER BY jourReunion ASC, heureDebut ASC"))->fetchAll(PDO::FETCH_ASSOC);
 
         return $res;
     }

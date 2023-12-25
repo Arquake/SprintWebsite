@@ -416,18 +416,18 @@
                 //
 
                 else if ( isset($_POST['asideClientSynthese']) ) {
-                    CtlClientSynthèse();
+                    CtlClientSynthèse( 3 );
                 }
 
 
                 //
                 // NV
                 //
-                // quand le bouton synthèse dans le aside est cliqué
+                // 
                 //
 
-                else if ( isset($_POST['asideClientSynthese']) ) {
-                    CtlClientSynthèse();
+                else if ( isset($_POST['']) ) {
+                    CtlClientSynthèse( 3 );
                 }
 
 

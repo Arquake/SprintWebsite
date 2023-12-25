@@ -11,17 +11,17 @@
         return '
         <aside>
             <form action="index.php" method="post">
-                <ul>
+                <ul class="asideUl">
 
-                    <li><input class="asideInput" type="submit" value="Gestion Employé" name="asideDirecteurGestionEmploye"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Gestion Employé" name="asideDirecteurGestionEmploye"></li>
 
-                    <li><input class="asideInput" type="submit" value="Gestion RDV" name="asideDirecteurGestionRendezVous"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Gestion RDV" name="asideDirecteurGestionRendezVous"></li>
 
-                    <li><input class="asideInput" type="submit" value="Gestion Compte" name="asideDirecteurGestionCompte"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Gestion Compte" name="asideDirecteurGestionCompte"></li>
                     
-                    <li><input class="asideInput" type="submit" value="Gestion Contrat" name="asideDirecteurGestionContrat"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Gestion Contrat" name="asideDirecteurGestionContrat"></li>
 
-                    <li><input class="asideInput" type="submit" value="Statistiques" name="asideDirecteurStats"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Statistiques" name="asideDirecteurStats"></li>
 
                 </ul>
             </form>

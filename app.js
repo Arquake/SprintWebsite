@@ -155,84 +155,106 @@ function creationContratOuverture(form) {
 }
 
 
+//
+// NV
+//
+//
+//
+
 function getFiveElementsVenir(){
     i=0;
     list="";
 
-    if(this.indexOfPageRdvVenir > 0) {
-        list = '<input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinus" style="visibility: visible; cursor: pointer;" onClick="minusVenirButtonEvent()">';
-    } else {
-        list = '<input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinus" style="visibility: hidden">';
-    }
-
-    while( i < 5 && this.indexOfPageRdvVenir*5+i < this.arrVenir.length ) {
-        list += '<div class="bulleDansInfoRdvSynthèse" style="cursor: pointer;">'+
-            '<div class="horraireSynthese">'+
-                this.arrVenir[this.indexOfPageRdvVenir*5+i][1]+
-                '<br>'+
-                this.arrVenir[this.indexOfPageRdvVenir*5+i][2]+
-                '<br>'+
-                this.arrVenir[this.indexOfPageRdvVenir*5+i][3]+
-            '</div>'+
-            '<div class="inbubbleSynthese">'+
-                'idRDV : '+ this.arrVenir[this.indexOfPageRdvVenir*5+i][0] +
-            '</div>'+
-            '<div class="inbubbleSynthese">'+
-                'motif : '+ this.arrVenir[this.indexOfPageRdvVenir*5+i][5] +
-            '</div>'+
-        '</div>';
-        i+=1;
-    };
+    if ( this.arrVenir != undefined ) {
+        if(this.indexOfPageRdvVenir > 0) {
+            list = '<input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinus" style="visibility: visible; cursor: pointer;" onClick="minusVenirButtonEvent()">';
+        } else {
+            list = '<input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinus" style="visibility: hidden">';
+        }
     
-    if( this.arrVenir.length > this.indexOfPageRdvVenir*5+i ) {
-        list += '<input type="image" src="View/style/assets/Right-Arrow.png" class="smallarrowNextPage" id="rdvVenirAdd" style="visibility: visible; cursor: pointer;" onClick="addVenirButtonEvent()"></input>';
-    } else {
-        list += '<input type="image" src="View/style/assets/Right-Arrow.png" class="smallarrowNextPage" id="rdvVenirAdd" style="visibility: hidden"></input>';
+        while( i < 5 && this.indexOfPageRdvVenir*5+i < this.arrVenir.length ) {
+            list += '<div class="bulleDansInfoRdvSynthèse" style="cursor: pointer;" onClick="showSynthesisOfRdv( '+ this.indexOfPageRdvVenir*5+i +', 1 )">'+
+                '<div class="horraireSynthese">'+
+                    this.arrVenir[this.indexOfPageRdvVenir*5+i][1]+
+                    '<br>'+
+                    this.arrVenir[this.indexOfPageRdvVenir*5+i][2]+
+                    '<br>'+
+                    this.arrVenir[this.indexOfPageRdvVenir*5+i][3]+
+                '</div>'+
+                '<div class="inbubbleSynthese">'+
+                    'idRDV : '+ this.arrVenir[this.indexOfPageRdvVenir*5+i][0] +
+                '</div>'+
+                '<div class="inbubbleSynthese">'+
+                    'motif : '+ this.arrVenir[this.indexOfPageRdvVenir*5+i][5] +
+                '</div>'+
+            '</div>';
+            i+=1;
+        };
+        
+        if( this.arrVenir.length > this.indexOfPageRdvVenir*5+i ) {
+            list += '<input type="image" src="View/style/assets/Right-Arrow.png" class="smallarrowNextPage" id="rdvVenirAdd" style="visibility: visible; cursor: pointer;" onClick="addVenirButtonEvent()"></input>';
+        } else {
+            list += '<input type="image" src="View/style/assets/Right-Arrow.png" class="smallarrowNextPage" id="rdvVenirAdd" style="visibility: hidden"></input>';
+        }
     }
 
     document.getElementById("RdvVenir").innerHTML = list
 }
 
 
+//
+// NV
+//
+//
+//
+
 function getFiveElementsPasse(){
     i=0;
     list="";
 
-    if(this.indexOfPageRdvPasse > 0) {
-        list = '<input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinus" style="visibility: visible; cursor: pointer;" onClick="minusPasseButtonEvent()">';
-    } else {
-        list = '<input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinus" style="visibility: hidden">';
-    }
-
-    while( i < 5 && this.indexOfPageRdvPasse*5+i < this.arrPasse.length ) {
-        list += '<div class="bulleDansInfoRdvSynthèse" style="cursor: pointer;">'+
-            '<div class="horraireSynthese">'+
-                this.arrPasse[this.indexOfPageRdvPasse*5+i][1]+
-                '<br>'+
-                this.arrPasse[this.indexOfPageRdvPasse*5+i][2]+
-                '<br>'+
-                this.arrPasse[this.indexOfPageRdvPasse*5+i][3]+
-            '</div>'+
-            '<div class="inbubbleSynthese">'+
-                'idRDV : '+ this.arrPasse[this.indexOfPageRdvPasse*5+i][0] +
-            '</div>'+
-            '<div class="inbubbleSynthese">'+
-                'motif : '+ this.arrPasse[this.indexOfPageRdvPasse*5+i][5] +
-            '</div>'+
-        '</div>';
-        i+=1;
-    };
+    if ( this.arrPasse != undefined ) {
+        if(this.indexOfPageRdvPasse > 0 ) {
+            list = '<input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinus" style="visibility: visible; cursor: pointer;" onClick="minusPasseButtonEvent()">';
+        } else {
+            list = '<input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinus" style="visibility: hidden">';
+        }
     
-    if( this.arrPasse.length > this.indexOfPageRdvPasse*5+i ) {
-        list += '<input type="image" src="View/style/assets/Right-Arrow.png" class="smallarrowNextPage" id="rdvVenirAdd" style="visibility: visible; cursor: pointer;" onClick="addPasseButtonEvent()"></input>';
-    } else {
-        list += '<input type="image" src="View/style/assets/Right-Arrow.png" class="smallarrowNextPage" id="rdvVenirAdd" style="visibility: hidden"></input>';
+        while( i < 5 && this.indexOfPageRdvPasse*5+i < this.arrPasse.length ) {
+            list += '<div class="bulleDansInfoRdvSynthèse" style="cursor: pointer;" onClick="showSynthesisOfRdv( '+ (parseInt(this.indexOfPageRdvPasse*5)+i) +', 2 )">'+
+                '<div class="horraireSynthese">'+ 
+                    this.arrPasse[this.indexOfPageRdvPasse*5+i][1]+
+                    '<br>'+
+                    this.arrPasse[this.indexOfPageRdvPasse*5+i][2]+
+                    '<br>'+
+                    this.arrPasse[this.indexOfPageRdvPasse*5+i][3]+
+                '</div>'+
+                '<div class="inbubbleSynthese">'+
+                    'idRDV : '+ this.arrPasse[this.indexOfPageRdvPasse*5+i][0] +
+                '</div>'+
+                '<div class="inbubbleSynthese">'+
+                    'motif : '+ this.arrPasse[this.indexOfPageRdvPasse*5+i][5] +
+                '</div>'+
+            '</div>';
+            i+=1;
+        };
+        
+        if( this.arrPasse.length > this.indexOfPageRdvPasse*5+i ) {
+            list += '<input type="image" src="View/style/assets/Right-Arrow.png" class="smallarrowNextPage" id="rdvVenirAdd" style="visibility: visible; cursor: pointer;" onClick="addPasseButtonEvent()"></input>';
+        } else {
+            list += '<input type="image" src="View/style/assets/Right-Arrow.png" class="smallarrowNextPage" id="rdvVenirAdd" style="visibility: hidden"></input>';
+        }
     }
 
+    
     document.getElementById("RdvPasse").innerHTML = list
 }
 
 
+//
+// NV
+//
+//
+//
 
 function minusVenirButtonEvent() {
     if( this.indexOfPageRdvVenir > 0){
@@ -241,12 +263,26 @@ function minusVenirButtonEvent() {
     }
 }
 
+
+//
+// NV
+//
+//
+//
+
 function addVenirButtonEvent() {
     if( this.indexOfPageRdvVenir*5 < this.arrVenir.length ){
         this.indexOfPageRdvVenir+=1;
         getFiveElementsVenir();
     }
 }
+
+
+//
+// NV
+//
+//
+//
 
 function minusPasseButtonEvent() {
     if( this.indexOfPageRdvPasse > 0){
@@ -255,9 +291,51 @@ function minusPasseButtonEvent() {
     }
 }
 
+
+//
+// NV
+//
+//
+//
+
 function addPasseButtonEvent() {
     if( this.indexOfPageRdvPasse*5 < this.arrPasse.length ){
         this.indexOfPageRdvPasse+=1;
         getFiveElementsPasse();
     }
+}
+
+
+//
+// NV
+//
+// rdvList = 1 : venir | 2 : passe
+//
+
+function showSynthesisOfRdv( rdvId, rdvList ) {
+
+    console.log(rdvId)
+
+    if ( rdvList == 1 ) {
+        rdvarr = this.arrVenir[rdvId]
+    } else {
+        rdvarr = this.arrPasse[rdvId]
+    }
+    
+    list = '<div class="leftSyntheseInfo">'+
+        'Jour : '+ rdvarr[1] +
+        '<br>'+
+        'heure de début : '+ rdvarr[2] +
+        '<br>'+
+        'heure de fin : '+ rdvarr[3] +
+        '</div>'+
+        '<div class="rightSyntheseInfo">'+
+        '    Motif : '+ rdvarr[5] +
+        '    <br>'+
+        '    Liste Pièces Necessaire : <textarea class="rightSyntheseInfoTextarea" disabled>'+ rdvarr[6] +'</textarea>'+
+        '</div>';
+
+    console.log(list)
+
+    document.getElementById("infoSyntheseBlock").innerHTML = list
 }

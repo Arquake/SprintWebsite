@@ -17,11 +17,11 @@
             $contenu .= '
             <aside>
                 <form action="index.php" method="post">
-                    <ul>
+                    <ul class="asideUl">
 
-                        <li><input class="asideInput" type="submit" value="Recherche Client" name="asideConseillerClientResearch"></li>
+                        <li class="asideLi"><input class="asideInput" type="submit" value="Recherche Client" name="asideConseillerClientResearch"></li>
 
-                        <li><input class="asideInput" type="submit" value="Plannings" name="asideConseillerPlanning"></li>
+                        <li class="asideLi"><input class="asideInput" type="submit" value="Plannings" name="asideConseillerPlanning"></li>
 
                     </ul>
                 </form>
@@ -41,15 +41,15 @@
 
     function ConseillerAsideSideBarWhenClientConnected() {
         return '<aside>
-        <form action="index.php" method="post">
-                <ul>
+            <form action="index.php" method="post">
+                <ul class="asideUl">
 
-                    <li><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthese"></li>
-                    <li><input class="asideInput" type="submit" value="Vendre Contrat" name="asideConseillerVendreContrat"></li>
-                    <li><input class="asideInput" type="submit" value="Ouvrir Compte" name="asideConseillerOuvrirCompte"></li>
-                    <li><input class="asideInput" type="submit" value="Modifier Découvert" name="asideConseillerModifDecouvert"></li>
-                    <li><input class="asideInput" type="submit" value="Résiliation" name="asideConseillerResiliation"></li>
-                    <li><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthese"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Vendre Contrat" name="asideConseillerVendreContrat"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Ouvrir Compte" name="asideConseillerOuvrirCompte"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Modifier Découvert" name="asideConseillerModifDecouvert"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Résiliation" name="asideConseillerResiliation"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
 
                 </ul>
             </form>
@@ -68,11 +68,11 @@
         $contenu .= '
         <aside>
             <form action="index.php" method="post">
-                <ul>
+                <ul class="asideUl">
 
-                    <li><input class="asideInput" type="submit" value="Recherche Client" name="asideConseillerClientResearch"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Recherche Client" name="asideConseillerClientResearch"></li>
 
-                    <li><input class="asideInput" type="submit" value="Plannings" name="asideConseillerPlanning"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Plannings" name="asideConseillerPlanning"></li>
 
                 </ul>
             </form>
@@ -127,11 +127,11 @@
         $contenu .= '
         <aside>
             <form action="index.php" method="post">
-                <ul>
+                <ul class="asideUl">
 
-                    <li><input class="asideInput" type="submit" value="Recherche Client" name="asideConseillerClientResearch"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Recherche Client" name="asideConseillerClientResearch"></li>
 
-                    <li><input class="asideInput" type="submit" value="Plannings" name="asideConseillerPlanning"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Plannings" name="asideConseillerPlanning"></li>
 
                 </ul>
             </form>
@@ -425,11 +425,11 @@
         $contenu = connectedHeader() . '
         <aside>
                 <form action="index.php" method="post">
-                    <ul>
+                    <ul class="asideUl">
 
-                        <li><input class="asideInput" type="submit" value="Recherche Client" name="asideConseillerClientResearch"></li>
+                        <li class="asideLi"><input class="asideInput" type="submit" value="Recherche Client" name="asideConseillerClientResearch"></li>
 
-                        <li><input class="asideInput" type="submit" value="Plannings" name="asideConseillerPlanning"></li>
+                        <li class="asideLi"><input class="asideInput" type="submit" value="Plannings" name="asideConseillerPlanning"></li>
 
                     </ul>
                 </form>
@@ -568,11 +568,11 @@
         $contenu = connectedHeader() . '
         <aside>
             <form action="index.php" method="post">
-                <ul>
+                <ul class="asideUl">
 
-                    <li><input class="asideInput" type="submit" value="Recherche Client" name="asideConseillerClientResearch"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Recherche Client" name="asideConseillerClientResearch"></li>
 
-                    <li><input class="asideInput" type="submit" value="Plannings" name="asideConseillerPlanning"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Plannings" name="asideConseillerPlanning"></li>
 
                 </ul>
             </form>
@@ -599,9 +599,24 @@
     // $rdv si la fonction est utilisé par planning met en valeur le RDV choisi
     //
 
-    function clientInscritSynthèseConseiller( $synthese, $page, $relevantArrayVenir, $relevantArrayPasse, $motifList, $rdv = false ) {
+    function clientInscritSynthèseConseiller( $synthese, $estInscrit, $relevantArrayVenir, $relevantArrayPasse, $motifList, $rdv = false ) {
         $contenu = '
         <script>
+
+            var arrPasse = [';
+            $i = 0;
+            while ( $i < count($relevantArrayPasse)-1 ) {
+                $arr=$relevantArrayPasse[$i];
+                $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$motifList[$arr['idMotif']]['libelleMotif'].'", "'.$motifList[$arr['idMotif']]['listePiece'].'"],';
+                $i++;
+            }
+
+            if ( count($relevantArrayPasse) != 0 ) {
+                $arr=$relevantArrayPasse[$i];
+                $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$motifList[$arr['idMotif']]['libelleMotif'].'", "'.$motifList[$arr['idMotif']]['listePiece'].'"]';
+            }
+            
+            $contenu .= '];
 
             var arrVenir = [';
             $i = 0;
@@ -610,31 +625,45 @@
                 $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$motifList[$arr['idMotif']]['libelleMotif'].'", "'.$motifList[$arr['idMotif']]['listePiece'].'"],';
                 $i++;
             }
-            $arr=$relevantArrayVenir[$i];
-            $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$arr['idMotif'].'"]';
+
+            if ( count($relevantArrayVenir) != 0 ) {
+                $arr=$relevantArrayVenir[$i];
+                $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$motifList[$arr['idMotif']]['libelleMotif'].'", "'.$motifList[$arr['idMotif']]['listePiece'].'"]';
+            }
+            
             $contenu .= '];
 
-            var arrPasse = [';
-                $i = 0;
-                while ( $i < count($relevantArrayPasse)-1 ) {
-                    $arr=$relevantArrayPasse[$i];
-                    $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$motifList[$arr['idMotif']]['libelleMotif'].'", "'.$motifList[$arr['idMotif']]['listePiece'].'"],';
-                    $i++;
-                }
-                $arr=$relevantArrayPasse[$i];
-                $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$arr['idMotif'].'"]';
-                $contenu .= '];
-
-            
         </script>
         ';
 
         $contenu .= connectedHeader();
 
-        $contenu .= ConseillerAsideSideBarWhenClientConnected() . '
-        <div class="clientSynthesis">
+            if( $estInscrit ) {
+                $contenu .= ConseillerAsideSideBarWhenClientConnected() . '
+            <form action="index.php" method="post">
+                <ul class="syntheseUl">
+
+                    <li class="syntheseLi"><input class="syntheseInput" type="submit" value="Comptes" name="asideClientSynthese"></li>
+                    <li class="syntheseLi"><input class="syntheseInput" type="submit" value="Contrats" name="asideConseillerVendreContrat"></li>
+                    <li class="syntheseLi"><input class="syntheseInput" type="submit" value="Rendez-Vous" name="asideConseillerOuvrirCompte"></li>
+
+                </ul>
+            </form>';
+            } else {
+                $contenu .= ConseillerAsideSideBarWhenClientConnectedNonInscrit();
+            }
+
+            
+
+            $contenu .= '<div class="clientSynthesis">
             <h1 style="color:gray; text-align:center;">Synthèse du client</h1>
-            <div class="clientSynthesisInformation">
+            <div class="clientSynthesisInformation" style="';
+            
+            if( !$estInscrit ) {
+                $contenu .= 'border-radius:10px;';
+            }
+
+            $contenu .= '">
 
                 <div class="topinfoClientSynthesis">
                     ID client : ' . $synthese['idClient'] . '
@@ -644,37 +673,40 @@
                     Client : ' . $synthese['nomClient'] . ' '.$synthese['prenomClient'] . '
                 </div>
 
-            </div>
+            </div>';
 
-            <div class="clientInscritSupplementInfoRight">
+            if ( $estInscrit ) {
+                $contenu .= '<div class="clientInscritSupplementInfoRight">
 
-                <div class="rightinfoClientSynthesis">
-                    profession : ' . $synthese['profession'] . '
+                    <div class="rightinfoClientSynthesis">
+                        profession : ' . $synthese['profession'] . '
+                    </div>
+
+                    <div class="rightinfoClientSynthesis">
+                        situation : ' . $synthese['situation'] . '
+                    </div>
+
                 </div>
 
-                <div class="rightinfoClientSynthesis">
-                    situation : ' . $synthese['situation'] . '
-                </div>
+                <div class="clientInscritSupplementInfoBottom">
 
-            </div>
+                    <div class="bottominfoClientSynthesis">
+                        adresse : ' . $synthese['adresse'] . ' '. $synthese['codePostale'] . '
+                    </div>
 
-            <div class="clientInscritSupplementInfoBottom">
+                    <div class="bottominfoClientSynthesis">
+                        mail : ' . $synthese['mail'] . '
+                    </div>
 
-                <div class="bottominfoClientSynthesis">
-                    adresse : ' . $synthese['adresse'] . ' '. $synthese['codePostale'] . '
-                </div>
-
-                <div class="bottominfoClientSynthesis">
-                    mail : ' . $synthese['mail'] . '
-                </div>
-
-                <div class="bottominfoClientSynthesis">
-                    numéro de téléphone : ' . $synthese['numeroTelephone'] . '
-                </div>
-                
-            </div>
+                    <div class="bottominfoClientSynthesis">
+                        numéro de téléphone : ' . $synthese['numeroTelephone'] . '
+                    </div>
+                    
+                </div>';
+            }
             
-            <h1 style="color:gray; text-align:center; margin-top:13%;">Rdv à venir</h1>
+            
+            $contenu .= '<h1 style="color:gray; text-align:left; margin-top:13%;">Rdv à venir</h1>
             <div class="listeRDV" id="RdvVenir">
 
                 <input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinusVenir">
@@ -686,7 +718,7 @@
                 
             </div>
             
-            <h1 style="color:gray; text-align:center; margin-top:13%;">précédent rdv</h1>
+            <h1 style="color:gray; text-align:left; margin-top:13%;">précédent rdv</h1>
             <div class="listeRDV" id="RdvPasse">
 
                 <input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinusPasse">
@@ -698,10 +730,25 @@
             </div>
             
             
-            <h1 style="color:gray; text-align:center; margin-top:13%;">Information rdv</h1>
-            <div class="informationRDVSynthèse">
-
-            </div>';
+            <h1 style="color:gray; text-align:left; margin-top:13%;">Information rdv</h1>
+            <div class="informationRDVSynthèse" id="infoSyntheseBlock">';
+                if( $rdv != false ) {
+                    $contenu .='<div class="leftSyntheseInfo">
+                        Jour : ' . $rdv['jourReunion'] .
+                        '<br>
+                        heure de début : ' . $rdv['heureDebut'] .
+                        '<br>
+                        heure de fin : ' . $rdv['heureFin'] .
+                    '</div>
+                    <div class="rightSyntheseInfo">
+                        Motif : ' . $motifList[$rdv['idMotif']]['libelleMotif'] .
+                        '<br>
+                        Liste Pièces Necessaire : <textarea class="rightSyntheseInfoTextarea" disabled>' . $motifList[$rdv['idMotif']]['listePiece'] . '</textarea>
+                    </div>';
+                }
+                
+                
+            $contenu .= '</div>';
 
             
             
@@ -713,11 +760,6 @@
 
         getFiveElementsVenir();
         getFiveElementsPasse();
-
-
-        function rendezVousInformation(idRDV) {
-
-        }
 
         </script>
         ';
@@ -737,65 +779,13 @@
     function ConseillerAsideSideBarWhenClientConnectedNonInscrit(){
         return '<aside>
         <form action="index.php" method="post">
-                <ul>
+                <ul class="asideUl">
 
-                    <li><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthese"></li>
-                    <li><input class="asideInput" type="submit" value="Inscrire Client" name="asideConseillerInscrireClient"></li>
-                    <li><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthese"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Inscrire Client" name="asideConseillerInscrireClient"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
 
                 </ul>
             </form>
         </aside>';
-    }
-
-
-    //
-    // NV
-    //
-    // page de la synthèse client si il n'est pas inscrit
-    //
-    // $page : 1 = synthèse comptes | 2 = synthèse contrats | 3 = rdv
-    // $rdv si la fonction est utilisé par planning met en valeur le RDV choisi
-    //
-
-    function clientNonInscritSynthèseConseiller( $synthese, $page, $relevantArray, $rdv = false ) {
-        $contenu = connectedHeader();
-
-        $contenu .= ConseillerAsideSideBarWhenClientConnectedNonInscrit() . '
-        <div class="clientSynthesis">
-            <div class="clientSynthesisInformation">
-            
-            </div>
-            <h1>Synthèse du client</h1>
-            <p>ID client : ' . $synthese['idClient'] . '</p>
-            <p>client : ' . $synthese['nomClient'] . ' '.$synthese['prenomClient'].'</p>
-        </div>';
-
-        require_once("View/gabarit.php");
-
-    }
-
-
-    //
-    //
-    //
-    //
-    //
-
-    function synthesisRdvBubble() {
-        '<div class="bulleDansInfoRdvSynthèse">
-                    <div class="horraireSynthese">
-                        23-12-2023
-                        <br>
-                        10h00
-                        <br>
-                        12h00
-                    </div>
-                    <div class="inbubbleSynthese">
-                        idRDV : 1224
-                    </div>
-                    <div class="inbubbleSynthese">
-                        motif : Ouverture CCP
-                    </div>
-                </div>';
     }
