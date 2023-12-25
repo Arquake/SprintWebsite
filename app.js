@@ -173,7 +173,7 @@ function getFiveElementsVenir(){
         }
     
         while( i < 5 && this.indexOfPageRdvVenir*5+i < this.arrVenir.length ) {
-            list += '<div class="bulleDansInfoRdvSynthèse" style="cursor: pointer;" onClick="showSynthesisOfRdv( '+ this.indexOfPageRdvVenir*5+i +', 1 )">'+
+            list += '<div class="bulleDansInfoRdvSynthese" style="cursor: pointer;" onClick="showSynthesisOfRdv( '+ this.indexOfPageRdvVenir*5+i +', 1 )">'+
                 '<div class="horraireSynthese">'+
                     this.arrVenir[this.indexOfPageRdvVenir*5+i][1]+
                     '<br>'+
@@ -220,7 +220,7 @@ function getFiveElementsPasse(){
         }
     
         while( i < 5 && this.indexOfPageRdvPasse*5+i < this.arrPasse.length ) {
-            list += '<div class="bulleDansInfoRdvSynthèse" style="cursor: pointer;" onClick="showSynthesisOfRdv( '+ (parseInt(this.indexOfPageRdvPasse*5)+i) +', 2 )">'+
+            list += '<div class="bulleDansInfoRdvSynthese" style="cursor: pointer;" onClick="showSynthesisOfRdv( '+ (parseInt(this.indexOfPageRdvPasse*5)+i) +', 2 )">'+
                 '<div class="horraireSynthese">'+ 
                     this.arrPasse[this.indexOfPageRdvPasse*5+i][1]+
                     '<br>'+

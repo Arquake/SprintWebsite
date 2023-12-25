@@ -423,11 +423,33 @@
                 //
                 // NV
                 //
-                // 
+                // Quand le bouton Rendez-Vous dans le li de la synthèse client est cliqué
                 //
 
-                else if ( isset($_POST['']) ) {
+                else if ( isset($_POST['syntheseRdv']) ) {
                     CtlClientSynthèse( 3 );
+                }
+
+
+                //
+                // NV
+                //
+                // Quand le bouton Comptes dans le li de la synthèse client est cliqué
+                //
+
+                else if ( isset($_POST['syntheseComptes']) ) {
+                    CtlComptesClientSynthese();
+                }
+
+
+                //
+                // NV
+                //
+                // Quand le bouton Contrat dans le li de la synthèse client est cliqué
+                //
+
+                else if ( isset($_POST['syntheseContrats']) ) {
+                    CtlContratsClientSynthese();
                 }
 
 

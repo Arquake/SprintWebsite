@@ -147,40 +147,34 @@
     // $researchtype : 1 = synthèse comptes | 2 = synthèse contrats | 3 = rdv | 4 = rdv venant du planning
     //
     
-    function CtlClientSynthèse( $researchtype = 1, $rdvChoice = -1 ){
+    function CtlClientSynthèse( $rdvChoice = -1 ){
 
-        if ( $researchtype == 1 ) {
-            $arr = getAllCompteClient();
-        } else if ( $researchtype == 2 ) {
-            $arr = getAllContratClient();
-        } else {
-            $arr = getAllRdvOfClient();
-            
-            $currentDate = date('Y-m-d');
-            $index = 0;
+        $arr = getAllRdvOfClient();
+        
+        $currentDate = date('Y-m-d');
+        $index = 0;
 
-            while ( $index < count($arr) && $arr[$index]['jourReunion'] < $currentDate ) {
-                if ( $rdvChoice != -1 && $arr[$index]['idRdv'] == $rdvChoice) {
-                    $rdvChoisi = $arr[$index];
-                } else {
-                    $rdvChoisi = "";
-                }
-                $index++;
-            }
-
-            if ( $index == 0) {
-                $arrPasse = [];
+        while ( $index < count($arr) && $arr[$index]['jourReunion'] < $currentDate ) {
+            if ( $rdvChoice != -1 && $arr[$index]['idRdv'] == $rdvChoice) {
+                $rdvChoisi = $arr[$index];
             } else {
-                $arrPasse = array_slice($arr, 0, $index);
+                $rdvChoisi = "";
             }
-
-            if ( $index == count($arr)) {
-                $arrVenir = [];
-            } else {
-                $arrVenir = array_slice($arr, $index);
-            }
-            
+            $index++;
         }
+
+        if ( $index == 0) {
+            $arrPasse = [];
+        } else {
+            $arrPasse = array_slice($arr, 0, $index);
+        }
+
+        if ( $index == count($arr)) {
+            $arrVenir = [];
+        } else {
+            $arrVenir = array_slice($arr, $index);
+        }
+            
 
         $motifsArr = getMotifsType();
 
@@ -196,17 +190,17 @@
 
             if ( $res['estInscrit'] == true ) {
 
-                if ( $researchtype == 4 ) {
-                    clientInscritSynthèseConseiller( DataClient(), true, $arrVenir, $arrPasse, $motifs, $rdvChoisi );
+                if ( $rdvChoice != -1 ) {
+                    clientRdvSynthèseConseiller( DataClient(), true, $arrVenir, $arrPasse, $motifs, $rdvChoisi );
                 } else {
-                    clientInscritSynthèseConseiller( DataClient(), true, $arrVenir, $arrPasse, $motifs );
+                    clientRdvSynthèseConseiller( DataClient(), true, $arrVenir, $arrPasse, $motifs );
                 }
 
             } else {
-                if ( $researchtype == 4 ) {
-                    clientInscritSynthèseConseiller( DataClient(), false, $arrVenir, $arrPasse, $motifs, $rdvChoisi );
+                if ( $rdvChoice != -1 ) {
+                    clientRdvSynthèseConseiller( DataClient(), false, $arrVenir, $arrPasse, $motifs, $rdvChoisi );
                 } else {
-                    clientInscritSynthèseConseiller( DataClient(), false, $arrVenir, $arrPasse, $motifs );
+                    clientRdvSynthèseConseiller( DataClient(), false, $arrVenir, $arrPasse, $motifs );
                 }
             }
 
@@ -470,4 +464,30 @@
 
         CtlClientSynthèse( 4, $_POST['clientButtonResearch'] );
 
+    }
+
+
+    //
+    // NV
+    //
+    // récupère les comptes du client et les envois à la vue
+    //
+
+    function CtlComptesClientSynthese() {
+        $arr = getAllCompteClient();
+
+        clientComptesSynthèseConseiller( DataClient(), $arr );
+    }
+
+
+    //
+    // NV
+    //
+    // récupère les contrats du client et les envois à la vue
+    //
+
+    function CtlContratsClientSynthese() {
+        $arr = getAllContratClient();
+
+        clientContratsSynthèseConseiller( DataClient(), $arr );
     }

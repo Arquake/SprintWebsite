@@ -593,13 +593,115 @@
     //
     // NV
     //
+    // page de la synthèse client si il n'est pas inscrit
+    // DOIT UNIQUEMENT ETRE APPELE POUR RETOURNER SON CONTENU
+    //
+
+    function ConseillerAsideSideBarWhenClientConnectedNonInscrit(){
+        return '<aside>
+        <form action="index.php" method="post">
+                <ul class="asideUl">
+
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthese"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Inscrire Client" name="asideConseillerInscrireClient"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
+
+                </ul>
+            </form>
+        </aside>';
+    }
+
+
+    //
+    // NV
+    //
+    // retourne le form de la synthèse pour changer de page
+    //
+
+    function synthesePageForm() {
+        return '
+        <form action="index.php" method="post">
+            <ul class="syntheseUl">
+
+                <li class="syntheseLi"><input class="syntheseInput" type="submit" value="Comptes" name="syntheseComptes"></li>
+                <li class="syntheseLi"><input class="syntheseInput" type="submit" value="Contrats" name="syntheseContrats"></li>
+                <li class="syntheseLi"><input class="syntheseInput" type="submit" value="Rendez-Vous" name="syntheseRdv"></li>
+
+            </ul>
+        </form>';
+    }
+
+
+    //
+    // NV
+    //
+    // créé la vue de la synthèse client des RDV du client
+    //
+
+    function synthèseClientInformations($estInscrit, $synthese) {
+
+        $contenu = '<h1 class="syntheseHeadingTitle">Synthèse rendez-vous client</h1>
+        <div class="clientSynthesisInformation" style="';
+
+        if( !$estInscrit ) {
+            $contenu .= 'border-radius:10px;';
+        }
+
+        $contenu .= '">
+
+            <div class="topinfoClientSynthesis">
+                ID client : ' . $synthese['idClient'] . '
+            </div>
+
+            <div class="topinfoClientSynthesis">
+                Client : ' . $synthese['nomClient'] . ' '.$synthese['prenomClient'] . '
+            </div>
+
+        </div>';
+
+        if ( $estInscrit ) {
+            $contenu .= '<div class="clientInscritSupplementInfoRight">
+
+                <div class="rightinfoClientSynthesis">
+                    profession : ' . $synthese['profession'] . '
+                </div>
+
+                <div class="rightinfoClientSynthesis">
+                    situation : ' . $synthese['situation'] . '
+                </div>
+
+            </div>
+
+            <div class="clientInscritSupplementInfoBottom">
+
+                <div class="bottominfoClientSynthesis">
+                    adresse : ' . $synthese['adresse'] . ' '. $synthese['codePostale'] . '
+                </div>
+
+                <div class="bottominfoClientSynthesis">
+                    mail : ' . $synthese['mail'] . '
+                </div>
+
+                <div class="bottominfoClientSynthesis">
+                    numéro de téléphone : ' . $synthese['numeroTelephone'] . '
+                </div>
+                
+            </div>';
+        }
+
+        return $contenu;
+    }
+
+
+    //
+    // NV
+    //
     // page de la synthèse client si il est inscrit
     //
-    // $page : 1 = synthèse comptes | 2 = synthèse contrats | 3 = rdv
     // $rdv si la fonction est utilisé par planning met en valeur le RDV choisi
     //
 
-    function clientInscritSynthèseConseiller( $synthese, $estInscrit, $relevantArrayVenir, $relevantArrayPasse, $motifList, $rdv = false ) {
+    function clientRdvSynthèseConseiller( $synthese, $estInscrit, $relevantArrayVenir, $relevantArrayPasse, $motifList, $rdv = false ) {
         $contenu = '
         <script>
 
@@ -639,16 +741,7 @@
         $contenu .= connectedHeader();
 
             if( $estInscrit ) {
-                $contenu .= ConseillerAsideSideBarWhenClientConnected() . '
-            <form action="index.php" method="post">
-                <ul class="syntheseUl">
-
-                    <li class="syntheseLi"><input class="syntheseInput" type="submit" value="Comptes" name="asideClientSynthese"></li>
-                    <li class="syntheseLi"><input class="syntheseInput" type="submit" value="Contrats" name="asideConseillerVendreContrat"></li>
-                    <li class="syntheseLi"><input class="syntheseInput" type="submit" value="Rendez-Vous" name="asideConseillerOuvrirCompte"></li>
-
-                </ul>
-            </form>';
+                $contenu .= ConseillerAsideSideBarWhenClientConnected() . synthesePageForm();
             } else {
                 $contenu .= ConseillerAsideSideBarWhenClientConnectedNonInscrit();
             }
@@ -656,57 +749,11 @@
             
 
             $contenu .= '<div class="clientSynthesis">
-            <h1 style="color:gray; text-align:center;">Synthèse du client</h1>
-            <div class="clientSynthesisInformation" style="';
-            
-            if( !$estInscrit ) {
-                $contenu .= 'border-radius:10px;';
-            }
+            ' .
 
-            $contenu .= '">
+            synthèseClientInformations( $estInscrit, $synthese) 
 
-                <div class="topinfoClientSynthesis">
-                    ID client : ' . $synthese['idClient'] . '
-                </div>
-
-                <div class="topinfoClientSynthesis">
-                    Client : ' . $synthese['nomClient'] . ' '.$synthese['prenomClient'] . '
-                </div>
-
-            </div>';
-
-            if ( $estInscrit ) {
-                $contenu .= '<div class="clientInscritSupplementInfoRight">
-
-                    <div class="rightinfoClientSynthesis">
-                        profession : ' . $synthese['profession'] . '
-                    </div>
-
-                    <div class="rightinfoClientSynthesis">
-                        situation : ' . $synthese['situation'] . '
-                    </div>
-
-                </div>
-
-                <div class="clientInscritSupplementInfoBottom">
-
-                    <div class="bottominfoClientSynthesis">
-                        adresse : ' . $synthese['adresse'] . ' '. $synthese['codePostale'] . '
-                    </div>
-
-                    <div class="bottominfoClientSynthesis">
-                        mail : ' . $synthese['mail'] . '
-                    </div>
-
-                    <div class="bottominfoClientSynthesis">
-                        numéro de téléphone : ' . $synthese['numeroTelephone'] . '
-                    </div>
-                    
-                </div>';
-            }
-            
-            
-            $contenu .= '<h1 style="color:gray; text-align:left; margin-top:13%;">Rdv à venir</h1>
+            . '<h1 class="syntheseBubbuleTitle">Rdv à venir</h1>
             <div class="listeRDV" id="RdvVenir">
 
                 <input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinusVenir">
@@ -718,7 +765,7 @@
                 
             </div>
             
-            <h1 style="color:gray; text-align:left; margin-top:13%;">précédent rdv</h1>
+            <h1 class="syntheseBubbuleTitle">précédent rdv</h1>
             <div class="listeRDV" id="RdvPasse">
 
                 <input type="image" src="View/style/assets/Left-Arrow.png" class="smallarrowNextPage" id="rdvVenirMinusPasse">
@@ -730,8 +777,8 @@
             </div>
             
             
-            <h1 style="color:gray; text-align:left; margin-top:13%;">Information rdv</h1>
-            <div class="informationRDVSynthèse" id="infoSyntheseBlock">';
+            <h1 class="syntheseBubbuleTitle">Information rdv</h1>
+            <div class="informationRDVSynthese" id="infoSyntheseBlock">';
                 if( $rdv != false ) {
                     $contenu .='<div class="leftSyntheseInfo">
                         Jour : ' . $rdv['jourReunion'] .
@@ -772,20 +819,127 @@
     //
     // NV
     //
-    // page de la synthèse client si il n'est pas inscrit
-    // DOIT UNIQUEMENT ETRE APPELE POUR RETOURNER SON CONTENU
+    // affiches les informations des comptes du client
     //
 
-    function ConseillerAsideSideBarWhenClientConnectedNonInscrit(){
-        return '<aside>
-        <form action="index.php" method="post">
-                <ul class="asideUl">
+    function clientComptesSynthèseConseiller( $synthese, $comptes ) {
+        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected() . synthesePageForm() ;
 
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthese"></li>
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Inscrire Client" name="asideConseillerInscrireClient"></li>
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
+        $contenu .= '<div class="clientSynthesis">' . synthèseClientInformations( true, $synthese) . '
 
-                </ul>
-            </form>
-        </aside>';
+        <h1 class="syntheseBubbuleTitle">Liste Comptes</h1>
+        <div class="syntheseComptes">';
+
+        foreach( $comptes as $compte) {
+            $contenu .= compteBubble( $compte ) ;
+        }
+            
+        $contenu .= '';
+
+        $contenu .= '
+            </div>
+        </div>';
+
+        require_once("View/gabarit.php");
+    }
+
+
+    //
+    // NV
+    //
+    // affiches les informations des contrats du client
+    //
+
+    function clientContratsSynthèseConseiller( $synthese, $contrats ) {
+        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected() . synthesePageForm() ;
+
+        $contenu .= '<div class="clientSynthesis">' . synthèseClientInformations( true, $synthese) .'
+
+        <h1 class="syntheseBubbuleTitle">Liste Contrats</h1>
+        <div class="syntheseComptes">';
+            
+        foreach( $contrats as $contrat) {
+            $contenu .= contratBubble( $contrat ) ;
+        }
+            
+        $contenu .= '';
+
+        $contenu .= '
+            </div>
+        </div>';
+
+        require_once("View/gabarit.php");
+    }
+
+
+    //
+    // NV
+    //
+    // renvoi une bulle avec le compte concerné
+    //
+
+    function compteBubble( $compte ) {
+        return '
+        <div class="insideBubbleCompte">
+            <div class="preDivCompte">
+                id Compte : '.$compte['idCompte'].'
+            </div>
+            <div class="divCompte">
+                <div class="divInsideDivCompte">
+                    <div style=" float:left;">
+                        typeCompte : '.$compte['typeCompte'].'
+                    </div>
+                    <div class="infoTopCompte">
+                        date ouverture : '.$compte['dateOuverture'].'
+                    </div>
+                    <div class="infoTopCompte">
+                        solde : '.$compte['solde'].' €
+                    </div>
+
+                </div>
+                <br>
+                <div class="divInsideDivCompte">
+                    <div style="float:left;">
+                        decouvert : '.$compte['montantDecouvert'].' €
+                    </div>
+                    <div class="infoBottomCompte">
+                        interet : '.$compte['interet'].' %
+                    </div>
+                    <div class="infoBottomCompte">
+                        plafond : '.$compte['plafond'].' €
+                    </div>
+
+                </div>
+            </div>
+        </div>';
+    }
+
+
+    //
+    // NV
+    //
+    // renvoi une bulle avec le contrat concerné
+    //
+
+    function contratBubble( $contrat ) {
+        return '
+        <div class="insideBubbleCompte">
+            <div class="preDivCompte" style="cursor: context-menu;">
+                id Compte : '.$contrat['idContrat'].'
+            </div>
+            <div class="divContrat">
+                <div class="divInsideDivCompte">
+                    <div style="float:left;">
+                        typeCompte : '.$contrat['typeContrat'].'
+                    </div>
+                    <div class="contratInfoInBubble">
+                        date ouverture : '.$contrat['dateVente'].'
+                    </div>
+                    <div class="contratInfoInBubble">
+                        solde : '.$contrat['tarifMensuel'].' €
+                    </div>
+
+                </div>
+            </div>
+        </div>';
     }

@@ -42,8 +42,6 @@
             <form action="index.php" method="post">
                 <ul class="asideUl">
 
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Synthèse client" name="asideClientSynthese"></li>
-
                     <li class="asideLi"><input class="asideInput" type="submit" value="Modification client" name="asideClientModification"></li>
 
                     <li class="asideLi"><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>
@@ -289,7 +287,7 @@
             <form action="index.php" method="post">
                 <ul class="asideUl">
 
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthèse"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthse"></li>
 
                     <li class="asideLi"><input class="asideInput" type="submit" value="Modification Client" name="asideClientModification"></li>
 
