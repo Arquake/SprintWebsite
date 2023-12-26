@@ -416,7 +416,7 @@
                 //
 
                 else if ( isset($_POST['asideClientSynthese']) ) {
-                    CtlClientSynthèse( 3 );
+                    CtlClientSynthese();
                 }
 
 
@@ -427,7 +427,7 @@
                 //
 
                 else if ( isset($_POST['syntheseRdv']) ) {
-                    CtlClientSynthèse( 3 );
+                    CtlClientSynthese();
                 }
 
 

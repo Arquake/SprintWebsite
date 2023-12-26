@@ -937,6 +937,8 @@ body,html {
     .syntheseBubbuleTitle {
         margin-top: 14%;
         margin-left: 2%;
+        margin-right: 0;
+        width: 20%;
 
         color:rgb(76, 76, 76);
         display: block;
@@ -1070,8 +1072,55 @@ body,html {
         float:left;
     }
 
-    .produitClosRight {
+    .produitClosTexte {
+        float: right;
+        margin-top: 0%;
+        margin-left: 2%;
+        width: 20%;
+        height: 10%;
 
+        color:rgb(76, 76, 76);
+        display: block;
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 28px;
+        text-align: left;
+        letter-spacing: 1.2%;
+    }
+
+    .produitClos {
+        float: right;
+        width: 20%;
+        height: 480%;
+        margin-top: 1%;
+
+        padding: 0;
+
+        border: 3px solid #AAA;
+        border-radius: 20px;
+
+        overflow: scroll;
+    }
+
+    .produitClosBubble {
+        float: left;
+        width: 80%;
+        height: 7%;
+        margin-right: 1%;
+        margin-left: 10%;
+        margin-top: 6%;
+
+        border-bottom: 3px solid rgb(0, 140, 255);
+        border-radius: 0px;
+
+        color:rgb(36, 36, 36);
+        display: block;
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 18px;
+        text-align: center;
     }
 }
 

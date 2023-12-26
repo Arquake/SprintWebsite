@@ -339,3 +339,29 @@ function showSynthesisOfRdv( rdvId, rdvList ) {
 
     document.getElementById("infoSyntheseBlock").innerHTML = list
 }
+
+
+//
+// NV
+//
+//
+//
+
+function setProduitClos( idCompte ) {
+
+    if ( idCompte in this.transaction ) {
+        list = "";
+        for ( i = 0 ; i < this.transaction[idCompte].length ; i++ ) {
+            list += '<div class="produitClosBubble">id : '+this.transaction[idCompte][i][0]+' | ';
+            if ( this.transaction[idCompte][i][1] > 1 ) {
+                list += 'dépot '
+            } else {
+                list += 'retrait '
+            }
+            list += this.transaction[idCompte][i][1]+'</div>';
+        }
+        document.getElementById("produitClos").innerHTML = list;
+    } else {
+        document.getElementById("produitClos").innerHTML = "";
+    }
+}

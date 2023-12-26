@@ -191,3 +191,20 @@
 
         return $res;
     }
+
+
+    //
+    // NV
+    //
+    // récupère toutes les transactions d'un client
+    //
+
+    function getAllOperationsClient() {
+        $connexion = getConnect();
+
+        $query = "SELECT * FROM operation WHERE idCompte IN (SELECT idCompte FROM compteclient WHERE idClient='".$_SESSION['idClient']."') ORDER BY idOperation ASC";
+
+        $res = ($connexion->query($query))->fetchAll(PDO::FETCH_ASSOC);
+
+        return $res;
+    }

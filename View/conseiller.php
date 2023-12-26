@@ -822,7 +822,7 @@
     // affiches les informations des comptes du client
     //
 
-    function clientComptesSynthèseConseiller( $synthese, $comptes ) {
+    function clientComptesSynthèseConseiller( $synthese, $comptes, $operations ) {
         $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected() . synthesePageForm() ;
 
         $contenu .= '<div class="clientSynthesis">' . synthèseClientInformations( true, $synthese) . '
@@ -833,12 +833,23 @@
         foreach( $comptes as $compte) {
             $contenu .= compteBubble( $compte ) ;
         }
-            
-        $contenu .= '';
+
+        
 
         $contenu .= '
+            </div>';
+
+        $contenu .= '
+            <h1 class="produitClosTexte">Produit Clos</h1>
+            <div class="produitClos" id="produitClos">
+            
             </div>
-        </div>';
+        </div>
+        
+        <script>
+            '.$operations.'
+        </script>
+        ';
 
         require_once("View/gabarit.php");
     }
@@ -861,8 +872,6 @@
         foreach( $contrats as $contrat) {
             $contenu .= contratBubble( $contrat ) ;
         }
-            
-        $contenu .= '';
 
         $contenu .= '
             </div>
@@ -881,10 +890,10 @@
     function compteBubble( $compte ) {
         return '
         <div class="insideBubbleCompte">
-            <div class="preDivCompte">
+            <div class="preDivCompte" onClick="setProduitClos( '.$compte['idCompte'].' )">
                 id Compte : '.$compte['idCompte'].'
             </div>
-            <div class="divCompte">
+            <div class="divCompte" onClick="setProduitClos( '.$compte['idCompte'].' )">
                 <div class="divInsideDivCompte">
                     <div style=" float:left;">
                         typeCompte : '.$compte['typeCompte'].'

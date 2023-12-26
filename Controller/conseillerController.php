@@ -49,7 +49,7 @@
                 $_SESSION['clientNaissance'] = $res['dateNaissance'];
                 $_SESSION['idClient'] = $res['idClient'];
 
-                CtlClientSynthèse( 3 );
+                CtlClientSynthese();
 
             } else if ( isset($res[1]) ) {
                 rechercheApprofondiClientConseiller($res);
@@ -59,7 +59,7 @@
                 $_SESSION['clientNaissance'] = $res[0]['dateNaissance'];
                 $_SESSION['idClient'] = $res[0]['idClient'];
 
-                CtlClientSynthèse( 3 );
+                CtlClientSynthese();
             }  else {
                 rechercheClientConseillerView(false);
             }
@@ -80,7 +80,7 @@
         $_SESSION['clientNaissance'] = $res['dateNaissance'];
         $_SESSION['idClient'] = $_POST['clientRechercheChoice'];
 
-        CtlClientSynthèse( 3 );
+        CtlClientSynthese();
     }
 
 
@@ -145,7 +145,7 @@
     // si la connexion client établi vérifie si le client est inscrit si il ne l'est pas oblige à l'inscrire sinon se connecte normaement
     //
     
-    function CtlClientSynthèse( $rdvChoice = -1 ){
+    function CtlClientSynthese( $rdvChoice = -1 ){
 
         $arr = getAllRdvOfClient();
         
@@ -171,7 +171,6 @@
         } else {
             $arrVenir = array_slice($arr, $index);
         }
-            
 
         $motifsArr = getMotifsType();
 
@@ -459,7 +458,7 @@
         $_SESSION['clientNaissance'] = $res['dateNaissance'];
         $_SESSION['idClient'] = $res['idClient'];
 
-        CtlClientSynthèse( 4, $_POST['clientButtonResearch'] );
+        CtlClientSynthese( 4, $_POST['clientButtonResearch'] );
 
     }
 
@@ -471,9 +470,46 @@
     //
 
     function CtlComptesClientSynthese() {
-        $arr = getAllCompteClient();
+        $comptes = getAllCompteClient();
 
-        clientComptesSynthèseConseiller( DataClient(), $arr );
+        $operations = getAllOperationsClient();
+
+        $listeOperation = [];
+
+        foreach( $operations as $operation ) {
+
+            
+            if ( $operation['typeOperation'] == "retrait" ) {
+                $negative = -1;
+            } else {
+                $negative = 1;
+            }
+
+            if ( !isset($listeOperation[$operation['idCompte']]) ) {
+                $listeOperation[$operation['idCompte']] = [ 'idCompte' => $operation['idCompte'], 'idOperation' => [$operation['idOperation']], 'montant' => [$negative*intval($operation['montant'])]];
+            } else {
+                array_push( $listeOperation[$operation['idCompte']]['idOperation'], $operation['idOperation'] );
+                array_push( $listeOperation[$operation['idCompte']]['montant'], $operation['montant'] );
+            }
+            
+        }
+
+        $list = "transaction=[];";
+
+        foreach ( $listeOperation as $compte) {
+
+            $list .= "transaction['".$compte['idCompte']."']=[";
+
+
+
+            for ( $i = 0 ; $i < count( $compte['idOperation'] ) - 1 ; $i++ ) {
+                $list .= "[".$compte['idOperation'][$i].",".$compte['montant'][$i]."],";
+            }
+
+            $list .= "[".$compte['idOperation'][count( $compte['idOperation'] ) - 1].",".$compte['montant'][count( $compte['idOperation'] ) - 1]."]];";
+        }
+
+        clientComptesSynthèseConseiller( DataClient(), $comptes, $list );
     }
 
 
