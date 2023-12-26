@@ -158,7 +158,7 @@ function creationContratOuverture(form) {
 //
 // NV
 //
-//
+// met les 5 éléments dans la zone de rendez-vous à venir
 //
 
 function getFiveElementsVenir(){
@@ -205,7 +205,7 @@ function getFiveElementsVenir(){
 //
 // NV
 //
-//
+// met les 5 éléments dans la zone de rendez-vous passez
 //
 
 function getFiveElementsPasse(){
@@ -253,7 +253,7 @@ function getFiveElementsPasse(){
 //
 // NV
 //
-//
+// page précédente dans les RDV à venir
 //
 
 function minusVenirButtonEvent() {
@@ -267,7 +267,7 @@ function minusVenirButtonEvent() {
 //
 // NV
 //
-//
+// page suivante dans les RDV à venir
 //
 
 function addVenirButtonEvent() {
@@ -281,7 +281,7 @@ function addVenirButtonEvent() {
 //
 // NV
 //
-//
+// page précédente dans les RDV passés
 //
 
 function minusPasseButtonEvent() {
@@ -295,7 +295,7 @@ function minusPasseButtonEvent() {
 //
 // NV
 //
-//
+// page suivante dans les RDV passés
 //
 
 function addPasseButtonEvent() {
@@ -344,7 +344,7 @@ function showSynthesisOfRdv( rdvId, rdvList ) {
 //
 // NV
 //
-//
+// appelé par une div de compte et affiche le produit clos dans la zone réservé
 //
 
 function setProduitClos( idCompte ) {
@@ -363,5 +363,54 @@ function setProduitClos( idCompte ) {
         document.getElementById("produitClos").innerHTML = list;
     } else {
         document.getElementById("produitClos").innerHTML = "";
+    }
+}
+
+
+//
+// NV
+//
+// affiche une selection de plage de dates
+//
+
+function plageDate( checkBoxId, divId, statsName ) {
+
+    divToChange = document.getElementById( divId );
+
+    console.log(divToChange == undefined)
+
+    if ( divToChange == undefined ) {
+        divCreation = document.createElement('div');
+        divCreation.id = divId;
+        document.getElementById( checkBoxId ).after(divCreation);
+        document.getElementById( divId ).innerHTML ='<p>'+
+        '<label for="dateDebut">Date De Début</label><input type="date" name="dateDebutStats'+statsName+'" required max="'+this.date+'"></p>'+
+        '<p><label for="dateFin">Date De Fin</label><input type="date" name="dateFinStats'+statsName+'" required min="'+this.date+'"></p>';
+    } else {
+        document.getElementById( divId ).outerHTML = '';
+    }
+}
+
+
+//
+// NV
+//
+// affiche une selection de date
+//
+
+function dateSelection( checkBoxId, divId, statsName ) {
+
+    divToChange = document.getElementById( divId );
+
+    console.log(divToChange == undefined)
+
+    if ( divToChange == undefined ) {
+        divCreation = document.createElement('div');
+        divCreation.id = divId;
+        document.getElementById( checkBoxId ).after(divCreation);
+        document.getElementById( divId ).innerHTML ='<p>'+
+        '<label for="dateDebut">Date De Fin</label><input type="date" name="dateStats'+statsName+'" required max="'+this.date+'"></p>';
+    } else {
+        document.getElementById( divId ).outerHTML = '';
     }
 }

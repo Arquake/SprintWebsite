@@ -1122,6 +1122,37 @@ body,html {
         font-size: 18px;
         text-align: center;
     }
+
+    .submitFormInputTotalWidth {
+        background-color: rgb(17, 124, 196);
+        border-radius: 10px;
+    
+        color: white;
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 20px;
+    
+        letter-spacing: 1px;
+    
+        float: right;
+        margin: 5%;
+        padding-top: 4%;
+        padding-bottom: 4%;
+        width: 90%;
+        cursor: pointer;
+    }
+
+    .checkboxStats {
+        margin-top: 2%;
+        margin-left: 5%;
+        margin-right: 25%;
+        margin-bottom: 1.5%;
+        width: 2%;
+        height: 80%;
+        transform: scale(3.3);
+        cursor: pointer;
+    }
 }
 
 

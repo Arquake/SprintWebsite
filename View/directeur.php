@@ -15,8 +15,6 @@
 
                     <li class="asideLi"><input class="asideInput" type="submit" value="Gestion Employé" name="asideDirecteurGestionEmploye"></li>
 
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Gestion RDV" name="asideDirecteurGestionRendezVous"></li>
-
                     <li class="asideLi"><input class="asideInput" type="submit" value="Gestion Compte" name="asideDirecteurGestionCompte"></li>
                     
                     <li class="asideLi"><input class="asideInput" type="submit" value="Gestion Contrat" name="asideDirecteurGestionContrat"></li>
@@ -155,7 +153,7 @@
                     <label for="posteCreation">Poste de l\'empolyé</label>
                     <select id="posteCreation" name="posteCreation">
                         <option value="Agent" ';
-        if ( $employe['poste'] == "Agent") { $contenu .= 'selected="selected"'; }
+                        if ( $employe['poste'] == "Agent") { $contenu .= 'selected="selected"'; }
                         $contenu .='>Agent</option>
                         <option value="Conseiller" ';
                         if ( $employe['poste'] == "Conseiller") { $contenu .= 'selected="selected"'; }
@@ -310,13 +308,52 @@
         require_once("View/gabarit.php");
     }
 
-    function modifierPiece(){
-        $contenu = connectedHeader() . directeurAside();
+
+    //
+    // NV
+    //
+    // Choix entre les différentes options de statistiques
+    //
+
+    function directeurChoixTypeStats() {
+
+        $date = new DateTime(date("y-m-d"));
+
+        $contenu = connectedHeader() . directeurAside().'
+
+        <script>
+            date = "'.$date->format("Y-m-d").'";
+        </script>
+
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+            <fieldset>
+                <legend>Action souhaitée</legend>
+                <p><label for="dateDebut">Date De Début</label><input type="date" name="dateDebutStats" required max=""></p><p><label for="dateFin">Date De Fin</label><input type="date" name="dateFinStats" required min=""></p>
+
+                    <p id="contrats"><label for="dateDebut">Nombres De Contrats</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="plageDate( \'contrats\', \'contratsDiv\', \'contrats\' )"></p>
+
+                    <p id="comptes"><label for="dateDebut">Nombres De Comptes</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="plageDate( \'comptes\', \'comptesDiv\', \'comptes\' )"></p>
+
+                    <p id="rdv"><label for="dateDebut">Nombres De RDV</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="plageDate( \'rdv\', \'rdvDiv\', \'rdv\' )"></p>
+
+                    <p id="nbClient"><label for="dateDebut">Nombres De Clients</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="dateSelection( \'nbClient\', \'nbClientDiv\', \'nbClient\' )"></p>
+
+                    <p id="soldeTotal"><label for="dateDebut">Solde Total</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="dateSelection( \'soldeTotal\', \'soldeTotalDiv\', \'soldeTotal\' )"></p>
+
+                    <input class="submitFormInput" type="submit" value="Rechercher" name="statsRechercheSubmit">
+
+            </fildset>    
+        </form>';
         require_once("View/gabarit.php");
     }
 
-    
-    function directeursStats(){
-        $contenu = connectedHeader() . directeurAside();
-        require_once("View/gabarit.php");
+
+    //
+    // NV
+    //
+    // affiche les stats directeur
+    //
+
+    function afficherStatsDirecteurs( $stats ) {
+
     }

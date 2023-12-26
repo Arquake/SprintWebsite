@@ -559,15 +559,6 @@
                 //
                 // 
                 //
-                else if ( isset($_POST['asideDirecteurGestionRendezVous']) ) {
-                    CtlDirecteurHomePage();
-                } 
-
-                //
-                //
-                //
-                // 
-                //
                 else if ( isset($_POST['asideDirecteurGestionCompte']) ) {
                     CtlDirecteurCompte();
                 } 
@@ -582,12 +573,12 @@
                 } 
 
                 //
-                // 
+                // NV
                 //
-                // 
+                // Quand le bouton Statistiques dans le aside est cliqué
                 //
                 else if ( isset($_POST['asideDirecteurStats']) ) {
-                    CtlDirecteurHomePage();
+                    CtlStatsDirecteur();
                 } 
 
 
@@ -681,6 +672,15 @@
 
                 else if ( isset($_POST['modifierEmployeChoisiSubmit']) ) {
                     CtlAppliquerModificationEmploye();
+                } 
+
+                //
+                // NV
+                //
+                // Quand le bouton recherche statistique est cliqué
+                //
+                else if ( isset($_POST['asideDirecteurStats']) ) {
+                    CtlStatsDirecteurRechercher();
                 } 
                 
                 else {

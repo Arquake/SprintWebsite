@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 25 déc. 2023 à 15:36
+-- Généré le : mar. 26 déc. 2023 à 18:08
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -91,15 +91,19 @@ CREATE TABLE IF NOT EXISTS `compteclient` (
   `plafond` int NOT NULL,
   `typeCompte` varchar(45) NOT NULL,
   PRIMARY KEY (`idCompte`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `compteclient`
 --
 
 INSERT INTO `compteclient` (`idCompte`, `idClient`, `dateOuverture`, `solde`, `interet`, `montantDecouvert`, `plafond`, `typeCompte`) VALUES
-(3, 8, '2023-12-21', 22950, 3, 0, 22950, 'Livret'),
-(4, 8, '2023-12-21', 120, 0, -300, 0, 'CCP');
+(3, 8, '2023-12-21', 21229, 3, 0, 22950, 'Livret'),
+(4, 8, '2023-12-21', 120, 0, -300, 0, 'CCP'),
+(5, 8, '2023-12-25', 1010, 0, 0, 0, 'CCP'),
+(6, 8, '2023-12-25', 0, 0, 0, 0, 'CCP'),
+(7, 8, '2023-12-25', 0, 0, 0, 0, 'CCP'),
+(8, 8, '2023-12-25', 0, 0, 0, 0, 'CCP');
 
 -- --------------------------------------------------------
 
@@ -135,7 +139,15 @@ CREATE TABLE IF NOT EXISTS `contratclient` (
   `tarifMensuel` float NOT NULL,
   `typeContrat` varchar(45) NOT NULL,
   PRIMARY KEY (`idContrat`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `contratclient`
+--
+
+INSERT INTO `contratclient` (`idContrat`, `idClient`, `dateVente`, `tarifMensuel`, `typeContrat`) VALUES
+(2, 8, '2023-12-25', 100, 'Assurance'),
+(3, 8, '2023-12-25', 350, 'Assurance');
 
 -- --------------------------------------------------------
 
@@ -159,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `employe` (
 --
 
 INSERT INTO `employe` (`login`, `password`, `poste`, `nomEmploye`, `prenomEmploye`, `dateEmbauche`) VALUES
-('Jeanne', '$2y$12$BGz/4IN0zWEbLz5Zma478ezDXi8dYNzKLvsSyFK/vjjFbI1bapE96', 'Directeur', 'Doe', 'Jeanne', '2023-12-02'),
+('Jeanne', '$2y$12$5qfBla3n1wBIoSL8dTnqVeXGRcY.mX/o5oTK8/oHxMfRH74RNf1li', 'Directeur', 'Doe', 'Jeanne', '2023-12-02'),
 ('JohnDoe', '$2y$12$NR8c3phliX2HcwexgiduMOcXc1PLBOfoyahrYJV72iP8Ez/HgTsx2', 'Agent', 'Doe', 'John', '2023-12-02'),
 ('JeanMichel', '$2y$12$5qfBla3n1wBIoSL8dTnqVeXGRcY.mX/o5oTK8/oHxMfRH74RNf1li', 'Conseiller', 'Jean', 'Michel', '2023-12-02');
 
@@ -197,7 +209,33 @@ CREATE TABLE IF NOT EXISTS `operation` (
   `typeOperation` varchar(45) NOT NULL,
   `montant` float NOT NULL,
   PRIMARY KEY (`idOperation`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `operation`
+--
+
+INSERT INTO `operation` (`idOperation`, `idCompte`, `typeOperation`, `montant`) VALUES
+(1, 5, 'dépot', 356),
+(2, 5, 'retrait', 36),
+(3, 3, 'retrait', 55),
+(4, 5, 'retrait', 50),
+(5, 5, 'dépot', 400),
+(6, 5, 'dépot', 50),
+(7, 5, 'dépot', 50),
+(8, 5, 'dépot', 50),
+(9, 5, 'dépot', 50),
+(10, 5, 'dépot', 50),
+(11, 5, 'dépot', 50),
+(12, 5, 'dépot', 50),
+(13, 5, 'dépot', 50),
+(14, 5, 'dépot', 50),
+(15, 5, 'dépot', 50),
+(16, 5, 'retrait', 60),
+(17, 5, 'retrait', 60),
+(18, 5, 'retrait', 60),
+(19, 5, 'dépot', 20),
+(20, 3, 'retrait', 1666);
 
 -- --------------------------------------------------------
 

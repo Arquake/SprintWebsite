@@ -111,14 +111,26 @@
 
 
     //
-    // 
+    // NV
     //
-    //
+    // Affiche les différentes type de stats au directeur
     //
 
-    function CtlStats() {
-        
+    function CtlStatsDirecteur() {
+        directeurChoixTypeStats();
     }
+
+
+    //
+    // NV
+    //
+    // récupère les statistiques demandés
+    //
+
+    function CtlStatsDirecteurRechercher() {
+
+    }
+
 
     //
     // MP
