@@ -144,8 +144,6 @@
     //
     // si la connexion client établi vérifie si le client est inscrit si il ne l'est pas oblige à l'inscrire sinon se connecte normaement
     //
-    // $researchtype : 1 = synthèse comptes | 2 = synthèse contrats | 3 = rdv | 4 = rdv venant du planning
-    //
     
     function CtlClientSynthèse( $rdvChoice = -1 ){
 
@@ -153,12 +151,11 @@
         
         $currentDate = date('Y-m-d');
         $index = 0;
+        $rdvChoisi = "";
 
         while ( $index < count($arr) && $arr[$index]['jourReunion'] < $currentDate ) {
             if ( $rdvChoice != -1 && $arr[$index]['idRdv'] == $rdvChoice) {
                 $rdvChoisi = $arr[$index];
-            } else {
-                $rdvChoisi = "";
             }
             $index++;
         }
