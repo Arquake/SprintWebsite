@@ -209,6 +209,7 @@ CREATE TABLE IF NOT EXISTS `operation` (
   `idCompte` int NOT NULL,
   `typeOperation` varchar(45) NOT NULL,
   `montant` float NOT NULL,
+  `dateOperation` date NOT NULL,
   PRIMARY KEY (`idOperation`)
 ) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

@@ -278,9 +278,36 @@
     function nombreClient() {
         $connexion = getConnect();
 
-        $query = "SELECT Count(*)'count' FROM rendezvous WHERE dateInscription <= '".$_POST['dateStatsnbClient']."' AND idClient!='-1'";
+        $query = "SELECT Count(*)'count' FROM client WHERE dateInscription <= '".$_POST['dateStatsnbClient']."' AND idClient!='-1'";
 
         $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC)['count'];
+
+        return $resultat;
+    }
+
+
+    //
+    // NV
+    //
+    // compte le nombre de RDV entre 2 dates
+    //
+
+    //
+    // SELECT SUM(solde) FROM compteClient ;
+    //
+    // SELECT IFNULL(SUM(montant), 0) FROM operation WHERE operation.dateOperation > '2023-12-27';
+    //
+
+    function soldeTotal() {
+        $connexion = getConnect();
+
+        echo "<script>console.log('".var_dump($_POST['dateStatssoldeTotal'])."')</script>";
+
+        $query = "SELECT ( SUM(compteClient.solde) - SUM(operation.montant))'count' FROM compteClient, operation WHERE operation.dateOperation > '".$_POST['dateStatssoldeTotal']."'";
+
+        echo "<script>console.log('".var_dump($query)."')</script>";
+
+        $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC);
 
         return $resultat;
     }

@@ -145,11 +145,13 @@
         }
 
         if( isset($_POST['dateStatsnbClient']) ) {
-            
+            $resClient = nombreClient();
+            echo "<script>console.log('".var_dump($resClient)."')</script>";
         }
 
         if( isset($_POST['dateStatssoldeTotal']) ) {
-            
+            $resTotal = soldeTotal();
+            echo "<script>console.log('".var_dump($resTotal)."')</script>";
         }
 
         afficherStatsDirecteurs( false );
