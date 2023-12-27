@@ -237,7 +237,7 @@
 
                     foreach ( $typeContrat as $contrat){
                         
-                        $contenu .= "<option value=".$contrat['typeContrat'].">".$contrat['typeContrat']."</option>";
+                        $contenu .= "<option value='".$contrat['typeContrat']."'>".$contrat['typeContrat']."</option>";
 
                     }
 
@@ -284,8 +284,8 @@
                     <select id="compteType" name="compteType">';
 
                     foreach ( $typeCompte as $compte){
-                        
-                        $contenu .= "<option value=".$compte['typeCompte'].">".$compte['typeCompte']."</option>";
+
+                        $contenu .= "<option value='".strval($compte['typeCompte'])."'>".$compte['typeCompte']."</option>";
 
                     }
 
@@ -374,7 +374,7 @@
 
                     foreach ( $comptes as $compte){
                         
-                        $contenu .= "<option value=".$compte['idCompte'].">".$compte['typeCompte']." - [".$compte['solde']."]</option>";
+                        $contenu .= "<option value='".$compte['idCompte']."'>".$compte['typeCompte']." - [".$compte['solde']."]</option>";
 
                     }
 
@@ -396,7 +396,7 @@
 
                 foreach ( $contrats as $contrat){
                     
-                    $contenu .= "<option value=".$contrat['idContrat'].">".$contrat['typeContrat']." - [".$contrat['tarifMensuel']."]</option>";
+                    $contenu .= "<option value='".$contrat['idContrat']."'>".$contrat['typeContrat']." - [".$contrat['tarifMensuel']."]</option>";
 
                 }
 
@@ -453,7 +453,7 @@
                     <p><label for="">Conseiller</label><select id="conseillerEDTChoice" name="conseillerEDTChoice"> ';
                     foreach ( $conseillers as $conseiller){
             
-                        $contenu .= "<option value=".$conseiller['login'].">". $conseiller['nomEmploye'] .' '. $conseiller['prenomEmploye'] ."</option>";
+                        $contenu .= "<option value='".$conseiller['login']."'>". $conseiller['nomEmploye'] .' '. $conseiller['prenomEmploye'] ."</option>";
             
                     }
                     

@@ -99,7 +99,7 @@
 
                     foreach ( $employes as $employe){
                         
-                        $contenu .= "<option value=".$employe['login'].">".$employe['nomEmploye']." - ".$employe['prenomEmploye']." - ".$employe['poste']."</option>";
+                        $contenu .= "<option value='".$employe['login']."'>".$employe['nomEmploye']." - ".$employe['prenomEmploye']." - ".$employe['poste']."</option>";
 
                     }
 
@@ -239,7 +239,7 @@
 
                 foreach ( $typeList as $type){
 
-                    $contenu .= "<option value=".$type['typeCompte'].">".$type['typeCompte']."</option>";
+                    $contenu .= "<option value='".$type['typeCompte']."'>".$type['typeCompte']."</option>";
                 
                 }
 
@@ -294,7 +294,7 @@
 
                 foreach ( $typeList as $type){
 
-                    $contenu .= "<option value=".$type['typeContrat'].">".$type['typeContrat']."</option>";
+                    $contenu .= "<option value='".$type['typeContrat']."'>".$type['typeContrat']."</option>";
                 
                 }
 
@@ -328,17 +328,16 @@
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
             <fieldset>
                 <legend>Action souhaitée</legend>
-                <p><label for="dateDebut">Date De Début</label><input type="date" name="dateDebutStats" required max=""></p><p><label for="dateFin">Date De Fin</label><input type="date" name="dateFinStats" required min=""></p>
 
-                    <p id="contrats"><label for="dateDebut">Nombres De Contrats</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="plageDate( \'contrats\', \'contratsDiv\', \'contrats\' )"></p>
+                    <p id="contrats"><label for="checkboxStatsContrats">Nombres De Contrats</label><input class="checkboxStats" type="checkbox" value="" name="checkboxStatsContrats" onClick="plageDate( \'contrats\', \'contratsDiv\', \'contrats\' )"></p>
 
-                    <p id="comptes"><label for="dateDebut">Nombres De Comptes</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="plageDate( \'comptes\', \'comptesDiv\', \'comptes\' )"></p>
+                    <p id="comptes"><label for="checkboxStatsComptes">Nombres De Comptes</label><input class="checkboxStats" type="checkbox" value="" name="checkboxStatsComptes" onClick="plageDate( \'comptes\', \'comptesDiv\', \'comptes\' )"></p>
 
-                    <p id="rdv"><label for="dateDebut">Nombres De RDV</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="plageDate( \'rdv\', \'rdvDiv\', \'rdv\' )"></p>
+                    <p id="rdv"><label for="checkboxStatsRDV">Nombres De RDV</label><input class="checkboxStats" type="checkbox" value="" name="checkboxStatsRDV" onClick="plageDate( \'rdv\', \'rdvDiv\', \'rdv\' )"></p>
 
-                    <p id="nbClient"><label for="dateDebut">Nombres De Clients</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="dateSelection( \'nbClient\', \'nbClientDiv\', \'nbClient\' )"></p>
+                    <p id="nbClient"><label for="checkboxStatsClients">Nombres De Clients</label><input class="checkboxStats" type="checkbox" value="" name="checkboxStatsClients" onClick="dateSelection( \'nbClient\', \'nbClientDiv\', \'nbClient\' )"></p>
 
-                    <p id="soldeTotal"><label for="dateDebut">Solde Total</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="dateSelection( \'soldeTotal\', \'soldeTotalDiv\', \'soldeTotal\' )"></p>
+                    <p id="soldeTotal"><label for="checkboxStatsSolde">Solde Total</label><input class="checkboxStats" type="checkbox" value="" name="checkboxStatsSolde" onClick="dateSelection( \'soldeTotal\', \'soldeTotalDiv\', \'soldeTotal\' )"></p>
 
                     <input class="submitFormInput" type="submit" value="Rechercher" name="statsRechercheSubmit">
 
@@ -355,5 +354,31 @@
     //
 
     function afficherStatsDirecteurs( $stats ) {
+        $date = new DateTime(date("y-m-d"));
 
+        $contenu = connectedHeader() . directeurAside().'
+
+        <script>
+            date = "'.$date->format("Y-m-d").'";
+        </script>
+
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+            <fieldset>
+                <legend>Action souhaitée</legend>
+
+                    <p id="contrats"><label for="dateDebut">Nombres De Contrats</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="plageDate( \'contrats\', \'contratsDiv\', \'contrats\' )"></p>
+
+                    <p id="comptes"><label for="dateDebut">Nombres De Comptes</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="plageDate( \'comptes\', \'comptesDiv\', \'comptes\' )"></p>
+
+                    <p id="rdv"><label for="dateDebut">Nombres De RDV</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="plageDate( \'rdv\', \'rdvDiv\', \'rdv\' )"></p>
+
+                    <p id="nbClient"><label for="dateDebut">Nombres De Clients</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="dateSelection( \'nbClient\', \'nbClientDiv\', \'nbClient\' )"></p>
+
+                    <p id="soldeTotal"><label for="dateDebut">Solde Total</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="dateSelection( \'soldeTotal\', \'soldeTotalDiv\', \'soldeTotal\' )"></p>
+
+                    <input class="submitFormInput" type="submit" value="Rechercher" name="statsRechercheSubmit">
+
+            </fildset>    
+        </form>';
+        require_once("View/gabarit.php");
     }

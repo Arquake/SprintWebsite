@@ -129,6 +129,28 @@
 
     function CtlStatsDirecteurRechercher() {
 
+        if( isset($_POST['dateDebutStatscontrats']) && isset($_POST['dateFinStatscontrats']) ) {
+            $res = nombreContrat();
+            echo "<script>console.log('".var_dump($res)."')</script>";
+        }
+
+        if( isset($_POST['dateDebutStatscomptes']) && isset($_POST['dateFinStatscomptes']) ) {
+            
+        }
+
+        if( isset($_POST['dateDebutStatsrdv']) && isset($_POST['dateFinStatsrdv']) ) {
+            
+        }
+
+        if( isset($_POST['dateStatsnbClient']) ) {
+            
+        }
+
+        if( isset($_POST['dateStatssoldeTotal']) ) {
+            
+        }
+
+        afficherStatsDirecteurs( false );
     }
 
 

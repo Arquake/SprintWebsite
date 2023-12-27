@@ -170,7 +170,7 @@
 
                     foreach ( $listeCompte as $compte){
                         
-                        $contenu .= "<option value=".$compte['idCompte'].">".$compte['idCompte']." - ".$compte['typeCompte']." - [ ".$compte['montantDecouvert']." ]</option>";
+                        $contenu .= "<option value='".$compte['idCompte']."'>".$compte['idCompte']." - ".$compte['typeCompte']." - [ ".$compte['montantDecouvert']." ]</option>";
 
                     }
 

@@ -258,7 +258,7 @@
 
         foreach ( $conseillerList as $conseiller){
             
-            $contenu .= "<option value=".$conseiller['login'].">".$conseiller['nomEmploye']."  ".$conseiller['prenomEmploye']."</option>";
+            $contenu .= "<option value='".$conseiller['login']."'>".$conseiller['nomEmploye']."  ".$conseiller['prenomEmploye']."</option>";
 
         }
 
@@ -309,7 +309,7 @@
 
         foreach ( $compteList as $compte){
             
-            $contenu .= "<option value=".$compte['idCompte'].">".$compte['typeCompte']." : ".$compte['solde']." €</option>";
+            $contenu .= "<option value='".$compte['idCompte']."'>".$compte['typeCompte']." : ".$compte['solde']." €</option>";
 
         }
 
@@ -478,7 +478,7 @@
 
         foreach ( $motifs as $motif){
 
-            $contenu .= "<option value=".$motif['idMotif'].">".$motif['libelleMotif']."</option>";
+            $contenu .= "<option value='".$motif['idMotif']."'>".$motif['libelleMotif']."</option>";
 
         }
         

@@ -55,6 +55,7 @@
         // DEFAULT CASES
         // Main pages of : AGENTS | CONSEILLERS | DIRECTEUR | CONNEXION PAGE
         //
+
         if ( isset($_SESSION['poste'])) {
             if ( $_SESSION['poste'] == "Agent" ) {
 
@@ -680,8 +681,25 @@
                 // Quand le bouton recherche statistique est cliqué
                 //
                 else if ( isset($_POST['asideDirecteurStats']) ) {
+                    directeurChoixTypeStats();
+                } 
+
+
+                //
+                // NV
+                //
+                // Quand le bouton recherche statistique est cliqué
+                //
+                else if ( isset($_POST['statsRechercheSubmit']) ) {
                     CtlStatsDirecteurRechercher();
                 } 
+
+
+                //
+                // NV
+                //
+                // DEFAULT CASE
+                //
                 
                 else {
                     CtlDirecteurHomePage();

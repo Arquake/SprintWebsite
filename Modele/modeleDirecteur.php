@@ -146,18 +146,23 @@
         $connexion -> query("DELETE FROM Compte WHERE typeCompte='".$type."'");
     }
 
+
     ///CONTRAT
+
 
     //
     // MP
     //
     // Retourne tout les types de contrat existants
     //
+
     function getTypeContratList(){
         $connexion = getConnect();
         $resultat = ($connexion -> query("SELECT typeContrat FROM Contrat"))->fetchAll(PDO::FETCH_ASSOC);
         return $resultat;
     }
+
+
 
     //
     // MP
@@ -165,6 +170,7 @@
     // Retourne vrai si aucun client ne possede ce type de contrat 
     // Retourne faux si qqn possede un contrat de ce type
     //
+
     function VerificationPossessionTypeContrat($type){
         $connexion = getConnect();
         $resultat = ($connexion -> query("SELECT idContrat FROM ContratClient WHERE typeContrat='".$type."'"))->fetchAll(PDO::FETCH_ASSOC);
@@ -172,12 +178,14 @@
         return empty($resultat);
     }
 
+
     //
     // MP
     //
     // Retourne vrai si le type de contrat n'existe pas  
     // Retourne faux si le type de contrat existe 
     //
+
     function VerificationExistanceTypeContrat($type){
         $connexion = getConnect();
         $resultat = ($connexion -> query("SELECT typeContrat FROM Contrat WHERE typeContrat='".$type."'"))->fetchAll(PDO::FETCH_ASSOC);
@@ -185,22 +193,43 @@
         return empty($resultat);
     }
 
+
     //
     // MP
     //
     // Ajoute le type aux types de contrat 
     // 
+
     function ajouterLeTypeContrat($type){
         $connexion = getConnect();
         $connexion -> query("INSERT INTO Contrat(typeContrat) VALUES('".$type."')");
     }
+
 
     //
     // MP
     //
     // Supprime le type des types de contrat
     // 
+
     function supprimerLeTypeContrat($type){
         $connexion = getConnect();
         $connexion -> query("DELETE FROM Contrat WHERE typeContrat='".$type."'");
+    }
+
+
+    //
+    // NV
+    //
+    // compte le nombre de contrat entre 2 dates
+    //
+
+    function nombreContrat() {
+        $connexion = getConnect();
+
+        $query = "SELECT Count(*)'count' FROM contratClient WHERE dateVente <= '".$_POST['dateFinStatscontrats']."' AND dateVente >= '".$_POST['dateDebutStatscontrats']."'";
+
+        $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC);
+
+        return $resultat;
     }
