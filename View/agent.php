@@ -16,36 +16,6 @@
 
                     <li class="asideLi"><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>
 
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Modifier découvert" name="asideConseillerModifDecouvert"></li>
-
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Prise rendez-vous" name="asideClientPriseRendezVous"></li>
-
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Nouvelle recherche" name="asideClientNouvelleRecherche"></li>
-
-                </ul>
-            </form>
-        </aside>';
-
-        return $contenu;
-    }
-
-
-    //
-    // NV
-    //
-    // fonction pour récupérer le aside si l'agent n'est pas connecté
-    //
-
-    function AgentAsideSideBarIfNoClient() {
-        $contenu = '
-        <aside>
-            <form action="index.php" method="post">
-                <ul class="asideUl">
-
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Modification client" name="asideClientModification"></li>
-
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>
-
                     <li class="asideLi"><input class="asideInput" type="submit" value="Prise rendez-vous" name="asideClientPriseRendezVous"></li>
 
                     <li class="asideLi"><input class="asideInput" type="submit" value="Nouvelle recherche" name="asideClientNouvelleRecherche"></li>
@@ -281,25 +251,7 @@
     //
 
     function transactionChoixClientAgentView($compteList){
-        $contenu = connectedHeader();
-        $contenu .= '
-        <aside>
-            <form action="index.php" method="post">
-                <ul class="asideUl">
-
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthse"></li>
-
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Modification Client" name="asideClientModification"></li>
-
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>
-
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Prise Rendez-Vous" name="asideClientPriseRendezVous"></li>
-
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
-
-                </ul>
-            </form>
-        </aside>
+        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '
         <form action="index.php" method="post" class="transactionForm" id="transactionForm">
             <fieldset>
                 <legend>Effectuer Transaction</legend>
@@ -340,9 +292,7 @@
     //
 
     function transactionRetraitClientAgentView() {
-        $contenu = connectedHeader();
-        $contenu .= '
-        <aside></aside>
+        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '
         
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
@@ -365,13 +315,12 @@
     //
     // MP
     //
-    //Affiche le panel pour deposer de l'argent sur le compte en session
+    // Affiche le panel pour deposer de l'argent sur le compte en session
     //
 
      function transactionDepotClientAgentView() {
 
-        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() .'
-        <aside></aside>        
+        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '     
 
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
@@ -394,8 +343,9 @@
         require_once("View/gabarit.php");
     }
 
+
     //
-    //MP
+    // MP
     //
     // Affiche la page de modification Agent(client simplifié) des infos client avec leur affichage de base à l'interieur.
     //

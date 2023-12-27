@@ -130,16 +130,18 @@
     function CtlStatsDirecteurRechercher() {
 
         if( isset($_POST['dateDebutStatscontrats']) && isset($_POST['dateFinStatscontrats']) ) {
-            $res = nombreContrat();
-            echo "<script>console.log('".var_dump($res)."')</script>";
+            $resContrats = nombreContrat();
+            echo "<script>console.log('".var_dump($resContrats)."')</script>";
         }
 
         if( isset($_POST['dateDebutStatscomptes']) && isset($_POST['dateFinStatscomptes']) ) {
-            
+            $resComptes = nombreCompte();
+            echo "<script>console.log('".var_dump($resComptes)."')</script>";
         }
 
         if( isset($_POST['dateDebutStatsrdv']) && isset($_POST['dateFinStatsrdv']) ) {
-            
+            $resRdv = nombreRdv();
+            echo "<script>console.log('".var_dump($resRdv)."')</script>";
         }
 
         if( isset($_POST['dateStatsnbClient']) ) {

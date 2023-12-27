@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 26 déc. 2023 à 18:08
+-- Généré le : mer. 27 déc. 2023 à 17:19
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `client` (
   `codePostale` int DEFAULT NULL,
   `profession` varchar(45) DEFAULT NULL,
   `situation` varchar(45) DEFAULT NULL,
+  `dateInscription` date DEFAULT NULL,
   PRIMARY KEY (`idClient`)
 ) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -47,10 +48,10 @@ CREATE TABLE IF NOT EXISTS `client` (
 -- Déchargement des données de la table `client`
 --
 
-INSERT INTO `client` (`idClient`, `nomClient`, `prenomClient`, `dateNaissance`, `estInscrit`, `numeroTelephone`, `mail`, `adresse`, `codePostale`, `profession`, `situation`) VALUES
-(9, 'Martin', 'Kys', '2023-12-14', 0, NULL, NULL, NULL, NULL, NULL, NULL),
-(8, 'Test', 'Test', '2023-12-12', 1, 1234567891, 'kys@kys.com', 'kys', 93270, 'kys', 'kys'),
-(7, 'Jonny', 'Doe', '2023-12-19', 1, 787173223, 'kys@kys.kys', 'kys', 91000, 'prof de kys', 'mort');
+INSERT INTO `client` (`idClient`, `nomClient`, `prenomClient`, `dateNaissance`, `estInscrit`, `numeroTelephone`, `mail`, `adresse`, `codePostale`, `profession`, `situation`, `dateInscription`) VALUES
+(9, 'Martin', 'Kys', '2023-12-14', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 'Test', 'Test', '2023-12-12', 1, 1234567891, 'kys@kys.com', 'kys', 93270, 'kys', 'kys', NULL),
+(7, 'Jonny', 'Doe', '2023-12-19', 1, 787173223, 'kys@kys.kys', 'kys', 91000, 'prof de kys', 'mort', NULL);
 
 -- --------------------------------------------------------
 

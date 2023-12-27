@@ -478,15 +478,8 @@
 
         foreach( $operations as $operation ) {
 
-            
-            if ( $operation['typeOperation'] == "retrait" ) {
-                $negative = -1;
-            } else {
-                $negative = 1;
-            }
-
             if ( !isset($listeOperation[$operation['idCompte']]) ) {
-                $listeOperation[$operation['idCompte']] = [ 'idCompte' => $operation['idCompte'], 'idOperation' => [$operation['idOperation']], 'montant' => [$negative*intval($operation['montant'])]];
+                $listeOperation[$operation['idCompte']] = [ 'idCompte' => $operation['idCompte'], 'idOperation' => [$operation['idOperation']], 'montant' => [$operation['montant']]];
             } else {
                 array_push( $listeOperation[$operation['idCompte']]['idOperation'], $operation['idOperation'] );
                 array_push( $listeOperation[$operation['idCompte']]['montant'], $operation['montant'] );
@@ -523,4 +516,30 @@
         $arr = getAllContratClient();
 
         clientContratsSynthèseConseiller( DataClient(), $arr );
+    }
+
+
+    //
+    // NV
+    //
+    // vérifie les informations fourni si elles sont bonne modifie le découvert sinon retouner une erreur
+    //
+
+    function CtlmodifierDecouvertSuite(){
+
+        if ( !isset($_POST['decouvertModification']) || $_POST['decouvertModification'] == '' || intval($_POST['decouvertModification']) > 0 ) {
+
+            $comptes = getAllCompteClient();
+
+            modificationDecouvert( $comptes, false, true );
+
+        } else {
+            
+            modifierDecouvert();
+
+            $comptes = getAllCompteClient();
+            
+            modificationDecouvert( $comptes, true );
+        }
+        
     }

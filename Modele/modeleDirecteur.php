@@ -229,7 +229,58 @@
 
         $query = "SELECT Count(*)'count' FROM contratClient WHERE dateVente <= '".$_POST['dateFinStatscontrats']."' AND dateVente >= '".$_POST['dateDebutStatscontrats']."'";
 
-        $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC);
+        $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC)['count'];
+
+        return $resultat;
+    }
+
+
+    //
+    // NV
+    //
+    // compte le nombre de comptes entre 2 dates
+    //
+
+    function nombreCompte() {
+        $connexion = getConnect();
+
+        $query = "SELECT Count(*)'count' FROM compteClient WHERE dateOuverture <= '".$_POST['dateFinStatscomptes']."' AND dateOuverture >= '".$_POST['dateDebutStatscontrats']."'";
+
+        $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC)['count'];
+
+        return $resultat;
+    }
+
+
+    //
+    // NV
+    //
+    // compte le nombre de RDV entre 2 dates
+    //
+
+    function nombreRdv() {
+        $connexion = getConnect();
+
+        $query = "SELECT Count(*)'count' FROM rendezvous WHERE dateCreationRdv <= '".$_POST['dateFinStatsrdv']."' AND dateCreationRdv >= '".$_POST['dateDebutStatsrdv']."' AND idClient!='-1'";
+
+        $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC)['count'];
+
+        return $resultat;
+    }
+
+
+    //
+    // NV
+    //
+    // compte le nombre de RDV entre 2 dates
+    //
+
+    function nombreClient() {
+        $connexion = getConnect();
+
+        $query = "SELECT Count(*)'count' FROM rendezvous WHERE dateCreationRdv <= '".$_POST['dateFinStatsrdv']."' AND dateCreationRdv >= '".$_POST['dateDebutStatsrdv']."' AND idClient!='-1'";
+
+        $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC)['count'];
 
         return $resultat;
     }

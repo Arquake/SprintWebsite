@@ -11,7 +11,7 @@
 
         $connexion -> query("UPDATE compteclient SET solde = solde - ".$montantRetrait." WHERE idCompte='".$_SESSION['idCompteClient']."'");
         
-        $connexion -> query("INSERT INTO operation(idCompte, typeOperation, montant) VALUES ('".$_SESSION['idCompteClient']."','retrait','".$montantRetrait."')");
+        $connexion -> query("INSERT INTO operation(idCompte, typeOperation, montant) VALUES ('".$_SESSION['idCompteClient']."','retrait','".-$montantRetrait."')");
     }
 
 
