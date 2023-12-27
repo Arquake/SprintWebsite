@@ -10,7 +10,19 @@
     function inscriptionClientConseiller() {
         $connexion = getConnect();
 
-        $query = "UPDATE client SET nomClient='".$_POST['nomClientInscription']."',prenomClient='".$_POST['prenomClientInscription']."',dateNaissance='".$_POST['dateNaissanceClientInscription']."',estInscrit='1',numeroTelephone='".$_POST['telephoneClientInscription']."',mail='".$_POST['mailClientInscription']."',adresse='".$_POST['adresseClientInscription']."',codePostale='".$_POST['codePostalClientInscription']."',profession='".$_POST['professionClientInscription']."',situation='".$_POST['situationClientInscription']."' WHERE idClient='".$_SESSION['idClient']."'";
+        $query = "UPDATE client SET 
+        
+        nomClient='".$_POST['nomClientInscription']."',
+        prenomClient='".$_POST['prenomClientInscription']."',
+        dateNaissance='".$_POST['dateNaissanceClientInscription']."',
+        estInscrit='1',numeroTelephone='".$_POST['telephoneClientInscription']."',
+        mail='".$_POST['mailClientInscription']."',adresse='".$_POST['adresseClientInscription']."',
+        codePostale='".$_POST['codePostalClientInscription']."',
+        profession='".$_POST['professionClientInscription']."',
+        situation='".$_POST['situationClientInscription']."',
+        dateInscription = CURRENT_DATE
+        
+        WHERE idClient='".$_SESSION['idClient']."'";
 
         $connexion->query($query);
 

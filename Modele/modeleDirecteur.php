@@ -278,7 +278,7 @@
     function nombreClient() {
         $connexion = getConnect();
 
-        $query = "SELECT Count(*)'count' FROM rendezvous WHERE dateCreationRdv <= '".$_POST['dateFinStatsrdv']."' AND dateCreationRdv >= '".$_POST['dateDebutStatsrdv']."' AND idClient!='-1'";
+        $query = "SELECT Count(*)'count' FROM rendezvous WHERE dateInscription <= '".$_POST['dateStatsnbClient']."' AND idClient!='-1'";
 
         $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC)['count'];
 
