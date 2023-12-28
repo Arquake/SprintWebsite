@@ -385,7 +385,7 @@ function plageDate( checkBoxId, divId, statsName ) {
         document.getElementById( checkBoxId ).after(divCreation);
         document.getElementById( divId ).innerHTML ='<p>'+
         '<label for="dateDebut">Date De Début</label><input type="date" name="dateDebutStats'+statsName+'" required max="'+this.date+'"></p>'+
-        '<p><label for="dateFin">Date De Fin</label><input type="date" name="dateFinStats'+statsName+'" required min="'+this.date+'"></p>';
+        '<p><label for="dateFin">Date De Fin</label><input type="date" name="dateFinStats'+statsName+'" required max="'+this.date+'"></p>';
     } else {
         document.getElementById( divId ).outerHTML = '';
     }

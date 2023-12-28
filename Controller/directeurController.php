@@ -129,32 +129,29 @@
 
     function CtlStatsDirecteurRechercher() {
 
+        $res = [];
+
         if( isset($_POST['dateDebutStatscontrats']) && isset($_POST['dateFinStatscontrats']) ) {
-            $resContrats = nombreContrat();
-            echo "<script>console.log('".var_dump($resContrats)."')</script>";
+            $res['contrats'] = nombreContrat();
         }
 
         if( isset($_POST['dateDebutStatscomptes']) && isset($_POST['dateFinStatscomptes']) ) {
-            $resComptes = nombreCompte();
-            echo "<script>console.log('".var_dump($resComptes)."')</script>";
+            $res['comptes'] = nombreCompte();
         }
 
         if( isset($_POST['dateDebutStatsrdv']) && isset($_POST['dateFinStatsrdv']) ) {
-            $resRdv = nombreRdv();
-            echo "<script>console.log('".var_dump($resRdv)."')</script>";
+            $res['rdv'] = nombreRdv();
         }
 
         if( isset($_POST['dateStatsnbClient']) ) {
-            $resClient = nombreClient();
-            echo "<script>console.log('".var_dump($resClient)."')</script>";
+            $res['clients'] = nombreClient();
         }
 
         if( isset($_POST['dateStatssoldeTotal']) ) {
-            $resTotal = soldeTotal();
-            echo "<script>console.log('".var_dump($resTotal)."')</script>";
+            $res['solde'] = soldeTotal();
         }
 
-        afficherStatsDirecteurs( false );
+        afficherStatsDirecteurs( $res );
     }
 
 

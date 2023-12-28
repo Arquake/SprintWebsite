@@ -354,31 +354,46 @@
     //
 
     function afficherStatsDirecteurs( $stats ) {
-        $date = new DateTime(date("y-m-d"));
 
         $contenu = connectedHeader() . directeurAside().'
 
-        <script>
-            date = "'.$date->format("Y-m-d").'";
-        </script>
-
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
             <fieldset>
-                <legend>Action souhaitée</legend>
 
-                    <p id="contrats"><label for="dateDebut">Nombres De Contrats</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="plageDate( \'contrats\', \'contratsDiv\', \'contrats\' )"></p>
+                <legend>Statistique</legend>';
 
-                    <p id="comptes"><label for="dateDebut">Nombres De Comptes</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="plageDate( \'comptes\', \'comptesDiv\', \'comptes\' )"></p>
+                
 
-                    <p id="rdv"><label for="dateDebut">Nombres De RDV</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="plageDate( \'rdv\', \'rdvDiv\', \'rdv\' )"></p>
+        if( isset($_POST['dateDebutStatscontrats']) && isset($_POST['dateFinStatscontrats']) ) {
+            $contenu .= '<p><label class="listePiece" for="">Nombres de Contrats du '.$_POST['dateDebutStatscontrats'].' au '.$_POST['dateFinStatscontrats'].'</label>
+            <textarea name="listePiece" id="listePiece" disabled="disabled" class="libelle">'.$stats['contrats'].'</textarea></p>';
+        }
 
-                    <p id="nbClient"><label for="dateDebut">Nombres De Clients</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="dateSelection( \'nbClient\', \'nbClientDiv\', \'nbClient\' )"></p>
+        if( isset($_POST['dateDebutStatscomptes']) && isset($_POST['dateFinStatscomptes']) ) {
+            $contenu .= '<p><label class="listePiece" for="">Nombres de Comptes du '.$_POST['dateDebutStatscomptes'].' au '.$_POST['dateFinStatscomptes'].'</label>
+            <textarea name="listePiece" id="listePiece" disabled="disabled" class="libelle">'.$stats['comptes'].'</textarea></p>';
+        }
 
-                    <p id="soldeTotal"><label for="dateDebut">Solde Total</label><input class="checkboxStats" type="checkbox" value="" name="" onClick="dateSelection( \'soldeTotal\', \'soldeTotalDiv\', \'soldeTotal\' )"></p>
+        if( isset($_POST['dateDebutStatsrdv']) && isset($_POST['dateFinStatsrdv']) ) {
+            $contenu .= '<p><label class="listePiece" for="">Nombres de Rendes-Vous prit du '.$_POST['dateDebutStatsrdv'].' au '.$_POST['dateDebutStatsrdv'].'</label>
+            <textarea name="listePiece" id="listePiece" disabled="disabled" class="libelle">'.$stats['rdv'].'</textarea></p>';
+        }
 
-                    <input class="submitFormInput" type="submit" value="Rechercher" name="statsRechercheSubmit">
+        if( isset($_POST['dateStatsnbClient']) ) {
+            $contenu .= '<p><label class="listePiece" for="">Nombres de Clients à la date du '.$_POST['dateStatsnbClient'].'</label>
+            <textarea name="listePiece" id="listePiece" disabled="disabled" class="libelle">'.$stats['clients'].'</textarea></p>';
+        }
 
-            </fildset>    
+        if( isset($_POST['dateStatssoldeTotal']) ) {
+            $contenu .= '<p><label class="listePiece" for="">Solde total à la date du '.$_POST['dateStatssoldeTotal'].' au '.$_POST['dateFinStatscontrats'].'</label>
+            <textarea name="listePiece" id="listePiece" disabled="disabled" class="libelle">'.$stats['solde'].'</textarea></p>';
+        }
+
+        $contenu .='<input class="submitFormInput" type="submit" value="Nouvelle Recherche" name="asideDirecteurStats">
+            </fieldset>
         </form>';
+
+
+
         require_once("View/gabarit.php");
     }

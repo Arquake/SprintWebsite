@@ -244,7 +244,7 @@
     function nombreCompte() {
         $connexion = getConnect();
 
-        $query = "SELECT Count(*)'count' FROM compteClient WHERE dateOuverture <= '".$_POST['dateFinStatscomptes']."' AND dateOuverture >= '".$_POST['dateDebutStatscontrats']."'";
+        $query = "SELECT Count(*)'count' FROM compteClient WHERE dateOuverture <= '".$_POST['dateFinStatscomptes']."' AND dateOuverture >= '".$_POST['dateDebutStatscomptes']."'";
 
         $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC)['count'];
 
@@ -293,21 +293,19 @@
     //
 
     //
-    // SELECT SUM(solde) FROM compteClient ;
+    // SELECT SUM(solde)'solde' FROM compteClient ;
     //
-    // SELECT IFNULL(SUM(montant), 0) FROM operation WHERE operation.dateOperation > '2023-12-27';
+    // SELECT IFNULL(SUM(montant), 0)'montant' FROM operation WHERE operation.dateOperation > '2023-12-27';
+    //
+    // SELECT solde - montant'resultat' FROM (SELECT SUM(solde)'solde' FROM compteClient)v1,(SELECT IFNULL(SUM(montant), 0)'montant' FROM operation WHERE operation.dateOperation > '2023-12-27')v2;
     //
 
     function soldeTotal() {
         $connexion = getConnect();
 
-        echo "<script>console.log('".var_dump($_POST['dateStatssoldeTotal'])."')</script>";
+        $query = "SELECT solde - montant'resultat' FROM (SELECT SUM(solde)'solde' FROM compteClient)v1,(SELECT IFNULL(SUM(montant), 0)'montant' FROM operation WHERE operation.dateOperation > '".$_POST['dateStatssoldeTotal']."')v2";
 
-        $query = "SELECT ( SUM(compteClient.solde) - SUM(operation.montant))'count' FROM compteClient, operation WHERE operation.dateOperation > '".$_POST['dateStatssoldeTotal']."'";
-
-        echo "<script>console.log('".var_dump($query)."')</script>";
-
-        $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC);
+        $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC)['resultat'];
 
         return $resultat;
     }
