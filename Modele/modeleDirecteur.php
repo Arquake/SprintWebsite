@@ -146,6 +146,17 @@
         $connexion -> query("DELETE FROM Compte WHERE typeCompte='".$type."'");
     }
 
+    //
+    // MP
+    //
+    // Retourne tout les motif ET les pieces existants
+    //
+    function getMotifPieceList(){
+        $connexion = getConnect();
+        $resultat = ($connexion -> query("SELECT * FROM motif"))->fetchAll(PDO::FETCH_ASSOC);
+        return $resultat;
+    }
+
 
     ///CONTRAT
 
@@ -217,6 +228,15 @@
         $connexion -> query("DELETE FROM Contrat WHERE typeContrat='".$type."'");
     }
 
+    //
+    // MP
+    //
+    // Ajoute le motif a la base de donné avec le libelle et les pieces inscrites
+    //
+    function ajoutMotif($motif,$piece){
+        $connexion = getConnect();
+        $connexion -> query("INSERT INTO motif(idMotif, libelleMotif, listePiece) VALUES(0,'".$motif."','".$piece."')");
+    }
 
     //
     // NV

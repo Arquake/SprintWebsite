@@ -98,18 +98,6 @@
         }
     }
 
-
-    //
-    // 
-    //
-    //
-    //
-
-    function CtlModifierPiece() {
-        
-    }
-
-
     //
     // NV
     //
@@ -160,9 +148,9 @@
     //
     // Repond au bouton "Gestion compte" du aside 
     //
-    function CtlDirecteurCompte( $sortie = 0){
+    function CtlDirecteurCompte($sortie = 0){
         $typeList = getTypeCompteList();
-        gestionCompte($typeList,$sortie);
+        gestionTypeCompte($typeList, $sortie);
     }
 
     //
@@ -173,9 +161,9 @@
     function CtlDirecteurAjouterCompte(){
         if (VerificationExistanceTypeCompte($_POST['DirecteurAjouterCompteType'])){        
             ajouterLeTypeCompte($_POST['DirecteurAjouterCompteType']);
-            CtlDirecteurCompte(1);
+            CtlGestionMotifs(1,1);
         }else {
-            CtlDirecteurCompte(4);
+            CtlGestionMotifs(1,2);
         }
     }
 
@@ -187,9 +175,9 @@
     function CtlDirecteurSupprimerCompte(){
         if (VerificationPossessionTypeCompte($_POST['DirecteurSupprimerCompteType'])){
             supprimerLeTypeCompte($_POST['DirecteurSupprimerCompteType']);
-            CtlDirecteurCompte(2);
+            CtlDirecteurCompte(1);
         } else {
-            CtlDirecteurCompte(3);
+            CtlDirecteurCompte(2);
         }
     }
 
@@ -199,9 +187,9 @@
     //
     // Repond au bouton "Gestion contrat" du aside 
     //
-    function CtlDirecteurContrat( $sortie = 0){
+    function CtlDirecteurContrat($sortie = 0){
         $typeList = getTypeContratList();
-        gestionContrat($typeList,$sortie);
+        gestionTypeContrat($typeList,$sortie);
     }
 
     //
@@ -212,9 +200,9 @@
     function CtlDirecteurAjouterContrat(){
         if (VerificationExistanceTypeContrat($_POST['DirecteurAjouterContratType'])){        
             ajouterLeTypeContrat($_POST['DirecteurAjouterContratType']);
-            CtlDirecteurContrat(1);
+            CtlGestionMotifs(2,1);
         }else {
-            CtlDirecteurContrat(4);
+            CtlGestionMotifs(2,2);
         }
     }
 
@@ -226,13 +214,50 @@
     function CtlDirecteurSupprimerContrat(){
         if (VerificationPossessionTypeContrat($_POST['DirecteurSupprimerContratType'])){
             supprimerLeTypeContrat($_POST['DirecteurSupprimerContratType']);
-            CtlDirecteurContrat(2);
+            CtlDirecteurContrat(1);
         } else {
-            CtlDirecteurContrat(3);
+            CtlDirecteurContrat(2);
         }
     }
 
+    //
+    // MP
+    //
+    // Link le bouton gestion employé a l'affichage des choix de l'action liée
+    // 
+    function CtlGestionEmploye(){
+        gestionEmploye();
+    }
 
+    //
+    // MP
+    //
+    // Link le bouton gestion produits de l'aside
+    // 
+    function CtlGestionProduits(){
+        gestionProduits();
+    }
+
+    //
+    // MP
+    //
+    // Link le bouton gestion motifs de l'aside
+    // - viaType par defaut sur 0, permet l'affichage correcte de la page des mtoifs
+    // - message par defaut sur 0, affiche le message par son id das la page de motifs 
+    function CtlGestionMotifs($viaType = 0, $message = 0){
+        $motifList = getMotifPieceList();
+        gestionMotifs($motifList,$viaType,$message);
+    }
+
+    //
+    // MP
+    //
+    //
+    //
+    function CtlAjoutMotif(){
+        ajoutMotif($_POST['DirecteurAjouterMotif'],$_POST['DirecteurAjouterPiece']);
+        CtlGestionMotifs();
+    }
 
 
 

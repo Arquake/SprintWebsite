@@ -7,7 +7,7 @@
     require_once("Controller/controller.php");
 
 
-    //echo "<script>console.log('".var_dump($_SESSION)."')</script>";
+    echo "<script>console.log('".var_dump($_SESSION)."')</script>";
     echo "<script>console.log('".var_dump($_POST)."')</script>";
 
 
@@ -532,25 +532,25 @@
                 // Quand le bouton "Gestion employé" dans le Aside est cliqué
                 //
                 if ( isset($_POST['asideDirecteurGestionEmploye']) ) {
-                    gestionEmploye();
+                    CtlGestionEmploye();
                 }
 
                 //
+                // MP
                 //
+                // Quand le bouton Gestion compte est cliqué
                 //
-                // 
-                //
-                else if ( isset($_POST['asideDirecteurGestionCompte']) ) {
-                    CtlDirecteurCompte();
+                else if ( isset($_POST['asideDirecteurGestionProduit']) ) {
+                    CtlGestionProduits();
                 } 
 
                 //
+                // MP
                 //
+                // Quand le bouton Gestion contrat est cliqué
                 //
-                // 
-                //
-                else if ( isset($_POST['asideDirecteurGestionContrat']) ) {
-                    CtlDirecteurContrat();
+                else if ( isset($_POST['asideDirecteurGestionMotifs']) ) {
+                    CtlGestionMotifs();
                 } 
 
                 //
@@ -583,7 +583,7 @@
                     CtlModifierEmploye();
                 }
 
-                /// COMPTE
+                /// --COMPTE--
         
                 //
                 // MP
@@ -602,8 +602,36 @@
                 else if ( isset($_POST['DirecteurRetirerCompteSubmit'] )) {
                     CtlDirecteurSupprimerCompte();
                 } 
+            
+                //
+                // MP
+                //
+                // Link le bouton "Supprimer type compte" au code correspondant
+                //
+                else if ( isset($_POST['DirecteurModifierCompteSubmit'] )) {
+                    CtlDirecteurModifierCompte();
+                } 
 
-                /// CONTRAT
+                //
+                // MP
+                //
+                // Link le bouton de modif des type de compte au code correspondant
+                //
+                else if ( isset($_POST['DirecteurGestionTypeCompte'] )) {
+                    CtlDirecteurCompte();
+                } 
+
+                //
+                // MP
+                //
+                // Link le bouton "terminer" de l'ajout de motif 
+                // renverra sur la page des compte
+                //
+                else if ( isset($_POST['DirecteurMotifSortieCompte'] )) {
+                    CtlDirecteurCompte();
+                } 
+
+                /// --CONTRAT--
         
                 //
                 // MP
@@ -623,6 +651,46 @@
                     CtlDirecteurSupprimerContrat();
                 } 
 
+                //
+                // MP
+                //
+                // Link le bouton de modif des type de contrat au code correspondant
+                //
+                else if ( isset($_POST['DirecteurGestionTypeContrat'] )) {
+                    CtlDirecteurContrat();
+                } 
+
+                //
+                // MP
+                //
+                // Link le bouton "terminer" de l'ajout de motif 
+                // renverra sur la page des contrat
+                //
+                else if ( isset($_POST['DirecteurMotifSortieContrat'] )) {
+                    CtlDirecteurContrat();
+                } 
+                
+
+                /// --MOTIFS--
+
+                //
+                // MP
+                //
+                // Quand le bouton "ajouter" de la page de gestion des
+                //
+                else if ( isset($_POST['DirecteurAjouterMotifSubmit'] )) {
+                    CtlAjoutMotif();
+                }
+
+
+
+
+
+
+
+
+
+                
                 //
                 // NV
                 //
