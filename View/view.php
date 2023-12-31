@@ -63,7 +63,7 @@
             <form action="index.php" method="POST" id="topForm">
                 <input type="image" src="View/style/assets/logo.png" alt="Submit" id="logo" name="menu">
 
-                <input class="topFormInformation" type="text" name="login" value="'.$_SESSION['prenom'].' '.$_SESSION['nom'].' ['.$_SESSION['poste'][0].']" disabled="disabled">
+                <input class="topFormInformation" type="text" name="login" value="[ '.$_SESSION['poste'].' ] '.$_SESSION['prenom'].' '.$_SESSION['nom'].'" disabled="disabled">
 
                 <input type="image" src="View/style/assets/logout.png" alt="Submit" id="signOut" name="deconnexion">
             </form>

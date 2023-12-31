@@ -364,27 +364,27 @@
 
         if( isset($_POST['dateDebutStatscontrats']) && isset($_POST['dateFinStatscontrats']) ) {
             $contenu .= '<p><label class="listePiece" for="">Nombres de Contrats du '.$_POST['dateDebutStatscontrats'].' au '.$_POST['dateFinStatscontrats'].'</label>
-            <textarea name="listePiece" id="listePiece" disabled="disabled" class="libelle">'.$stats['contrats'].'</textarea></p>';
+            <textarea name="listePiece" id="listePiece" disabled="disabled" class="resultatRecherche">'.$stats['contrats'].'</textarea></p>';
         }
 
         if( isset($_POST['dateDebutStatscomptes']) && isset($_POST['dateFinStatscomptes']) ) {
             $contenu .= '<p><label class="listePiece" for="">Nombres de Comptes du '.$_POST['dateDebutStatscomptes'].' au '.$_POST['dateFinStatscomptes'].'</label>
-            <textarea name="listePiece" id="listePiece" disabled="disabled" class="libelle">'.$stats['comptes'].'</textarea></p>';
+            <textarea name="listePiece" id="listePiece" disabled="disabled" class="resultatRecherche">'.$stats['comptes'].'</textarea></p>';
         }
 
         if( isset($_POST['dateDebutStatsrdv']) && isset($_POST['dateFinStatsrdv']) ) {
             $contenu .= '<p><label class="listePiece" for="">Nombres de Rendes-Vous prit du '.$_POST['dateDebutStatsrdv'].' au '.$_POST['dateDebutStatsrdv'].'</label>
-            <textarea name="listePiece" id="listePiece" disabled="disabled" class="libelle">'.$stats['rdv'].'</textarea></p>';
+            <textarea name="listePiece" id="listePiece" disabled="disabled" class="resultatRecherche">'.$stats['rdv'].'</textarea></p>';
         }
 
         if( isset($_POST['dateStatsnbClient']) ) {
             $contenu .= '<p><label class="listePiece" for="">Nombres de Clients à la date du '.$_POST['dateStatsnbClient'].'</label>
-            <textarea name="listePiece" id="listePiece" disabled="disabled" class="libelle">'.$stats['clients'].'</textarea></p>';
+            <textarea name="listePiece" id="listePiece" disabled="disabled" class="resultatRecherche">'.$stats['clients'].'</textarea></p>';
         }
 
         if( isset($_POST['dateStatssoldeTotal']) ) {
-            $contenu .= '<p><label class="listePiece" for="">Solde total à la date du '.$_POST['dateStatssoldeTotal'].' au '.$_POST['dateFinStatscontrats'].'</label>
-            <textarea name="listePiece" id="listePiece" disabled="disabled" class="libelle">'.$stats['solde'].'</textarea></p>';
+            $contenu .= '<p><label class="listePiece" for="">Solde total à la date du '.$_POST['dateStatssoldeTotal'] . '</label>
+            <textarea name="listePiece" id="listePiece" disabled="disabled" class="resultatRecherche">'.$stats['solde'].'</textarea></p>';
         }
 
         $contenu .='<input class="submitFormInput" type="submit" value="Nouvelle Recherche" name="asideDirecteurStats">

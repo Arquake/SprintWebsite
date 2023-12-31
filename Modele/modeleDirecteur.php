@@ -313,17 +313,16 @@
     //
 
     //
-    // SELECT SUM(solde)'solde' FROM compteClient ;
-    //
-    // SELECT IFNULL(SUM(montant), 0)'montant' FROM operation WHERE operation.dateOperation > '2023-12-27';
-    //
     // SELECT solde - montant'resultat' FROM (SELECT SUM(solde)'solde' FROM compteClient)v1,(SELECT IFNULL(SUM(montant), 0)'montant' FROM operation WHERE operation.dateOperation > '2023-12-27')v2;
+    //
+    //
+    // SELECT IFNULL(SUM(montant), 0)'resultat' FROM operation WHERE operation.dateOperation <= '".$_POST['dateStatssoldeTotal']."'
     //
 
     function soldeTotal() {
         $connexion = getConnect();
 
-        $query = "SELECT solde - montant'resultat' FROM (SELECT SUM(solde)'solde' FROM compteClient)v1,(SELECT IFNULL(SUM(montant), 0)'montant' FROM operation WHERE operation.dateOperation > '".$_POST['dateStatssoldeTotal']."')v2";
+        $query = "SELECT IFNULL(SUM(montant), 0)'resultat' FROM operation WHERE operation.dateOperation <= '".$_POST['dateStatssoldeTotal']."'";
 
         $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC)['resultat'];
 

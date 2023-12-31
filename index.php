@@ -7,8 +7,8 @@
     require_once("Controller/controller.php");
 
 
-    echo "<script>console.log('".var_dump($_SESSION)."')</script>";
-    echo "<script>console.log('".var_dump($_POST)."')</script>";
+    //echo "<script>console.log('".var_dump($_SESSION)."')</script>";
+    //echo "<script>console.log('".var_dump($_POST)."')</script>";
 
 
     //
@@ -609,7 +609,7 @@
                 // Link le bouton "Supprimer type compte" au code correspondant
                 //
                 else if ( isset($_POST['DirecteurModifierCompteSubmit'] )) {
-                    CtlDirecteurModifierCompte();
+                    //CtlDirecteurModifierCompte();
                 } 
 
                 //
