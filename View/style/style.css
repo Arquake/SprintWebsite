@@ -102,6 +102,8 @@ body,html {
         font-size: 20px;
     
         letter-spacing: 1px;
+
+        resize: none;
     }
 
 
@@ -120,6 +122,7 @@ body,html {
         font-size: 20px;
     
         letter-spacing: 1px;
+        resize: none;
     }
 
     
@@ -1254,25 +1257,43 @@ body,html {
         height: 100%;
         width: 4%;
         padding-left: 1%;
-        margin-bottom: 1%;
+        margin-right: 20%;
+
+        align-self: left;
+        justify-content: left;
     }
+
+    .topFormInformation {
+        
+        width: 50%;
+        padding: 0;
+        margin: 0;
+
+        background: none;
+        border: none;
+        color: white;
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 32px;
     
-    
+        text-align: center;
+        letter-spacing: 1px;
+
+        align-self: center;
+        justify-content: center;
+    }
+
     #signOut {
         height: 70%;
         width: 3%;
         padding-left: 1%;
-        margin-top: 0;
-        margin-bottom: 1.5%;
-        
-    }
-    
-    #signOutForm {
-        margin: 0.5%;
-        margin-right: 1%;
-        float: right;
-        height: 100%;
-        width: 3%;
+        margin: 0.25%;
+        margin-top: 0.75%;
+        margin-left: 20%;
+
+        align-self: right;
+        justify-content: right;       
     }
     
     input[type="radio"] {
@@ -1330,7 +1351,7 @@ body,html {
     }
     
     input[type=text], input[type=password], input[type=number], input[type=date], input[type=time] {
-        width: 53%;
+        width: 47%;
         height: 100%;
         float: right;
         margin-right: 3%;
@@ -1402,7 +1423,7 @@ body,html {
     }
     
     select {
-        width: 53%;
+        width: 50%;
         height: 100%;
         float: right;
         margin-right: 3%;
@@ -1533,7 +1554,7 @@ body,html {
 
     .sideFormPriseRendezVous {
         float: left;
-        width: 26%;
+        width: 20%;
         padding-top: 1% ;
         margin-left: 15%;
     }
@@ -1598,5 +1619,288 @@ body,html {
         overflow:auto;
 
         resize: none;
+    }
+
+    .liste {
+        width: 91.5%;
+        height: 30vh;
+        padding: 1.5%;
+        margin-right: 3%;
+        margin-left: 2.5%;
+    
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 20px;
+    
+        margin-top: 2%;
+
+        letter-spacing: 1px;
+
+        resize: none;
+    }
+
+    .libelle {
+        padding-top: 2.5%;
+        padding-bottom: 0;
+        text-align: center;
+        width: 94%;
+        height: 100%;
+        margin-right: 3%;
+        margin-left: 2.5%;
+    
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 20px;
+
+        margin-top: 2%;
+    
+        letter-spacing: 1px;
+        resize: none;
+    }
+
+    .listePiece {
+        color: white;
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 20px;
+    
+        text-align: center;
+        letter-spacing: 1.2%;
+    
+        display: block;
+        float: none;
+    
+        background-color: rgb(17, 124, 196);
+        border-radius: 5px;
+        width: 95%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 5%
+    }
+
+    table.edtAgents {
+        float: right;
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        table-layout: fixed;
+        width: 60%;
+        margin-right: 4%;
+        height: 80%;
+        text-align: center;
+        border-collapse: collapse;
+        border: 1px solid;
+    }
+
+    .semainetd {
+        margin-right: 4%;
+        padding: 0px;
+        padding-top: 2%;
+        padding-bottom: 2%;
+
+        height: 0px;
+        text-align: center;
+        
+
+        border-right: 1px solid;
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+
+        color: rgb(44, 44, 44);
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 26px;
+        text-align: center;
+    }
+
+    .jourth {
+        margin: 0;
+        padding: 0;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        height: 3%;
+        text-align: center;
+        border-right: 1px solid;
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+
+        color: rgb(44, 44, 44);
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .edttdHoraire {
+        margin-top: 1%;
+        margin-bottom: 1%;
+        top: 0;
+        height: 10%;
+        text-align: center;
+        padding: 0px;
+        border-right: 1px solid;
+        padding-left: 7px;
+        padding-right: 17px;
+    }
+
+    .insidetd {
+        display: block;
+        float: left;
+    
+        background-color: green;
+        border-radius: 10px;
+        border: none;
+        padding: 0%;
+        padding-left: 4%;
+        width: 100%;
+        height: 80px;
+
+        margin-top: 6%;
+        margin-bottom: 1%;
+        transition: background-color 0.25s;
+    }
+
+    button.insidetd {
+        cursor: pointer;
+    }
+
+    button.insidetd:active {
+        background-color: rgb(0, 104, 0);
+    }
+
+    .formation {
+        display: block;
+        float: left;
+    
+        background-color: rgb(59, 59, 59);
+        border-radius: 10px;
+        padding: 0%;
+        padding-left: 4%;
+        width: 100%;
+        height: 80px;
+        margin-bottom: 1%;
+    }
+
+    .horaires {
+        float: left;
+        color: white;
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 12px;
+        text-align: left;
+
+        padding-top: 20%;
+
+        letter-spacing: 1px;
+        left: 0px;
+    }
+
+    .edtSubmitWeekChange {
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        border: none;
+        outline: none;
+
+        color: white;
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 20px;
+        text-align: center;
+        letter-spacing: 1px;
+
+        background-color: rgb(17, 124, 196);
+
+        transition: background-color 0.25s;
+        cursor: pointer;
+    }
+
+    .edtSubmitWeekChange:hover {
+        background: rgb(41, 85, 168);
+    }    
+
+    .edtWeekChangeForm {
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .tdWeekChange {
+        height: 10%;
+        padding: 0;
+        margin: 0;
+    }
+ 
+    .indordvtd {
+        margin-top: 7%;
+        padding-right: 3%;
+        display: block;
+
+        color: white;
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 11px;
+        text-align: right;
+        letter-spacing: 1px;
+
+        overflow: hidden;
+    }
+
+    .priseRDVformLabel {
+        color: white;
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 16px;
+    
+        text-align: right;
+        letter-spacing: 1px;
+    
+        display: block;
+        float: left;
+    
+        background-color: rgb(17, 124, 196);
+        border-radius: 5px;
+        padding: 1.5%;
+        width: 40%;
+        margin-right: 0%;
+        margin-bottom: 1%;
+
+        padding-top: 2.5%;
+        padding-bottom: 2.5%;
+    }
+
+    .priseRDVformLabelIDRDV {
+        color: white;
+        font-family: 'SF Pro Display';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 14px;
+    
+        text-align: right;
+        letter-spacing: 1px;
+    
+        display: block;
+        float: left;
+    
+        background-color: rgb(17, 124, 196);
+        border-radius: 5px;
+        padding: 1.5%;
+        width: 40%;
+        margin-right: 0%;
+        margin-bottom: 1%;
+
+        padding-top: 2.5%;
+        padding-bottom: 2.5%;
     }
 }
