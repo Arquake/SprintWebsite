@@ -335,8 +335,6 @@ function showSynthesisOfRdv( rdvId, rdvList ) {
         '    Liste Pièces Necessaire : <textarea class="rightSyntheseInfoTextarea" disabled>'+ rdvarr[6] +'</textarea>'+
         '</div>';
 
-    console.log(list)
-
     document.getElementById("infoSyntheseBlock").innerHTML = list
 }
 
@@ -377,8 +375,6 @@ function plageDate( checkBoxId, divId, statsName ) {
 
     divToChange = document.getElementById( divId );
 
-    console.log(divToChange == undefined)
-
     if ( divToChange == undefined ) {
         divCreation = document.createElement('div');
         divCreation.id = divId;
@@ -402,8 +398,6 @@ function dateSelection( checkBoxId, divId, statsName ) {
 
     divToChange = document.getElementById( divId );
 
-    console.log(divToChange == undefined)
-
     if ( divToChange == undefined ) {
         divCreation = document.createElement('div');
         divCreation.id = divId;
@@ -413,4 +407,55 @@ function dateSelection( checkBoxId, divId, statsName ) {
     } else {
         document.getElementById( divId ).outerHTML = '';
     }
+}
+
+
+//
+// NV
+//
+// modifie les boutons disponible lors de changement d'information client
+//
+
+function modificationClientEditSubmit( validation ) {
+
+    divToChange = document.getElementById( "modification" );
+
+    nom = document.getElementById( "nomClientModification" );
+
+    prenom = document.getElementById( "prenomClientModification" );
+
+    date = document.getElementById( "dateNaissanceClientModification" );
+
+    event.preventDefault();
+
+    if ( validation ) {
+        divToChange.innerHTML = '<p><input class="submitFormInput" type="submit" value="Valider" name="ValiderModificationClientSubmit"></p>'+
+                                '<p><input class="submitFormInput" type="submit" value="Editer" name="ReModificationClientSubmit" onClick="modificationClientEditSubmit(false)"></p>';
+        
+        nom.disabled = true;
+        prenom.disabled = true;
+        date.disabled = true;
+
+    } else {
+        divToChange.innerHTML = '<p><input class="submitFormInput" type="submit" value="Modifier" name="ModificationClientSubmit" onClick="modificationClientEditSubmit(true)"></p>';
+        nom.disabled = false;
+        prenom.disabled = false;
+        date.disabled = false;
+    }
+}
+
+
+//
+// NV
+//
+// réactive les champ pour être envoyé
+//
+
+function modificationSubmit() {
+
+    document.getElementById( "nomClientModification" ).disabled = false;
+
+    document.getElementById( "prenomClientModification" ).disabled = false;
+
+    document.getElementById( "dateNaissanceClientModification" ).disabled = false;
 }

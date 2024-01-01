@@ -120,16 +120,19 @@
         return $resultat;
     }
 
+
     //
-    // MP
+    // MP - NV
     //
     // Modifie les informations du client en session avec celle fournie
     //
+
     function editInformationClient(){
         $connexion = getConnect();
 
-        $connexion->query("UPDATE Client SET nomClient = '".$_SESSION['nomClientModification']."', prenomClient = '".$_SESSION['prenomClientModification']."', dateNaissance = '".$_SESSION['dateNaissanceClientModification']."'  WHERE idClient='".$_SESSION['idClient']."'");
+        $connexion->query("UPDATE Client SET nomClient = '".$_POST['nomClientModification']."', prenomClient = '".$_POST['prenomClientModification']."', dateNaissance = '".$_POST['dateNaissanceClientModification']."' WHERE idClient='".$_SESSION['idClient']."'");
     }
+
 
     //
     // NV

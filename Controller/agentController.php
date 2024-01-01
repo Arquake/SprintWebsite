@@ -216,7 +216,6 @@
     function CtlAgentTransactionClient(){
         $_SESSION['idCompteClient'] = $_POST['compteSelection'];
         $res = getCompteViaId($_SESSION['idCompteClient']);
-        echo "<script>console.log('".var_dump($res)."')</script>";
         $_SESSION['typeCompteClient'] = $res['typeCompte'];
         $_SESSION['soldeCompteClient'] = $res['solde'];
         $_SESSION['plafondCompteClient'] = $res['plafond'];
@@ -282,51 +281,29 @@
     //
 
     function CtlModificationClient() {
-        AgentclientModificationPage($_SESSION['clientNom'], $_SESSION['clientPrenom'], $_SESSION['clientNaissance']);
+        AgentclientModificationPage();
     }
 
     //
-    // MP
-    //
-    // Bouton "Modifier" de la modification des infos clients.
-    // Appel la page et sauvegarde la modification des informations du client. 
-    //
-    function CtlAgentModificationClient(){
-        $_SESSION['nomClientModification'] = $_POST['nomClientModification'];
-        $_SESSION['prenomClientModification'] = $_POST['prenomClientModification'];
-        $_SESSION['dateNaissanceClientModification'] = $_POST['dateNaissanceClientModification'];
-        
-        AgentclientModificationPageVerification();
-    }
-
-    //
-    // MP
+    // MP - NV
     //
     // Bouton "Valider" de la modification des infos clients
     // Retour a l'acceuil et effectue les modification sur la base de donnée et dans la session
     //
     function CtlAgentValiderModificationClient() {
-        editInformationClient();
 
-        $_SESSION['clientNom'] = $_SESSION['nomClientModification'];
-        $_SESSION['clientPrenom'] = $_SESSION['prenomClientModification']; 
-        $_SESSION['clientNaissance'] = $_SESSION['dateNaissanceClientModification'];
+        if ( $_POST['nomClientModification'] != '' && $_POST['prenomClientModification'] != "" && $_POST['dateNaissanceClientModification'] != "" ) {
+            $_SESSION['clientNom'] = $_POST['nomClientModification'];
+            $_SESSION['clientPrenom'] = $_POST['prenomClientModification']; 
+            $_SESSION['clientNaissance'] = $_POST['dateNaissanceClientModification'];
 
-        unset($_SESSION['nomClientModification']);
-        unset($_SESSION['prenomClientModification']);
-        unset($_SESSION['dateNaissanceClientModification']);
+            editInformationClient();
 
-        accueilAgent();
-    }
-    
-    //
-    // MP
-    //
-    // Bouton "Editer" de la modification des infos clients
-    // 
-    //
-    function CtlAgentReModificationClient(){
-        AgentclientModificationPage($_SESSION['nomClientModification'],$_SESSION['prenomClientModification'],$_SESSION['dateNaissanceClientModification']);
+            AgentclientModificationPage( true );
+        } else {
+            AgentclientModificationPage( false, true );
+        }
+        
     }
 
 
@@ -401,7 +378,7 @@
 
         if ($_POST['rdvDel'] != '' ) {
 
-            if ( !empty( rdvToIdClient() ) ) {
+            if ( empty( rdvToIdClient() ) ) {
                 $conseillersInfos = employeInformations( $_SESSION['conseillerRattacherClient'] );
                 priseDeRendezVousAgents( getMotifsType(), $arr, $conseillersInfos, false, false, false,true );
             } else {

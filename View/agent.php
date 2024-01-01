@@ -345,53 +345,43 @@
 
 
     //
-    // MP
+    // MP - NV
     //
     // Affiche la page de modification Agent(client simplifié) des infos client avec leur affichage de base à l'interieur.
     //
-    function AgentclientModificationPage($nom,$prenom,$dateNaissance) {
-        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '
-        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+    //
+    //<p id="valider"><input class="submitFormInput" type="submit" value="Valider" name="ValiderModificationClientSubmit"></p>
+    //<p id="editer"><input class="submitFormInput" type="submit" value="Editer" name="ReModificationClientSubmit" onClick="modificationClientEditSubmit(false)"></p>
+    //<p id="modifier"><input class="submitFormInput" type="submit" value="Modifier" name="ModificationClientSubmit" onClick="modificationClientEditSubmit(true)"></p>
+    //
+
+    function AgentclientModificationPage( $modificationApplique = false, $error = false ) {
+        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected();
+        
+        if ( $modificationApplique ) {
+            $contenu .= '<div class="invalidForm">Les informations du client ont été modifiés</div>';
+        } else if ( $error ) {
+            $contenu .= '<div class="invalidForm">Une erreur est survenu lors de la modification</div>';
+        }
+        
+        $contenu .= '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm" onSubmit="modificationSubmit()">
 
             <fieldset>
 
                 <legend>Modifier Client</legend>
 
-                <p><label for="nomClientModification">Nom du Client</label><input type="text" name="nomClientModification" value="'.$nom.'" required></p>
+                <p><label for="nomClientModification">Nom du Client</label><input type="text" id="nomClientModification" name="nomClientModification" value="'.$_SESSION['clientNom'].'" required></p>
 
-                <p><label for="prenomClientModification">Prénom du Client</label><input type="text" name="prenomClientModification" value="'.$prenom.'"required ></p>
+                <p><label for="prenomClientModification">Prénom du Client</label><input type="text" id="prenomClientModification" name="prenomClientModification" value="'.$_SESSION['clientPrenom'].'"required ></p>
 
-                <p><label for="dateNaissanceClientModification">Date de Naissanse du Client</label><input type="date" name="dateNaissanceClientModification" value="'.$dateNaissance.'" required></p>
+                <p><label for="dateNaissanceClientModification">Date de Naissanse du Client</label><input type="date" id="dateNaissanceClientModification" name="dateNaissanceClientModification" value="'.$_SESSION['clientNaissance'].'" required max="'.(new DateTime(date("y-m-d")))->format("Y-m-d").'"></p>
 
 
-                <p><input class="submitFormInput" type="submit" value="Modifier" name="ModificationClientSubmit"></p>
-            </fieldset>
-        </form>
-        ';
-        require_once("View/gabarit.php");
-    }
+                <div id="modification">
+                    <p id="modifier"><input class="submitFormInput" type="submit" value="Modifier" name="ModificationClientSubmit" onClick="modificationClientEditSubmit(true)"></p>
+                </div>
 
-    //
-    //MP
-    //
-    // Affiche la page de modification Agent(client simplifié) des infos client avec leur affichage de base à l'interieur.
-    //
-    function AgentclientModificationPageVerification() {
-        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '
-        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
-
-            <fieldset>
-
-                <legend>Nouvelles informations</legend>
-
-                <p><label for="nomClientModif">Nom du Client</label><input type="text" name="nomClientModif" value="'.$_SESSION['nomClientModification'].'" disabled="disabled"></p>
-
-                <p><label for="prenomClientModif">Prénom du Client</label><input type="text" name="prenomClientModif" value="'.$_SESSION['prenomClientModification'].'" disabled="disabled"></p>
-
-                <p><label for="dateNaissanceClientModif">Date de Naissanse du Client</label><input type="date" name="dateNaissanceClientModif" value="'.$_SESSION['dateNaissanceClientModification'].'" disabled="disabled"></p>
-
-                <p><input class="submitFormInput" type="submit" value="Valider" name="ValiderModificationClientSubmit"></p>
-                <p><input class="submitFormInput" type="submit" value="Editer" name="ReModificationClientSubmit"></p>
             </fieldset>
         </form>
         ';
@@ -405,7 +395,7 @@
     // Page avec l'EDT du conseiller du client et les forms de prise et suppression de rendez vous
     //
 
-    function priseDeRendezVousAgents( $motifs, $arr, $conseiller, $error=false, $cree=false, $supprime=false ) {
+    function priseDeRendezVousAgents( $motifs, $arr, $conseiller, $error=false, $cree=false, $supprime=false, $errorSupression = false ) {
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected();
 
         if ( $error ) {
@@ -414,6 +404,8 @@
             $contenu .= '<div class="invalidForm">RDV Créé</div>';
         } else if ( $supprime ) {
             $contenu .= '<div class="invalidForm">RDV Supprimé</div>';
+        } else if ( $errorSupression ) {
+            $contenu .= '<div class="invalidForm">Le RDV sélectionné n\'existe pas</div>';
         }
 
         $contenu .= '<div class"priseRdv">
@@ -422,7 +414,7 @@
 
                     <legend>Programmer un RDV</legend>
                     <p>
-                        <label for="motifRDV">Motif Du RDV</label>
+                        <label for="motifRDV" class="priseRDVformLabel">Motif Du RDV</label>
                         <select id="motifRDV" name="motifRDV" required>
                         ';
 
@@ -435,16 +427,16 @@
         $contenu .= '
                         </select>
                     </p>
-                    <p><label for="">Date</label><input type="date" name="date" id="date"></p>
-                    <p><label for="">Heure de début</label><input type="time" name="heureDebut" id="heureDebut"></p>
-                    <p><label for="">Heure de fin</label><input type="time" name="heureFin" id="heureFin"></p>
+                    <p><label for="" class="priseRDVformLabel">Date</label><input type="date" name="date" id="date" min="'.(new DateTime(date("y-m-d")))->modify('+1 days')->format("Y-m-d").'"></p>
+                    <p><label for="" class="priseRDVformLabel">Heure de début</label><input type="time" name="heureDebut" id="heureDebut"></p>
+                    <p><label for="" class="priseRDVformLabel">Heure de fin</label><input type="time" name="heureFin" id="heureFin"></p>
                     <input class="submitFormInput" type="submit" name="creerRDVAgent" value="Créer">
                 </fieldset>
                 
 
                 <fieldset>
                     <legend>Supprimer un RDV</legend>
-                    <p><label for="">Identifiant du RDV</label><input type="number" name="rdvDel" id="rdvDel"></p> 
+                    <p><label for="" class="priseRDVformLabelIDRDV">Identifiant du RDV</label><input type="number" name="rdvDel" id="rdvDel"></p> 
                     <input class="submitFormInput" type="submit"  name="deleteRDVAgent" value="Supprimer">
 
                 </fieldset>

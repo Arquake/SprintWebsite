@@ -171,24 +171,6 @@
                 else if ( isset($_POST['asideClientModification']) ) {
                     CtlModificationClient();
                 }
-
-                //
-                // MP
-                //
-                // Bouton "Modifier" de la modification des infos clients
-                //
-                else if ( isset($_POST['ModificationClientSubmit'])){
-                    CtlAgentModificationClient();
-                }
-
-                //
-                // MP
-                //
-                // Bouton "Editer" de la modification des infos clients
-                //
-                else if ( isset($_POST['ReModificationClientSubmit'])){
-                    CtlAgentReModificationClient();
-                }
                 
                 //
                 // MP
