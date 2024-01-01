@@ -314,8 +314,6 @@ function addPasseButtonEvent() {
 
 function showSynthesisOfRdv( rdvId, rdvList ) {
 
-    console.log(rdvId)
-
     if ( rdvList == 1 ) {
         rdvarr = this.arrVenir[rdvId]
     } else {

@@ -357,6 +357,8 @@
             $contenu .= '<div class="invalidForm">Le compte a été résilié</div>';
         } else if ( $resilierContratSucess ) {
             $contenu .= '<div class="invalidForm">Le contrat a été résilié</div>';
+        } else if ( empty($comptes) && empty($contrats) ) {
+            $contenu .= '<div class="invalidForm">Aucun Compte ou Contrat n\'existe pour le client</div>';
         }
         
         $contenu .= '
@@ -468,16 +470,16 @@
 
                     <legend>Programmer une Formation</legend>
 
-                    <p><label for="">Date</label><input type="date" name="date" id="date"></p>
-                    <p><label for="">Heure de début</label><input type="time" name="heureDebut" id="heureDebut"></p>
-                    <p><label for="">Heure de fin</label><input type="time" name="heureFin" id="heureFin"></p>
+                    <p><label for="" class="priseRDVformLabel">Date</label><input type="date" name="date" id="date" min="'.(new DateTime(date("y-m-d")))->modify('+1 days')->format("Y-m-d").'"></p>
+                    <p><label for="" class="priseRDVformLabel">Heure de début</label><input type="time" name="heureDebut" id="heureDebut"></p>
+                    <p><label for="" class="priseRDVformLabel">Heure de fin</label><input type="time" name="heureFin" id="heureFin"></p>
                     <input class="submitFormInput" type="submit" name="creerRDVConseiller" value="Créer">
                 </fieldset>
                 
 
                 <fieldset>
                     <legend>Supprimer un RDV</legend>
-                    <p><label for="">Identifiant du RDV</label><input type="number" name="rdvDel" id="rdvDel"></p> 
+                    <p><label for="" class="priseRDVformLabelIDRDV">Identifiant du RDV</label><input type="number" name="rdvDel" id="rdvDel"></p> 
                     <input class="submitFormInput" type="submit"  name="deleteRDVConseiller" value="Supprimer">
 
                 </fieldset>

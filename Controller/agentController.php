@@ -290,6 +290,7 @@
     // Bouton "Valider" de la modification des infos clients
     // Retour a l'acceuil et effectue les modification sur la base de donnée et dans la session
     //
+    
     function CtlAgentValiderModificationClient() {
 
         if ( $_POST['nomClientModification'] != '' && $_POST['prenomClientModification'] != "" && $_POST['dateNaissanceClientModification'] != "" ) {
@@ -303,7 +304,7 @@
         } else {
             AgentclientModificationPage( false, true );
         }
-        
+
     }
 
 

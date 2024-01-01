@@ -4,7 +4,7 @@
     //
     // NV
     //
-    // 
+    // aside du directeur
     //
 
     function directeurAside() {
@@ -30,7 +30,7 @@
     //
     // NV
     //
-    // 
+    // affiche l'accueil du directeur
     //
 
     function accueilDirecteur(){
@@ -42,7 +42,7 @@
     //
     // NV
     //
-    // 
+    // affiche la page de modification employe
     //
 
     function gestionEmployeDirecteur($employeCreated = false){
@@ -178,11 +178,13 @@
         require_once("View/gabarit.php");
     }
 
+
     //
     // MP
     //
     // Affichage du choix entre creer employé et modifier employe
     //
+
     function gestionEmploye(){
         $contenu = connectedHeader() . directeurAside().'
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
@@ -198,11 +200,13 @@
         require_once("View/gabarit.php");
     }
 
+
     //
     // MP
     //
     // Affichage du choix pour la gestion compte
     //
+
     function gestionTypeCompte($typeList,$sortie = 0){
         $contenu = connectedHeader() . directeurAside();
 
@@ -228,7 +232,7 @@
 
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
             <fieldset>
-                <legend>Types de compte</legend>
+                <legend>Modifier Types de compte</legend>
                 </p>
 
                 <p>
@@ -252,11 +256,13 @@
         require_once("View/gabarit.php");
     }
 
+
     //
     // MP
     //
     // Affichage du choix pour la gestion contrat
     //
+
     function gestionTypeContrat($typeList, $sortie){
         $contenu = connectedHeader() . directeurAside();
 
@@ -396,11 +402,13 @@
         require_once("View/gabarit.php");
     }
 
+
     //
     // MP
     //
     // Affichage du choix de la gestion de contrat
     //
+
     function gestionProduits(){
         $contenu = connectedHeader() . directeurAside().'
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
@@ -416,6 +424,7 @@
         require_once("View/gabarit.php");
     }
 
+
     //
     // MP
     //
@@ -427,6 +436,7 @@
     // - 1, quand on arrive sur cette page apres création d'un type de compte
     // - 2, quand on arrive sur cette page apres création d'un type de compte  
     //
+
     function gestionMotifs($motifList,$viaType,$sortieType=0,$sortie = 0){
         $contenu = connectedHeader() . directeurAside();
 
@@ -497,6 +507,7 @@
     //
     // Affiche la page de modification de motif avec affichage des infos actuelle à l'interieur.
     //
+
     function motifModificationPage($libelle,$piece) {
         $contenu = connectedHeader() . directeurAside() . '
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
@@ -516,11 +527,13 @@
         require_once("View/gabarit.php");
     }
 
+
     //
     // MP
     //
     // Affiche la page de verification de modification des motifs avec affichage des infos actuelle à l'interieur.
     //
+    
     function motifModificationPageVerification() {
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
