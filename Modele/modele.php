@@ -17,11 +17,8 @@
 
             return $connexion;
         } catch ( Exception $e ){
-            echo "<script>console.log('".var_dump($e)."')</script>";
+            throw new Exception('Erreur lors de la connexion à la base de données');
         }
-        
-
-        
     }
 
 

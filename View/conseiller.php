@@ -34,7 +34,7 @@
     //
     // NV
     //
-    // aside conseiller
+    // aside conseiller connecté à un client
     //
     // DOIT UNIQUEMENT ETRE APPELE POUR RETOURNER SON CONTENU
     //
@@ -60,12 +60,13 @@
     //
     // NV
     //
-    // vue de la recherche client
+    // aside conseiller non connecté à un client
+    //
+    // DOIT UNIQUEMENT ETRE APPELE POUR RETOURNER SON CONTENU
     //
 
-    function rechercheClientConseillerView($valid = true){
-        $contenu = connectedHeader();
-        $contenu .= '
+    function ConseillerAsideSideBarWhenClientNotConnected() {
+        return '
         <aside>
             <form action="index.php" method="post">
                 <ul class="asideUl">
@@ -77,6 +78,17 @@
                 </ul>
             </form>
         </aside>';
+    }
+
+
+    //
+    // NV
+    //
+    // vue de la recherche client
+    //
+
+    function rechercheClientConseillerView($valid = true){
+        $contenu = connectedHeader() .ConseillerAsideSideBarWhenClientNotConnected();
         if ( !$valid ){
             $contenu .= '<div class="invalidForm">Aucun client ne<br>correspond à la recherche</div>';
         };
@@ -123,19 +135,7 @@
     //
 
     function rechercheApprofondiClientConseiller($res) {
-        $contenu = connectedHeader();
-        $contenu .= '
-        <aside>
-            <form action="index.php" method="post">
-                <ul class="asideUl">
-
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Recherche Client" name="asideConseillerClientResearch"></li>
-
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Plannings" name="asideConseillerPlanning"></li>
-
-                </ul>
-            </form>
-        </aside>
+        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientNotConnected() . '
         
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
@@ -424,18 +424,7 @@
     //
 
     function priseDeRendezVousConseillers( $conseillers, $arr, $error=false, $cree=false, $supprime=false, $suppression = false ) {
-        $contenu = connectedHeader() . '
-        <aside>
-                <form action="index.php" method="post">
-                    <ul class="asideUl">
-
-                        <li class="asideLi"><input class="asideInput" type="submit" value="Recherche Client" name="asideConseillerClientResearch"></li>
-
-                        <li class="asideLi"><input class="asideInput" type="submit" value="Plannings" name="asideConseillerPlanning"></li>
-
-                    </ul>
-                </form>
-            </aside>';
+        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientNotConnected();
 
         if ( $error ) {
             $contenu .= '<div class="invalidForm">Le RDV n\'a pas pu être supprimé<br>veuillez rentrer des informations valides</div>';
@@ -567,18 +556,8 @@
     //
 
     function suppressionRDVSuiteAFormation() {
-        $contenu = connectedHeader() . '
-        <aside>
-            <form action="index.php" method="post">
-                <ul class="asideUl">
-
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Recherche Client" name="asideConseillerClientResearch"></li>
-
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Plannings" name="asideConseillerPlanning"></li>
-
-                </ul>
-            </form>
-        </aside>
+        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientNotConnected() . '
+        
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
             <fieldset>

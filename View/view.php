@@ -37,11 +37,12 @@
     // Affiche cette page en cas d'erreur dans l'index
     //
 
-    function error(){
+    function error( $exception ){
         $contenu = '
         <header><img src="View/style/assets/logo.png" alt="" id="logo"></header>
         <aside></aside>
         <div class="invalidForm">Une erreur s\'est produite</div>
+        <div class="invalidForm">'.$exception->getMessage().'</div>
         <div class="error"><a class="errorATag" href="index.php">Cliquez ici pour retourner à l\'accueil</a></div>';
         require_once("View/gabarit.php");
     }
@@ -53,7 +54,7 @@
     // Header avec le logo le bouton de déconnexion et le Prénom et Nom de l'agent connecté
     //
     //
-    // <input class="topFormInformation" type="text" name="login" value="'.$_SESSION['prenom'].' '.$_SESSION['nom'].'" disabled="disabled">
+    //
     //
     //
 

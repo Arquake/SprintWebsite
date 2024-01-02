@@ -8,7 +8,7 @@
 
 
     function CtlError( $exception ){
-        error();
+        error( $exception );
     }
 
     function CtlAccueil(){

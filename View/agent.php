@@ -3,7 +3,7 @@
     //
     // NV
     //
-    // fonction pour récupérer le aside si l'agent est connecté
+    // fonction pour récupérer le aside si l'agent est connecté à un client
     //
 
     function AgentAsideSideBarWhenClientConnected() {
@@ -31,43 +31,11 @@
     //
     // NV
     //
-    // page d'accueil de l'agent
+    // fonction pour récupérer le aside si l'agent n'est pas connecté à un client
     //
 
-    function accueilAgent(){
-        $contenu = connectedHeader();
-        if ( isset($_SESSION['idClient']) ) {
-
-            $contenu .= AgentAsideSideBarWhenClientConnected();
-
-        } else {
-            $contenu .= '
-            <aside>
-                <form action="index.php" method="post">
-                    <ul class="asideUl">
-
-                        <li class="asideLi"><input class="asideInput" type="submit" value="Recherche client" name="asideAgentClientResearch"></li>
-
-                        <li class="asideLi"><input class="asideInput" type="submit" value="Créer client" name="asideClientCreation"></li>
-
-                    </ul>
-                </form>
-            </aside>';
-        }
-            require_once("View/gabarit.php");
-
-    }
-
-
-    //
-    // NV
-    //
-    // page de la création client
-    //
-
-    function creationClientAgent($error = true) {
-        $contenu = connectedHeader();
-        $contenu .= '
+    function AgentAsideSideBarWhenClientNotConnected() {
+        $contenu = '
         <aside>
             <form action="index.php" method="post">
                 <ul class="asideUl">
@@ -79,6 +47,40 @@
                 </ul>
             </form>
         </aside>';
+
+        return $contenu;
+    }
+
+
+    //
+    // NV
+    //
+    // page d'accueil de l'agent
+    //
+
+    function accueilAgent(){
+        $contenu = connectedHeader();
+        if ( isset($_SESSION['idClient']) ) {
+
+            $contenu .= AgentAsideSideBarWhenClientConnected();
+
+        } else {
+            $contenu .= AgentAsideSideBarWhenClientNotConnected();
+        }
+
+        require_once("View/gabarit.php");
+    }
+
+
+    //
+    // NV
+    //
+    // page de la création client
+    //
+
+    function creationClientAgent($error = true) {
+        $contenu = connectedHeader();
+        $contenu .= AgentAsideSideBarWhenClientNotConnected();
         if ( !$error ){
             $contenu .= '<div class="invalidForm">Formulaire non valide !</div>';
         };
@@ -112,18 +114,7 @@
 
     function rechercheClientAgentView($valid = true){
         $contenu = connectedHeader();
-        $contenu .= '
-        <aside>
-            <form action="index.php" method="post">
-                <ul class="asideUl">
-
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Recherche client" name="asideAgentClientResearch"></li>
-
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Créer client" name="asideClientCreation"></li>
-
-                </ul>
-            </form>
-        </aside>';
+        $contenu .= AgentAsideSideBarWhenClientNotConnected();
         if ( !$valid ){
             $contenu .= '<div class="invalidForm">Aucun client ne<br>correspond à la recherche</div>';
         };
@@ -170,19 +161,7 @@
     //
 
     function rechercheApprofondiClientAgent($res) {
-        $contenu = connectedHeader();
-        $contenu .= '
-        <aside>
-            <form action="index.php" method="post">
-                <ul class="asideUl">
-
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Recherche Client" name="asideAgentClientResearch"></li>
-
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Créer Client" name="asideClientCreation"></li>
-
-                </ul>
-            </form>
-        </aside>
+        $contenu = connectedHeader() . AgentAsideSideBarWhenClientNotConnected() . '
         
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
 
