@@ -869,7 +869,7 @@
     //
 
     function compteBubble( $compte ) {
-        return '
+        $contenu = '
         <div class="insideBubbleCompte">
             <div class="preDivCompte" onClick="setProduitClos( '.$compte['idCompte'].' )">
                 id Compte : '.$compte['idCompte'].'
@@ -891,17 +891,26 @@
                 <div class="divInsideDivCompte">
                     <div style="float:left;">
                         decouvert : '.$compte['montantDecouvert'].' €
-                    </div>
-                    <div class="infoBottomCompte">
+                    </div>';
+                    if ( $compte['interet'] != 0 ) {
+                        $contenu .= '<div class="infoBottomCompte">
                         interet : '.$compte['interet'].' %
-                    </div>
-                    <div class="infoBottomCompte">
-                        plafond : '.$compte['plafond'].' €
-                    </div>
+                        </div>';
+                    }
 
-                </div>
+                    if ( $compte['plafond'] != 0 ) {
+                        $contenu .= '<div class="infoBottomCompte">
+                        plafond : '.$compte['plafond'].' €
+                    </div>';
+                    }
+                    
+                    
+
+                $contenu .= '</div>
             </div>
         </div>';
+
+        return $contenu;
     }
 
 
@@ -926,7 +935,7 @@
                         date ouverture : '.$contrat['dateVente'].'
                     </div>
                     <div class="contratInfoInBubble">
-                        solde : '.$contrat['tarifMensuel'].' €
+                        Tarif Mensuel : '.$contrat['tarifMensuel'].' €
                     </div>
 
                 </div>

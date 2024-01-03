@@ -232,7 +232,7 @@
 
         <form action="index.php" method="post" class="topPageForm" id="topPageForm">
             <fieldset>
-                <legend>Modifier Types de compte</legend>
+                <legend>Modifier Type de compte</legend>
                 </p>
 
                 <p>

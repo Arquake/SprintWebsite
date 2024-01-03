@@ -218,7 +218,7 @@
     function getAllOperationsClient() {
         $connexion = getConnect();
 
-        $query = "SELECT * FROM operation WHERE idCompte IN (SELECT idCompte FROM compteclient WHERE idClient='".$_SESSION['idClient']."') ORDER BY idOperation ASC";
+        $query = "SELECT * FROM operation WHERE idCompte IN (SELECT idCompte FROM compteclient WHERE idClient='".$_SESSION['idClient']."') ORDER BY idOperation DESC";
 
         $res = ($connexion->query($query))->fetchAll(PDO::FETCH_ASSOC);
 
