@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 27 déc. 2023 à 17:19
+-- Généré le : jeu. 04 jan. 2024 à 17:18
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `client` (
   `situation` varchar(45) DEFAULT NULL,
   `dateInscription` date DEFAULT NULL,
   PRIMARY KEY (`idClient`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `client`
@@ -51,7 +51,9 @@ CREATE TABLE IF NOT EXISTS `client` (
 INSERT INTO `client` (`idClient`, `nomClient`, `prenomClient`, `dateNaissance`, `estInscrit`, `numeroTelephone`, `mail`, `adresse`, `codePostale`, `profession`, `situation`, `dateInscription`) VALUES
 (9, 'Martin', 'Kys', '2023-12-14', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (8, 'Test', 'Test', '2023-12-12', 1, 1234567891, 'kys@kys.com', 'kys', 93270, 'kys', 'kys', NULL),
-(7, 'Jonny', 'Doe', '2023-12-19', 1, 787173223, 'kys@kys.kys', 'kys', 91000, 'prof de kys', 'mort', NULL);
+(7, 'Jonny', 'Doe', '2023-12-19', 1, 787173223, 'kys@kys.kys', 'kys', 91000, 'prof de kys', 'mort', NULL),
+(10, 'feur', 'Doe', '2024-01-01', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(14, 'testi', 'testi', '2024-01-01', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -92,19 +94,16 @@ CREATE TABLE IF NOT EXISTS `compteclient` (
   `plafond` int NOT NULL,
   `typeCompte` varchar(45) NOT NULL,
   PRIMARY KEY (`idCompte`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `compteclient`
 --
 
 INSERT INTO `compteclient` (`idCompte`, `idClient`, `dateOuverture`, `solde`, `interet`, `montantDecouvert`, `plafond`, `typeCompte`) VALUES
-(3, 8, '2023-12-21', 21229, 3, 0, 22950, 'Livret'),
-(4, 8, '2023-12-21', 120, 0, -300, 0, 'CCP'),
-(5, 8, '2023-12-25', 1010, 0, 0, 0, 'CCP'),
-(6, 8, '2023-12-25', 0, 0, 0, 0, 'CCP'),
-(7, 8, '2023-12-25', 0, 0, 0, 0, 'CCP'),
-(8, 8, '2023-12-25', 0, 0, 0, 0, 'CCP');
+(11, 7, '2024-01-01', 360, 0, -300, 0, 'CCP'),
+(12, 8, '2024-01-03', 0, 3, 0, 22950, 'Livret A'),
+(9, 8, '2023-12-31', 12500, 0, -400, 0, 'CCP');
 
 -- --------------------------------------------------------
 
@@ -140,15 +139,15 @@ CREATE TABLE IF NOT EXISTS `contratclient` (
   `tarifMensuel` float NOT NULL,
   `typeContrat` varchar(45) NOT NULL,
   PRIMARY KEY (`idContrat`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `contratclient`
 --
 
 INSERT INTO `contratclient` (`idContrat`, `idClient`, `dateVente`, `tarifMensuel`, `typeContrat`) VALUES
-(2, 8, '2023-12-25', 100, 'Assurance'),
-(3, 8, '2023-12-25', 350, 'Assurance');
+(4, 7, '2024-01-01', 360, 'Assurance Voiture'),
+(5, 8, '2024-01-03', 25, 'Assurance Vie');
 
 -- --------------------------------------------------------
 
@@ -172,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `employe` (
 --
 
 INSERT INTO `employe` (`login`, `password`, `poste`, `nomEmploye`, `prenomEmploye`, `dateEmbauche`) VALUES
-('Jeanne', '$2y$12$5qfBla3n1wBIoSL8dTnqVeXGRcY.mX/o5oTK8/oHxMfRH74RNf1li', 'Directeur', 'Doe', 'Jeanne', '2023-12-02'),
+('JeanneDoe', '$2y$12$NR2lbzU0cSynHJvUPKFUxO.DO13D1KoElXgNR4rSprjkubmMM99BK', 'Directeur', 'Doe', 'Jeanne', '2023-12-02'),
 ('JohnDoe', '$2y$12$NR8c3phliX2HcwexgiduMOcXc1PLBOfoyahrYJV72iP8Ez/HgTsx2', 'Agent', 'Doe', 'John', '2023-12-02'),
 ('JeanMichel', '$2y$12$5qfBla3n1wBIoSL8dTnqVeXGRcY.mX/o5oTK8/oHxMfRH74RNf1li', 'Conseiller', 'Jean', 'Michel', '2023-12-02');
 
@@ -211,33 +210,23 @@ CREATE TABLE IF NOT EXISTS `operation` (
   `montant` float NOT NULL,
   `dateOperation` date NOT NULL,
   PRIMARY KEY (`idOperation`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `operation`
 --
 
-INSERT INTO `operation` (`idOperation`, `idCompte`, `typeOperation`, `montant`) VALUES
-(1, 5, 'dépot', 356),
-(2, 5, 'retrait', 36),
-(3, 3, 'retrait', 55),
-(4, 5, 'retrait', 50),
-(5, 5, 'dépot', 400),
-(6, 5, 'dépot', 50),
-(7, 5, 'dépot', 50),
-(8, 5, 'dépot', 50),
-(9, 5, 'dépot', 50),
-(10, 5, 'dépot', 50),
-(11, 5, 'dépot', 50),
-(12, 5, 'dépot', 50),
-(13, 5, 'dépot', 50),
-(14, 5, 'dépot', 50),
-(15, 5, 'dépot', 50),
-(16, 5, 'retrait', 60),
-(17, 5, 'retrait', 60),
-(18, 5, 'retrait', 60),
-(19, 5, 'dépot', 20),
-(20, 3, 'retrait', 1666);
+INSERT INTO `operation` (`idOperation`, `idCompte`, `typeOperation`, `montant`, `dateOperation`) VALUES
+(32, 9, 'dépot', 100, '2024-01-03'),
+(31, 12, 'retrait', -300, '2024-01-03'),
+(30, 12, 'dépot', 300, '2024-01-03'),
+(29, 10, 'retrait', -400, '2024-01-01'),
+(28, 9, 'dépot', 400, '2024-01-01'),
+(27, 11, 'dépot', 360, '2024-01-01'),
+(26, 10, 'dépot', 100, '2023-12-31'),
+(25, 9, 'retrait', -360, '2023-12-31'),
+(24, 10, 'dépot', 300, '2023-12-31'),
+(23, 9, 'dépot', 12360, '2023-12-30');
 
 -- --------------------------------------------------------
 
@@ -258,7 +247,9 @@ CREATE TABLE IF NOT EXISTS `rattachera` (
 INSERT INTO `rattachera` (`idClient`, `login`) VALUES
 (9, 'JeanMichel'),
 (7, 'JeanMichel'),
-(8, 'JeanMichel');
+(8, 'JeanMichel'),
+(13, 'JeanMichel'),
+(14, 'JeanMichel');
 
 -- --------------------------------------------------------
 
@@ -277,7 +268,7 @@ CREATE TABLE IF NOT EXISTS `rendezvous` (
   `idClient` int NOT NULL,
   `idMotif` varchar(45) NOT NULL,
   PRIMARY KEY (`idRdv`)
-) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `rendezvous`
@@ -324,8 +315,13 @@ INSERT INTO `rendezvous` (`idRdv`, `jourReunion`, `heureDebut`, `heureFin`, `dat
 (40, '2023-12-24', '15:00:00', '16:00:00', '2023-12-19', 'JeanMichel', -1, 'formation'),
 (41, '2023-12-23', '15:00:00', '16:00:00', '2023-12-19', 'JeanMichel', -1, 'formation'),
 (42, '2023-12-26', '10:00:00', '12:00:00', '2023-12-25', 'JeanMichel', 8, '1'),
-(43, '2023-12-25', '12:00:00', '14:00:00', '2023-12-25', 'JeanMichel', 8, '1'),
-(44, '2023-12-24', '14:00:00', '16:00:00', '2023-12-25', 'JeanMichel', 8, '1');
+(44, '2023-12-24', '14:00:00', '16:00:00', '2023-12-25', 'JeanMichel', 8, '1'),
+(45, '2023-12-29', '16:00:00', '17:00:00', '2023-12-28', 'JeanMichel', 8, '1'),
+(46, '2024-01-02', '12:00:00', '14:00:00', '2024-01-01', 'JeanMichel', 14, '1'),
+(47, '2024-01-02', '14:00:00', '16:00:00', '2024-01-01', 'JeanMichel', 14, '1'),
+(48, '2024-01-02', '16:00:00', '18:00:00', '2024-01-01', 'JeanMichel', 14, '1'),
+(49, '2024-01-02', '18:00:00', '20:00:00', '2024-01-01', 'JeanMichel', 14, '1'),
+(51, '2024-01-03', '10:00:00', '12:00:00', '2024-01-01', 'JeanMichel', 14, '1');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
