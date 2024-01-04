@@ -349,7 +349,7 @@
         // on vérifie au ssi si les heures sont bien dans l'ordre
         //
 
-        if ( $_POST['date'] == '' || $_POST['heureDebut'] == '' || $_POST['heureFin'] == '' || $_POST['date'] <= date("Y-m-d") || $_POST['heureDebut'] > $_POST['heureFin'] ) {
+        if ( $_POST['date'] == '' || $_POST['heureDebut'] == '' || $_POST['heureFin'] == '' || $_POST['date'] < date("Y-m-d") || $_POST['heureDebut'] > $_POST['heureFin'] ) {
 
 
             $arr=getEDTConseillerByDate();
