@@ -59,7 +59,9 @@
 
         $res = ($connexion -> query("SELECT MAX(idCompte)'max' FROM compteclient")) -> fetch(PDO::FETCH_ASSOC)['max'];
 
-        $res = $connexion -> query("INSERT INTO operation(idCompte, typeOperation, montant, dateOperation) VALUES ('".$res."','dépot','".$_POST['soldeInitial']."', CURRENT_DATE)");
+        if ( intval($_POST['soldeInitial']) != 0 ) {
+            $res = $connexion -> query("INSERT INTO operation(idCompte, typeOperation, montant, dateOperation) VALUES ('".$res."','dépot','".$_POST['soldeInitial']."', CURRENT_DATE)");
+        }
     }
 
 

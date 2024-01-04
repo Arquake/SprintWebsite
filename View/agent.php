@@ -374,7 +374,7 @@
     // Page avec l'EDT du conseiller du client et les forms de prise et suppression de rendez vous
     //
 
-    function priseDeRendezVousAgents( $motifs, $arr, $conseiller, $error=false, $cree=false, $supprime=false, $errorSupression = false ) {
+    function priseDeRendezVousAgents( $motifs, $arr, $conseiller, $error=false, $cree=false, $supprime=false, $errorSupression = false, $rdvError = false ) {
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected();
 
         if ( $error ) {
@@ -385,6 +385,8 @@
             $contenu .= '<div class="invalidForm">RDV Supprimé</div>';
         } else if ( $errorSupression ) {
             $contenu .= '<div class="invalidForm">Le RDV sélectionné n\'existe pas</div>';
+        } else if ( $rdvError ) {
+            $contenu .= '<div class="invalidForm">Un RDV ou une formation <br>est déjà existant sur ce créneau horaire</div>';
         }
 
         $contenu .= '<div class"priseRdv">
