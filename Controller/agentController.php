@@ -351,7 +351,7 @@
         // on vérifie au ssi si les heures sont bien dans l'ordre
         //
 
-        if ( $_POST['motifRDV'] == '' || $_POST['date'] == '' || $_POST['heureDebut'] == '' || $_POST['heureFin'] == '' || $_POST['date'] <= date("Y-m-d") || $_POST['heureDebut'] > $_POST['heureFin'] || !empty(checkRDVCreation()) ) {
+        if ( $_POST['motifRDV'] == '' || $_POST['date'] == '' || $_POST['heureDebut'] == '' || $_POST['heureFin'] == '' || $_POST['date'] < date("Y-m-d") || $_POST['heureDebut'] > $_POST['heureFin'] || !empty(checkRDVCreation()) ) {
             getAndSetConseillerLoginDuClientDansSession($_SESSION['idClient']);
             $arr=getEDTConseillerByDate();
             $conseillersInfos = employeInformations( $_SESSION['conseillerRattacherClient'] );
