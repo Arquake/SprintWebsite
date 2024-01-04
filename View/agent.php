@@ -176,7 +176,7 @@
                 foreach ( $res as $client){
             
                     $contenu .= '
-                        <p><label for="'.$client['idClient'].'">'.$client['nomClient']."    ".$client['prenomClient']."     ".$client['dateNaissance'].'</label>
+                        <p><label for="'.$client['idClient'].'">'.htmlentities($client['nomClient'], ENT_QUOTES,"UTF-8")."    ".htmlentities($client['prenomClient'], ENT_QUOTES,"UTF-8")."     ".$client['dateNaissance'].'</label>
                         <input type="radio" id="'.$client['idClient'].'" name="clientRechercheChoice" value="'.$client['idClient'].'"></p>';
         
                 }
@@ -211,7 +211,7 @@
 
         foreach ( $conseillerList as $conseiller){
             
-            $contenu .= "<option value='".$conseiller['login']."'>".$conseiller['nomEmploye']."  ".$conseiller['prenomEmploye']."</option>";
+            $contenu .= "<option value='".$conseiller['login']."'>".htmlentities($conseiller['nomEmploye'], ENT_QUOTES,"UTF-8")."  ".htmlentities($conseiller['prenomEmploye'], ENT_QUOTES,"UTF-8")."</option>";
 
         }
 
@@ -354,9 +354,9 @@
 
                 <legend>Modifier Client</legend>
 
-                <p><label for="nomClientModification">Nom du Client</label><input type="text" id="nomClientModification" name="nomClientModification" value="'.$_SESSION['clientNom'].'" required></p>
+                <p><label for="nomClientModification">Nom du Client</label><input type="text" id="nomClientModification" name="nomClientModification" value="'.htmlentities($_SESSION['clientNom'], ENT_QUOTES,"UTF-8").'" required></p>
 
-                <p><label for="prenomClientModification">Prénom du Client</label><input type="text" id="prenomClientModification" name="prenomClientModification" value="'.$_SESSION['clientPrenom'].'"required ></p>
+                <p><label for="prenomClientModification">Prénom du Client</label><input type="text" id="prenomClientModification" name="prenomClientModification" value="'.htmlentities($_SESSION['clientPrenom'], ENT_QUOTES,"UTF-8").'"required ></p>
 
                 <p><label for="dateNaissanceClientModification">Date de Naissanse du Client</label><input type="date" id="dateNaissanceClientModification" name="dateNaissanceClientModification" value="'.$_SESSION['clientNaissance'].'" required max="'.(new DateTime(date("y-m-d")))->format("Y-m-d").'"></p>
 
@@ -405,7 +405,7 @@
 
         foreach ( $motifs as $motif){
 
-            $contenu .= "<option value='".$motif['idMotif']."'>".$motif['libelleMotif']."</option>";
+            $contenu .= "<option value='".$motif['idMotif']."'>".htmlentities($motif['libelleMotif'], ENT_QUOTES,"UTF-8")."</option>";
 
         }
         
@@ -465,7 +465,7 @@
                     </form>
                 </td>
 
-                <th colspan="5" class="semainetd">Emploi du temps de<br>'.$conseiller['nomEmploye'].' '.$conseiller['prenomEmploye'].'<br>Semaine '.($date->modify('+7 days')->format("W")).' de l\'année '.$date->format("Y").'</th>
+                <th colspan="5" class="semainetd">Emploi du temps de<br>'.htmlentities($conseiller['nomEmploye'], ENT_QUOTES,"UTF-8").' '.htmlentities($conseiller['prenomEmploye'], ENT_QUOTES,"UTF-8").'<br>Semaine '.($date->modify('+7 days')->format("W")).' de l\'année '.$date->format("Y").'</th>
                 
                 <td class="tdWeekChange">
                     <form action="index.php" method="post" class="edtWeekChangeForm">
@@ -529,9 +529,9 @@
 
                 <legend>Information RDV</legend>
 
-                <p><label class="listePiece" for="">Libelle</label><textarea name="listePiece" id="listePiece" disabled="disabled" class="libelle">'.$arr['libelleMotif'].'</textarea></p> 
+                <p><label class="listePiece" for="">Libelle</label><textarea name="listePiece" id="listePiece" disabled="disabled" class="libelle">'.htmlentities($arr['libelleMotif'], ENT_QUOTES,"UTF-8").'</textarea></p> 
 
-                <p><label class="listePiece" for="">Liste de pièces à prévoir</label><textarea name="listePiece" id="listePiece" disabled="disabled" class="liste">'.$arr['listePiece'].'</textarea></p> 
+                <p><label class="listePiece" for="">Liste de pièces à prévoir</label><textarea name="listePiece" id="listePiece" disabled="disabled" class="liste">'.htmlentities($arr['listePiece'], ENT_QUOTES,"UTF-8").'</textarea></p> 
 
                 <input class="submitFormInput" type="submit" value="Suivant" name="asideClientPriseRendezVous">
             </fieldset>

@@ -12,7 +12,7 @@
     function getConnect() {
         try {
             $connexion=new PDO('mysql:host='.SERVEUR.';dbname='.BDD,USER,PASSWORD);
-            $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
             $connexion->query('SET NAMES UTF8');
 
             return $connexion;

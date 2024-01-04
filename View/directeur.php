@@ -99,7 +99,7 @@
 
                     foreach ( $employes as $employe){
                         
-                        $contenu .= "<option value='".$employe['login']."'>".$employe['nomEmploye']." - ".$employe['prenomEmploye']." - ".$employe['poste']."</option>";
+                        $contenu .= "<option value='".$employe['login']."'>".htmlentities($employe['nomEmploye'], ENT_QUOTES,"UTF-8")." - ".htmlentities($employe['prenomEmploye'], ENT_QUOTES,"UTF-8")." - ".$employe['poste']."</option>";
 
                     }
 
@@ -142,8 +142,8 @@
         <form action="index.php" method="post" class="topPageForm" id="modificationEmploye" onSubmit="modifierEmploye(this)">
             <fieldset>
                 <legend>Création d\'employé</legend>
-                <p><label for="nomCreation">Nom de l\'employé</label><input type="text" name="nomCreation" required="required" value="'.$employe['nomEmploye'].'"></p>
-                <p><label for="prenomCreation">Prénom de l\'employé</label><input type="text" name="prenomCreation" required="required" value="'.$employe['prenomEmploye'].'"></p>
+                <p><label for="nomCreation">Nom de l\'employé</label><input type="text" name="nomCreation" required="required" value="'.htmlentities($employe['nomEmploye'], ENT_QUOTES,"UTF-8").'"></p>
+                <p><label for="prenomCreation">Prénom de l\'employé</label><input type="text" name="prenomCreation" required="required" value="'.htmlentities($employe['prenomEmploye'], ENT_QUOTES,"UTF-8").'"></p>
                 <p><label for="loginCreation">Identifiant de l\'employé</label><input type="text" name="loginCreation" required="required" value="'.$employe['login'].'"></p>
                 <p>
                     <label for="password">Mot De Passe de l\'employé</label>
