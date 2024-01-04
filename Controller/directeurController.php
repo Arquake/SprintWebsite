@@ -163,7 +163,7 @@
             ajouterLeTypeCompte($_POST['DirecteurAjouterCompteType']);
             CtlGestionMotifs(1,1);
         }else {
-            CtlGestionMotifs(1,2);
+            CtlDirecteurCompte(5);
         }
     }
 
@@ -202,7 +202,7 @@
             ajouterLeTypeContrat($_POST['DirecteurAjouterContratType']);
             CtlGestionMotifs(2,1);
         }else {
-            CtlGestionMotifs(2,2);
+            CtlDirecteurCompte(5);
         }
     }
 
@@ -236,6 +236,7 @@
     // 
     function CtlGestionProduits(){
         gestionProduits();
+        if(isset($_SESSION['typeCompte'])) { unset($_SESSION['typeCompte']); }
     }
 
     //
@@ -243,10 +244,59 @@
     //
     // Link le bouton gestion motifs de l'aside
     // - viaType par defaut sur 0, permet l'affichage correcte de la page des mtoifs
-    // - message par defaut sur 0, affiche le message par son id das la page de motifs 
+    // - message par defaut sur 0, affiche le message par son id das la page de motifs
+    //
     function CtlGestionMotifs($viaType = 0, $message = 0){
+        $_SESSION['viaType'] = $viaType;
         $motifList = getMotifPieceList();
         gestionMotifs($motifList,$viaType,$message);
+        unset($_SESSION['idMotif']);
+    }
+
+    //
+    // MP
+    //
+    // 
+    //
+    function CtlAjoutMotif(){        
+        $motif = addslashes($_POST['DirecteurAjouterMotif']);
+        $pieces = addslashes($_POST['DirecteurAjouterPiece']);
+        
+        if (VerificationExistanceMotif($motif)){
+            ajoutMotif($motif,$pieces);
+            CtlGestionMotifs($_SESSION['viaType'],3);
+        } else {
+            CtlGestionMotifs($_SESSION['viaType'],4);
+        }
+    }
+    
+    //
+    // MP
+    //
+    //
+    //
+    function CtlModifierMotif(){
+        $_SESSION['idMotif'] = $_POST['DirecteurModifierMotif'];
+        $motif = getMotifViaId($_POST['DirecteurModifierMotif']);
+        motifModificationPage($motif['libelleMotif'], $motif['listePiece']);
+        
+    }
+    
+    //
+    // MP
+    //
+    //
+    //
+    function CtlModifierMotifValidation(){
+        $motif = addslashes($_POST['motifModification']);
+        $pieces = addslashes($_POST['pieceMotifModification']);
+        
+        if (VerificationExistanceMotif($motif)){
+            modifierMotifViaIdSession($motif,$pieces);
+            CtlGestionMotifs($_SESSION['viaType'],3);
+        } else {
+            CtlGestionMotifs($_SESSION['viaType'],2);
+        }
     }
 
     //
@@ -254,12 +304,52 @@
     //
     //
     //
-    function CtlAjoutMotif(){
-        ajoutMotif($_POST['DirecteurAjouterMotif'],$_POST['DirecteurAjouterPiece']);
-        CtlGestionMotifs();
+    function CtlDirecteurModifierCompte(){
+        $_SESSION['typeCompte'] = $_POST['DirecteurSupprimerCompteType'];
+        typeCompteModificationPage();
     }
 
+    //
+    // MP
+    //
+    // 
+    //
+    function CtlModifierTypeCompteValidation(){
+        $type = $_POST['typeCompteModification'];
 
+        if (VerificationMofificationTypeCompte($type)){
+            modifierTypeCompte($type);
+            CtlDirecteurCompte(3);
+        } else {
+            CtlDirecteurCompte(4);
+        }
+    }
+
+    //
+    // MP
+    //
+    //
+    //
+    function CtlDirecteurModifierContrat(){
+        $_SESSION['typeContrat'] = $_POST['DirecteurSupprimerContratType'];
+        typeContratModificationPage();
+    }
+
+    //
+    // MP
+    //
+    // 
+    //
+    function CtlModifierTypeContratValidation(){
+        $type = $_POST['typeContratModification'];
+
+        if (VerificationMofificationTypeContrat($type)){
+            modifierTypeContrat($type);
+            CtlDirecteurContrat(3);
+        } else {
+            CtlDirecteurContrat(4);
+        }
+    }
 
 
 

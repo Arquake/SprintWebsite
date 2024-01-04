@@ -216,6 +216,10 @@
             $contenu .= '<div class="invalidForm">Suppression impossible : type encore utilisé </div>';
         } else if ( $sortie == 3 ){
             $contenu .= '<div class="invalidForm">Modification effective</div>';
+        } else if ( $sortie == 4 ){
+            $contenu .= '<div class="invalidForm">Modification impossible : nom déjà utilisé ou vide</div>';
+        } else if ( $sortie == 5 ){
+            $contenu .= '<div class="invalidForm">Ajout impossible : nom déjà utilisé ou vide</div>';
         }
 
         $contenu .= '
@@ -272,6 +276,10 @@
             $contenu .= '<div class="invalidForm">Suppression impossible : type encore utilisé </div>';
         } else if ( $sortie == 3 ){
             $contenu .= '<div class="invalidForm">Modification effective</div>';
+        } else if ( $sortie == 4 ){
+            $contenu .= '<div class="invalidForm">Modification impossible : nom déjà utilisé ou vide</div>';
+        } else if ( $sortie == 5 ){
+            $contenu .= '<div class="invalidForm">Ajout impossible : nom déjà utilisé ou vide</div>';
         }
 
         $contenu .= '
@@ -434,16 +442,18 @@
     // $viaType, int : 
     // - 0, affiche la page de d'ajout/modification des motifs de rdv
     // - 1, quand on arrive sur cette page apres création d'un type de compte
-    // - 2, quand on arrive sur cette page apres création d'un type de compte  
+    // - 2, quand on arrive sur cette page apres création d'un type de contrat  
     //
 
-    function gestionMotifs($motifList,$viaType,$sortieType=0,$sortie = 0){
+    function gestionMotifs($motifList,$viaType,$message=0){
         $contenu = connectedHeader() . directeurAside();
 
-        if ( $sortieType == 1 ){
+        if ( $message == 1 ){
             $contenu .= '<div class="invalidForm">Ajout effectif</div>';
-        } else if ( $sortieType == 2 ){
-            $contenu .= '<div class="invalidForm">Ajout impossible : type déjà existant </div>';
+        } else if ( $message == 2 ){
+            $contenu .= '<div class="invalidForm">Modification impossible : motif déjà utilisé ou non-nommé</div>';
+        } else if ( $message == 3 ){
+            $contenu .= '<div class="invalidForm">Mofification effective</div>';
         } 
 
 
@@ -501,55 +511,95 @@
         require_once("View/gabarit.php");
     }
 
-    
     //
-    // MP
+    // MP 
     //
-    // Affiche la page de modification de motif avec affichage des infos actuelle à l'interieur.
+    // Affiche la page de modification des motif avec leur affichage de base à l'interieur.
     //
-
-    function motifModificationPage($libelle,$piece) {
-        $contenu = connectedHeader() . directeurAside() . '
-        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+    // $motif : libelle motif pre-existant
+    // $piece : pièces necessaires pre-existante
+    //
+    function motifModificationPage($motif, $piece) {
+        $contenu = connectedHeader() . directeurAside();
+        
+        $contenu .= '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm" onSubmit="modificationMotifSubmit()">
 
             <fieldset>
 
                 <legend>Modifier motif</legend>
 
-                <p><label for="libelleMotifModification">Libelle du motif</label><input type="text" name="libelleMotifModification" value="'.$libelle.'" required></p>
+                <p><label for="motifModification">Motif :</label>
+                <input type="text" id="motifModification" name="motifModification" value="'.$motif.'" required></p>
 
-                <p><label for="pieceModification">Pièces à prévoir</label><input type="text" name="pieceModification" value="'.$piece.'"required ></p>
+                <p><label for="pieceMotifModification">Pièce(s) à prévoir :</label>
+                <textarea class="textAreaPieces" id="pieceMotifModification" name="pieceMotifModification" required >'.$piece.' </textarea></p>
+                
+                <div id="modification">
+                    <p id="modifier">
+                    <input class="submitFormInput" type="submit" value="Modifier" name="ModificationMotifSubmit" onClick="modificationMotifEditSubmit(true)"></p>
+                </div>
 
-                <p><input class="submitFormInput" type="submit" value="Modifier" name="ModificationMotifSubmit"></p>
             </fieldset>
         </form>
         ';
         require_once("View/gabarit.php");
     }
 
+    //
+    // MP 
+    //
+    // Affiche la page de modification des type de compte avec leur affichage de base à l'interieur.
+    //
 
-    //
-    // MP
-    //
-    // Affiche la page de verification de modification des motifs avec affichage des infos actuelle à l'interieur.
-    //
-    
-    function motifModificationPageVerification() {
-        $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '
-        <form action="index.php" method="post" class="topPageForm" id="topPageForm">
+    function typeCompteModificationPage() {
+        $contenu = connectedHeader() . directeurAside();
+        
+        $contenu .= '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm" onSubmit="modificationTypeCompteSubmit()">
 
             <fieldset>
 
-                <legend>Nouvelles informations</legend>
+                <legend>Modifier type compte</legend>
 
-                <p><label for="nomClientModif">Nom du Client</label><input type="text" name="nomClientModif" value="'.$_SESSION['nomClientModification'].'" disabled="disabled"></p>
+                <p><label for="typeCompteModification">Nouveau nom :</label>
+                <input type="text" id="typeCompteModification" name="typeCompteModification" value="'.$_SESSION['typeCompte'].'" required></p>
+                
+                <div id="modification">
+                    <p id="modifier">
+                    <input class="submitFormInput" type="submit" value="Modifier" name="ModificationTypeCompteSubmit" onClick="modificationTypeCompteEditSubmit(true)"></p>
+                </div>
 
-                <p><label for="prenomClientModif">Prénom du Client</label><input type="text" name="prenomClientModif" value="'.$_SESSION['prenomClientModification'].'" disabled="disabled"></p>
+            </fieldset>
+        </form>
+        ';
+        require_once("View/gabarit.php");
+    }
 
-                <p><label for="dateNaissanceClientModif">Date de Naissanse du Client</label><input type="date" name="dateNaissanceClientModif" value="'.$_SESSION['dateNaissanceClientModification'].'" disabled="disabled"></p>
+    //
+    // MP 
+    //
+    // Affiche la page de modification des type de contrat avec leur affichage de base à l'interieur.
+    //
 
-                <p><input class="submitFormInput" type="submit" value="Valider" name="ValiderModificationClientSubmit"></p>
-                <p><input class="submitFormInput" type="submit" value="Editer" name="ReModificationClientSubmit"></p>
+    function typeContratModificationPage() {
+        $contenu = connectedHeader() . directeurAside();
+        
+        $contenu .= '
+        <form action="index.php" method="post" class="topPageForm" id="topPageForm" onSubmit="modificationTypeContratSubmit()">
+
+            <fieldset>
+
+                <legend>Modifier type contrat</legend>
+
+                <p><label for="typeContratModification">Nouveau nom :</label>
+                <input type="text" id="typeContratModification" name="typeContratModification" value="'.$_SESSION['typeContrat'].'" required></p>
+                
+                <div id="modification">
+                    <p id="modifier">
+                    <input class="submitFormInput" type="submit" value="Modifier" name="ModificationTypeContratSubmit" onClick="modificationTypeContratEditSubmit(true)"></p>
+                </div>
+
             </fieldset>
         </form>
         ';

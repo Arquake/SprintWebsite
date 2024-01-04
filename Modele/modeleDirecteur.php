@@ -328,3 +328,84 @@
 
         return $resultat;
     }
+
+    //
+    // MP
+    //
+    // Get les information via l'id pour la modification des information (les montrer a l'utilisateur)
+    //
+    function getMotifViaId($id){
+        $connexion = getConnect();
+        $resultat = ($connexion -> query("SELECT libelleMotif, listePiece FROM motif WHERE idMotif='".intval($id)."'"))->fetch(PDO::FETCH_ASSOC);
+        return $resultat;
+    }
+
+    //
+    // MP
+    //
+    // modif les information du client via l'id placé en session
+    //
+    function modifierMotifViaIdSession($libelle, $pieces){
+        $connexion = getConnect();
+        $connexion -> query("UPDATE motif SET libelleMotif='".$libelle."', listePiece='".$pieces."' WHERE idMotif='".$_SESSION['idMotif']."'");
+        
+    }
+
+    //
+    // MP
+    //
+    // Retourne vrai si aucun motif ne possede ce nom et que le champ nom est set   
+    // Retourne faux si un motif existe deja avec ce nom ou s'il n'est pas rempli
+    //
+
+    function VerificationExistanceMotif($motif){
+        $connexion = getConnect();
+        $resultat = ($connexion -> query("SELECT idMotif FROM motif WHERE libelleMotif='".$motif."'"))->fetch(PDO::FETCH_ASSOC);
+        
+        return !empty($motif) && (empty($resultat) || $resultat['idMotif'] == $_SESSION['idMotif']);
+    }
+
+    //
+    // MP
+    //
+    //
+    function VerificationMofificationTypeCompte($type){
+        $connexion = getConnect();
+        $resultat = ($connexion -> query("SELECT typeCompte FROM compte WHERE typeCompte='".$type."'"))->fetch(PDO::FETCH_ASSOC);
+
+        return !empty($type) && empty($resultat);
+    }
+
+    //
+    // MP
+    //
+    //
+    //
+    function modifierTypeCompte($type){
+        $connexion = getConnect();
+        $connexion -> query("UPDATE compte SET typeCompte='".$type."' WHERE typeCompte='".$_SESSION['typeCompte']."'");
+        
+    }
+
+    //
+    // MP
+    //
+    //
+    function VerificationMofificationTypeContrat($type){
+        $connexion = getConnect();
+        $resultat = ($connexion -> query("SELECT typeContrat FROM contrat WHERE typeContrat='".$type."'"))->fetch(PDO::FETCH_ASSOC);
+
+        return !empty($type) && empty($resultat);
+    }
+
+    //
+    // MP
+    //
+    //
+    //
+    function modifierTypeContrat($type){
+        $connexion = getConnect();
+        $connexion -> query("UPDATE contrat SET typeContrat='".$type."' WHERE typeContrat='".$_SESSION['typeContrat']."'");
+        
+    }
+    

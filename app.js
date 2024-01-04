@@ -457,3 +457,124 @@ function modificationSubmit() {
 
     document.getElementById( "dateNaissanceClientModification" ).disabled = false;
 }
+
+//
+// MP
+//
+// modifie les boutons disponible lors de changement d'information motif
+//
+
+function modificationMotifEditSubmit( validation ) {
+
+    divToChange = document.getElementById( "modification" );
+
+    motif = document.getElementById( "motifModification" );
+
+    pieces = document.getElementById( "pieceMotifModification" );
+
+    event.preventDefault();
+
+    if ( validation ) {
+        divToChange.innerHTML = '<p><input class="submitFormInput" type="submit" value="Valider" name="ValiderModificationMotifSubmit"></p>'+
+                                '<p><input class="submitFormInput" type="submit" value="Editer" name="ReModificationMotifSubmit" onClick="modificationMotifEditSubmit(false)"></p>';
+        
+        motif.disabled = true;
+        pieces.disabled = true;
+
+    } else {
+        divToChange.innerHTML = '<p><input class="submitFormInput" type="submit" value="Modifier" name="ModificationMotifSubmit" onClick="modificationMotifEditSubmit(true)"></p>';
+        
+        motif.disabled = false;
+        pieces.disabled = false;
+    }
+}
+
+//
+// MP
+//
+// réactive les champ pour être envoyé
+//
+
+function modificationMotifSubmit() {
+
+    document.getElementById( "motifModification" ).disabled = false;
+
+    document.getElementById( "pieceMotifModification" ).disabled = false;
+}
+
+
+//
+// MP
+//
+// modifie les boutons disponible lors de changement d'information du type compte
+//
+
+function modificationTypeCompteEditSubmit( validation ) {
+
+    divToChange = document.getElementById( "modification" );
+
+    type = document.getElementById( "typeCompteModification" );
+
+    event.preventDefault();
+
+    if ( validation ) {
+        divToChange.innerHTML = '<p><input class="submitFormInput" type="submit" value="Valider" name="ValiderModificationTypeCompteSubmit"></p>'+
+                                '<p><input class="submitFormInput" type="submit" value="Editer" name="ReModificationTypeCompteSubmit" onClick="modificationTypeCompteEditSubmit(false)"></p>';
+        
+        type.disabled = true;
+
+    } else {
+        divToChange.innerHTML = '<p><input class="submitFormInput" type="submit" value="Modifier" name="ModificationTypeCompteSubmit" onClick="modificationTypeCompteEditSubmit(true)"></p>';
+        
+        type.disabled = false;
+    }
+}
+
+//
+// MP
+//
+// réactive les champ pour être envoyé
+//
+
+function modificationTypeCompteSubmit() {
+
+    document.getElementById( "typeCompteModification" ).disabled = false;
+}
+
+//
+// MP
+//
+// modifie les boutons disponible lors de changement d'information du type contrat
+//
+
+function modificationTypeContratEditSubmit( validation ) {
+
+    divToChange = document.getElementById( "modification" );
+
+    type = document.getElementById( "typeContratModification" );
+
+    event.preventDefault();
+
+    if ( validation ) {
+        divToChange.innerHTML = '<p><input class="submitFormInput" type="submit" value="Valider" name="ValiderModificationTypeContratSubmit"></p>'+
+                                '<p><input class="submitFormInput" type="submit" value="Editer" name="ReModificationTypeContratSubmit" onClick="modificationTypeContratEditSubmit(false)"></p>';
+        
+        type.disabled = true;
+
+    } else {
+        divToChange.innerHTML = '<p><input class="submitFormInput" type="submit" value="Modifier" name="ModificationTypeContratSubmit" onClick="modificationTypeContratEditSubmit(true)"></p>';
+        
+        type.disabled = false;
+    }
+}
+
+//
+// MP
+//
+// réactive les champ pour être envoyé
+//
+
+function modificationTypeContratSubmit() {
+
+    document.getElementById( "typeContratModification" ).disabled = false;
+}

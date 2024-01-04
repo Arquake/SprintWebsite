@@ -7,9 +7,8 @@
     require_once("Controller/controller.php");
 
 
-    //echo "<script>console.log('".var_dump($_SESSION)."')</script>";
-    //echo "<script>console.log('".var_dump($_POST)."')</script>";
-
+    echo "<script>console.log('".var_dump($_SESSION)."')</script>";
+    echo "<script>console.log('".var_dump($_POST)."')</script>";
 
     //
     // Check if user try to sign out
@@ -584,15 +583,6 @@
                 else if ( isset($_POST['DirecteurRetirerCompteSubmit'] )) {
                     CtlDirecteurSupprimerCompte();
                 } 
-            
-                //
-                // MP
-                //
-                // Link le bouton "Supprimer type compte" au code correspondant
-                //
-                else if ( isset($_POST['DirecteurModifierCompteSubmit'] )) {
-                    //CtlDirecteurModifierCompte();
-                } 
 
                 //
                 // MP
@@ -612,6 +602,25 @@
                 else if ( isset($_POST['DirecteurMotifSortieCompte'] )) {
                     CtlDirecteurCompte();
                 } 
+
+                //
+                // MP
+                //
+                // Link le bouton "terminer" de l'ajout de motif 
+                // renverra sur la page des compte
+                //
+                else if ( isset($_POST['DirecteurModifierCompteSubmit'] )) {
+                    CtlDirecteurModifierCompte();
+                } 
+
+                //
+                // MP
+                //
+                // Quand le bouton "valider" de la page de modification des motifs
+                //
+                else if ( isset($_POST['ValiderModificationTypeCompteSubmit'] )) {
+                    CtlModifierTypeCompteValidation();
+                }
 
                 /// --CONTRAT--
         
@@ -651,17 +660,52 @@
                 else if ( isset($_POST['DirecteurMotifSortieContrat'] )) {
                     CtlDirecteurContrat();
                 } 
+
+                //
+                // MP
+                //
+                // Quand le bouton "valider" de la page de modification des info du type de contrat
+                //
+                else if ( isset($_POST['ValiderModificationTypeContratSubmit'] )) {
+                    CtlModifierTypeContratValidation();
+                }
                 
+                //
+                // MP
+                //
+                // Modif du type de contrat
+                //
+                else if ( isset($_POST['DirecteurModifierContratSubmit'] )) {
+                    CtlDirecteurModifierContrat();
+                }
 
                 /// --MOTIFS--
 
                 //
                 // MP
                 //
-                // Quand le bouton "ajouter" de la page de gestion des
+                // Quand le bouton "ajouter" de la page de gestion des motifs
                 //
                 else if ( isset($_POST['DirecteurAjouterMotifSubmit'] )) {
                     CtlAjoutMotif();
+                }
+
+                //
+                // MP
+                //
+                // Quand le bouton "modifier" de la page de gestion des motifs
+                //
+                else if ( isset($_POST['DirecteurModifierMotifSubmit'] )) {
+                    CtlModifierMotif();
+                }
+
+                //
+                // MP
+                //
+                // Quand le bouton "valider" de la page de modification des motifs
+                //
+                else if ( isset($_POST['ValiderModificationMotifSubmit'] )) {
+                    CtlModifierMotifValidation();
                 }
 
 
