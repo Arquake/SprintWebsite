@@ -35,6 +35,7 @@
         $connexion = getConnect();
 
         $resultat = $connexion -> query("SELECT * FROM Employe WHERE login='" . $login . "'");
+
         $resultat = $resultat->fetch(PDO::FETCH_ASSOC);
 
         if ( $resultat != false ){
