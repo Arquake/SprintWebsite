@@ -406,7 +406,7 @@
         $contenu .= '
                         </select>
                     </p>
-                    <p><label for="" class="priseRDVformLabel">Date</label><input type="date" name="date" id="date" min="'.(new DateTime(date("y-m-d")))->modify('+1 days')->format("Y-m-d").'"></p>
+                    <p><label for="" class="priseRDVformLabel">Date</label><input type="date" name="date" id="date" min="'.(new DateTime(date("y-m-d")))->format("Y-m-d").'"></p>
                     <p><label for="" class="priseRDVformLabel">Heure de début</label><input type="time" name="heureDebut" id="heureDebut"></p>
                     <p><label for="" class="priseRDVformLabel">Heure de fin</label><input type="time" name="heureFin" id="heureFin"></p>
                     <input class="submitFormInput" type="submit" name="creerRDVAgent" value="Créer">
