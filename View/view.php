@@ -366,7 +366,15 @@
     //
 
     function clientComptesSynthèse( $synthese, $comptes, $operations ) {
-        $contenu = connectedHeader() . ConseillerAsideSideBarWhenClientConnected() . synthesePageForm() ;
+        $contenu = connectedHeader();
+
+        if ( $_SESSION['poste'] == 'Conseiller' ) {
+            $contenu .= ConseillerAsideSideBarWhenClientConnected();
+        } else if ( $_SESSION['poste'] == 'Agent' ){
+            $contenu .= AgentAsideSideBarWhenClientConnected();
+        }
+
+        $contenu .= synthesePageForm() ;
 
         $contenu .= '<div class="clientSynthesis">' . synthèseClientInformations( true, $synthese) . '
 

@@ -87,7 +87,7 @@ function soldeCheckNegative( field ) {
 
 function soldeCheckPositive( field ) {
     if ( field.value > 0 ) {
-        field.value = 0
+        field.value = -field.value
     }
 }
 
