@@ -429,7 +429,7 @@
         if ( $error ) {
             $contenu .= '<div class="invalidForm">Le RDV n\'a pas pu être supprimé<br>veuillez rentrer des informations valides</div>';
         } else if ( $cree ) {
-            $contenu .= '<div class="invalidForm">RDV Créé</div>';
+            $contenu .= '<div class="invalidForm">Formation créé</div>';
         } else if ( $supprime ) {
             $contenu .= '<div class="invalidForm">RDV Supprimé</div>';
         } else if ( $suppression ) {
