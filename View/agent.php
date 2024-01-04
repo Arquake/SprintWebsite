@@ -12,9 +12,13 @@
             <form action="index.php" method="post">
                 <ul class="asideUl">
 
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Synthèse Client" name="asideClientSynthese"></li>
+
                     <li class="asideLi"><input class="asideInput" type="submit" value="Modification client" name="asideClientModification"></li>
 
                     <li class="asideLi"><input class="asideInput" type="submit" value="Transaction" name="asideClientTransaction"></li>
+
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Modifier Découvert" name="asideConseillerModifDecouvert"></li>
 
                     <li class="asideLi"><input class="asideInput" type="submit" value="Prise rendez-vous" name="asideClientPriseRendezVous"></li>
 

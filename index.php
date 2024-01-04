@@ -7,8 +7,8 @@
     require_once("Controller/controller.php");
 
 
-    echo "<script>console.log('".var_dump($_SESSION)."')</script>";
-    echo "<script>console.log('".var_dump($_POST)."')</script>";
+    //echo "<script>console.log('".var_dump($_SESSION)."')</script>";
+    //echo "<script>console.log('".var_dump($_POST)."')</script>";
 
     //
     // Check if user try to sign out
@@ -220,6 +220,72 @@
                 else if ( isset($_POST['deleteRDVAgent']) ) {
                     CtlSupprimerRendezVousAgent();
                 }
+
+
+                //
+                // NV
+                //
+                // quand le bouton synthèse dans le aside est cliqué
+                //
+
+                else if ( isset($_POST['asideClientSynthese']) ) {
+                    CtlClientSynthese();
+                }
+
+
+                //
+                // NV
+                //
+                // Quand le bouton Rendez-Vous dans le li de la synthèse client est cliqué
+                //
+
+                else if ( isset($_POST['syntheseRdv']) ) {
+                    CtlClientSynthese();
+                }
+
+
+                //
+                // NV
+                //
+                // Quand le bouton Comptes dans le li de la synthèse client est cliqué
+                //
+
+                else if ( isset($_POST['syntheseComptes']) ) {
+                    CtlComptesClientSynthese();
+                }
+
+
+                //
+                // NV
+                //
+                // Quand le bouton Contrat dans le li de la synthèse client est cliqué
+                //
+
+                else if ( isset($_POST['syntheseContrats']) ) {
+                    CtlContratsClientSynthese();
+                }
+
+
+                //
+                // NV
+                //
+                // Quand le bouton Modifier Decouvert dans le aside est cliqué
+                //
+
+                else if ( isset($_POST['asideConseillerModifDecouvert']) ) {
+                    CtlmodifierDecouvert();
+                } 
+
+
+                //
+                // NV
+                //
+                // Quand le bouton modifier dans le forme de modification découvert est cliqué
+                //
+
+                else if ( isset($_POST['modifierDecouvertSubmit']) ) {
+                    CtlmodifierDecouvertSuite();
+                } 
 
                 //
                 // NV

@@ -187,16 +187,16 @@
             if ( $res['estInscrit'] == true ) {
 
                 if ( $rdvChoice != -1 ) {
-                    clientRdvSynthèseConseiller( DataClient(), true, $arrVenir, $arrPasse, $motifs, $rdvChoisi );
+                    clientRdvSynthèse( DataClient(), true, $arrVenir, $arrPasse, $motifs, $rdvChoisi );
                 } else {
-                    clientRdvSynthèseConseiller( DataClient(), true, $arrVenir, $arrPasse, $motifs );
+                    clientRdvSynthèse( DataClient(), true, $arrVenir, $arrPasse, $motifs );
                 }
 
             } else {
                 if ( $rdvChoice != -1 ) {
-                    clientRdvSynthèseConseiller( DataClient(), false, $arrVenir, $arrPasse, $motifs, $rdvChoisi );
+                    clientRdvSynthèse( DataClient(), false, $arrVenir, $arrPasse, $motifs, $rdvChoisi );
                 } else {
-                    clientRdvSynthèseConseiller( DataClient(), false, $arrVenir, $arrPasse, $motifs );
+                    clientRdvSynthèse( DataClient(), false, $arrVenir, $arrPasse, $motifs );
                 }
             }
 
@@ -502,7 +502,7 @@
             $list .= "[".$compte['idOperation'][count( $compte['idOperation'] ) - 1].",".$compte['montant'][count( $compte['idOperation'] ) - 1]."]];";
         }
 
-        clientComptesSynthèseConseiller( DataClient(), $comptes, $list );
+        clientComptesSynthèse( DataClient(), $comptes, $list );
     }
 
 
@@ -515,7 +515,7 @@
     function CtlContratsClientSynthese() {
         $arr = getAllContratClient();
 
-        clientContratsSynthèseConseiller( DataClient(), $arr );
+        clientContratsSynthèse( DataClient(), $arr );
     }
 
 
