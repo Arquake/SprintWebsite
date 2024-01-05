@@ -9,9 +9,18 @@
     function retraitAgentClient($montantRetrait){
         $connexion = getConnect();
 
-        $connexion -> query("UPDATE compteclient SET solde = solde - ".$montantRetrait." WHERE idCompte='".$_SESSION['idCompteClient']."'");
-        
-        $connexion -> query("INSERT INTO operation(idCompte, typeOperation, montant, dateOperation) VALUES ('".$_SESSION['idCompteClient']."','retrait','".-$montantRetrait."', CURRENT_DATE)");
+        $query = "
+        UPDATE compteclient SET solde = solde - :montantRetraitSolde WHERE idCompte=:idCompte;
+
+        INSERT INTO operation(idCompte, typeOperation, montant, dateOperation) VALUES ( :idCompte, 'retrait', :montantRetrait, CURRENT_DATE )";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':montantRetraitSolde', $montantRetrait, PDO::PARAM_INT);
+        $prepare->bindValue(':idCompte', $_SESSION['idCompteClient'], PDO::PARAM_INT);
+        $prepare->bindValue(':montantRetrait', -$montantRetrait, PDO::PARAM_INT);
+
+        $prepare -> execute();
     }
 
 
@@ -23,10 +32,18 @@
     
     function depotAgentClient($montantDepot){
         $connexion = getConnect();
-        
-        $connexion -> query("UPDATE compteclient SET solde = solde + ".$montantDepot." WHERE idCompte='".$_SESSION['idCompteClient']."'");
 
-        $connexion -> query("INSERT INTO operation(idCompte, typeOperation, montant, dateOperation) VALUES ('".$_SESSION['idCompteClient']."','dépot','".$montantDepot."', CURRENT_DATE)");
+        $query = "
+        UPDATE compteclient SET solde = solde + :montantDepot WHERE idCompte=:idCompte;
+        
+        INSERT INTO operation(idCompte, typeOperation, montant, dateOperation) VALUES ( :idCompte, 'dépot', :montantDepot, CURRENT_DATE )";
+        
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':montantDepot', $montantDepot, PDO::PARAM_INT);
+        $prepare->bindValue(':idCompte', $_SESSION['idCompteClient'], PDO::PARAM_INT);
+
+        $prepare -> execute();
     }
 
 
@@ -40,9 +57,14 @@
 
         $connexion = getConnect();
 
-        $connexion -> query("INSERT INTO RattacherA(idClient, login) VALUES('".$_SESSION['idClient']."', '".$_POST['posteRattachement']."') ");
+        $query = "INSERT INTO RattacherA(idClient, login) VALUES(:idClient, :poste) ";
 
-        return true;
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':idClient', $_SESSION['idClient'], PDO::PARAM_INT);
+        $prepare->bindValue(':poste', $_POST['posteRattachement'], PDO::PARAM_STR);
+
+        $prepare -> execute();
     }
 
 
@@ -56,26 +78,17 @@
 
         $connexion = getConnect();
 
-        $connexion -> query("INSERT INTO Client(nomClient, prenomClient, dateNaissance, estInscrit) VALUES('".$nomClient."', '".$prenomClient."' ,'".$dateNaissance."', 0)");
+        $query = "INSERT INTO Client(nomClient, prenomClient, dateNaissance, estInscrit) VALUES(:nomClient, :prenomClient ,:naissance , 0)";
 
-        $resultat = (($connexion -> query("SELECT idClient FROM Client WHERE idClient=(SELECT MAX(idClient) FROM Client)"))->fetch(PDO::FETCH_ASSOC))['idClient'];
+        $prepare = $connexion->prepare($query);
 
-        return $resultat;
-    }
+        $prepare->bindValue(':nomClient', $nomClient, PDO::PARAM_STR);
+        $prepare->bindValue(':prenomClient', $prenomClient, PDO::PARAM_STR);
+        $prepare->bindValue(':naissance', $dateNaissance, PDO::PARAM_STR);
 
+        $prepare -> execute();
 
-    //
-    // NV
-    //
-    // vérifie si le client est Inscrit
-    //
-
-    function clientInscritCheck() {
-        $connexion = getConnect();
-
-        $resultat = ($connexion->query("SELECT estInscrit FROM client WHERE idClient='".$_SESSION['idClient']."'"))->fetch(PDO::FETCH_ASSOC);
-
-        return $resultat;
+        return ($connexion->query("SELECT idClient FROM Client WHERE idClient=(SELECT MAX(idClient) FROM Client)"))->fetch(PDO::FETCH_ASSOC)['idClient'];
     }
 
 
@@ -88,7 +101,17 @@
     function getEmployeExist($idClient) {
         $connexion = getConnect();
 
-        $resultat = ($connexion->query("SELECT login FROM RattacherA WHERE idClient='".$idClient."'"))->fetch(PDO::FETCH_ASSOC);
+        $query = "SELECT login FROM RattacherA WHERE idClient=:idClient";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':idClient', $idClient, PDO::PARAM_INT);
+
+        $prepare -> execute();
+
+        $prepare->setFetchMode(PDO::FETCH_ASSOC);
+
+        $resultat = $prepare->fetch(PDO::FETCH_ASSOC);
 
         if ( !empty( $resultat ) ) {
             $resultat=$resultat['login'];
@@ -96,11 +119,32 @@
             return false;
         }
 
-        $resultat = ($connexion->query("SELECT login FROM Employe WHERE login='".$resultat."'"))->fetch(PDO::FETCH_ASSOC);
+        $query = "SELECT login FROM Employe WHERE login=:login";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':login', $resultat, PDO::PARAM_STR);
+
+        $prepare -> execute();
+
+        $prepare->setFetchMode(PDO::FETCH_ASSOC);
+
+        $resultat = $prepare->fetch(PDO::FETCH_ASSOC);
+
         if ( !empty( $resultat ) ) {
+
             return true;
+
         } else {
-            $connexion->query("DELETE FROM rattachera WHERE idClient='".$idClient."'");
+
+            $query = "DELETE FROM rattachera WHERE idClient=:idClient";
+
+            $prepare = $connexion->prepare($query);
+
+            $prepare->bindValue(':idClient', $idClient, PDO::PARAM_INT);
+
+            $prepare -> execute();
+
             return false;
         }
     }

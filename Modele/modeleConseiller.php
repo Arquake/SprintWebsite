@@ -12,19 +12,34 @@
 
         $query = "UPDATE client SET 
         
-        nomClient='".$_POST['nomClientInscription']."',
-        prenomClient='".$_POST['prenomClientInscription']."',
-        dateNaissance='".$_POST['dateNaissanceClientInscription']."',
-        estInscrit='1',numeroTelephone='".$_POST['telephoneClientInscription']."',
-        mail='".$_POST['mailClientInscription']."',adresse='".$_POST['adresseClientInscription']."',
-        codePostale='".$_POST['codePostalClientInscription']."',
-        profession='".$_POST['professionClientInscription']."',
-        situation='".$_POST['situationClientInscription']."',
+        nomClient=:nom,
+        prenomClient=:prenom,
+        dateNaissance=:naissance,
+        estInscrit='1',
+        numeroTelephone=:tel,
+        mail=:mail,
+        adresse=:adresse,
+        codePostale=:code,
+        profession=:prof,
+        situation=:situation,
         dateInscription = CURRENT_DATE
         
-        WHERE idClient='".$_SESSION['idClient']."'";
+        WHERE idClient=:idClient";
 
-        $connexion->query($query);
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':nom', $_POST['nomClientInscription'], PDO::PARAM_STR);
+        $prepare->bindValue(':prenom', $_POST['prenomClientInscription'], PDO::PARAM_STR);
+        $prepare->bindValue(':naissance', $_POST['dateNaissanceClientInscription'], PDO::PARAM_STR);
+        $prepare->bindValue(':tel', $_POST['telephoneClientInscription'], PDO::PARAM_INT);
+        $prepare->bindValue(':mail', $_POST['mailClientInscription'], PDO::PARAM_STR);
+        $prepare->bindValue(':adresse', $_POST['adresseClientInscription'], PDO::PARAM_STR);
+        $prepare->bindValue(':code', $_POST['codePostalClientInscription'], PDO::PARAM_INT);
+        $prepare->bindValue(':prof', $_POST['professionClientInscription'], PDO::PARAM_STR);
+        $prepare->bindValue(':situation', $_POST['situationClientInscription'], PDO::PARAM_STR);
+        $prepare->bindValue(':idClient', $_SESSION['idClient'], PDO::PARAM_INT);
+
+        $prepare -> execute();
 
     }
 
@@ -53,14 +68,38 @@
     function creerCompteConseiller() {
         $connexion = getConnect();
 
-        $query = "INSERT INTO compteclient(idClient, dateOuverture, solde, interet, montantDecouvert, plafond, typeCompte) VALUES('".$_SESSION['idClient']."',CURRENT_DATE,'".$_POST['soldeInitial']."','".$_POST['interetCreation']."','".$_POST['decouvertCreation']."','".$_POST['plafondCreation']."','".$_POST['compteType']."')";
+        $query = "INSERT INTO compteclient(idClient, dateOuverture, solde, interet, montantDecouvert, plafond, typeCompte) VALUES(
+            :id,
+            CURRENT_DATE,
+            :solde,
+            :interet,
+            :decouvert,
+            :plafond,
+            :type)";
 
-        $connexion->query($query);
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':id', $_SESSION['idClient'], PDO::PARAM_INT);
+        $prepare->bindValue(':solde', $_POST['soldeInitial'], PDO::PARAM_STR);
+        $prepare->bindValue(':interet', $_POST['interetCreation'], PDO::PARAM_STR);
+        $prepare->bindValue(':decouvert', $_POST['decouvertCreation'], PDO::PARAM_STR);
+        $prepare->bindValue(':plafond', $_POST['plafondCreation'], PDO::PARAM_STR);
+        $prepare->bindValue(':type', $_POST['compteType'], PDO::PARAM_STR);
+
+        $prepare -> execute();
 
         $res = ($connexion -> query("SELECT MAX(idCompte)'max' FROM compteclient")) -> fetch(PDO::FETCH_ASSOC)['max'];
 
         if ( intval($_POST['soldeInitial']) != 0 ) {
-            $res = $connexion -> query("INSERT INTO operation(idCompte, typeOperation, montant, dateOperation) VALUES ('".$res."','dépot','".$_POST['soldeInitial']."', CURRENT_DATE)");
+
+            $query = "INSERT INTO operation(idCompte, typeOperation, montant, dateOperation) VALUES (:id,'dépot',:solde, CURRENT_DATE)";
+
+            $prepare = $connexion->prepare($query);
+
+            $prepare->bindValue(':id', $res, PDO::PARAM_STR);
+            $prepare->bindValue(':solde', $_POST['soldeInitial'], PDO::PARAM_STR);
+
+            $prepare -> execute();
         }
     }
 
@@ -89,9 +128,15 @@
     function creerContratConseiller() {
         $connexion = getConnect();
 
-        $query = "INSERT INTO contratclient(idClient, dateVente, tarifMensuel, typeContrat) VALUES ('".$_SESSION['idClient']."',CURRENT_DATE,'".$_POST['tarifCreation']."','".$_POST['contratType']."')";
+        $query = "INSERT INTO contratclient(idClient, dateVente, tarifMensuel, typeContrat) VALUES (:id ,CURRENT_DATE,:tarif ,:type )";
 
-        $connexion->query($query);
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':id', $_SESSION['idClient'], PDO::PARAM_INT);
+        $prepare->bindValue(':tarif', $_POST['tarifCreation'], PDO::PARAM_STR);
+        $prepare->bindValue(':type', $_POST['contratType'], PDO::PARAM_STR);
+
+        $prepare -> execute();
     }
 
 
@@ -104,9 +149,17 @@
     function getAllCompteClient() {
         $connexion = getConnect();
 
-        $resultat = ($connexion->query("SELECT * FROM compteclient WHERE idClient='".$_SESSION['idClient']."'"))->fetchAll(PDO::FETCH_ASSOC);
+        $query = "SELECT * FROM compteclient WHERE idClient=:id";
 
-        return $resultat;
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':id', $_SESSION['idClient'], PDO::PARAM_INT);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+
+        return $prepare->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
@@ -119,9 +172,17 @@
     function getAllContratClient() {
         $connexion = getConnect();
 
-        $resultat = ($connexion->query("SELECT * FROM contratclient WHERE idClient='".$_SESSION['idClient']."'"))->fetchAll(PDO::FETCH_ASSOC);
+        $query = "SELECT * FROM contratclient WHERE idClient=:id";
 
-        return $resultat;
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':id', $_SESSION['idClient'], PDO::PARAM_INT);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+
+        return $prepare->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
@@ -134,9 +195,14 @@
     function modifierDecouvert() {
         $connexion = getConnect();
 
-        $resultat = $connexion->query("UPDATE compteclient SET montantDecouvert='".$_POST['decouvertModification']."' WHERE idCompte='".$_POST['listeComptes']."'");
+        $query = "UPDATE compteclient SET montantDecouvert=:montant WHERE idCompte=:idCompte";
 
-        return $resultat;
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':montant', $_POST['decouvertModification'], PDO::PARAM_STR);
+        $prepare->bindValue(':idCompte', $_POST['listeComptes'], PDO::PARAM_STR);
+
+        $prepare -> execute();
     }
 
 
@@ -149,9 +215,17 @@
     function getSoldeClient() {
         $connexion = getConnect();
 
-        $resultat = ($connexion->query("SELECT solde FROM compteclient WHERE idCompte='".$_POST['resiliationCompte']."'"))->fetch(PDO::FETCH_ASSOC)['solde'];
+        $query = "SELECT solde FROM compteclient WHERE idCompte=:idCompte";
 
-        return $resultat;
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':idCompte', $_POST['resiliationCompte'], PDO::PARAM_INT);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+
+        return $prepare->fetch(PDO::FETCH_ASSOC)['solde'];
     }
 
 
@@ -164,7 +238,13 @@
     function resilierContrat() {
         $connexion = getConnect();
 
-        $connexion->query("DELETE FROM contratclient WHERE idContrat='".$_POST['resiliationContrat']."'");
+        $query = "DELETE FROM contratclient WHERE idContrat=:idContrat";
+
+        $prepare = $connexion->prepare($query);
+        
+        $prepare->bindValue(':idContrat', $_POST['resiliationContrat'], PDO::PARAM_INT);
+
+        $prepare -> execute();
     }
 
 
@@ -177,7 +257,13 @@
     function resilierCompte() {
         $connexion = getConnect();
 
-        $connexion->query("DELETE FROM compteclient WHERE idCompte='".$_POST['resiliationCompte']."'");
+        $query = "DELETE FROM compteclient WHERE idCompte=:idCompte";
+
+        $prepare = $connexion->prepare($query);
+        
+        $prepare->bindValue(':idCompte', $_POST['resiliationCompte'], PDO::PARAM_INT);
+
+        $prepare -> execute();
     }
 
 
@@ -190,9 +276,17 @@
     function getclientByRDV() {
         $connexion = getConnect();
 
-        $res = ($connexion->query("SELECT idClient FROM rendezvous WHERE idRDV='".$_POST['clientButtonResearch']."'"))->fetch(PDO::FETCH_ASSOC)['idClient'];
+        $query = "SELECT idClient FROM rendezvous WHERE idRDV=:idRDV";
 
-        return $res;
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':idRDV', $_POST['clientButtonResearch'], PDO::PARAM_INT);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+
+        return $prepare->fetch(PDO::FETCH_ASSOC)['idClient'];
     }
 
 
@@ -205,9 +299,17 @@
     function getAllRdvOfClient() {
         $connexion = getConnect();
 
-        $res = ($connexion->query("SELECT * FROM rendezvous WHERE idClient='".$_SESSION['idClient']."' ORDER BY jourReunion ASC, heureDebut ASC"))->fetchAll(PDO::FETCH_ASSOC);
+        $query = "SELECT * FROM rendezvous WHERE idClient=:id ORDER BY jourReunion ASC, heureDebut ASC";
 
-        return $res;
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':id', $_SESSION['idClient'], PDO::PARAM_INT);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+
+        return $prepare->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
@@ -220,9 +322,38 @@
     function getAllOperationsClient() {
         $connexion = getConnect();
 
-        $query = "SELECT * FROM operation WHERE idCompte IN (SELECT idCompte FROM compteclient WHERE idClient='".$_SESSION['idClient']."') ORDER BY idOperation DESC";
+        $query = "SELECT * FROM operation WHERE idCompte IN (SELECT idCompte FROM compteclient WHERE idClient=:id) ORDER BY idOperation DESC";
 
-        $res = ($connexion->query($query))->fetchAll(PDO::FETCH_ASSOC);
+        $prepare = $connexion->prepare($query);
 
-        return $res;
+        $prepare->bindValue(':id', $_SESSION['idClient'], PDO::PARAM_INT);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+
+        return $prepare->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    //
+    // NV
+    //
+    // vérifie si le client est Inscrit
+    //
+
+    function clientInscritCheck() {
+        $connexion = getConnect();
+
+        $query = "SELECT estInscrit FROM client WHERE idClient=:idClient";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':idClient', $_SESSION['idClient'], PDO::PARAM_INT);
+
+        $prepare -> execute();
+
+        $prepare->setFetchMode(PDO::FETCH_ASSOC);
+
+        return $prepare->fetch(PDO::FETCH_ASSOC);
     }

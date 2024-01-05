@@ -496,7 +496,7 @@
 
                 foreach ( $motifList as $motif){
 
-                    $contenu .= "<option value='".$motif['idMotif']."'>".$motif['libelleMotif']."</option>";
+                    $contenu .= "<option value='".$motif['idMotif']."'>".htmlentities($motif['libelleMotif'], ENT_QUOTES,"UTF-8")."</option>";
                 
                 }
 
@@ -530,10 +530,10 @@
                 <legend>Modifier motif</legend>
 
                 <p><label for="motifModification">Motif :</label>
-                <input type="text" id="motifModification" name="motifModification" value="'.$motif.'" required></p>
+                <input type="text" id="motifModification" name="motifModification" value="'.htmlentities($motif, ENT_QUOTES,"UTF-8").'" required></p>
 
                 <p><label for="pieceMotifModification">Pièce(s) à prévoir :</label>
-                <textarea class="textAreaPieces" id="pieceMotifModification" name="pieceMotifModification" required >'.$piece.' </textarea></p>
+                <textarea class="textAreaPieces" id="pieceMotifModification" name="pieceMotifModification" required >'.htmlentities($piece, ENT_QUOTES,"UTF-8").' </textarea></p>
                 
                 <div id="modification">
                     <p id="modifier">

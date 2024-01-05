@@ -184,9 +184,9 @@
 
                     <legend>Inscrire Client</legend>
 
-                        <p><label for="nomClientInscription">Nom du Client</label><input type="text" name="nomClientInscription" value="'.$clientInformation['nomClient'].'"></p>
+                        <p><label for="nomClientInscription">Nom du Client</label><input type="text" name="nomClientInscription" value="'.htmlentities($clientInformation['nomClient'], ENT_QUOTES,"UTF-8").'"></p>
 
-                        <p><label for="prenomClientInscription">Prénom du Client</label><input type="text" name="prenomClientInscription" value="'.$clientInformation['prenomClient'].'"></p>
+                        <p><label for="prenomClientInscription">Prénom du Client</label><input type="text" name="prenomClientInscription" value="'.htmlentities($clientInformation['prenomClient'], ENT_QUOTES,"UTF-8").'"></p>
 
                         <p><label for="dateNaissanceClientInscription">Date de Naissanse du Client</label><input type="date" name="dateNaissanceClientInscription" value="'.$clientInformation['dateNaissance'].'"></p>
 
@@ -444,7 +444,7 @@
                     <p><label for="">Conseiller</label><select id="conseillerEDTChoice" name="conseillerEDTChoice"> ';
                     foreach ( $conseillers as $conseiller){
             
-                        $contenu .= "<option value='".$conseiller['login']."'>". $conseiller['nomEmploye'] .' '. $conseiller['prenomEmploye'] ."</option>";
+                        $contenu .= "<option value='".$conseiller['login']."'>". htmlentities($conseiller['nomEmploye'], ENT_QUOTES,"UTF-8") .' '. htmlentities($conseiller['prenomEmploye'], ENT_QUOTES,"UTF-8") ."</option>";
             
                     }
                     
@@ -512,7 +512,7 @@
                     </form>
                 </td>
 
-                <th colspan="5" class="semainetd">Semaine '.($date->modify('+7 days')->format("W")).' de l\'année '.$date->format("Y").'<br> De '.$_SESSION['conseillerNom'].' '.$_SESSION['conseillerPrenom'].'</th>
+                <th colspan="5" class="semainetd">Semaine '.($date->modify('+7 days')->format("W")).' de l\'année '.$date->format("Y").'<br> De '.htmlentities($_SESSION['conseillerNom'], ENT_QUOTES,"UTF-8").' '.htmlentities($_SESSION['conseillerPrenom'], ENT_QUOTES,"UTF-8").'</th>
                 
                 <td class="tdWeekChange">
                     <form action="index.php" method="post" class="edtWeekChangeForm">

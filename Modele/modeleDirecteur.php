@@ -10,11 +10,30 @@
     function createEmploye( $login, $password, $poste, $nomEmploye, $prenomEmploye ){
 
         $connexion = getConnect();
-        $resultat = $connexion -> query("SELECT login FROM Employe WHERE login='" . $login . "'");
-        
-        if ( $resultat != false && empty($resultat) == 0 ){
 
-            $connexion -> query("INSERT INTO Employe(login,password,poste,nomEmploye,prenomEmploye,dateEmbauche) VALUES('" . $login . "', '" . password_hash($password, PASSWORD_DEFAULT, ['cost' => 12] ) . "', '" . $poste . "', '" . $nomEmploye . "', '" . $prenomEmploye . "', '" . date('Ymd') . "')");
+        $query = "SELECT login FROM Employe WHERE login=:login";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':login', $login, PDO::PARAM_STR);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+        
+        if ( $prepare != false && empty($prepare) == 0 ){
+
+            $query = "INSERT INTO Employe(login,password,poste,nomEmploye,prenomEmploye,dateEmbauche) VALUES(:login, :password, :poste, :nom, :prenom, '" . date('Ymd') . "')";
+
+            $prepare = $connexion->prepare($query);
+
+            $prepare->bindValue(':login', $login, PDO::PARAM_STR);
+            $prepare->bindValue(':password', password_hash($password, PASSWORD_DEFAULT, ['cost' => 12] ), PDO::PARAM_STR);
+            $prepare->bindValue(':poste', $poste, PDO::PARAM_STR);
+            $prepare->bindValue(':nom', $nomEmploye, PDO::PARAM_STR);
+            $prepare->bindValue(':prenom', $prenomEmploye, PDO::PARAM_STR);
+
+            $prepare -> execute();
 
             return true;
 
@@ -48,12 +67,20 @@
         $connexion = getConnect();
         
         if ( $employe == false ) {
-            $resultat = ($connexion -> query("SELECT login, nomEmploye, prenomEmploye, poste FROM Employe WHERE login='".$_POST['modifierLemploye']."'"))->fetch(PDO::FETCH_ASSOC);
-        } else {
-            $resultat = ($connexion -> query("SELECT login, nomEmploye, prenomEmploye, poste FROM Employe WHERE login='".$employe."'"))->fetch(PDO::FETCH_ASSOC);
+            $employe = $_POST['modifierLemploye'];
         }
 
-        return $resultat;
+        $query = "SELECT login, nomEmploye, prenomEmploye, poste FROM Employe WHERE login=:login";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':login', $employe, PDO::PARAM_STR);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+
+        return $prepare -> fetch(PDO::FETCH_ASSOC);
     }
 
 
@@ -66,10 +93,20 @@
     function modificationInformationEmployeDirecteur() {
         $connexion = getConnect();
         if ( isset($_POST['passwordCheckbox'])) {
-            $connexion -> query("UPDATE employe SET login='".$_POST['loginCreation']."',password='".password_hash($_POST['passwordCreation'], PASSWORD_DEFAULT, ['cost' => 12] )."',poste='".$_POST['posteCreation']."',nomEmploye='".$_POST['nomCreation']."',prenomEmploye='".$_POST['prenomCreation']."' WHERE login='".$_SESSION['employeChoisiInformationLogin']."'");
+            $query = "UPDATE employe SET login=:login,password='".password_hash($_POST['passwordCreation'], PASSWORD_DEFAULT, ['cost' => 12] )."',poste=:poste,nomEmploye=:nom,prenomEmploye=:prenom WHERE login=:loginSec";
         } else {
-            $connexion -> query("UPDATE employe SET login='".$_POST['loginCreation']."',poste='".$_POST['posteCreation']."',nomEmploye='".$_POST['nomCreation']."',prenomEmploye='".$_POST['prenomCreation']."' WHERE login='".$_SESSION['employeChoisiInformationLogin']."'");
+            $query = "UPDATE employe SET login=:login,poste=:poste,nomEmploye=:nom,prenomEmploye=:prenom WHERE login=:loginSec";
         }
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':login', $_POST['loginCreation'], PDO::PARAM_STR);
+        $prepare->bindValue(':poste', $_POST['posteCreation'], PDO::PARAM_STR);
+        $prepare->bindValue(':nom', $_POST['nomCreation'], PDO::PARAM_STR);
+        $prepare->bindValue(':prenom', $_POST['loginCreation'], PDO::PARAM_STR);
+        $prepare->bindValue(':loginSec', $_SESSION['employeChoisiInformationLogin'], PDO::PARAM_STR);
+
+        $prepare -> execute();
     }
 
 
@@ -82,12 +119,24 @@
 
     function loginCheckIfExistDirecteur() {
         $connexion = getConnect();
-        $resultat = ($connexion -> query("SELECT login FROM Employe WHERE login='".$_POST['loginCreation']."'"))->fetch(PDO::FETCH_ASSOC);
-        if ( !empty($resultat) ) { return true; }
+
+        $query = "SELECT login FROM Employe WHERE login=:login";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':login', $_POST['loginCreation'], PDO::PARAM_STR);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+
+        if ( !empty($prepare -> fetch(PDO::FETCH_ASSOC)) ) { return true; }
         return false;
     }
 
+
     ///COMPTE
+
 
     //
     // MP
@@ -100,6 +149,7 @@
         return $resultat;
     }
 
+
     //
     // MP
     //
@@ -108,10 +158,20 @@
     //
     function VerificationPossessionTypeCompte($type){
         $connexion = getConnect();
-        $resultat = ($connexion -> query("SELECT idCompte FROM CompteClient WHERE typeCompte='".$type."'"))->fetchAll(PDO::FETCH_ASSOC);
+
+        $query = "SELECT idCompte FROM CompteClient WHERE typeCompte=:type";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':type', $type, PDO::PARAM_STR);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
         
-        return empty($resultat);
+        return empty($prepare -> fetchAll(PDO::FETCH_ASSOC));
     }
+
 
     //
     // MP
@@ -119,38 +179,68 @@
     // Retourne vrai si le type de compte n'existe pas  
     // Retourne faux si le type de compte existe 
     //
+
     function VerificationExistanceTypeCompte($type){
         $connexion = getConnect();
-        $resultat = ($connexion -> query("SELECT typeCompte FROM Compte WHERE typeCompte='".$type."'"))->fetchAll(PDO::FETCH_ASSOC);
         
-        return empty($resultat);
+        $query = "SELECT typeCompte FROM Compte WHERE typeCompte=:type";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':type', $type, PDO::PARAM_STR);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+        
+        return empty($prepare -> fetchAll(PDO::FETCH_ASSOC));
     }
+
 
     //
     // MP
     //
     // Ajoute le type aux types de compte  
     // 
+
     function ajouterLeTypeCompte($type){
         $connexion = getConnect();
-        $connexion -> query("INSERT INTO Compte(typeCompte) VALUES('".$type."')");
+
+        $query = "INSERT INTO Compte(typeCompte) VALUES(:type)";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':type', $type, PDO::PARAM_STR);
+
+        $prepare -> execute();
     }
+
 
     //
     // MP
     //
     // Supprime le type des types de compte  
     // 
+
     function supprimerLeTypeCompte($type){
         $connexion = getConnect();
-        $connexion -> query("DELETE FROM Compte WHERE typeCompte='".$type."'");
+
+        $query = "DELETE FROM Compte WHERE typeCompte=':type";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':type', $type, PDO::PARAM_STR);
+
+        $prepare -> execute();
     }
+
 
     //
     // MP
     //
     // Retourne tout les motif ET les pieces existants
     //
+
     function getMotifPieceList(){
         $connexion = getConnect();
         $resultat = ($connexion -> query("SELECT * FROM motif"))->fetchAll(PDO::FETCH_ASSOC);
@@ -184,9 +274,18 @@
 
     function VerificationPossessionTypeContrat($type){
         $connexion = getConnect();
-        $resultat = ($connexion -> query("SELECT idContrat FROM ContratClient WHERE typeContrat='".$type."'"))->fetchAll(PDO::FETCH_ASSOC);
         
-        return empty($resultat);
+        $query = "SELECT idContrat FROM ContratClient WHERE typeContrat='".$type."'";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':type', $type, PDO::PARAM_STR);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+        
+        return empty($prepare -> fetchAll(PDO::FETCH_ASSOC));
     }
 
 
@@ -199,9 +298,20 @@
 
     function VerificationExistanceTypeContrat($type){
         $connexion = getConnect();
-        $resultat = ($connexion -> query("SELECT typeContrat FROM Contrat WHERE typeContrat='".$type."'"))->fetchAll(PDO::FETCH_ASSOC);
         
-        return empty($resultat);
+        $connexion = getConnect();
+        
+        $query = "SELECT typeContrat FROM Contrat WHERE typeContrat=:type";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':type', $type, PDO::PARAM_STR);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+        
+        return empty($prepare -> fetchAll(PDO::FETCH_ASSOC));
     }
 
 
@@ -213,7 +323,14 @@
 
     function ajouterLeTypeContrat($type){
         $connexion = getConnect();
-        $connexion -> query("INSERT INTO Contrat(typeContrat) VALUES('".$type."')");
+
+        $query = "INSERT INTO Contrat(typeContrat) VALUES(:type)";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':type', $type, PDO::PARAM_STR);
+
+        $prepare -> execute();
     }
 
 
@@ -225,8 +342,16 @@
 
     function supprimerLeTypeContrat($type){
         $connexion = getConnect();
-        $connexion -> query("DELETE FROM Contrat WHERE typeContrat='".$type."'");
+
+        $query = "DELETE FROM Contrat WHERE typeContrat=:type";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':type', $type, PDO::PARAM_STR);
+
+        $prepare -> execute();
     }
+
 
     //
     // MP
@@ -235,8 +360,17 @@
     //
     function ajoutMotif($motif,$piece){
         $connexion = getConnect();
-        $connexion -> query("INSERT INTO motif(idMotif, libelleMotif, listePiece) VALUES(0,'".$motif."','".$piece."')");
+
+        $query = "INSERT INTO motif(idMotif, libelleMotif, listePiece) VALUES(0, :motif, :piece)";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':motif', $motif, PDO::PARAM_STR);
+        $prepare->bindValue(':piece', $piece, PDO::PARAM_STR);
+
+        $prepare -> execute();
     }
+
 
     //
     // NV
@@ -247,11 +381,18 @@
     function nombreContrat() {
         $connexion = getConnect();
 
-        $query = "SELECT Count(*)'count' FROM contratClient WHERE dateVente <= '".$_POST['dateFinStatscontrats']."' AND dateVente >= '".$_POST['dateDebutStatscontrats']."'";
+        $query = "SELECT Count(*)'count' FROM contratClient WHERE dateVente <= :fin AND dateVente >= :deb";
 
-        $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC)['count'];
+        $prepare = $connexion->prepare($query);
 
-        return $resultat;
+        $prepare->bindValue(':fin', $_POST['dateFinStatscontrats'], PDO::PARAM_STR);
+        $prepare->bindValue(':deb', $_POST['dateDebutStatscontrats'], PDO::PARAM_STR);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+
+        return $prepare->fetch(PDO::FETCH_ASSOC)['count'];
     }
 
 
@@ -264,11 +405,18 @@
     function nombreCompte() {
         $connexion = getConnect();
 
-        $query = "SELECT Count(*)'count' FROM compteClient WHERE dateOuverture <= '".$_POST['dateFinStatscomptes']."' AND dateOuverture >= '".$_POST['dateDebutStatscomptes']."'";
+        $query = "SELECT Count(*)'count' FROM compteClient WHERE dateOuverture <= :fin AND dateOuverture >= :deb";
 
-        $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC)['count'];
+        $prepare = $connexion->prepare($query);
 
-        return $resultat;
+        $prepare->bindValue(':fin', $_POST['dateFinStatscomptes'], PDO::PARAM_STR);
+        $prepare->bindValue(':deb', $_POST['dateDebutStatscomptes'], PDO::PARAM_STR);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+
+        return $prepare->fetch(PDO::FETCH_ASSOC)['count'];
     }
 
 
@@ -281,75 +429,92 @@
     function nombreRdv() {
         $connexion = getConnect();
 
-        $query = "SELECT Count(*)'count' FROM rendezvous WHERE dateCreationRdv <= '".$_POST['dateFinStatsrdv']."' AND dateCreationRdv >= '".$_POST['dateDebutStatsrdv']."' AND idClient!='-1'";
+        $query = "SELECT Count(*)'count' FROM rendezvous WHERE dateCreationRdv <= :fin AND dateCreationRdv >= :deb AND idClient!='-1'";
 
-        $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC)['count'];
+        $prepare = $connexion->prepare($query);
 
-        return $resultat;
+        $prepare->bindValue(':fin', $_POST['dateFinStatsrdv'], PDO::PARAM_STR);
+        $prepare->bindValue(':deb', $_POST['dateDebutStatsrdv'], PDO::PARAM_STR);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+
+        return $prepare->fetch(PDO::FETCH_ASSOC)['count'];
     }
 
 
     //
     // NV
     //
-    // compte le nombre de RDV entre 2 dates
+    // compte le nombre de client inscrit à la date
     //
 
     function nombreClient() {
         $connexion = getConnect();
 
-        $query = "SELECT Count(*)'count' FROM client WHERE dateInscription <= '".$_POST['dateStatsnbClient']."' AND idClient!='-1'";
+        $query = "SELECT Count(*)'count' FROM client WHERE dateInscription <= :date AND idClient!='-1'";
 
-        $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC)['count'];
+        $prepare = $connexion->prepare($query);
 
-        return $resultat;
+        $prepare->bindValue(':date', $_POST['dateStatsnbClient'], PDO::PARAM_STR);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+
+        return $prepare->fetch(PDO::FETCH_ASSOC)['count'];
     }
 
 
     //
     // NV
     //
-    // compte le nombre de RDV entre 2 dates
-    //
-
-    //
-    // SELECT solde - montant'resultat' FROM (SELECT SUM(solde)'solde' FROM compteClient)v1,(SELECT IFNULL(SUM(montant), 0)'montant' FROM operation WHERE operation.dateOperation > '2023-12-27')v2;
-    //
-    //
-    // SELECT IFNULL(SUM(montant), 0)'resultat' FROM operation WHERE operation.dateOperation <= '".$_POST['dateStatssoldeTotal']."'
+    // compte le solde total dans la banque à la date
     //
 
     function soldeTotal() {
         $connexion = getConnect();
 
-        $query = "SELECT IFNULL(SUM(montant), 0)'resultat' FROM operation WHERE operation.dateOperation <= '".$_POST['dateStatssoldeTotal']."'";
+        $query = "SELECT IFNULL(SUM(montant), 0)'resultat' FROM operation WHERE operation.dateOperation <= :solde";
 
-        $resultat = ($connexion -> query($query))->fetch(PDO::FETCH_ASSOC)['resultat'];
+        $prepare = $connexion->prepare($query);
 
-        return $resultat;
+        $prepare->bindValue(':solde', $_POST['dateStatssoldeTotal'], PDO::PARAM_STR);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+
+        return $prepare->fetch(PDO::FETCH_ASSOC)['resultat'];
     }
+
 
     //
     // MP
     //
     // Get les information via l'id pour la modification des information (les montrer a l'utilisateur)
     //
+
     function getMotifViaId($id){
         $connexion = getConnect();
         $resultat = ($connexion -> query("SELECT libelleMotif, listePiece FROM motif WHERE idMotif='".intval($id)."'"))->fetch(PDO::FETCH_ASSOC);
         return $resultat;
     }
 
+
     //
     // MP
     //
     // modif les information du client via l'id placé en session
     //
+
     function modifierMotifViaIdSession($libelle, $pieces){
         $connexion = getConnect();
         $connexion -> query("UPDATE motif SET libelleMotif='".$libelle."', listePiece='".$pieces."' WHERE idMotif='".$_SESSION['idMotif']."'");
         
     }
+
 
     //
     // MP
@@ -364,6 +529,7 @@
         
         return !empty($motif) && (empty($resultat) || $resultat['idMotif'] == $_SESSION['idMotif']);
     }
+    
 
     //
     // MP
