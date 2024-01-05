@@ -498,8 +498,18 @@
 
     function getMotifViaId($id){
         $connexion = getConnect();
-        $resultat = ($connexion -> query("SELECT libelleMotif, listePiece FROM motif WHERE idMotif='".intval($id)."'"))->fetch(PDO::FETCH_ASSOC);
-        return $resultat;
+
+        $query = "SELECT libelleMotif, listePiece FROM motif WHERE idMotif=:id";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':id', intval($id), PDO::PARAM_INT);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+
+        return $prepare->fetch(PDO::FETCH_ASSOC);
     }
 
 
@@ -511,8 +521,16 @@
 
     function modifierMotifViaIdSession($libelle, $pieces){
         $connexion = getConnect();
-        $connexion -> query("UPDATE motif SET libelleMotif='".$libelle."', listePiece='".$pieces."' WHERE idMotif='".$_SESSION['idMotif']."'");
         
+        $query = "UPDATE motif SET libelleMotif=:libelle, listePiece=:pieces WHERE idMotif=:id";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':libelle', $libelle, PDO::PARAM_STR);
+        $prepare->bindValue(':pieces', $pieces, PDO::PARAM_STR);
+        $prepare->bindValue(':id', $_SESSION['idMotif'], PDO::PARAM_INT);
+
+        $prepare -> execute();
     }
 
 
@@ -529,7 +547,7 @@
         
         return !empty($motif) && (empty($resultat) || $resultat['idMotif'] == $_SESSION['idMotif']);
     }
-    
+
 
     //
     // MP
