@@ -451,9 +451,11 @@
         if ( $message == 1 ){
             $contenu .= '<div class="invalidForm">Ajout effectif</div>';
         } else if ( $message == 2 ){
-            $contenu .= '<div class="invalidForm">Modification impossible : motif déjà utilisé ou non-nommé</div>';
+            $contenu .= '<div class="invalidForm">Modification impossible : motif non-nommé</div>';
         } else if ( $message == 3 ){
-            $contenu .= '<div class="invalidForm">Mofification effective</div>';
+            $contenu .= '<div class="invalidForm">Modification effective</div>';
+        } else if ( $message == 4 ){
+            $contenu .= '<div class="invalidForm">Création impossible</div>';
         } 
 
 

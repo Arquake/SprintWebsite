@@ -243,14 +243,14 @@
     // MP
     //
     // Link le bouton gestion motifs de l'aside
-    // - viaType par defaut sur 0, permet l'affichage correcte de la page des mtoifs
+    // - viaType par defaut sur 0, permet l'affichage correcte de la page des motifs
     // - message par defaut sur 0, affiche le message par son id das la page de motifs
     //
     function CtlGestionMotifs($viaType = 0, $message = 0){
         $_SESSION['viaType'] = $viaType;
         $motifList = getMotifPieceList();
-        gestionMotifs($motifList,$viaType,$message);
         unset($_SESSION['idMotif']);
+        gestionMotifs($motifList,$viaType,$message);
     }
 
     //
@@ -259,12 +259,11 @@
     // 
     //
     function CtlAjoutMotif(){        
-        $motif = addslashes($_POST['DirecteurAjouterMotif']);
-        $pieces = addslashes($_POST['DirecteurAjouterPiece']);
+        $motif = $_POST['DirecteurAjouterMotif'];
         
         if (VerificationExistanceMotif($motif)){
-            ajoutMotif($motif,$pieces);
-            CtlGestionMotifs($_SESSION['viaType'],3);
+            ajoutMotif($motif,$_POST['DirecteurAjouterPiece']);
+            CtlGestionMotifs($_SESSION['viaType'],1);
         } else {
             CtlGestionMotifs($_SESSION['viaType'],4);
         }
@@ -288,11 +287,10 @@
     //
     //
     function CtlModifierMotifValidation(){
-        $motif = addslashes($_POST['motifModification']);
-        $pieces = addslashes($_POST['pieceMotifModification']);
+        $motif = $_POST['motifModification'];
         
         if (VerificationExistanceMotif($motif)){
-            modifierMotifViaIdSession($motif,$pieces);
+            modifierMotifViaIdSession($motif,$_POST['pieceMotifModification']);
             CtlGestionMotifs($_SESSION['viaType'],3);
         } else {
             CtlGestionMotifs($_SESSION['viaType'],2);

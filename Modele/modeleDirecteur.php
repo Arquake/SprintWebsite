@@ -535,7 +535,7 @@
 
 
     //
-    // MP
+    // MP - NV
     //
     // Retourne vrai si aucun motif ne possede ce nom et que le champ nom est set   
     // Retourne faux si un motif existe deja avec ce nom ou s'il n'est pas rempli
@@ -543,9 +543,24 @@
 
     function VerificationExistanceMotif($motif){
         $connexion = getConnect();
-        $resultat = ($connexion -> query("SELECT idMotif FROM motif WHERE libelleMotif='".$motif."'"))->fetch(PDO::FETCH_ASSOC);
-        
-        return !empty($motif) && (empty($resultat) || $resultat['idMotif'] == $_SESSION['idMotif']);
+
+        $query = "SELECT idMotif FROM motif WHERE libelleMotif=:motif";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':motif', $motif, PDO::PARAM_STR);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+
+        $resultat = $prepare -> fetch(PDO::FETCH_ASSOC);
+
+        if ( isset($_SESSION['idMotif']) ) {
+            return !empty($motif) && !empty($resultat);
+        } else {
+            return !empty($motif) && empty($resultat);
+        }
     }
 
 
@@ -555,7 +570,18 @@
     //
     function VerificationMofificationTypeCompte($type){
         $connexion = getConnect();
-        $resultat = ($connexion -> query("SELECT typeCompte FROM compte WHERE typeCompte='".$type."'"))->fetch(PDO::FETCH_ASSOC);
+
+        $query = "SELECT typeCompte FROM compte WHERE typeCompte=:type";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':type', $type, PDO::PARAM_STR);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+
+        $resultat = $prepare -> fetch(PDO::FETCH_ASSOC);
 
         return !empty($type) && empty($resultat);
     }
@@ -567,7 +593,15 @@
     //
     function modifierTypeCompte($type){
         $connexion = getConnect();
-        $connexion -> query("UPDATE compte SET typeCompte='".$type."' WHERE typeCompte='".$_SESSION['typeCompte']."'");
+
+        $query = "UPDATE compte SET typeCompte=:type WHERE typeCompte=:typeCompte";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':type', $type, PDO::PARAM_STR);
+        $prepare->bindValue(':typeCompte', $_SESSION['typeCompte'], PDO::PARAM_STR);
+
+        $prepare -> execute();
         
     }
 
@@ -577,7 +611,18 @@
     //
     function VerificationMofificationTypeContrat($type){
         $connexion = getConnect();
-        $resultat = ($connexion -> query("SELECT typeContrat FROM contrat WHERE typeContrat='".$type."'"))->fetch(PDO::FETCH_ASSOC);
+
+        $query = "SELECT typeContrat FROM contrat WHERE typeContrat=:type";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':type', $type, PDO::PARAM_STR);
+
+        $prepare -> execute();
+
+        $prepare -> setFetchMode(PDO::FETCH_ASSOC);
+
+        $resultat = $prepare -> fetch(PDO::FETCH_ASSOC);
 
         return !empty($type) && empty($resultat);
     }
@@ -589,7 +634,14 @@
     //
     function modifierTypeContrat($type){
         $connexion = getConnect();
-        $connexion -> query("UPDATE contrat SET typeContrat='".$type."' WHERE typeContrat='".$_SESSION['typeContrat']."'");
         
+        $query = "UPDATE contrat SET typeContrat=:type WHERE typeContrat=:typeContrat";
+
+        $prepare = $connexion->prepare($query);
+
+        $prepare->bindValue(':type', $type, PDO::PARAM_STR);
+        $prepare->bindValue(':typeContrat', $_SESSION['typeContrat'], PDO::PARAM_STR);
+
+        $prepare -> execute();
     }
     
