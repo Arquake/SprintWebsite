@@ -567,7 +567,9 @@
     //
     // MP
     //
+    // vérifie si le type de compte existe
     //
+
     function VerificationMofificationTypeCompte($type){
         $connexion = getConnect();
 
@@ -586,11 +588,13 @@
         return !empty($type) && empty($resultat);
     }
 
+
     //
     // MP
     //
+    // Modifie le type de compte
     //
-    //
+
     function modifierTypeCompte($type){
         $connexion = getConnect();
 
@@ -605,10 +609,13 @@
         
     }
 
+
     //
     // MP
     //
+    // vérifie si le type de contrat existe
     //
+
     function VerificationMofificationTypeContrat($type){
         $connexion = getConnect();
 
@@ -627,11 +634,13 @@
         return !empty($type) && empty($resultat);
     }
 
+
     //
     // MP
     //
+    // Modifie le type de contrat
     //
-    //
+
     function modifierTypeContrat($type){
         $connexion = getConnect();
         
