@@ -176,7 +176,7 @@
                 foreach ( $res as $client){
             
                     $contenu .= '
-                        <p><label for="'.$client['idClient'].'">'.htmlentities($client['nomClient'], ENT_QUOTES,"UTF-8")."    ".htmlentities($client['prenomClient'], ENT_QUOTES,"UTF-8")."     ".$client['dateNaissance'].'</label>
+                        <p><label for="'.$client['idClient'].'" style="font-size:14px;">'.htmlentities($client['nomClient'], ENT_QUOTES,"UTF-8")."    ".htmlentities($client['prenomClient'], ENT_QUOTES,"UTF-8")."     ".$client['dateNaissance'].'</label>
                         <input type="radio" id="'.$client['idClient'].'" name="clientRechercheChoice" value="'.$client['idClient'].'"></p>';
         
                 }
