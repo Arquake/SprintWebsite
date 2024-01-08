@@ -113,13 +113,13 @@
                         '.$arr['heureFin'].'
                     </div>
                     <div class="indordvtd">
-                        idRDV : '.$arr['idRdv'].'
+                        id RDV : '.$arr['idRdv'].'
                     </div>
                     <div class="indordvtd">
-                        client : '.$arr['idClient'].'
+                        id Client : '.$arr['idClient'].'
                     </div>
                     <div class="indordvtd">
-                        motif : '.$arr['idMotif'].'
+                        id Motif : '.$arr['idMotif'].'
                     </div>
                 </div>
             </td>';
@@ -242,13 +242,13 @@
             $i = 0;
             while ( $i < count($relevantArrayPasse)-1 ) {
                 $arr=$relevantArrayPasse[$i];
-                $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$motifList[$arr['idMotif']]['libelleMotif'].'", "'.$motifList[$arr['idMotif']]['listePiece'].'"],';
+                $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$motifList[$arr['idMotif']]['libelleMotif'].'", '.str_replace('\r','',json_encode($motifList[$arr['idMotif']]['listePiece'])).'],';
                 $i++;
             }
 
             if ( count($relevantArrayPasse) != 0 ) {
                 $arr=$relevantArrayPasse[$i];
-                $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$motifList[$arr['idMotif']]['libelleMotif'].'", "'.$motifList[$arr['idMotif']]['listePiece'].'"]';
+                $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$motifList[$arr['idMotif']]['libelleMotif'].'", '.str_replace('\r','',json_encode($motifList[$arr['idMotif']]['listePiece'])).']';
             }
             
             $contenu .= '];
@@ -257,13 +257,13 @@
             $i = 0;
             while ( $i < count($relevantArrayVenir)-1 ) {
                 $arr=$relevantArrayVenir[$i];
-                $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$motifList[$arr['idMotif']]['libelleMotif'].'", "'.$motifList[$arr['idMotif']]['listePiece'].'"],';
+                $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$motifList[$arr['idMotif']]['libelleMotif'].'", '.str_replace('\r','',json_encode($motifList[$arr['idMotif']]['listePiece'])).'],';
                 $i++;
             }
 
             if ( count($relevantArrayVenir) != 0 ) {
                 $arr=$relevantArrayVenir[$i];
-                $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$motifList[$arr['idMotif']]['libelleMotif'].'", "'.$motifList[$arr['idMotif']]['listePiece'].'"]';
+                $contenu .= '["'.$arr['idRdv'].'","'.$arr['jourReunion'].'","'.$arr['heureDebut'].'","'.$arr['heureFin'].'","'.$arr['dateCreationRdv'].'","'.$motifList[$arr['idMotif']]['libelleMotif'].'", '.str_replace('\r','',json_encode($motifList[$arr['idMotif']]['listePiece'])).']';
             }
             
             $contenu .= '];

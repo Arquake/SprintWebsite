@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 04 jan. 2024 à 17:18
+-- Généré le : lun. 08 jan. 2024 à 14:41
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -49,12 +49,12 @@ CREATE TABLE IF NOT EXISTS `client` (
 --
 
 INSERT INTO `client` (`idClient`, `nomClient`, `prenomClient`, `dateNaissance`, `estInscrit`, `numeroTelephone`, `mail`, `adresse`, `codePostale`, `profession`, `situation`, `dateInscription`) VALUES
-(1, 'Daunat', 'Jean', '1999-03-13', 1, 0736976334, 'Jean-Daunat@orange.fr', '13 rue des pommiers', 93270, 'dentiste', 'célibataire', '2017-03-14'),
+(1, 'Daunat', 'Jean', '1999-03-13', 1, 736976334, 'Jean-Daunat@orange.fr', '13 rue des pommiers', 93270, 'dentiste', 'célibataire', '2017-03-14'),
 (2, 'Daunat', 'Kyllian', '2003-12-02', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (3, 'Daunat', 'Ramsès', '2005-02-13', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (4, 'kamel', 'Patrick', '2007-10-11', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(5, 'Kysberly', 'Dannette', '2004-07-26', 1, 0239648579,'kys-berly-Dannette@sfr.fr', '26 avenue du raisin sec', 45100, 'fossoyeuse', 'marié', '2004-07-30'),
-(6, 'Kysberly', 'Napoléon', '2003-09-17', 1, 0798653421,'kys-berly-Napoleon@sfr.fr', '26 avenue du raisin sec', 45100, 'croquemort', 'marié', '2020-10-23');
+(5, 'Kysberly', 'Dannette', '2004-07-26', 1, 239648579, 'kys-berly-Dannette@sfr.fr', '26 avenue du raisin sec', 45100, 'fossoyeuse', 'marié', '2004-07-30'),
+(6, 'Kysberly', 'Napoléon', '2003-09-17', 1, 798653421, 'kys-berly-Napoleon@sfr.fr', '26 avenue du raisin sec', 45100, 'croquemort', 'marié', '2020-10-23');
 
 -- --------------------------------------------------------
 
@@ -95,11 +95,15 @@ CREATE TABLE IF NOT EXISTS `compteclient` (
   `plafond` int NOT NULL,
   `typeCompte` varchar(45) NOT NULL,
   PRIMARY KEY (`idCompte`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `compteclient`
 --
+
+INSERT INTO `compteclient` (`idCompte`, `idClient`, `dateOuverture`, `solde`, `interet`, `montantDecouvert`, `plafond`, `typeCompte`) VALUES
+(13, 1, '2024-01-08', 4640, 0, -300, 0, 'CCP'),
+(14, 1, '2024-01-08', 1860, 3, 0, 22950, 'Livret A');
 
 -- --------------------------------------------------------
 
@@ -118,8 +122,8 @@ CREATE TABLE IF NOT EXISTS `contrat` (
 --
 
 INSERT INTO `contrat` (`typeContrat`) VALUES
-('Assurance Vie'),
 ('Assurance Maison'),
+('Assurance Vie'),
 ('Assurance Voiture');
 
 -- --------------------------------------------------------
@@ -136,11 +140,15 @@ CREATE TABLE IF NOT EXISTS `contratclient` (
   `tarifMensuel` float NOT NULL,
   `typeContrat` varchar(45) NOT NULL,
   PRIMARY KEY (`idContrat`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `contratclient`
 --
+
+INSERT INTO `contratclient` (`idContrat`, `idClient`, `dateVente`, `tarifMensuel`, `typeContrat`) VALUES
+(6, 1, '2024-01-08', 25, 'Assurance Vie'),
+(7, 1, '2024-01-08', 300, 'Assurance Maison');
 
 -- --------------------------------------------------------
 
@@ -181,11 +189,28 @@ CREATE TABLE IF NOT EXISTS `motif` (
   `libelleMotif` varchar(45) DEFAULT NULL,
   `listePiece` varchar(2000) DEFAULT NULL,
   PRIMARY KEY (`idMotif`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `motif`
 --
+
+INSERT INTO `motif` (`idMotif`, `libelleMotif`, `listePiece`) VALUES
+(2, 'Ouverture CCP', '- carte d\'identité\r\n- justificatif d\'identité\r\n- justificatif de revenu'),
+(3, 'Ouverture Livret A', '- carte d\'identité\r\n- justificatif d\'identité\r\n- justificatif de revenu'),
+(4, 'Ouverture CEL', '- carte d\'identité\r\n- justificatif d\'identité\r\n- justificatif de revenu\r\n- justificatif de domicile'),
+(5, 'Ouverture PEL', '- carte d\'identité\r\n- justificatif d\'identité\r\n- justificatif de revenu\r\n- justificatif de domicile\r\n- justificatif de travail CDI'),
+(6, 'Résiliation CCP', ''),
+(7, 'Résiliation Livret A', ''),
+(8, 'Résiliation CEL', ''),
+(9, 'Résiliation PEL', ''),
+(10, 'Ouverture Assurance Vie', '- justificatif d\'identité'),
+(11, 'Ouverture Assurance Maison', '- justificatif d\'identité\r\n- justificatif de domicile'),
+(12, 'Ouverture Assurance Voiture', '- justificatif d\'identité\r\n- justificatif de revenu\r\n- carte grise'),
+(13, 'Resiliation Assurance Vie', ''),
+(14, 'Resiliation Assurance Maison', ''),
+(15, 'Resiliation Assurance Voiture', ''),
+(16, 'Inscription', '- justificatif de domicile\r\n- justificatif de revenu\r\n- justificatif d\'emploi\r\n- justificatif d\'identité');
 
 -- --------------------------------------------------------
 
@@ -201,11 +226,28 @@ CREATE TABLE IF NOT EXISTS `operation` (
   `montant` float NOT NULL,
   `dateOperation` date NOT NULL,
   PRIMARY KEY (`idOperation`)
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `operation`
 --
+
+INSERT INTO `operation` (`idOperation`, `idCompte`, `typeOperation`, `montant`, `dateOperation`) VALUES
+(33, 13, 'dépot', 750, '2023-01-08'),
+(34, 14, 'dépot', 1860, '2023-03-08'),
+(35, 13, 'dépot', 600, '2024-01-08'),
+(36, 13, 'dépot', 600, '2024-01-08'),
+(37, 13, 'dépot', 600, '2024-01-08'),
+(38, 13, 'dépot', 600, '2024-01-08'),
+(39, 13, 'dépot', 600, '2024-01-08'),
+(40, 13, 'dépot', 600, '2024-01-08'),
+(41, 13, 'retrait', -1350, '2024-01-08'),
+(42, 13, 'dépot', 300, '2024-01-08'),
+(43, 13, 'dépot', 300, '2024-01-08'),
+(44, 13, 'retrait', -150, '2024-01-08'),
+(45, 13, 'retrait', -330, '2024-01-08'),
+(46, 13, 'retrait', -50, '2024-01-08'),
+(47, 13, 'dépot', 1570, '2024-01-08');
 
 -- --------------------------------------------------------
 
@@ -248,11 +290,17 @@ CREATE TABLE IF NOT EXISTS `rendezvous` (
   `idClient` int NOT NULL,
   `idMotif` varchar(45) NOT NULL,
   PRIMARY KEY (`idRdv`)
-) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `rendezvous`
 --
+
+INSERT INTO `rendezvous` (`idRdv`, `jourReunion`, `heureDebut`, `heureFin`, `dateCreationRdv`, `login`, `idClient`, `idMotif`) VALUES
+(52, '2024-01-12', '10:00:00', '11:00:00', '2024-01-08', 'DannyViannet', 2, '16'),
+(53, '2023-10-09', '11:00:00', '12:00:00', '2024-01-08', 'JeanMichel', 1, '16'),
+(54, '2023-11-11', '14:00:00', '15:00:00', '2024-01-08', 'JeanMichel', 1, '2'),
+(56, '2023-12-16', '15:00:00', '16:00:00', '2024-01-08', 'JeanMichel', 1, '3');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
