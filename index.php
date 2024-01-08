@@ -321,7 +321,7 @@
                 // Ou quand les boutons pour se déplacer dans l'emploi du temps sont cliqués
                 //
 
-                else if ( isset($_POST['asideConseillerPlanning']) || isset($_POST['weekMinusOne']) || isset($_POST['weekAddOne']) ||isset($_POST['conseillerEDTSubmit']) ) {
+                else if ( isset($_POST['asideConseillerPlanning']) || isset($_POST['weekMinusOne']) || isset($_POST['weekAddOne']) || isset($_POST['conseillerEDTSubmit']) ) {
                     if ( isset($_POST['conseillerEDTSubmit']) ) {
                         $_SESSION['conseillerRattacherClient'] = $_POST['conseillerEDTChoice'];
                     } else if ( isset($_POST['asideConseillerPlanning']) ) {
