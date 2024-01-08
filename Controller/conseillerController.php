@@ -383,17 +383,20 @@
 
     function CtlSupprimerRendezVousConseiller() {
 
-        $arr=getEDTConseillerByDate();
+        
 
         if ($_POST['rdvDel'] != '' ) {
             if( $_SESSION['login'] == $_SESSION['conseillerRattacherClient'] ) {
                 deleteRDV();
+                $arr=getEDTConseillerByDate();
                 priseDeRendezVousConseillers( getAllConseillers(), $arr);
             } else {
+                $arr=getEDTConseillerByDate();
                 priseDeRendezVousConseillers( getAllConseillers(), $arr, false, false, false, true );
             }
             
         } else {
+            $arr=getEDTConseillerByDate();
             priseDeRendezVousConseillers( getAllConseillers(), $arr, true, false, true );
         }
     }

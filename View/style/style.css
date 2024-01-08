@@ -1976,7 +1976,7 @@ body,html {
 
     .clientInscritSupplementInfoRight {
         width: 22.4%;
-        height: 91%;
+        height: 85%;
         float: right;
 
         border: solid;
@@ -2018,7 +2018,7 @@ body,html {
         font-family: 'SF Pro Display';
         font-weight: bold;
         font-style: normal;
-        font-size: 18px;
+        font-size: 12px;
         text-align: center;
         letter-spacing: 1px;
         display: inline-block;
@@ -2403,7 +2403,10 @@ body,html {
     }
 
     .contratInfoInBubble {
-        margin-left:15%;
+        font-size: 14px;
+        width: 30%;
+        margin-left:3%;
+        margin-right: 3%;
         float:left;
     }
 

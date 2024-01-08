@@ -507,14 +507,14 @@
             </div>
             <div class="divContrat">
                 <div class="divInsideDivCompte">
-                    <div style="float:left;">
-                        typeCompte : '.$contrat['typeContrat'].'
+                    <div class="contratInfoInBubble">
+                        typeCompte : <br>'.$contrat['typeContrat'].'
                     </div>
                     <div class="contratInfoInBubble">
-                        date ouverture : '.$contrat['dateVente'].'
+                        date ouverture : <br> '.$contrat['dateVente'].'
                     </div>
                     <div class="contratInfoInBubble">
-                        Tarif Mensuel : '.$contrat['tarifMensuel'].' €
+                        Tarif Mensuel : <br> '.$contrat['tarifMensuel'].' €
                     </div>
 
                 </div>
