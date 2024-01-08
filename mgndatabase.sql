@@ -49,11 +49,12 @@ CREATE TABLE IF NOT EXISTS `client` (
 --
 
 INSERT INTO `client` (`idClient`, `nomClient`, `prenomClient`, `dateNaissance`, `estInscrit`, `numeroTelephone`, `mail`, `adresse`, `codePostale`, `profession`, `situation`, `dateInscription`) VALUES
-(9, 'Martin', 'Kys', '2023-12-14', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(8, 'Test', 'Test', '2023-12-12', 1, 1234567891, 'kys@kys.com', 'kys', 93270, 'kys', 'kys', NULL),
-(7, 'Jonny', 'Doe', '2023-12-19', 1, 787173223, 'kys@kys.kys', 'kys', 91000, 'prof de kys', 'mort', NULL),
-(10, 'feur', 'Doe', '2024-01-01', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(14, 'testi', 'testi', '2024-01-01', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 'Daunat', 'Jean', '1999-03-13', 1, 0736976334, 'Jean-Daunat@orange.fr', '13 rue des pommiers', 93270, 'dentiste', 'célibataire', '2017-03-14'),
+(2, 'Daunat', 'Kyllian', '2003-12-02', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'Daunat', 'Ramsès', '2005-02-13', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 'kamel', 'Patrick', '2007-10-11', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 'Kysberly', 'Dannette', '2004-07-26', 1, 0239648579,'kys-berly-Dannette@sfr.fr', '26 avenue du raisin sec', 45100, 'fossoyeuse', 'marié', '2004-07-30'),
+(6, 'Kysberly', 'Napoléon', '2003-09-17', 1, 0798653421,'kys-berly-Napoleon@sfr.fr', '26 avenue du raisin sec', 45100, 'croquemort', 'marié', '2020-10-23');
 
 -- --------------------------------------------------------
 
@@ -100,11 +101,6 @@ CREATE TABLE IF NOT EXISTS `compteclient` (
 -- Déchargement des données de la table `compteclient`
 --
 
-INSERT INTO `compteclient` (`idCompte`, `idClient`, `dateOuverture`, `solde`, `interet`, `montantDecouvert`, `plafond`, `typeCompte`) VALUES
-(11, 7, '2024-01-01', 360, 0, -300, 0, 'CCP'),
-(12, 8, '2024-01-03', 0, 3, 0, 22950, 'Livret A'),
-(9, 8, '2023-12-31', 12500, 0, -400, 0, 'CCP');
-
 -- --------------------------------------------------------
 
 --
@@ -123,6 +119,7 @@ CREATE TABLE IF NOT EXISTS `contrat` (
 
 INSERT INTO `contrat` (`typeContrat`) VALUES
 ('Assurance Vie'),
+('Assurance Maison'),
 ('Assurance Voiture');
 
 -- --------------------------------------------------------
@@ -144,10 +141,6 @@ CREATE TABLE IF NOT EXISTS `contratclient` (
 --
 -- Déchargement des données de la table `contratclient`
 --
-
-INSERT INTO `contratclient` (`idContrat`, `idClient`, `dateVente`, `tarifMensuel`, `typeContrat`) VALUES
-(4, 7, '2024-01-01', 360, 'Assurance Voiture'),
-(5, 8, '2024-01-03', 25, 'Assurance Vie');
 
 -- --------------------------------------------------------
 
@@ -172,6 +165,7 @@ CREATE TABLE IF NOT EXISTS `employe` (
 
 INSERT INTO `employe` (`login`, `password`, `poste`, `nomEmploye`, `prenomEmploye`, `dateEmbauche`) VALUES
 ('JeanneDoe', '$2y$12$NR2lbzU0cSynHJvUPKFUxO.DO13D1KoElXgNR4rSprjkubmMM99BK', 'Directeur', 'Doe', 'Jeanne', '2023-12-02'),
+('DannyViannet', '$2y$12$duBbtGusMAYhEo9iev.ud.LtagOawA762sgUC8D1dYwElnKIgSGIW', 'Conseiller', 'Viannet', 'Danny', '2024-08-01'),
 ('JohnDoe', '$2y$12$NR8c3phliX2HcwexgiduMOcXc1PLBOfoyahrYJV72iP8Ez/HgTsx2', 'Agent', 'Doe', 'John', '2023-12-02'),
 ('JeanMichel', '$2y$12$5qfBla3n1wBIoSL8dTnqVeXGRcY.mX/o5oTK8/oHxMfRH74RNf1li', 'Conseiller', 'Jean', 'Michel', '2023-12-02');
 
@@ -193,9 +187,6 @@ CREATE TABLE IF NOT EXISTS `motif` (
 -- Déchargement des données de la table `motif`
 --
 
-INSERT INTO `motif` (`idMotif`, `libelleMotif`, `listePiece`) VALUES
-(1, 'test', 'truc');
-
 -- --------------------------------------------------------
 
 --
@@ -216,18 +207,6 @@ CREATE TABLE IF NOT EXISTS `operation` (
 -- Déchargement des données de la table `operation`
 --
 
-INSERT INTO `operation` (`idOperation`, `idCompte`, `typeOperation`, `montant`, `dateOperation`) VALUES
-(32, 9, 'dépot', 100, '2024-01-03'),
-(31, 12, 'retrait', -300, '2024-01-03'),
-(30, 12, 'dépot', 300, '2024-01-03'),
-(29, 10, 'retrait', -400, '2024-01-01'),
-(28, 9, 'dépot', 400, '2024-01-01'),
-(27, 11, 'dépot', 360, '2024-01-01'),
-(26, 10, 'dépot', 100, '2023-12-31'),
-(25, 9, 'retrait', -360, '2023-12-31'),
-(24, 10, 'dépot', 300, '2023-12-31'),
-(23, 9, 'dépot', 12360, '2023-12-30');
-
 -- --------------------------------------------------------
 
 --
@@ -245,11 +224,12 @@ CREATE TABLE IF NOT EXISTS `rattachera` (
 --
 
 INSERT INTO `rattachera` (`idClient`, `login`) VALUES
-(9, 'JeanMichel'),
-(7, 'JeanMichel'),
-(8, 'JeanMichel'),
-(13, 'JeanMichel'),
-(14, 'JeanMichel');
+(1, 'JeanMichel'),
+(2, 'DannyViannet'),
+(3, 'JeanMichel'),
+(4, 'DannyViannet'),
+(5, 'JeanMichel'),
+(6, 'JeanMichel');
 
 -- --------------------------------------------------------
 
@@ -273,55 +253,6 @@ CREATE TABLE IF NOT EXISTS `rendezvous` (
 --
 -- Déchargement des données de la table `rendezvous`
 --
-
-INSERT INTO `rendezvous` (`idRdv`, `jourReunion`, `heureDebut`, `heureFin`, `dateCreationRdv`, `login`, `idClient`, `idMotif`) VALUES
-(1, '2023-12-19', '12:00:00', '13:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(2, '2023-12-19', '13:00:00', '14:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(3, '2023-12-19', '14:00:00', '15:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(4, '2023-12-19', '15:00:00', '16:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(5, '2023-12-19', '16:00:00', '17:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(6, '2023-12-19', '17:00:00', '18:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(7, '2023-12-20', '08:00:00', '09:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(8, '2023-12-20', '09:00:00', '10:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(9, '2023-12-20', '10:00:00', '11:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(10, '2023-12-20', '11:00:00', '12:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(11, '2023-12-20', '12:00:00', '13:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(12, '2023-12-20', '13:00:00', '14:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(13, '2023-12-21', '08:00:00', '09:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(14, '2023-12-21', '09:00:00', '10:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(15, '2023-12-21', '10:00:00', '11:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(16, '2023-12-21', '11:00:00', '12:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(17, '2023-12-21', '13:00:00', '14:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(18, '2023-12-21', '14:00:00', '15:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(19, '2023-12-22', '08:00:00', '09:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(20, '2023-12-22', '09:00:00', '10:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(21, '2023-12-22', '10:00:00', '11:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(22, '2023-12-22', '11:00:00', '12:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(23, '2023-12-22', '12:00:00', '13:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(24, '2023-12-22', '13:00:00', '14:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(25, '2023-12-23', '08:00:00', '09:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(26, '2023-12-23', '09:00:00', '10:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(27, '2023-12-23', '10:00:00', '11:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(28, '2023-12-23', '11:00:00', '12:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(29, '2023-12-23', '12:00:00', '13:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(30, '2023-12-23', '13:00:00', '14:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(31, '2023-12-24', '08:00:00', '09:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(32, '2023-12-24', '09:00:00', '10:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(33, '2023-12-24', '10:00:00', '11:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(34, '2023-12-24', '11:00:00', '12:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(35, '2023-12-24', '12:00:00', '13:00:00', '2023-12-18', 'JeanMichel', 7, '1'),
-(39, '2023-12-24', '15:00:00', '16:00:00', '2023-12-19', 'jonnytest', -1, 'formation'),
-(38, '2023-12-22', '15:00:00', '16:00:00', '2023-12-19', 'jonnytest', 8, '1'),
-(40, '2023-12-24', '15:00:00', '16:00:00', '2023-12-19', 'JeanMichel', -1, 'formation'),
-(41, '2023-12-23', '15:00:00', '16:00:00', '2023-12-19', 'JeanMichel', -1, 'formation'),
-(42, '2023-12-26', '10:00:00', '12:00:00', '2023-12-25', 'JeanMichel', 8, '1'),
-(44, '2023-12-24', '14:00:00', '16:00:00', '2023-12-25', 'JeanMichel', 8, '1'),
-(45, '2023-12-29', '16:00:00', '17:00:00', '2023-12-28', 'JeanMichel', 8, '1'),
-(46, '2024-01-02', '12:00:00', '14:00:00', '2024-01-01', 'JeanMichel', 14, '1'),
-(47, '2024-01-02', '14:00:00', '16:00:00', '2024-01-01', 'JeanMichel', 14, '1'),
-(48, '2024-01-02', '16:00:00', '18:00:00', '2024-01-01', 'JeanMichel', 14, '1'),
-(49, '2024-01-02', '18:00:00', '20:00:00', '2024-01-01', 'JeanMichel', 14, '1'),
-(51, '2024-01-03', '10:00:00', '12:00:00', '2024-01-01', 'JeanMichel', 14, '1');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
