@@ -383,13 +383,13 @@
 
         if ( $error ) {
             $contenu .= '<div class="invalidForm">Le RDV n\'a pas pu être créé<br>veuillez rentrer des informations valides</div>';
-        } else if ( $cree ) {
+        } if ( $cree ) {
             $contenu .= '<div class="invalidForm">RDV Créé</div>';
-        } else if ( $supprime ) {
+        } if ( $supprime ) {
             $contenu .= '<div class="invalidForm">RDV Supprimé</div>';
-        } else if ( $errorSupression ) {
+        } if ( $errorSupression ) {
             $contenu .= '<div class="invalidForm">Le RDV sélectionné n\'existe pas</div>';
-        } else if ( $rdvError ) {
+        } if ( $rdvError ) {
             $contenu .= '<div class="invalidForm">Un RDV ou une formation <br>est déjà existant sur ce créneau horaire</div>';
         }
 

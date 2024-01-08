@@ -49,7 +49,7 @@
                     <li class="asideLi"><input class="asideInput" type="submit" value="Ouvrir Compte" name="asideConseillerOuvrirCompte"></li>
                     <li class="asideLi"><input class="asideInput" type="submit" value="Modifier Découvert" name="asideConseillerModifDecouvert"></li>
                     <li class="asideLi"><input class="asideInput" type="submit" value="Résiliation" name="asideConseillerResiliation"></li>
-                    <li class="asideLi"><input class="asideInput" type="submit" value="Nouvelle Recherche" name="asideClientNouvelleRecherche"></li>
+                    <li class="asideLi"><input class="asideInput" type="submit" value="Accueil" name="asideClientNouvelleRecherche"></li>
 
                 </ul>
             </form>
@@ -103,7 +103,7 @@
                 <fieldset>
                     <legend>Rechercher par ID</legend>
 
-                    <p><label for="nomCreation">ID Client</label><input type="number" name="idClientRecherche" onBlur="validFormField( this, 1, 45 )"></p>
+                    <p><label for="nomCreation">ID Client</label><input type="number" name="idClientRecherche"></p>
                         
                 </fieldset>
 
@@ -112,9 +112,9 @@
 
                     <p><label for="nomClientrRecherche">Nom du Client</label><input type="text" name="nomClientRecherche""></p>
 
-                    <p><label for="prenomClientRecherche">Prénom du Client</label><input type="text" name="prenomClientRecherche" onBlur="validFormField( this, 2, 45 )"></p>
+                    <p><label for="prenomClientRecherche">Prénom du Client</label><input type="text" name="prenomClientRecherche"></p>
 
-                    <p><label for="dateNaissanceClientRecherche">Date de Naissanse du Client</label><input type="date" name="dateNaissanceClientRecherche" onBlur="validFormField( this, 2, 32 )"></p>
+                    <p><label for="dateNaissanceClientRecherche">Date de Naissanse du Client</label><input type="date" name="dateNaissanceClientRecherche"></p>
 
 
                 </fieldset>

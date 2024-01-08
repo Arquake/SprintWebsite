@@ -22,8 +22,8 @@
         <form action="index.php" method="post" class="topPageForm" id="topPageForm" onSubmit="connexionAttempt(this)">
             <fieldset>
                 <legend>Connexion</legend>
-                <p><label for="login">Identifiant</label><input type="text" name="login" onBlur="validFormField( this, 2, 32 )" required="required"></p>
-                <p><label for="password">Mot de passe</label><input type="password" name="password" onBlur="validFormField( this, 8, 32 )" required="required"></p>
+                <p><label for="login">Identifiant</label><input type="text" name="login" required="required"></p>
+                <p><label for="password">Mot de passe</label><input type="password" name="password"  required="required"></p>
                 <p><input class="submitFormInput" type="submit" value="Connexion" name="connexion"></p>
             </fieldset>
         </form>';

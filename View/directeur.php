@@ -58,10 +58,10 @@
         <form action="index.php" method="post" class="topPageForm" onSubmit="createEmployeCheck(this)" id="topPageForm">
             <fieldset>
                 <legend>Création d\'employé</legend>
-                <p><label for="nomCreation">Nom de l\'employé</label><input type="text" name="nomCreation" onBlur="validFormField( this, 2, 45 )" required="required"></p>
-                <p><label for="prenomCreation">Prénom de l\'employé</label><input type="text" name="prenomCreation" onBlur="validFormField( this, 2, 45 )" required="required"></p>
-                <p><label for="loginCreation">Identifiant de l\'employé</label><input type="text" name="loginCreation" onBlur="validFormField( this, 2, 32 )" required="required"></p>
-                <p><label for="password">Mot de passe de l\'employé</label><input type="password" name="passwordCreation" onBlur="validFormField( this, 8, 32 )" required="required"></p>
+                <p><label for="nomCreation">Nom de l\'employé</label><input type="text" name="nomCreation"required="required"></p>
+                <p><label for="prenomCreation">Prénom de l\'employé</label><input type="text" name="prenomCreation"required="required"></p>
+                <p><label for="loginCreation">Identifiant de l\'employé</label><input type="text" name="loginCreation"required="required"></p>
+                <p><label for="password">Mot de passe de l\'employé</label><input type="password" name="passwordCreation"required="required"></p>
                 <p>
                     <label for="posteCreation">Poste de l\'employé</label>
                     <select id="posteCreation" name="posteCreation">
