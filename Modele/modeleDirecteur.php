@@ -103,7 +103,7 @@
         $prepare->bindValue(':login', $_POST['loginCreation'], PDO::PARAM_STR);
         $prepare->bindValue(':poste', $_POST['posteCreation'], PDO::PARAM_STR);
         $prepare->bindValue(':nom', $_POST['nomCreation'], PDO::PARAM_STR);
-        $prepare->bindValue(':prenom', $_POST['loginCreation'], PDO::PARAM_STR);
+        $prepare->bindValue(':prenom', $_POST['prenomCreation'], PDO::PARAM_STR);
         $prepare->bindValue(':loginSec', $_SESSION['employeChoisiInformationLogin'], PDO::PARAM_STR);
 
         $prepare -> execute();

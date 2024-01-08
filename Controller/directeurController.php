@@ -56,7 +56,7 @@
     //
 
     function CtlModifierEmployeSelected() {
-        if ( isset($_POST['employeChoisiInformationLogin']) ) {
+        if ( isset($_SESSION['employeChoisiInformationLogin']) ) {
             $_POST['modifierLemploye'] = $_SESSION['employeChoisiInformationLogin'];
         }
         $arr = informationConnexionEmployeDirecteur();
