@@ -461,7 +461,7 @@
         $_SESSION['clientNaissance'] = $res['dateNaissance'];
         $_SESSION['idClient'] = $res['idClient'];
 
-        CtlClientSynthese( 4, $_POST['clientButtonResearch'] );
+        CtlClientSynthese( $_POST['clientButtonResearch'] );
 
     }
 
