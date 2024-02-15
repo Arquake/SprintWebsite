@@ -237,7 +237,7 @@
         $contenu = connectedHeader() . AgentAsideSideBarWhenClientConnected() . '
         <form action="index.php" method="post" class="transactionForm" id="transactionForm">
             <fieldset>
-                <legend>Effectuer Transaction</legend>
+                <legend>Effectuer transaction</legend>
                 <p>
                     <label for="compteSelection">Compte disponible :</label>
                     <select id="compteSelection" name="compteSelection">';
